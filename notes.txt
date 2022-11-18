@@ -1,0 +1,23 @@
+Lading page
+ -Register(Customer/Trainer Approval by admin)
+
+Super Admin
+ Trainers
+ Customer
+  -Progress
+ Inventory/Sales
+ Program
+
+Admin
+ Trainers
+ Customer
+  -Progress
+ Inventory/Sales
+ Program
+
+Trainer
+ Customer
+  -Progress
+ 
+Customer
+ Progress
