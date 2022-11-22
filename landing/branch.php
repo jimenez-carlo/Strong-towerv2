@@ -14,6 +14,7 @@
   <!-- Awesome fonts -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css
     " integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <title>Strong Tower</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -29,7 +30,37 @@
       <h1>Branch</h1>
     </div>
   </section>
-  <section class="container mb-5">
+
+  <!-- Contact Start -->
+  <div class="container pt-5" id="contact">
+    <div class="d-flex flex-column text-center mb-5">
+      <h4 class="font-weight-bold">Get In Touch</h4>
+    </div>
+    <div class="row px-3 pb-2">
+      <div class="col-sm-4 text-center mb-3">
+        <i class="fa fa-2x fa-map-marker-alt mb-3"></i>
+        <h4 class="font-weight-bold">Address</h4>
+        <p>3rd floor SP North Building (EastWestBank), Urdaneta, Philippines, 2400</p>
+      </div>
+      <div class="col-sm-4 text-center mb-3">
+        <i class="fa fa-2x fa-phone-alt mb-3"></i>
+        <h4 class="font-weight-bold">Phone</h4>
+        <p>+639083403181</p>
+      </div>
+      <div class="col-sm-4 text-center mb-3">
+        <i class="far fa-2x fa-envelope mb-3"></i>
+        <h4 class="font-weight-bold">Email</h4>
+        <p>strongtower@gmail.com</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 pb-5">
+        <iframe style="width: 100%; height: 392px;" src="https://maps.google.com/maps?q=East%20West%20Bank%20-%20Urdaneta%20City&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      </div>
+
+    </div>
+  </div>
+  <!-- <section class="container mb-5">
     <div class="row">
       <?php foreach (get_list("SELECT * from tbl_branch where  deleted_flag = 0 limit 2") as $res) { ?>
 
@@ -50,7 +81,7 @@
         </div>
       <?php } ?>
     </div>
-  </section>
+  </section> -->
   <?php require_once("footer.php"); ?>
 </body>
 
