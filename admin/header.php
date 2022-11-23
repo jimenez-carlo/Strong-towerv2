@@ -1,8 +1,25 @@
 <?php
+require_once('../functions.php');
 require_once('../database/conn.php');
 if (!isset($_SESSION['user']->access_id) && !in_array($_SESSION['user']->access_id, array(1, 2))) {
   header('location:../index.php');
 }
+
+
+// $current!='product_food' ? "$current" : 'Active';
+function activate($array)
+{
+  $page = $_SERVER['PHP_SELF'];
+  $page = explode("/", $page);
+  $current = end($page);
+  $current = str_replace(".php", "", $current);
+  if (in_array($current, $array)) {
+    return "active";
+  } {
+    return "";
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,37 +96,37 @@ if (!isset($_SESSION['user']->access_id) && !in_array($_SESSION['user']->access_
             <?php switch ($_SESSION['user']->access_id) {
               case 1: ?>
                 <!-- Super Admin -->
-                <li class="nav-item"><a href="." class="nav-link btn-side active"><i class="fa fa-home nav-icon"></i>
+                <li class="nav-item"><a href="home.php" class="nav-link <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
                     <p>Home</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/clients"><i class="fa fa-users nav-icon"></i>
+                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Clients</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/trainers"><i class="fa fa-users nav-icon"></i>
+                <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Trainers</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/employees"><i class="fa fa-users nav-icon"></i>
+                <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Employees</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/client_plans"><i class="fa fa-clipboard nav-icon"></i>
+                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/plans"><i class="fa fa-clipboard nav-icon"></i>
+                <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Membership Plans</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
+                <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/equipments"><i class="fa fa-dumbbell nav-icon"></i>
+                <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/supplements"><i class="fa fa-pills nav-icon"></i>
+                <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
                     <p>Supplements</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/services"><i class="fa fa-handshake nav-icon"></i>
+                <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
                     <p>Services</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/branches"><i class="fa fa-store nav-icon"></i>
+                <li class="nav-item"><a href="branches.php" class="nav-link <?= activate(array("branches")) ?>"><i class="fa fa-store nav-icon"></i>
                     <p>Branches</p>
                   </a></li>
                 <?php break; ?>
