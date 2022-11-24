@@ -99,7 +99,7 @@
     // Insert Member
     $user_id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch',5)");
     query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`) VALUES('$user_id','$first_name','$middle_name','$last_name','$gender','$contact','$address')");
-    remove_error();
+    echo "<script>document.getElementById('myForm').reset();</script>";
     return
       '<div class="alert alert-success d-flex align-items-center" role="alert">
         <div>
@@ -114,8 +114,8 @@
     <h2>Please Signup this form</h2>
     <div class="signup-col">
 
-      <?php echo (isset($_POST['submit']) && !empty(signup())) ? signup() : '';  ?>
-      <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+      <?php echo (isset($_POST['submit'])) ? signup() : '';  ?>
+      <form method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate id="myForm">
         <div class="col-md-3">
           <label for="validationCustom01" class="form-label">*First Name</label>
           <input type="text" class="form-control <?= isset($_SESSION['error']['first_name']) ? 'is-invalid' : '' ?>" name="first_name" required value="<?= isset($_POST['first_name']) ? $_POST['first_name'] : '' ?>">
