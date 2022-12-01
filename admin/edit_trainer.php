@@ -1,5 +1,4 @@
 <?php include('header.php'); ?>
-<?php $user = get_one("SELECT tp.*,u.*,ui.*,if(u.plan_expiration_date>curdate(),u.plan_expiration_date, null )  as `plan_expiration_date`,if(u.plan_expiration_date>curdate(),u.client_plan_id, 0 )  as `client_plan_id` FROM tbl_user u inner join tbl_user_info ui on ui.id = u.id left join tbl_client_plan tc on (tc.id = u.client_plan_id and u.plan_expiration_date > curdate()) left join tbl_plan tp on tp.id = tc.plan_id where u.id = " . $_GET['id']) ?>
 <div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -54,6 +53,8 @@
       }
       ?>
       <?php echo (isset($_POST['update'])) ? update($_POST) : '';  ?>
+      <?php $user = get_one("SELECT tp.*,u.*,ui.*,if(u.plan_expiration_date>curdate(),u.plan_expiration_date, null )  as `plan_expiration_date`,if(u.plan_expiration_date>curdate(),u.client_plan_id, 0 )  as `client_plan_id` FROM tbl_user u inner join tbl_user_info ui on ui.id = u.id left join tbl_client_plan tc on (tc.id = u.client_plan_id and u.plan_expiration_date > curdate()) left join tbl_plan tp on tp.id = tc.plan_id where u.id = " . $_GET['id']) ?>
+
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">

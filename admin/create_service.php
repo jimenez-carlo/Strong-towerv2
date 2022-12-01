@@ -25,8 +25,8 @@
         $check_service_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_services b where b.name ='$service' and deleted_flag = 0 limit 1");
 
         if (!empty($check_service_name->res)) {
-          $_SESSION['error']['username'] = true;
-          return message_error("Username Already In-use!");
+          $_SESSION['error']['service'] = true;
+          return message_error("Service Name Already In-use!");
         }
 
 
@@ -38,6 +38,7 @@
         }
 
         query("INSERT INTO tbl_services (`name`,`description`,`image`) VALUES('$service', '$description','$image_name')");
+        unset($_POST);
         return message_success("Service Created Successfully!", 'Successfull!');
       }
       ?>

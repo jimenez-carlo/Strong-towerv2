@@ -1,5 +1,4 @@
 <?php include('header.php'); ?>
-<?php $supplement = get_one("select * from tbl_supplements where id =" . $_GET['id']) ?>
 <div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -41,6 +40,8 @@
       }
       ?>
       <?php echo (isset($_POST['update'])) ? update(array_merge($_POST, $_FILES)) : '';  ?>
+      <?php $supplement = get_one("select * from tbl_supplements where id =" . $_GET['id']) ?>
+
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">

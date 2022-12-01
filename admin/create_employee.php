@@ -45,6 +45,7 @@
 
         $id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch','$access')");
         query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`) VALUES('$id','$first_name','$middle_name','$last_name','$gender','$contact','$address')");
+        unset($_POST);
         return message_success("Client Created Successfully!", 'Successfull!');
       }
       ?>
