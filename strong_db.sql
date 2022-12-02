@@ -100,7 +100,7 @@ CREATE TABLE `tbl_branch` (
 
 LOCK TABLES `tbl_branch` WRITE;
 /*!40000 ALTER TABLE `tbl_branch` DISABLE KEYS */;
-INSERT INTO `tbl_branch` VALUES (1,'Branch 11','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.z','2022-10-07 21:31:07','2022-10-07 21:31:07',0,'bagong filed'),(2,'branch 2','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-07 21:31:07','2022-10-07 21:31:07',0,NULL),(3,'branch 3','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-07 21:31:07','2022-10-07 21:31:07',1,NULL),(4,'branch 4','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-31 21:57:43','2022-10-31 21:57:43',1,NULL),(5,'branch 5','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-31 22:23:57','2022-10-31 22:23:57',1,NULL),(6,'test','test','2022-12-02 04:46:59','2022-12-02 04:46:59',1,NULL),(7,'test2113','test','2022-12-02 04:48:06','2022-12-02 04:48:06',1,NULL);
+INSERT INTO `tbl_branch` VALUES (1,'Branch 1','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.z','2022-10-07 21:31:07','2022-10-07 21:31:07',0,'bagong filed'),(2,'Branch 2','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-07 21:31:07','2022-10-07 21:31:07',0,NULL),(3,'branch 3','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-07 21:31:07','2022-10-07 21:31:07',1,NULL),(4,'branch 4','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-31 21:57:43','2022-10-31 21:57:43',1,NULL),(5,'branch 5','Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-31 22:23:57','2022-10-31 22:23:57',1,NULL),(6,'test','test','2022-12-02 04:46:59','2022-12-02 04:46:59',1,NULL),(7,'test2113','test','2022-12-02 04:48:06','2022-12-02 04:48:06',1,NULL);
 /*!40000 ALTER TABLE `tbl_branch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,4 +470,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-02  5:59:17
+-- Dump completed on 2022-12-02 15:03:27
