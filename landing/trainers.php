@@ -34,89 +34,64 @@
             <h1>Trainers</h1>
         </div>
     </section>
-    <!-- Start Trainers -->
-    <section class="trainers">
-        <h1>Our Trainers</h1>
-        <p>They are Handsome</p>
-        <div class="items">
-            <div class="item">
-                <img src="images/1.jpg" style="object-fit: fill;">
-                <div class="inner">
-                    <div class="info">
-                        <h4>John</h4>
-                        <p>online coach</p>
-                        <p>Expertise: Powerlifting</p>
-                        <div class="links">
-                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        </div>
+
+
+    <section class="container mb-5">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 13rem;">
+                    <img src="images/1.jpg" class="card-img-top" alt="..." style="height:286px;width:100%;object-fit:contain;background:red">
+                    <div class="card-body">
+                        <h5 class="card-title">John Doe</h5>
+                        <p class="card-text">Cardio</p>
                     </div>
+
                 </div>
             </div>
-            <div class="item">
-                <img src="images/2.jpg" style="object-fit: fill;">
-                <div class="inner">
-                    <div class="info">
-                        <h4>Karel</h4>
-                        <p>online coach</p>
-                        <div class="links">
-                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        </div>
+            <div class="col">
+                <div class="card" style="width: 13rem;">
+                    <img src="images/2.jpg" class="card-img-top" alt="..." style="height:286px;width:100%;object-fit:contain;background:red">
+                    <div class="card-body">
+                        <h5 class="card-title">Mike</h5>
+                        <p class="card-text">Crossfit</p>
                     </div>
+
                 </div>
             </div>
-            <div class="item">
-                <img src="images/3.jpg" style="object-fit: fill;">
-                <div class="inner">
-                    <div class="info">
-                        <h4>Arnold</h4>
-                        <p>online coach</p>
-                        <div class="links">
-                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        </div>
+            <div class="col">
+                <div class="card" style="width: 13rem;">
+                    <img src="images/3.jpg" class="card-img-top" alt="..." style="height:286px;width:100%;object-fit:contain;background:red">
+                    <div class="card-body">
+                        <h5 class="card-title">Rex</h5>
+                        <p class="card-text">Power Lifting</p>
                     </div>
+
                 </div>
             </div>
-            <div class="item">
-                <img src="images/4.jpg" style="object-fit: fill;">
-                <div class="inner">
-                    <div class="info">
-                        <h4>Michael</h4>
-                        <p>online coach</p>
-                        <div class="links">
-                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        </div>
+            <div class="col">
+                <div class="card" style="width: 13rem;">
+                    <img src="images/4.jpg" class="card-img-top" alt="..." style="height:286px;width:100%;object-fit:contain;background:red">
+                    <div class="card-body">
+                        <h5 class="card-title">Dan Fernandez</h5>
+                        <p class="card-text">Crossfit</p>
                     </div>
+
                 </div>
             </div>
-            <div class="item">
-                <img src="images/5.jpg" style="object-fit: fill;">
-                <div class="inner">
-                    <div class="info">
-                        <h4>Michael</h4>
-                        <p>online coach</p>
-                        <div class="links">
-                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        </div>
+            <div class="col">
+                <div class="card" style="width: 13rem;">
+                    <img src="images/5.jpg" class="card-img-top" alt="..." style="height:286px;width:100%;object-fit:contain;background:red">
+                    <div class="card-body">
+                        <h5 class="card-title">Dan Fernandez</h5>
+                        <p class="card-text">Power Lifting</p>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
+
+
     <?php require_once("footer.php"); ?>
 </body>
 
