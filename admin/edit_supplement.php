@@ -31,7 +31,8 @@
 
         $image_name = get_one("select image from tbl_supplements where id = '$id' limit 1")->image;
         if ($_FILES['image']['error'] == 0) {
-          $image_name = 'image_' . date('YmdHis') . '.jpeg';
+          $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+          $image_name = 'image_' . date('YmdHis') . $ext;
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../supplements/' . $image_name);
         }
 

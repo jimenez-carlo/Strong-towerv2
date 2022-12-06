@@ -46,13 +46,19 @@
           return message_error("Email Already In-use!");
         }
 
+        $image_name = get_one("select picture from tbl_user_info where id = '$id' limit 1")->picture;
+        if ($_FILES['image']['error'] == 0) {
+          $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+          $image_name = 'image_' . date('YmdHis') . $ext;
+          move_uploaded_file($_FILES["image"]["tmp_name"],   '../profile/' . $image_name);
+        }
 
         query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `password` = '$new_password', `branch_id` = '$branch' where id = $id");
-        query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact', `address` = '$address' where id = $id");
+        query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact', `address` = '$address',`picture`='$image_name' where id = $id");
         return message_success("Client Updated Successfully!", 'Successfull!');
       }
       ?>
-      <?php echo (isset($_POST['update'])) ? update($_POST) : '';  ?>
+      <?php echo (isset($_POST['update'])) ? update(array_merge($_POST, $_FILES)) : '';  ?>
       <?php $user = get_one("SELECT tp.*,u.*,ui.*,if(u.plan_expiration_date>curdate(),u.plan_expiration_date, null )  as `plan_expiration_date`,if(u.plan_expiration_date>curdate(),u.client_plan_id, 0 )  as `client_plan_id` FROM tbl_user u inner join tbl_user_info ui on ui.id = u.id left join tbl_client_plan tc on (tc.id = u.client_plan_id and u.plan_expiration_date > curdate()) left join tbl_plan tp on tp.id = tc.plan_id where u.id = " . $_GET['id']) ?>
 
       <div class="container-fluid" id="content">
@@ -61,7 +67,7 @@
             <h1 class="m-0"><i class="fa fa-edit"></i> Edit Client #<?= $user->id ?> </h1>
           </div><!-- /.col -->
         </div>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
           <input type="hidden" id="id" name="id" value="<?= $user->id ?>">
           <section class="content">
             <div class="row">
@@ -76,6 +82,17 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-4">
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="">Picture</label>
+                          <img src="../profile/<?= isset($_POST['image']) ? $_POST['image'] : $user->picture ?>" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
+                          <input type="file" class="form-control" id="image" name="image" accept="image/*" style="border: unset;">
+                        </div>
+                      </div>
+                    </div>
                     <div class="row">
                       <div class="col-sm-4">
                         <div class="form-group">
@@ -193,4 +210,16 @@
   </div>
   <!-- /.content-wrapper -->
 </div>
+<script>
+  inputImage = document.getElementById('image');
+  preview = document.getElementById('preview');
+  inputImage.onchange = evt => {
+    const [file] = inputImage.files
+    if (file && file['type'].split('/')[0] === 'image') {
+      preview.src = URL.createObjectURL(file)
+    } else {
+      preview.src = '../profile/<?= $user->picture ?>';
+    }
+  }
+</script>
 <?php include('footer.php'); ?>

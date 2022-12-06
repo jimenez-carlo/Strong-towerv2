@@ -42,21 +42,27 @@
           return message_error("Email Already In-use!");
         }
 
+        $image_name = 'default.png';
+        if ($_FILES['image']['error'] == 0) {
+          $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+          $image_name = 'image_' . date('YmdHis') . $ext;
+          move_uploaded_file($_FILES["image"]["tmp_name"],   '../profile/' . $image_name);
+        }
 
         $id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch','$access')");
-        query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`) VALUES('$id','$first_name','$middle_name','$last_name','$gender','$contact','$address')");
+        query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,`picture`) VALUES('$id','$first_name','$middle_name','$last_name','$gender','$contact','$address','$image_name')");
         unset($_POST);
         return message_success("Client Created Successfully!", 'Successfull!');
       }
       ?>
-      <?php echo (isset($_POST['create'])) ? create($_POST) : '';  ?>
+      <?php echo (isset($_POST['create'])) ? create(array_merge($_POST, $_FILES)) : '';  ?>
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-user-plus"></i> Register Client</h1>
+            <h1 class="m-0"><i class="fa fa-user-plus"></i> Assign Client Plan</h1>
           </div><!-- /.col -->
         </div>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
           <section class="content">
             <div class="row">
               <div class="col-md-12">
@@ -70,6 +76,17 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-4">
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="">Picture</label>
+                          <img src="../profile/default.png" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
+                          <input type="file" class="form-control" id="image" name="image" accept="image/*" style="border: unset;">
+                        </div>
+                      </div>
+                    </div>
                     <div class="row">
                       <div class="col-sm-4">
                         <div class="form-group">
@@ -187,4 +204,16 @@
   </div>
   <!-- /.content-wrapper -->
 </div>
+<script>
+  inputImage = document.getElementById('image');
+  preview = document.getElementById('preview');
+  inputImage.onchange = evt => {
+    const [file] = inputImage.files
+    if (file && file['type'].split('/')[0] === 'image') {
+      preview.src = URL.createObjectURL(file)
+    } else {
+      preview.src = '../profile/default.png';
+    }
+  }
+</script>
 <?php include('footer.php'); ?>
