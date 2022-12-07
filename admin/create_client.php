@@ -81,7 +81,7 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="">Picture</label>
+                          
                           <img src="../profile/default.png" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
                           <input type="file" class="form-control" id="image" name="image" accept="image/*" style="border: unset;">
                         </div>
