@@ -43,20 +43,20 @@
       }
       ?>
       <?php echo (isset($_POST['update'])) ? update($_POST) : '';  ?>
-      <?php $default = get_one("SELECT * from tbl_client_plan where id = " . $_GET['id']) ?>
+      <?php $default = get_one("SELECT * from tbl_client_plan where id = " . $_SESSION['user']->client_plan_id) ?>
       <?php $client_id = $default->client_id; ?>
 
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-user"></i> Edit Client Plan #<?= $default->id ?></h1>
+            <h1 class="m-0"><i class="fa fa-clipboard nav-icon"></i> Workout Plan</h1>
           </div><!-- /.col -->
         </div>
         <form method="post" name="update_client_plan">
           <input type="hidden" name="id" value="<?= $default->id ?>">
           <section class="content">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="card card-secondary">
                   <div class="card-header">
                     <h3 class="card-title">Client Details</h3>
@@ -107,109 +107,35 @@
                         <thead>
                           <tr>
                             <th>Workout</th>
-                            <th>Actions</th>
+                            <th>Reps</th>
+                            <th>Sets</th>
+                            <th>Duration</th>
+                            <th>Description</th>
                           </tr>
                         </thead>
                         <tbody id="wrapper2">
-                          <?php if (isset($_POST['workout'])) { ?>
-                            <?php foreach ($_POST['workout'] as $res) { ?>
-                              <tr>
-                                <td><select name="workout[]" class="form-control"><?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $subres) { ?> <option value="<?= $subres['id']; ?>" <?= ($res == $subres['id'] ? "selected" : "") ?>> <?= strtoupper($subres['name'] . ' - ' . $subres['reps'] . ' Reps - ' . $subres['sets'] . ' Sets - ' . $subres['duration'] . ' Duration'); ?> </option><?php } ?> </select> </td>
-                                <td><button type="button" class="btn btn-dark btn-remove-workout"> Remove </button> </td>
-                              </tr>
-                            <?php } ?>
-                          <?php } else { ?>
-                            <?php foreach (get_list("SELECT * from tbl_workout_plan where client_plan_id = $default->id") as $res) { ?>
-                              <tr>
-                                <td><select name="workout[]" class="form-control">
-                                    <?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $subres) { ?>
-                                      <option value="<?= $subres['id']; ?>" <?php echo ($res['workout_id'] == $subres['id']) ? 'selected' : ''; ?>> <?= strtoupper($subres['name'] . ' - ' . $subres['reps'] . ' Reps - ' . $subres['sets'] . ' Sets - ' . $subres['duration'] . ' Duration'); ?> </option>
-                                    <?php } ?>
-                                  </select> </td>
-                                <td><button type="button" class="btn btn-dark btn-remove-workout"> Remove </button> </td>
-                              </tr>
-                            <?php } ?>
+
+                          <?php foreach (get_list("SELECT w.* from tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id where wp.client_plan_id = $default->id") as $res) { ?>
+                            <tr>
+                              <td><?= strtoupper($res['name']) ?></td>
+                              <td><?= $res['reps'] ?></td>
+                              <td><?= $res['sets'] ?></td>
+                              <td><?= $res['duration'] ?></td>
+                              <td><?= $res['description'] ?></td>
+                            </tr>
                           <?php } ?>
+
                         </tbody>
                       </table>
                     </div>
 
 
 
-                    <div class="form-group">
-                      <button type="button" class="btn btn-dark" id="add_workout">
-                        <i class="fas fa-plus"></i> Add Workout
-                      </button>
-                      <input type="hidden" name="trainer" value="<?= $default->trainer_id ?>">
-                      <input type="hidden" name="expiration_date" value="<?= $default->expiration_date ?>">
-                      <input type="hidden" name="client" value="<?= $default->client_id ?>">
-                      <input type="hidden" name="plan" value="<?= $default->plan_id ?>">
-                      <button type="submit" class="btn btn-dark float-right" name="update"><i class="fa fa-save"></i> Update</button>
-                    </div>
+
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="card card-secondary">
-                  <div class="card-header">
-                    <h3 class="card-title">Progress Details</h3>
-                    <div class="card-tools">
-                      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="card-body">
 
-
-                    <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <!-- <th>Plan Name</th> -->
-                          <th colspan="">Reps</th>
-                          <th>Sets</th>
-                          <th>Actions</th>
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php foreach (get_list("select w.reps as target_reps,w.sets as `target_sets`,p.*,DATE_FORMAT(p.date,'%W, %M %d, %Y') as `date` from tbl_progress p inner join tbl_workout w on w.id = p.workout_id where p.customer_id = '$client_id' and p.plan_id = '$default->id'  group by p.plan_id,p.date order by p.date desc") as $res) { ?>
-                          <tr>
-                            <td><?= $res['date']; ?></td>
-                            <td>
-                              <div class="progress-group">
-                                Total
-                                <span class="float-right">
-                                  <b><?= $res['reps'] . "</b>/" . $res['target_reps'] ?></span>
-                                <div class="progress progress-sm">
-                                  <div class="progress-bar bg-danger" style="width: <?= ((int)$res['reps'] / (int)$res['target_reps']) * 100 ?>%"></div>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="progress-group">
-                                Total
-                                <span class="float-right">
-                                  <b><?= $res['sets'] . "</b>/" . $res['target_sets'] ?></span>
-                                <div class="progress progress-sm">
-                                  <div class="progress-bar bg-danger" style="width: <?= ((int)$res['sets'] / (int)$res['target_sets']) * 100 ?>%"></div>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <form method="post">
-                                <a href="#" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
-                              </form>
-                            </td>
-                          </tr>
-                        <?php } ?>
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
             </div>
           </section>
         </form>

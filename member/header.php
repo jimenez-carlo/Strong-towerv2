@@ -1,7 +1,20 @@
 <?php
+require_once('../functions.php');
 require_once('../database/conn.php');
 if (!isset($_SESSION['user']->access_id) && !in_array($_SESSION['user']->access_id, array(1, 2))) {
   header('location:../index.php');
+}
+function activate($array)
+{
+  $page = $_SERVER['PHP_SELF'];
+  $page = explode("/", $page);
+  $current = end($page);
+  $current = str_replace(".php", "", $current);
+  if (in_array($current, $array)) {
+    return "active";
+  } {
+    return "";
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -77,33 +90,47 @@ if (!isset($_SESSION['user']->access_id) && !in_array($_SESSION['user']->access_
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="#" class="nav-link active">
+              <a href="#" class="nav-link <?= activate(array("home")) ?>">
                 <i class="fa fa-home nav-icon"></i>
                 <p>Home</p>
               </a>
             </li>
+            <?php if (!(date('Y-m-d') > $_SESSION['user']->plan_expiration_date) && (!empty($_SESSION['user']->client_plan_id))) { ?>
+              <li class="nav-item">
+                <a href="workout_today.php" class="nav-link <?= activate(array("workout_today")) ?>">
+                  <i class="fa fa-sun nav-icon"></i>
+                  <p>Workout Today</p>
+                </a>
+              </li>
+            <?php } ?>
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fa fa-dumbbell nav-icon"></i>
-                <p>Daily Workout</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="my_activity.php" class="nav-link <?= activate(array("my_activity")) ?>">
                 <i class="fa fa-calendar nav-icon"></i>
                 <p>My Activity</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fa fa-clipboard nav-icon"></i>
-                <p>Workout Plan</p>
+              <a href="my_plan.php" class="nav-link <?= activate(array("my_plan")) ?>">
+                <i class="fa fa-dumbbell nav-icon"></i>
+                <p>My Workout Plan</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans")) ?>">
+                <i class="fa fa-clipboard nav-icon"></i>
+                <p>Membership Plans</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="supplements.php" class="nav-link <?= activate(array("supplements")) ?>">
                 <i class="fa fa-pills nav-icon"></i>
                 <p>Supplements</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="services.php" class="nav-link <?= activate(array("services")) ?>">
+                <i class="fa fa-handshake nav-icon"></i>
+                <p>Services</p>
               </a>
             </li>
 
