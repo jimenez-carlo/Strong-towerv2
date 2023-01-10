@@ -218,13 +218,6 @@
             Please Insert profile picture.
           </div>
         </div>
-        <div class="col-md-3">
-          <label for="validationCustom02" class="form-label">*Medical Certificate Picture</label>
-          <input type="file" class="form-control" name="image" required>
-          <div class="invalid-feedback">
-            Please Insert Medical Certificate picture.
-          </div>
-        </div>
         <div class="col-12">
           <button name="submit" class="btn btn-danger" style="background-color: maroon; color:#fff" type="submit">Submit form</button><br>
           <p>Already have an account? just click <a href="join.php">here</a> to login</p>
