@@ -100,7 +100,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: '<i class="fa fa-plus"></i> Add Employee',
           action: function(e, dt, node, config) {
