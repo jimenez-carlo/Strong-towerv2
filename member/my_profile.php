@@ -57,7 +57,7 @@
         if ($_FILES['image2']['error'] == 0) {
           $ext = pathinfo($_FILES['image2']['name'], PATHINFO_EXTENSION);
           $medical_certificate = 'image_' . date('YmdHis') . "." . $ext;
-          move_uploaded_file($_FILES["image2"]["tmp_name"],   '../medical_certificate/' . $medical_certificate);
+          move_uploaded_file($_FILES["image"]["tmp_name"],   '../medical_certificate/' . $medical_certificate);
         }
 
         query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `password` = '$new_password', `branch_id` = '$branch' where id = $id");
@@ -68,12 +68,12 @@
       <?php echo (isset($_POST['update'])) ? update(array_merge($_POST, $_FILES)) : '';  ?>
       <?php
       $id = $_SESSION['user']->id;
-      $user = get_one("SELECT tp.*,u.*,ui.*,if(u.plan_expiration_date>curdate(),u.plan_expiration_date, null )  as `plan_expiration_date`,if(u.plan_expiration_date>curdate(),u.client_plan_id, 0 )  as `client_plan_id` FROM tbl_user u inner join tbl_user_info ui on ui.id = u.id left join tbl_client_plan tc on (tc.id = u.client_plan_id and u.plan_expiration_date > curdate()) left join tbl_plan tp on tp.id = tc.plan_id where u.id = "  . $_GET['id']) ?>
+      $user = get_one("SELECT tp.*,u.*,ui.*,if(u.plan_expiration_date>curdate(),u.plan_expiration_date, null )  as `plan_expiration_date`,if(u.plan_expiration_date>curdate(),u.client_plan_id, 0 )  as `client_plan_id` FROM tbl_user u inner join tbl_user_info ui on ui.id = u.id left join tbl_client_plan tc on (tc.id = u.client_plan_id and u.plan_expiration_date > curdate()) left join tbl_plan tp on tp.id = tc.plan_id where u.id = " . $id) ?>
 
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-edit"></i> Edit Client #<?= $user->id ?> </h1>
+            <h1 class="m-0"><i class="fa fa-edit"></i> My Profile </h1>
           </div><!-- /.col -->
         </div>
         <form method="post" enctype="multipart/form-data">

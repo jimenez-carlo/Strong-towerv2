@@ -96,9 +96,25 @@
       return false;
     }
 
+    $image_name = 'default.jpg';
+    if ($_FILES['image']['error'] == 0) {
+      $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+      $image_name = 'image_' . date('YmdHis') . "." . $ext;
+      move_uploaded_file($_FILES["image"]["tmp_name"],   '../profile/' . $image_name);
+    }
+
+    $medical_certificate = 'default.jpg';
+    if ($_FILES['image2']['error'] == 0) {
+      $ext = pathinfo($_FILES['image2']['name'], PATHINFO_EXTENSION);
+      $medical_certificate = 'image_' . date('YmdHis') . "." . $ext;
+      move_uploaded_file($_FILES["image2"]["tmp_name"],   '../medical_certificate/' . $medical_certificate);
+    }
+
+    // return "INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,medical_certificate,`picture`) VALUES('2','$first_name','$middle_name','$last_name','$gender','$contact','$address','$medical_certificate','$image_name')";
+    // die;
     // Insert Member
     $user_id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch',5)");
-    query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`) VALUES('$user_id','$first_name','$middle_name','$last_name','$gender','$contact','$address')");
+    query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,medical_certificate,`picture`) VALUES('$user_id','$first_name','$middle_name','$last_name','$gender','$contact','$address','$medical_certificate','$image_name')");
     echo "<script>document.getElementById('myForm').reset();</script>";
     return
       '<div class="alert alert-success d-flex align-items-center" role="alert">
@@ -220,7 +236,7 @@
         </div>
         <div class="col-md-3">
           <label for="validationCustom02" class="form-label">*Medical Certificate Picture</label>
-          <input type="file" class="form-control" name="image" required>
+          <input type="file" class="form-control" name="image2" required>
           <div class="invalid-feedback">
             Please Insert Medical Certificate picture.
           </div>

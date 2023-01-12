@@ -104,7 +104,7 @@ function activate($array)
               </li>
             <?php } ?>
             <li class="nav-item">
-              <a href="my_activity.php" class="nav-link <?= activate(array("my_activity")) ?>">
+              <a href="my_activity.php" class="nav-link <?= activate(array("my_activity", "view_activity")) ?>">
                 <i class="fa fa-calendar nav-icon"></i>
                 <p>My Activity</p>
               </a>
@@ -131,6 +131,12 @@ function activate($array)
               <a href="services.php" class="nav-link <?= activate(array("services")) ?>">
                 <i class="fa fa-handshake nav-icon"></i>
                 <p>Services</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
+                <i class="fa fa-user nav-icon"></i>
+                <p>My Profile</p>
               </a>
             </li>
 

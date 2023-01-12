@@ -31,7 +31,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select w.reps as target_reps,w.sets as `target_sets`,p.*,DATE_FORMAT(p.date,'%W, %M %d, %Y') as `date` from tbl_progress p inner join tbl_workout w on w.id = p.workout_id where p.customer_id = '$member_id' group by p.plan_id,p.date order by p.date desc") as $res) { ?>
+                <?php foreach (get_list("select w.reps as target_reps,w.sets as `target_sets`,sum(p.reps) as reps,sum(p.sets) as sets,p.date as 'date_2',DATE_FORMAT(p.date,'%W, %M %d, %Y') as `date` from tbl_progress p inner join tbl_workout w on w.id = p.workout_id where p.customer_id = '$member_id' group by p.date order by p.date desc") as $res) { ?>
                   <tr>
                     <td><?= $res['date']; ?></td>
                     <td>
@@ -56,7 +56,7 @@
                     </td>
                     <td>
                       <form method="post">
-                        <a href="edit_membership_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                        <a href="view_activity.php?date=<?= $res['date_2']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                       </form>
                     </td>
                   </tr>
