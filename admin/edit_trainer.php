@@ -87,7 +87,7 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          
+
                           <img src="../profile/<?= isset($_POST['image']) ? $_POST['image'] : $user->picture ?>" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
                           <input type="file" class="form-control" id="image" name="image" accept="image/*" style="border: unset;">
                         </div>
@@ -117,7 +117,7 @@
                             </select>
                           <?php } else { ?>
                             <input type="text" class="form-control <?= isset($_SESSION['error']['branch']) ? 'is-invalid' : '' ?>" value="<?= $_SESSION['user']->branch ?>" disabled>
-                            <input type="hidden" id="branch" name="branch" value="<?= $_SESSION['user']->branch_id ?>" disabled>
+                            <input type="hidden" id="branch" name="branch" value="<?= $_SESSION['user']->branch_id ?>">
                           <?php } ?>
                         </div>
                       </div>
