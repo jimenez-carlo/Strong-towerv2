@@ -50,7 +50,8 @@
                     <td><?php echo $res['contact_no']; ?></td>
                     <td>
                       <form method="post">
-                        <a href="edit_employee.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+
+                        <a href="<?= $_SESSION['user']->access_id == 2 ? 'edit_employee.php?id=' . $res['id'] : 'view_employee.php?id=' . $res['id']  ?>" class="btn btn-sm btn-dark"> <?= $_SESSION['user']->access_id == 2 ? 'Edit' : 'View'  ?> <i class="fa fa-<?= $_SESSION['user']->access_id == 2 ? 'edit' : 'eye'  ?>"></i> </a>
                         <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                       </form>
                     </td>
