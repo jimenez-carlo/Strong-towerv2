@@ -49,7 +49,9 @@
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <td>
                       <form method="post">
-                        <a href="edit_client_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                        <?php if ($_SESSION['user']->access_id == 2) { ?>
+                          <a href="edit_client_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                        <?php } ?>
                         <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                       </form>
                     </td>
@@ -99,7 +101,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: '<i class="fa fa-plus"></i> Add Client Plan',
           action: function(e, dt, node, config) {
