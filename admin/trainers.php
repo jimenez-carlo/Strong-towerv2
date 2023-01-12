@@ -49,7 +49,9 @@
                     <td>
 
                       <form method="post">
-                        <a href="edit_trainer.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                        <?php if ($_SESSION['user']->access_id == 2) { ?>
+                          <a href="edit_trainer.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                        <?php } ?>
                         <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                       </form>
                     </td>

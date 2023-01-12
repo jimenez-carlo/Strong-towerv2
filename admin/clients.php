@@ -59,11 +59,17 @@
                     <td><?php echo $res['contact_no']; ?></td>
                     <td>
                       <form method="post">
-                        <a href="edit_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                        <?php if ($_SESSION['user']->access_id == 2) { ?>
+                          <a href="edit_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                        <?php } ?>
                         <?php if (empty($res['verified'])) { ?>
-                          <button type="submit" class="btn btn-sm btn-dark" name="verify" value="<?php echo $res['id']; ?>"> Verify <i class="fa fa-user-check"></i> </button>
+                          <?php if ($_SESSION['user']->access_id == 2) { ?>
+                            <button type="submit" class="btn btn-sm btn-dark" name="verify" value="<?php echo $res['id']; ?>"> Verify <i class="fa fa-user-check"></i> </button>
+                          <?php } ?>
                         <?php } else { ?>
-                          <button type="button" class="btn btn-sm btn-dark" disabled> Verify <i class="fa fa-user-check"></i> </button>
+                          <?php if ($_SESSION['user']->access_id == 2) { ?>
+                            <button type="button" class="btn btn-sm btn-dark" disabled> Verify <i class="fa fa-user-check"></i> </button>
+                          <?php } ?>
                         <?php } ?>
                         <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                       </form>

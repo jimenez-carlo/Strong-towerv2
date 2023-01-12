@@ -27,8 +27,8 @@
         }
 
 
-
-        $old_client_id = get_one("SELECT id from tbl_user where client_plan_id = $id")->id;
+        $tmp = get_one("SELECT id from tbl_user where client_plan_id = $id");
+        $old_client_id = (isset($tmp->id)) ? $tmp->id : 0;
         if ($old_client_id != $client) {
           query("UPDATE tbl_user set plan_expiration_date = null,client_plan_id = 0 where id = '$old_client_id'");
         }
