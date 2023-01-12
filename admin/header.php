@@ -133,7 +133,7 @@ function activate($array)
               <?php
               case 2: ?>
                 <!-- Manager -->
-                <li class="nav-item"><a href="." class="nav-link btn-side active"><i class="fa fa-home nav-icon"></i>
+                <li class="nav-item"><a href="." class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
                     <p>Home</p>
                   </a></li>
                 <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
