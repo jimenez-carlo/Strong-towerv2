@@ -42,7 +42,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-dumbell nav-icon"></i> <?= date_format(date_create($date), "W, M d, Y") ?></h1>
+            <h1 class="m-0"><i class="fa fa-dumbell nav-icon"></i> <?= date_format(date_create($date), "D, M d, Y") ?></h1>
           </div><!-- /.col -->
           <?php
           $date_today = date('Y-m-d');
