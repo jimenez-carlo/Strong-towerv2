@@ -9,7 +9,7 @@
       function create($data)
       {
         extract($data);
-        $required_fields = array('username', 'email', 'password', 're_password', 'first_name', 'middle_name', 'last_name', 'contact');
+        $required_fields = array('username', 'email', 'password', 're_password', 'first_name', 'last_name', 'contact');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
