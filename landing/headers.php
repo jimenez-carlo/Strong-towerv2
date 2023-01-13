@@ -5,7 +5,7 @@ if (isset($_SESSION['user']->access_id)) {
     if (in_array($_SESSION['user']->access_id, array(1, 2))) {
         // Super Admin/Admin
         header('location:../admin/home.php');
-    } else if (in_array($_SESSION['user']->access_id, array(3, 4))) {
+    } else if (in_array($_SESSION['user']->access_id, array(3))) {
         // Trainer Staff
         header('location:../trainer/home.php');
     } else {
@@ -75,7 +75,8 @@ function activate($current, $page)
         <li><a href="trainers.php" class="<?= activate($current, "trainers") ?>">Trainers</a></li>
         <li><a href="branch.php" class="<?= activate($current, "branch") ?>">Branch</a></li>
         <li><a href="supplement.php" class="<?= activate($current, "supplement") ?>">Supplement</a></li>
-        <li><a href="schedule.php" class="<?= activate($current, "schedule") ?>">Schedule</a></li>
+        <!-- <li><a href="schedule.php" class="<?= activate($current, "schedule") ?>">Schedule</a></li> -->
+        <li><a href="plan.php" class="<?= activate($current, "plan") ?>">Plan</a></li>
         <li><a href="about_us.php" class="<?= activate($current, "about_us") ?>">About</a></li>
         <div class="close"><i class="fas fa-times"></i></div>
     </ul>

@@ -143,6 +143,7 @@
 
       if (isset($user->verified) && !empty($user->verified)) {
         remove_error();
+        // return print_r($user);
         $_SESSION['user'] = $user;
         return '<script>location.reload();</script>';
       } else {

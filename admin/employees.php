@@ -36,8 +36,8 @@
                 </tr>
               </thead>
               <tbody>
-                <?php $where = in_array($_SESSION['user']->access_id, array(2, 3, 4)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : "";
-                $sql = "select b.name as `branch`,g.name as `gender`,ui.*,u.*,a.name as 'access' from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id in (2,3,4) and u.deleted_flag = 0 $where"; ?>
+                <?php $where = in_array($_SESSION['user']->access_id, array(2, 3)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : "";
+                $sql = "select b.name as `branch`,g.name as `gender`,ui.*,u.*,a.name as 'access' from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id in (2,3) and u.deleted_flag = 0 $where"; ?>
                 <?php foreach (get_list($sql) as $res) { ?>
                   <tr>
                     <td><?php echo $res['id']; ?></td>

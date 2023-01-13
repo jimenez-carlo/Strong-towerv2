@@ -65,7 +65,7 @@
   {
     extract(escape_data($_POST));
     // Require Fields
-    $required_fields = array('first_name', 'middle_name', 'last_name', 'birth_date', 'contact', 'email', 'address', 'username', 'password');
+    $required_fields = array('first_name', 'last_name', 'birth_date', 'contact', 'email', 'address', 'username', 'password');
     $error_counter = 0;
     foreach ($required_fields as $res) {
       if (empty(${$res})) {
@@ -95,10 +95,16 @@
     if ($error_counter > 0) {
       return false;
     }
+    $image_name = 'default.png';
+    if ($_FILES['image']['error'] == 0) {
+      $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+      $image_name = 'image_' . date('YmdHis') . "." . $ext;
+      move_uploaded_file($_FILES["image"]["tmp_name"],   '../profile/' . $image_name);
+    }
 
     // Insert Member
     $user_id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch',3)");
-    query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`) VALUES('$user_id','$first_name','$middle_name','$last_name','$gender','$contact','$address')");
+    query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,`picture`) VALUES('$user_id','$first_name','$middle_name','$last_name','$gender','$contact','$address','$image_name')");
     echo "<script>document.getElementById('myForm').reset();</script>";
     return
       '<div class="alert alert-success d-flex align-items-center" role="alert">

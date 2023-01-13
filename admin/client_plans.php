@@ -37,7 +37,7 @@
               </thead>
               <tbody>
                 <?php $where = in_array($_SESSION['user']->access_id, array(2, 3, 4)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : ""; ?>
-                <?php foreach (get_list("select tp.name as 'plan',b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.*,ui2.first_name as `t_first_name`,ui2.middle_name as `t_middle_name`, ui2.last_name as `t_last_name`,tc.id from tbl_client_plan tc inner join tbl_user u on u.id = tc.client_id inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id inner join tbl_plan tp on tp.id = tc.plan_id  inner join tbl_user_info ui2 on ui2.id = tc.trainer_id where u.access_id = 5 and tc.deleted_flag = 0 $where") as $res) { ?>
+                <?php foreach (get_list("select tp.name as 'plan',b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.*,ui2.first_name as `t_first_name`,ui2.middle_name as `t_middle_name`, ui2.last_name as `t_last_name`,tc.id from tbl_client_plan tc inner join tbl_user u on u.id = tc.client_id inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id inner join tbl_plan tp on tp.id = tc.plan_id  inner join tbl_user_info ui2 on ui2.id = tc.trainer_id where u.access_id = 4 and tc.deleted_flag = 0 $where") as $res) { ?>
                   <td><?php echo $res['id']; ?></td>
                   <td><?php echo strtoupper($res['plan']); ?></td>
                   <td><?php echo ucfirst($res['branch']); ?></td>
@@ -51,6 +51,9 @@
                       <form method="post">
                         <?php if ($_SESSION['user']->access_id == 2) { ?>
                           <a href="edit_client_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                        <?php } ?>
+                        <?php if ($_SESSION['user']->access_id == 1) { ?>
+                          <a href="view_my_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                         <?php } ?>
                         <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                       </form>

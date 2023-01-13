@@ -99,7 +99,7 @@ function activate($array)
                 <li class="nav-item"><a href="home.php" class="nav-link <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
                     <p>Home</p>
                   </a></li>
-                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
+                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "view_client")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Clients</p>
                   </a></li>
                 <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
@@ -108,24 +108,24 @@ function activate($array)
                 <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Employees</p>
                   </a></li>
-                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
+                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan", "view_my_client")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
-                <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
+                <!-- <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "view_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Membership Plans</p>
-                  </a></li>
-                <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
+                  </a></li> -->
+                <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
                   </a></li>
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
-                  </a></li>
-                <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
+                  </a></li> -->
+                <!-- <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
                     <p>Supplements</p>
-                  </a></li>
-                <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
+                  </a></li> -->
+                <!-- <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
                     <p>Services</p>
-                  </a></li>
+                  </a></li> -->
                 <li class="nav-item"><a href="branches.php" class="nav-link <?= activate(array("branches", "create_branch", "edit_branch")) ?>"><i class="fa fa-store nav-icon"></i>
                     <p>Branches</p>
                   </a></li>

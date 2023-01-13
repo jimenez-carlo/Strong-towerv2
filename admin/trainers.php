@@ -13,7 +13,13 @@
         query("UPDATE tbl_user set `deleted_flag` = 1 where id = $id");
         return message_success("Trainer Deleted Successfully!");
       }
+      function verify($id)
+      {
+        query("UPDATE tbl_user set `verified` = 1 where id = $id");
+        return message_success("Client Verified Successfully!");
+      }
       ?>
+      <?php echo (isset($_POST['verify'])) ? verify($_POST['verify']) : '';  ?>
       <?php echo (isset($_POST['delete'])) ? delete_user($_POST['delete']) : '';  ?>
       <div class="container-fluid" id="content">
         <div class="row mb-2">
@@ -52,7 +58,17 @@
                         <?php if ($_SESSION['user']->access_id == 2) { ?>
                           <a href="edit_trainer.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                         <?php } ?>
-                        <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                        <?php if (empty($res['verified'])) { ?>
+                          <?php if ($_SESSION['user']->access_id == 2) { ?>
+                            <button type="submit" class="btn btn-sm btn-dark" name="verify" value="<?php echo $res['id']; ?>"> Verify <i class="fa fa-user-check"></i> </button>
+                            <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                          <?php } ?>
+                        <?php } else { ?>
+                          <?php if ($_SESSION['user']->access_id == 2) { ?>
+                            <button type="button" class="btn btn-sm btn-dark" disabled> Verify <i class="fa fa-user-check"></i> </button>
+                            <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                          <?php } ?>
+                        <?php } ?>
                       </form>
                     </td>
                   </tr>

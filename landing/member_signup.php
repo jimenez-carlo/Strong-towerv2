@@ -65,7 +65,7 @@
   {
     extract(escape_data($_POST));
     // Require Fields
-    $required_fields = array('first_name', 'middle_name', 'last_name', 'birth_date', 'contact', 'email', 'address', 'username', 'password');
+    $required_fields = array('first_name', 'last_name', 'birth_date', 'contact', 'email', 'address', 'username', 'password');
     $error_counter = 0;
     foreach ($required_fields as $res) {
       if (empty(${$res})) {
@@ -96,18 +96,11 @@
       return false;
     }
 
-    $image_name = 'default.jpg';
+    $image_name = 'default.png';
     if ($_FILES['image']['error'] == 0) {
       $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
       $image_name = 'image_' . date('YmdHis') . "." . $ext;
       move_uploaded_file($_FILES["image"]["tmp_name"],   '../profile/' . $image_name);
-    }
-
-    $medical_certificate = 'default.jpg';
-    if ($_FILES['image2']['error'] == 0) {
-      $ext = pathinfo($_FILES['image2']['name'], PATHINFO_EXTENSION);
-      $medical_certificate = 'image_' . date('YmdHis') . "." . $ext;
-      move_uploaded_file($_FILES["image2"]["tmp_name"],   '../medical_certificate/' . $medical_certificate);
     }
 
     // return "INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,medical_certificate,`picture`) VALUES('2','$first_name','$middle_name','$last_name','$gender','$contact','$address','$medical_certificate','$image_name')";
@@ -234,13 +227,7 @@
             Please Insert profile picture.
           </div>
         </div>
-        <div class="col-md-3">
-          <label for="validationCustom02" class="form-label">*Medical Certificate Picture</label>
-          <input type="file" class="form-control" name="image2" required>
-          <div class="invalid-feedback">
-            Please Insert Medical Certificate picture.
-          </div>
-        </div>
+
         <div class="col-12">
           <button name="submit" class="btn btn-danger" style="background-color: maroon; color:#fff" type="submit">Submit form</button><br>
           <p>Already have an account? just click <a href="join.php">here</a> to login</p>

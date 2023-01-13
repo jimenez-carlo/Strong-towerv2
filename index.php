@@ -91,7 +91,8 @@ if (isset($_SESSION['user']->access_id)) {
                 <li><a href="landing/trainers.php">Trainers</a></li>
                 <li><a href="landing/branch.php">Branch</a></li>
                 <li><a href="landing/supplement.php">Supplement</a></li>
-                <li><a href="landing/schedule.php">Schedule</a></li>
+                <li><a href="landing/plan.php">Plans</a></li>
+                <!-- <li><a href="landing/schedule.php">Schedule</a></li> -->
                 <li><a href="landing/about_us.php">About</a></li>
                 <div class="close"><i class="fas fa-times"></i></div>
             </ul>
