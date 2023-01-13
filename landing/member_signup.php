@@ -113,7 +113,7 @@
     // return "INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,medical_certificate,`picture`) VALUES('2','$first_name','$middle_name','$last_name','$gender','$contact','$address','$medical_certificate','$image_name')";
     // die;
     // Insert Member
-    $user_id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch',5)");
+    $user_id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch',4)");
     query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,medical_certificate,`picture`) VALUES('$user_id','$first_name','$middle_name','$last_name','$gender','$contact','$address','$medical_certificate','$image_name')");
     echo "<script>document.getElementById('myForm').reset();</script>";
     return

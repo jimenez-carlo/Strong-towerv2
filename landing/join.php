@@ -121,7 +121,7 @@
     {
 
       extract(escape_data($_POST));
-      $access = ($type == 'trainer') ? 3 : 5;
+      $access = ($type == 'trainer') ? 3 : 4;
 
       $email = $type . '_email';
       $password = $type . '_password';

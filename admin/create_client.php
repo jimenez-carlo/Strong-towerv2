@@ -81,7 +81,7 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          
+
                           <img src="../profile/default.png" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
                           <input type="file" class="form-control" id="image" name="image" accept="image/*" style="border: unset;">
                         </div>
@@ -135,7 +135,7 @@
                         <div class="form-group">
                           <label>Type</label>
                           <input type="text" class="form-control" value="Client" disabled>
-                          <input type="hidden" id="access" name="access" value="5">
+                          <input type="hidden" id="access" name="access" value="4">
                         </div>
                       </div>
                     </div>
