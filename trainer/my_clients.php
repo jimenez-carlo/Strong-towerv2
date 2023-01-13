@@ -44,7 +44,7 @@
                 <?php
                 $where = in_array($_SESSION['user']->access_id, array(2, 3, 4)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : "";
                 $trainer_id = $_SESSION['user']->access_id;
-                $sql = "select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.*,tcp.id from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id inner join tbl_client_plan tcp on tcp.client_id = u.id  where u.access_id = 5 and u.deleted_flag = 0 and tcp.trainer_id = '$trainer_id' $where";
+                $sql = "select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.*,tcp.id from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id inner join tbl_client_plan tcp on tcp.client_id = u.id  where u.access_id = 4 and u.deleted_flag = 0 and tcp.trainer_id = '$trainer_id' $where";
                 ?>
                 <?php foreach (get_list($sql) as $res) { ?>
                   <tr>
