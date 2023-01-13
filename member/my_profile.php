@@ -53,12 +53,12 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../profile/' . $image_name);
         }
 
-        $medical_certificate = get_one("select medical_certificate from tbl_user_info where id = '$id' limit 1")->medical_certificate;
-        if ($_FILES['image2']['error'] == 0) {
-          $ext = pathinfo($_FILES['image2']['name'], PATHINFO_EXTENSION);
-          $medical_certificate = 'image_' . date('YmdHis') . "." . $ext;
-          move_uploaded_file($_FILES["image"]["tmp_name"],   '../medical_certificate/' . $medical_certificate);
-        }
+        // $medical_certificate = get_one("select medical_certificate from tbl_user_info where id = '$id' limit 1")->medical_certificate;
+        // if ($_FILES['image2']['error'] == 0) {
+        //   $ext = pathinfo($_FILES['image2']['name'], PATHINFO_EXTENSION);
+        //   $medical_certificate = 'image_' . date('YmdHis') . "." . $ext;
+        //   move_uploaded_file($_FILES["image"]["tmp_name"],   '../medical_certificate/' . $medical_certificate);
+        // }
 
         query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `password` = '$new_password', `branch_id` = '$branch' where id = $id");
         query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact', `address` = '$address',`picture`='$image_name' where id = $id");
@@ -95,8 +95,8 @@
                       <div class="col-sm-4">
                         <div class="form-group">
 
-                          <img src="../medical_certificate/<?= isset($_POST['image2']) ? $_POST['image2'] : $user->medical_certificate ?>" alt="" style="width:200px;height:200px;align-self: center;" id="preview2">
-                          <input type="file" class="form-control" id="image2" name="image2" accept="image/*" style="border: unset;">
+                          <!-- <img src="../medical_certificate/<?= isset($_POST['image2']) ? $_POST['image2'] : $user->medical_certificate ?>" alt="" style="width:200px;height:200px;align-self: center;" id="preview2">
+                          <input type="file" class="form-control" id="image2" name="image2" accept="image/*" style="border: unset;"> -->
                         </div>
                       </div>
                       <div class="col-sm-4">
@@ -235,15 +235,15 @@
       preview.src = '../profile/<?= $user->picture ?>';
     }
   }
-  inputImage = document.getElementById('image2');
-  preview = document.getElementById('preview2');
-  inputImage.onchange = evt => {
-    const [file] = inputImage.files
-    if (file && file['type'].split('/')[0] === 'image') {
-      preview.src = URL.createObjectURL(file)
-    } else {
-      preview.src = '../medical_certificate/<?= $user->medical_certificate ?>';
-    }
-  }
+  // inputImage = document.getElementById('image2');
+  // preview = document.getElementById('preview2');
+  // inputImage.onchange = evt => {
+  //   const [file] = inputImage.files
+  //   if (file && file['type'].split('/')[0] === 'image') {
+  //     preview.src = URL.createObjectURL(file)
+  //   } else {
+  //     preview.src = '../medical_certificate/<?= $user->medical_certificate ?>';
+  //   }
+  // }
 </script>
 <?php include('footer.php'); ?>
