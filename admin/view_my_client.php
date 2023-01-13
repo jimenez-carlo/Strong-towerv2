@@ -169,7 +169,7 @@
                       </thead>
                       <tbody>
 
-                        <?php foreach (get_list("select p.plan_id,w.reps as target_reps,w.sets as `target_sets`,sum(p.reps) as reps,sum(p.sets) as sets,p.date as 'date_2',DATE_FORMAT(p.date,'%W, %M %d, %Y') as `date` from tbl_progress p inner join tbl_workout w on w.id = p.workout_id where p.customer_id = '$client_id' group by p.date,p.plan_id order by p.date desc") as $res) { ?>
+                        <?php foreach (get_list("select p.plan_id,sum(w.reps) as target_reps,sum(w.sets) as `target_sets`,sum(p.reps) as reps,sum(p.sets) as sets,p.date as 'date_2',DATE_FORMAT(p.date,'%W, %M %d, %Y') as `date` from tbl_progress p inner join tbl_workout w on w.id = p.workout_id where p.customer_id = '$client_id' group by p.date,p.plan_id order by p.date desc") as $res) { ?>
                           <tr>
                             <td><?= $res['date']; ?></td>
                             <td>

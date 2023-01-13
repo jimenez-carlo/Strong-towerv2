@@ -109,12 +109,14 @@ function activate($array)
                 <p>My Activity</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="my_plan.php" class="nav-link <?= activate(array("my_plan")) ?>">
-                <i class="fa fa-dumbbell nav-icon"></i>
-                <p>My Workout Plan</p>
-              </a>
-            </li>
+            <?php if (!(date('Y-m-d') > $_SESSION['user']->plan_expiration_date) && (!empty($_SESSION['user']->client_plan_id))) { ?>
+              <li class="nav-item">
+                <a href="my_plan.php" class="nav-link <?= activate(array("my_plan")) ?>">
+                  <i class="fa fa-dumbbell nav-icon"></i>
+                  <p>My Workout Plan</p>
+                </a>
+              </li>
+            <?php } ?>
             <li class="nav-item">
               <a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans")) ?>">
                 <i class="fa fa-clipboard nav-icon"></i>
