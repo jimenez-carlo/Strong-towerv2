@@ -49,7 +49,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-user"></i> Edit Client Plan #<?= $default->id ?></h1>
+            <h1 class="m-0"><i class="fa fa-user"></i> View Client Plan #<?= $default->id ?></h1>
           </div><!-- /.col -->
         </div>
         <form method="post" name="update_client_plan">
@@ -174,7 +174,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach (get_list("select w.reps as target_reps,w.sets as `target_sets`,p.*,DATE_FORMAT(p.date,'%W, %M %d, %Y') as `date` from tbl_progress p inner join tbl_workout w on w.id = p.workout_id where p.customer_id = '$client_id' and p.plan_id = '$default->id'  group by p.plan_id,p.date order by p.date desc") as $res) { ?>
+
+                        <?php foreach (get_list("select p.plan_id,w.reps as target_reps,w.sets as `target_sets`,sum(p.reps) as reps,sum(p.sets) as sets,p.date as 'date_2',DATE_FORMAT(p.date,'%W, %M %d, %Y') as `date` from tbl_progress p inner join tbl_workout w on w.id = p.workout_id where p.customer_id = '$client_id' group by p.date,p.plan_id order by p.date desc") as $res) { ?>
                           <tr>
                             <td><?= $res['date']; ?></td>
                             <td>
@@ -199,7 +200,7 @@
                             </td>
                             <td>
                               <form method="post">
-                                <a href="#" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
+                                <a href="view_activity.php?client_id=<?= $_GET['id'] ?>&plan_id=<?= $res['plan_id'] ?>&date=<?= $res['date_2']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                               </form>
                             </td>
                           </tr>
