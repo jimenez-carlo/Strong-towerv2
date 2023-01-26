@@ -24,7 +24,7 @@
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
-                  <th>ID#</th>
+                  <!-- <th>ID#</th> -->
                   <th>Workout Name</th>
                   <th>Reps</th>
                   <th>Sets</th>
@@ -37,14 +37,14 @@
               <tbody>
                 <?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $res) { ?>
                   <tr>
-                    <td><?php echo $res['id']; ?></td>
+                    <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo $res['reps']; ?></td>
                     <td><?php echo $res['sets']; ?></td>
                     <td><?php echo $res['duration']; ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
-                        <form method="post">
+                        <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_workout.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                           <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>

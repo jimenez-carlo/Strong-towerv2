@@ -47,14 +47,17 @@
           $member_id = $_SESSION['user']->id;
           $plan_id = $_SESSION['user']->client_plan_id;
           $workout_today = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_progress b where b.`date` = '$date_today' and b.plan_id = '$plan_id' limit 1");
+          $day_id = get_one("select id from tbl_workout_day where name = '" . strtolower(date('l') . "'"))->id;
+
           if (empty($workout_today->res)) {
-            query("INSERT INTO tbl_progress (customer_id,plan_id,workout_id,reps,sets,duration,date) SELECT $member_id,$plan_id,workout_id,0,0,null,'$date_today' from tbl_workout_plan where     client_plan_id = $plan_id");
+            query("INSERT INTO tbl_progress (customer_id,plan_id,workout_id,reps,sets,duration,date) SELECT $member_id,$plan_id,workout_id,0,0,null,'$date_today' from tbl_workout_plan where     client_plan_id = $plan_id and day_id = '$day_id'");
           }
           // print_r($plan_id);
+
           ?>
 
         </div><!-- /.row -->
-        <form method="post">
+        <form method="post" onsubmit="return confirm('Are You Sure?');">
 
           <div class="col-sm-12">
             <div class="card card-secondary">
@@ -127,7 +130,7 @@
                     $available_workout = get_one("SELECT group_concat(workout_id) as workout_ids from tbl_progress p where p.plan_id = $plan_id and date = '$date_today' group by p.plan_id");
                     $not_in = implode("','", array_map('intval', explode(',', $available_workout->workout_ids)));
                     ?>
-                    <?php foreach (get_list("SELECT w.* FROM tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id WHERE wp.workout_id NOT IN ('" . $not_in . "') and wp.client_plan_id = '$plan_id'") as $res) { ?>
+                    <?php foreach (get_list("SELECT w.* FROM tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id WHERE wp.workout_id NOT IN ('" . $not_in . "') and wp.client_plan_id = '$plan_id' and wp.day_id = $day_id ") as $res) { ?>
                       <tr>
                         <td><?= ucfirst($res['name']) . " - " . $res['duration']; ?></td>
                         <td><?= $res['sets'] ?></td>

@@ -78,6 +78,7 @@ function activate($current, $page)
         <!-- <li><a href="schedule.php" class="<?= activate($current, "schedule") ?>">Schedule</a></li> -->
         <li><a href="plan.php" class="<?= activate($current, "plan") ?>">Plan</a></li>
         <li><a href="about_us.php" class="<?= activate($current, "about_us") ?>">About</a></li>
+        <li><a href="join.php" class="<?= activate($current, "join") ?>">Login</a></li>
         <div class="close"><i class="fas fa-times"></i></div>
     </ul>
 </nav>

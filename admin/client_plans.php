@@ -24,7 +24,7 @@
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
-                  <th>Plan ID#</th>
+                  <!-- <th>Plan ID#</th> -->
                   <th>Plan</th>
                   <th>Branch</th>
                   <th>Client Name</th>
@@ -37,18 +37,18 @@
               </thead>
               <tbody>
                 <?php $where = in_array($_SESSION['user']->access_id, array(2, 3, 4)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : ""; ?>
-                <?php foreach (get_list("select tp.name as 'plan',b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.*,ui2.first_name as `t_first_name`,ui2.middle_name as `t_middle_name`, ui2.last_name as `t_last_name`,tc.id from tbl_client_plan tc inner join tbl_user u on u.id = tc.client_id inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id inner join tbl_plan tp on tp.id = tc.plan_id  inner join tbl_user_info ui2 on ui2.id = tc.trainer_id where u.access_id = 4 and tc.deleted_flag = 0 $where") as $res) { ?>
-                  <td><?php echo $res['id']; ?></td>
+                <?php foreach (get_list("select tp.name as 'plan',b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.*,ui2.first_name as `t_first_name`,ui2.middle_name as `t_middle_name`, ui2.last_name as `t_last_name`,tc.id, ui2.id as `trainer_id` from tbl_client_plan tc inner join tbl_user u on u.id = tc.client_id inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id inner join tbl_plan tp on tp.id = tc.plan_id  left join tbl_user_info ui2 on ui2.id = tc.trainer_id where u.access_id = 4 and tc.deleted_flag = 0 $where") as $res) { ?>
+                  <!-- <td><?php echo $res['id']; ?></td> -->
                   <td><?php echo strtoupper($res['plan']); ?></td>
                   <td><?php echo ucfirst($res['branch']); ?></td>
                   <td><?php echo ucwords($res['first_name'] . ' ' . $res['middle_name'][0] . '. ' . $res['last_name']); ?></td>
-                  <td><?php echo ucwords($res['t_first_name'] . ' ' . $res['t_middle_name'][0] . '. ' . $res['t_last_name']); ?></td>
+                  <td><?php echo ucwords(!empty($res['trainer_id']) ? $res['t_first_name'] . ' ' . $res['t_middle_name'][0] . '. ' . $res['t_last_name'] : 'NO TRAINER'); ?></td>
                   <td><?php echo $res['email']; ?></td>
                   <td><?php echo strtoupper($res['gender']); ?></td>
                   <td><?php echo $res['contact_no']; ?></td>
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <td>
-                      <form method="post">
+                      <form method="post" onsubmit="return confirm('Are You Sure?');">
                         <?php if ($_SESSION['user']->access_id == 2) { ?>
                           <a href="edit_client_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                         <?php } ?>

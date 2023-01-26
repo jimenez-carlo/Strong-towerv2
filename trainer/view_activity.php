@@ -26,7 +26,7 @@
           </div><!-- /.col -->
 
         </div><!-- /.row -->
-        <form method="post">
+        <form method="post" onsubmit="return confirm('Are You Sure?');">
 
           <div class="col-sm-12">
             <div class="card card-secondary">

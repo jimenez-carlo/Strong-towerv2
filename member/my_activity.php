@@ -24,8 +24,8 @@
                 <tr>
                   <th>Date</th>
                   <!-- <th>Plan Name</th> -->
-                  <th colspan="">Reps</th>
-                  <th>Sets</th>
+                  <!-- <th colspan="">Reps</th>
+                  <th>Sets</th> -->
                   <th>Actions</th>
 
                 </tr>
@@ -34,7 +34,7 @@
                 <?php foreach (get_list("select sum(w.reps) as target_reps,sum(w.sets) as `target_sets`,sum(p.reps) as reps,sum(p.sets) as sets,p.date as 'date_2',DATE_FORMAT(p.date,'%W, %M %d, %Y') as `date` from tbl_progress p inner join tbl_workout w on w.id = p.workout_id where p.customer_id = '$member_id' group by p.date order by p.date desc") as $res) { ?>
                   <tr>
                     <td><?= $res['date']; ?></td>
-                    <td>
+                    <!-- <td>
                       <div class="progress-group">
                         Total
                         <span class="float-right">
@@ -53,9 +53,9 @@
                           <div class="progress-bar bg-danger" style="width: <?= ((int)$res['sets'] / (int)$res['target_sets']) * 100 ?>%"></div>
                         </div>
                       </div>
-                    </td>
+                    </td> -->
                     <td>
-                      <form method="post">
+                      <form method="post" onsubmit="return confirm('Are You Sure?');">
                         <a href="view_activity.php?date=<?= $res['date_2']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                       </form>
                     </td>

@@ -60,16 +60,16 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-user-plus"></i> Register Employee</h1>
+            <h1 class="m-0"><i class="fa fa-user-plus"></i> Register Employee/Trainer</h1>
           </div><!-- /.col -->
         </div>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" onsubmit="return confirm('Are You Sure?');" enctype="multipart/form-data">
           <section class="content">
             <div class="row">
               <div class="col-md-12">
                 <div class="card card-secondary">
                   <div class="card-header">
-                    <h3 class="card-title">Client Details</h3>
+                    <h3 class="card-title">Employee/Trainer Details</h3>
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -136,7 +136,7 @@
                         <div class="form-group">
                           <label>Type</label>
                           <select id="access" name="access" class="form-control">
-                            <?php foreach (get_list("select * from tbl_access where deleted_flag = 0 and id in(2,3,4) and deleted_flag = 0") as $res) { ?>
+                            <?php foreach (get_list("select * from tbl_access where deleted_flag = 0 and id in(2,3) and deleted_flag = 0") as $res) { ?>
                               <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
                             <?php } ?>
                           </select>
@@ -190,7 +190,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-dark float-right" name="create"><i class="fa fa-save"></i> Create Employee</button>
+                      <button type="submit" class="btn btn-dark float-right" name="create"><i class="fa fa-save"></i> Create Employee/Trainer</button>
                     </div>
                   </div>
                 </div>

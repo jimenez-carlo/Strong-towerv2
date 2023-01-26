@@ -30,7 +30,7 @@
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
-                  <th>ID#</th>
+                  <!-- <th>ID#</th> -->
                   <th>Branch</th>
                   <th>Username</th>
                   <th>Email</th>
@@ -45,7 +45,7 @@
                 $sql = "select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id = 3 and u.deleted_flag = 0 $where"; ?>
                 <?php foreach (get_list($sql) as $res) { ?>
                   <tr>
-                    <td><?php echo $res['id']; ?></td>
+                    <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['branch']); ?></td>
                     <td><?php echo $res['username']; ?></td>
                     <td><?php echo $res['email']; ?></td>
@@ -54,7 +54,7 @@
                     <td><?php echo $res['contact_no']; ?></td>
                     <td>
 
-                      <form method="post">
+                      <form method="post" onsubmit="return confirm('Are You Sure?');">
                         <?php if ($_SESSION['user']->access_id == 2) { ?>
                           <a href="edit_trainer.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                         <?php } ?>

@@ -9,7 +9,7 @@
       function update($data)
       {
         extract($data);
-        $required_fields = array('plan', 'client', 'trainer', 'expiration_date');
+        $required_fields = array('plan', 'client', 'expiration_date');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -22,9 +22,9 @@
           return message_error("Please Fill Blank Fields!");
         }
 
-        if (!isset($workout)) {
-          return message_error("No Workout Assigned Yet!");
-        }
+        // if (!isset($workout)) {
+        //   return message_error("No Workout Assigned Yet!");
+        // }
 
 
         $tmp = get_one("SELECT id from tbl_user where client_plan_id = $id");
@@ -34,10 +34,10 @@
         }
         query("UPDATE tbl_client_plan set `client_id` = '$client', `plan_id` = '$plan',`trainer_id`='$trainer',`expiration_date`='$expiration_date' where id = $id");
         query("UPDATE tbl_user set plan_expiration_date = '$expiration_date',client_plan_id = $id where id = '$client'");
-        query("DELETE FROM tbl_workout_plan where client_plan_id = $id");
-        foreach ($workout as $res) {
-          query("INSERT INTO tbl_workout_plan (client_plan_id,workout_id) VALUES ($id,'$res')");
-        }
+        // query("DELETE FROM tbl_workout_plan where client_plan_id = $id");
+        // foreach ($workout as $res) {
+        //   query("INSERT INTO tbl_workout_plan (client_plan_id,workout_id) VALUES ($id,'$res')");
+        // }
 
         return message_success("Client Plan Updated Successfully!", 'Successfull!');
       }
@@ -52,11 +52,11 @@
             <h1 class="m-0"><i class="fa fa-user"></i> Edit Client Plan #<?= $default->id ?></h1>
           </div><!-- /.col -->
         </div>
-        <form method="post" name="update_client_plan">
+        <form method="post" onsubmit="return confirm('Are You Sure?');" name="update_client_plan">
           <input type="hidden" name="id" value="<?= $default->id ?>">
           <section class="content">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="card card-secondary">
                   <div class="card-header">
                     <h3 class="card-title">Client Plan Details</h3>
@@ -102,6 +102,8 @@
                           <label>*Trainer</label>
                           <select id="trainer" name="trainer" class="form-control">
                             <?php foreach (get_list("select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id = 3 and u.deleted_flag = 0") as $res) { ?>
+
+                              <option value="0" <?php echo ($default->trainer_id == 0) ? 'selected' : ''; ?>>NO TRAINER</option>
                               <option value="<?= $res['id']; ?>" <?php echo ($default->trainer_id == $res['id']) ? 'selected' : ''; ?>><?= strtoupper($res['first_name'] . ' ' . $res['middle_name'][0] . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
                             <?php } ?>
                           </select>
@@ -117,66 +119,14 @@
                         </div>
                       </div>
                     </div>
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="card card-secondary">
-                  <div class="card-header">
-                    <h3 class="card-title">Workouts Details</h3>
-                    <div class="card-tools">
-                      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-
-
-                    <div class="col-sm-12">
-                      <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
-                        <thead>
-                          <tr>
-                            <th>Workout</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody id="wrapper2">
-                          <?php if (isset($_POST['workout'])) { ?>
-                            <?php foreach ($_POST['workout'] as $res) { ?>
-                              <tr>
-                                <td><select name="workout[]" class="form-control"><?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $subres) { ?> <option value="<?= $subres['id']; ?>" <?= ($res == $subres['id'] ? "selected" : "") ?>> <?= strtoupper($subres['name'] . ' - ' . $subres['reps'] . ' Reps - ' . $subres['sets'] . ' Sets - ' . $subres['duration'] . ' Duration'); ?> </option><?php } ?> </select> </td>
-                                <td><button type="button" class="btn btn-dark btn-remove-workout"> Remove </button> </td>
-                              </tr>
-                            <?php } ?>
-                          <?php } else { ?>
-                            <?php foreach (get_list("SELECT * from tbl_workout_plan where client_plan_id = $default->id") as $res) { ?>
-                              <tr>
-                                <td><select name="workout[]" class="form-control">
-                                    <?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $subres) { ?>
-                                      <option value="<?= $subres['id']; ?>" <?php echo ($res['workout_id'] == $subres['id']) ? 'selected' : ''; ?>> <?= strtoupper($subres['name'] . ' - ' . $subres['reps'] . ' Reps - ' . $subres['sets'] . ' Sets - ' . $subres['duration'] . ' Duration'); ?> </option>
-                                    <?php } ?>
-                                  </select> </td>
-                                <td><button type="button" class="btn btn-dark btn-remove-workout"> Remove </button> </td>
-                              </tr>
-                            <?php } ?>
-                          <?php } ?>
-                        </tbody>
-                      </table>
-                    </div>
-
-
-
                     <div class="form-group">
-                      <button type="button" class="btn btn-dark" id="add_workout">
-                        <i class="fas fa-plus"></i> Add Workout
-                      </button>
+
                       <button type="submit" class="btn btn-dark float-right" name="update"><i class="fa fa-save"></i> Update</button>
                     </div>
                   </div>
                 </div>
               </div>
+
             </div>
           </section>
         </form>
@@ -192,19 +142,3 @@
 </div>
 
 <?php include('footer.php'); ?>
-<script>
-  $(document).ready(function() {
-    var wrapper = $("#wrapper2");
-    var add_button = $("#add_workout");
-
-    $(add_button).click(function(e) {
-      e.preventDefault();
-      $(wrapper).append('<tr><td><select name = "workout[]" class="form-control"><?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $res) { ?> <option value="<?= $res['id']; ?>" > <?= strtoupper($res['name'] . ' - ' . $res['reps'] . ' Reps - ' . $res['sets'] . ' Sets - ' . $res['duration'] . ' Duration'); ?> </option><?php } ?> </select> </td><td><button type ="button" class="btn btn-dark btn-remove-workout" > Remove </button> </td></tr> ');
-    });
-
-    $(wrapper).on("click", ".btn-remove-workout", function(e) {
-      e.preventDefault();
-      $(this).parent().parent().parent().parent().parent().remove();
-    })
-  });
-</script>

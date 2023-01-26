@@ -8,41 +8,54 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <?php
-      function delete_user($id)
+      function add_stock($data)
       {
-        query("UPDATE tbl_services set `deleted_flag` = 1 where id = $id");
-        return message_success("Service Deleted Successfully!");
+        extract($data);
+        $created_by = $_SESSION['user']->id;
+        $new_qty = $original_qty + $qty;
+        query("UPDATE tbl_supplements set qty = $new_qty where id = $supplement_id");
+        query("INSERT into tbl_supplement_inventory (supplement_id,original_qty, qty, created_by) values('$supplement_id','$original_qty','$qty', '$created_by')");
+        return message_success("Stock Updated Successfully!");
       }
       ?>
-      <?php echo (isset($_POST['delete'])) ? delete_user($_POST['delete']) : '';  ?>
+      <?php echo (isset($_POST['add_stock'])) ? add_stock($_POST) : '';  ?>
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-handshake"></i> Services</h1>
+            <h1 class="m-0"><i class="fa fa-box"></i> Inventory</h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
                   <!-- <th>ID#</th> -->
-                  <th>Image</th>
-                  <th>Service name</th>
+                  <th>Supplement name</th>
+                  <th>Stock</th>
+                  <th>Price</th>
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <th>Actions</th>
                   <?php } ?>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_services where deleted_flag = 0") as $res) { ?>
+                <?php foreach (get_list("select * from tbl_supplements where deleted_flag = 0") as $res) { ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
-                    <td><img src="../services/<?php echo $res['image']; ?>" style="width:100px;height:100px;object-fit:contain"></td>
                     <td><?php echo ucfirst($res['name']); ?></td>
+                    <td><?php echo $res['qty'] ?></td>
+                    <td class="text-right"><?php echo number_format($res['price'], 2); ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
-                          <a href="edit_service.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
-                          <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                          <div class="input-group mb-3">
+                            <input type="hidden" name="supplement_id" value="<?php echo $res['id'] ?>">
+                            <input type="hidden" name="original_qty" value="<?php echo $res['qty'] ?>">
+                            <input type="number" class="form-control rounded-0" name="qty" value="0" style="width:10px">
+                            <span class="input-group-append">
+                              <button type="submit" class="btn btn-dark btn-sm" name="add_stock">Add Stock</button>
+                              <a href="inventory_view.php?id=<?php echo $res['id']; ?>" style="padding-top:7px" class="btn btn-dark btn-sm">View</a>
+                            </span>
+                          </div>
                         </form>
                       </td>
                     <?php } ?>
@@ -91,14 +104,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
-          className: 'btn btn-sm btn-dark',
-          text: '<i class="fa fa-user-plus"></i> Add Service',
-          action: function(e, dt, node, config) {
-            window.location = 'create_service.php';
-          }
-        }
-      ]
-  <?php } ?>
+
+    ]
   });
 </script>

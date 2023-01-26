@@ -31,7 +31,7 @@
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
-                  <th>ID#</th>
+                  <!-- <th>ID#</th> -->
                   <th>Branch</th>
                   <th>Username</th>
                   <th>Email</th>
@@ -48,7 +48,7 @@
                 ?>
                 <?php foreach (get_list($sql) as $res) { ?>
                   <tr>
-                    <td><?php echo $res['id']; ?></td>
+                    <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['branch']); ?></td>
                     <td><?php echo $res['username']; ?></td>
                     <td><?php echo $res['email']; ?></td>
@@ -56,7 +56,7 @@
                     <td><?php echo strtoupper($res['gender']); ?></td>
                     <td><?php echo $res['contact_no']; ?></td>
                     <td>
-                      <form method="post">
+                      <form method="post" onsubmit="return confirm('Are You Sure?');">
                         <a href="edit_client_list.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                       </form>
                     </td>

@@ -8,46 +8,56 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <?php
-      function add_to_cart($data)
+      $customer_id = $_SESSION['user']->id;
+      function update_cart($data)
       {
         extract($data);
-        $customer_id = $_SESSION['user']->id;
         $stocks = get_one("select qty from tbl_supplements where id='$supplement_id' limit 1");
         if (!empty($stocks) && isset($stocks->qty)) {
           $qty = intval($qty);
           if ($qty > $stocks->qty) {
             return message_error("Not Enough Stocks.");
           } else {
-            $draft = get_one("select id,qty from tbl_transaction_items where supplement_id = '$supplement_id' and customer_id = '$customer_id' and invoice_id is null limit 1");
-            if (isset($draft->qty) && isset($draft->id) && !empty($draft->qty) && !empty($draft->id)) {
-              $total_qty = intval($draft->qty) + $qty;
-              $total_price = $total_qty * $price;
-              $id = $draft->id;
-              query("update tbl_transaction_items set qty = '$total_qty', price = '$total_price' where id = '$id'");
-            } else {
-              $total_price = $qty * intval($price);
-              query("insert into tbl_transaction_items (price,qty,supplement_id,customer_id) VALUES ('$total_price', '$qty', '$supplement_id', '$customer_id') ");
-            }
-            return message_success("Supplement Added To Cart Successfully!");
+            $total_price = $qty * $price;
+            query("update tbl_transaction_items set qty = '$qty', price = '$total_price' where id = '$transaction_id'");
+            return message_success("Cart Updated Successfully!");
           }
         } else {
           return message_error("Supplement Out Of Stock.");
         }
       }
+      function delete($data)
+      {
+        extract($data);
+        query("delete from tbl_transaction_items where id = $transaction_id");
+        return message_success("Supplement Removed!");
+      }
+
+      function checkout()
+      {
+        $customer_id = $_SESSION['user']->id;
+        $invoice = date('dmyhis');
+        $id = insert_get_id("insert into tbl_invoice (invoice,status_id, customer_id) values ('$invoice',1,'$customer_id')");
+        query("update tbl_transaction_items set invoice_id = '$id' where customer_id = '$customer_id' and invoice_id is null ");
+        return message_success("Cart Checkout Succesfully!");
+      }
+      $checkout_available = get_one("select count(id)  as id from tbl_transaction_items where invoice_id is null and customer_id = '$customer_id' group by invoice_id");
       ?>
-      <?php echo (isset($_POST['add_to_cart'])) ? add_to_cart($_POST) : '';  ?>
+      <?php echo (isset($_POST['update_cart'])) ? update_cart($_POST) : '';  ?>
+      <?php echo (isset($_POST['delete'])) ? delete($_POST) : '';  ?>
+      <?php echo (isset($_POST['checkout'])) ? checkout() : '';  ?>
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-pills"></i> Supplements</h1>
+            <h1 class="m-0"><i class="fa fa-check"></i> Cart</h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
-                  <!-- <th>ID#</th> -->
-                  <th>Image</th>
+                  <th></th>
                   <th>Supplement name</th>
+                  <th>Qty</th>
                   <th>Price</th>
                   <th>Actions</th>
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
@@ -56,22 +66,25 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_supplements where deleted_flag = 0") as $res) { ?>
+                <?php foreach (get_list("SELECT s.*,i.qty,i.id as transaction_id FROM tbl_transaction_items i inner join tbl_supplements s on s.id = i.supplement_id where i.customer_id = '4' and invoice_id is null") as $res) { ?>
                   <tr>
-                    <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><img src="../supplements/<?php echo $res['image']; ?>" style="width:100px;height:100px;object-fit:contain"></td>
                     <td><?php echo ucfirst($res['name']); ?></td>
-                    <td class="text-right"><?php echo number_format($res['price'], 2); ?></td>
+                    <td class="text-right"><?= $res['qty'] ?></td>
+                    <td class="text-right"><?php echo number_format($res['price'] * $res['qty'], 2); ?></td>
                     <td>
                       <form method="post" onsubmit="return confirm('Are You Sure?');">
                         <div class="input-group mb-3">
                           <input type="hidden" name="supplement_id" value="<?php echo $res['id'] ?>">
+                          <input type="hidden" name="transaction_id" value="<?php echo $res['transaction_id'] ?>">
                           <input type="hidden" name="price" value="<?php echo $res['price'] ?>">
-                          <input type="number" class="form-control rounded-0" name="qty" required max="<?php echo $res['qty'] ?>" value="1">
+                          <input type="number" class="form-control rounded-0" name="qty" required min="1" value="<?php echo $res['qty'] ?>">
                           <span class="input-group-append">
-                            <button type="submit" class="btn btn-dark btn-sm" name="add_to_cart">Add to Cart</button>
+                            <button type="submit" class="btn btn-dark btn-sm" name="update_cart">Update</button>
+                            <button type="submit" class="btn btn-dark btn-sm" name="delete">Delete</button>
                           </span>
                         </div>
+
                       </form>
                     </td>
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
@@ -90,7 +103,9 @@
             </table>
           </div>
 
-
+          <form method="post" onsubmit="return confirm('Are You Sure?');">
+            <button type="submit" class="btn btn-dark btn-sm" name="checkout" <?= (isset($checkout_available->id)) ? '' : 'disabled'  ?>>Checkout</button>
+          </form>
         </div>
 
       </div><!-- /.row -->
@@ -118,26 +133,5 @@
 <script src="../adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
-  $('table').DataTable({
-    "paging": true,
-    "lengthChange": false,
-    "searching": true,
-    "ordering": true,
-    "info": true,
-    "autoWidth": false,
-    "responsive": true,
-    dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
-    buttons: [
-      <?php //if (in_array($_SESSION['user']->access_id, array(1, 2))) { 
-      ?> {
-        className: 'btn btn-sm btn-dark',
-        text: '<i class="fa fa-shopping-cart"></i> Cart',
-        action: function(e, dt, node, config) {
-          window.location = 'checkout.php';
-        }
-      }
-    ]
-    <?php // } 
-    ?>
-  });
+
 </script>

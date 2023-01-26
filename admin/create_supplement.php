@@ -9,7 +9,7 @@
       function create($data)
       {
         extract($data);
-        $required_fields = array('supplement', 'qty', 'price');
+        $required_fields = array('supplement', 'price');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -38,7 +38,8 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../supplements/' . $image_name);
         }
 
-        query("INSERT INTO tbl_supplements (`name`,`description`, qty, price,`image`) VALUES('$supplement', '$description','$qty','$price','$image_name')");
+        $id = insert_get_id("INSERT INTO tbl_supplements (`name`,`description`, price,`image`) VALUES('$supplement', '$description','$price','$image_name')");
+        query("INSERT into tbl_supplement_invetory (supplement_id) values($id)");
         unset($_POST);
         return message_success("Supplement Created Successfully!", 'Successfull!');
       }
@@ -50,7 +51,7 @@
             <h1 class="m-0"><i class="fa fa-pills"></i> Add Supplement</h1>
           </div><!-- /.col -->
         </div>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" onsubmit="return confirm('Are You Sure?');" enctype="multipart/form-data">
           <section class="content">
             <div class="row">
               <div class="col-md-12">
@@ -76,10 +77,6 @@
                     <div class="form-group">
                       <label for="">*Supplement Price</label>
                       <input type="number" class="form-control <?= isset($_SESSION['error']['price']) ? 'is-invalid' : '' ?>" id="price" name="price" placeholder="Supplement Name" value="<?= isset($_POST['price']) ? $_POST['price'] : '' ?>">
-                    </div>
-                    <div class="form-group">
-                      <label for="">*Supplement Qty</label>
-                      <input type="number" class="form-control <?= isset($_SESSION['error']['qty']) ? 'is-invalid' : '' ?>" id="qty" name="qty" placeholder="Supplement Qty" value="<?= isset($_POST['qty']) ? $_POST['qty'] : '' ?>">
                     </div>
                     <div class="form-group">
                       <label for="">Supplement Description</label>

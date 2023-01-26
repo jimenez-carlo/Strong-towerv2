@@ -7,43 +7,30 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <?php
-      function delete_user($id)
-      {
-        query("UPDATE tbl_branch set `deleted_flag` = 1 where id = $id");
-        return message_success("Branch Deleted Successfully!");
-      }
-      ?>
-      <?php echo (isset($_POST['delete'])) ? delete_user($_POST['delete']) : '';  ?>
+
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-handshake"></i> Branch</h1>
+            <h1 class="m-0"><i class="fa fa-box"></i> Supplement #<?php echo $_GET['id'] ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
-                  <th>ID#</th>
-                  <th>Branch name</th>
-                  <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
-                    <th>Actions</th>
-                  <?php } ?>
+                  <!-- <th>ID#</th> -->
+                  <th>Stocked Qty</th>
+                  <th>New Qty</th>
+                  <th>Date Created</th>
+
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                <?php foreach (get_list("select * from tbl_supplement_inventory where supplement_id = " . $_GET['id']) as $res) { ?>
                   <tr>
-                    <td><?php echo $res['id']; ?></td>
-                    <td><?php echo ucfirst($res['name']); ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
-                      <td>
-                        <form method="post" onsubmit="return confirm('Are You Sure?');">
-                          <a href="edit_branch.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
-                          <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
-                        </form>
-                      </td>
-                    <?php } ?>
+                    <td><?php echo $res['qty'] ?></td>
+                    <td><?php echo $res['original_qty'] + $res['qty'] ?></td>
+                    <td><?php echo $res['date_created'] ?></td>
+
                   </tr>
                 <?php } ?>
 
@@ -78,25 +65,3 @@
 <script src="../adminlte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script>
-  $('table').DataTable({
-    "paging": true,
-    "lengthChange": false,
-    "searching": true,
-    "ordering": true,
-    "info": true,
-    "autoWidth": false,
-    "responsive": true,
-    dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
-    buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
-          className: 'btn btn-sm btn-dark',
-          text: '<i class="fa fa-user-plus"></i> Add Branch',
-          action: function(e, dt, node, config) {
-            window.location = 'create_branch.php';
-          }
-        }
-      ]
-  <?php } ?>
-  });
-</script>

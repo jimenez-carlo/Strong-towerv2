@@ -24,10 +24,10 @@
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
-                  <th>ID#</th>
+                  <!-- <th>ID#</th> -->
                   <th>Plan Name</th>
-                  <th>Monthly Price</th>
-                  <th>Session Price</th>
+                  <th>Monthly Amount</th>
+                  <!-- <th>Session Price</th> -->
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <th>Actions</th>
                   <?php } ?>
@@ -36,13 +36,13 @@
               <tbody>
                 <?php foreach (get_list("select * from tbl_plan where deleted_flag = 0") as $res) { ?>
                   <tr>
-                    <td><?php echo $res['id']; ?></td>
+                    <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo number_format($res['per_month'], 2); ?></td>
-                    <td><?php echo number_format($res['per_session'], 2); ?></td>
+                    <!-- <td><?php echo number_format($res['per_session'], 2); ?></td> -->
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
-                        <form method="post">
+                        <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_membership_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                           <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>

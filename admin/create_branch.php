@@ -41,7 +41,7 @@
             <h1 class="m-0"><i class="fa fa-user-plus"></i> Add Branch</h1>
           </div><!-- /.col -->
         </div>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" onsubmit="return confirm('Are You Sure?');" enctype="multipart/form-data">
           <section class="content">
             <div class="row">
               <div class="col-md-12">

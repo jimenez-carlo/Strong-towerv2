@@ -101,12 +101,12 @@ function activate($array)
                   </a></li>
                 <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "view_client")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Clients</p>
-                  </a></li>
+                    <!-- </a></li>
                 <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Trainers</p>
-                  </a></li>
+                  </a></li> -->
                 <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Employees</p>
+                    <p>Employees & Trainers</p>
                   </a></li>
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan", "view_my_client")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
@@ -139,11 +139,11 @@ function activate($array)
                 <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Clients</p>
                   </a></li>
-                <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
+                <!-- <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Trainers</p>
-                  </a></li>
+                  </a></li> -->
                 <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Employees</p>
+                    <p>Employees & Trainers</p>
                   </a></li>
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
@@ -159,6 +159,9 @@ function activate($array)
                   </a></li>
                 <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
                     <p>Supplements</p>
+                  </a></li>
+                <li class="nav-item"><a href="inventory.php" class="nav-link <?= activate(array("inventory", "inventory_view")) ?>"><i class="fa fa-box nav-icon"></i>
+                    <p>Inventory</p>
                   </a></li>
                 <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
                     <p>Services</p>
@@ -189,6 +192,9 @@ function activate($array)
                   </a></li>
                 <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/supplements"><i class="fa fa-pills nav-icon"></i>
                     <p>Supplements</p>
+                  </a></li>
+                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/supplements"><i class="fa fa-pills nav-icon"></i>
+                    <p>Inventory</p>
                   </a></li>
                 <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/services"><i class="fa fa-handshake nav-icon"></i>
                     <p>Services</p>

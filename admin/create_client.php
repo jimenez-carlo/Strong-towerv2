@@ -48,7 +48,7 @@
           $image_name = 'image_' . date('YmdHis') . $ext;
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../profile/' . $image_name);
         }
-
+        $branch = $_SESSION['user']->branch_id;
         $id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch','$access')");
         query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,`picture`) VALUES('$id','$first_name','$middle_name','$last_name','$gender','$contact','$address','$image_name')");
         unset($_POST);
@@ -62,7 +62,7 @@
             <h1 class="m-0"><i class="fa fa-user-plus"></i> Assign Client Plan</h1>
           </div><!-- /.col -->
         </div>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" onsubmit="return confirm('Are You Sure?');" enctype="multipart/form-data">
           <section class="content">
             <div class="row">
               <div class="col-md-12">

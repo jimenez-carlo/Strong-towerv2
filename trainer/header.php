@@ -96,9 +96,9 @@ function activate($array)
             <li class="nav-item"><a href="home.php" class="nav-link <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
                 <p>Home</p>
               </a></li>
-            <li class="nav-item"><a href="client_list.php" class="nav-link <?= activate(array("client_list", "create_client_list", "edit_client_list")) ?>" name="admin/clients"><i class="fa fa-users nav-icon"></i>
+            <!-- <li class="nav-item"><a href="client_list.php" class="nav-link <?= activate(array("client_list", "create_client_list", "edit_client_list")) ?>" name="admin/clients"><i class="fa fa-users nav-icon"></i>
                 <p>Client List</p>
-              </a></li>
+              </a></li> -->
             <li class="nav-item"><a href="my_clients.php" class="nav-link <?= activate(array("my_clients", "create_my_client", "edit_my_client")) ?>" name="admin/trainer_clients"><i class="fa fa-users nav-icon"></i>
                 <p>My Clients</p>
               </a></li>

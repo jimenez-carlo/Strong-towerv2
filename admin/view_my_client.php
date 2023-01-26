@@ -52,7 +52,7 @@
             <h1 class="m-0"><i class="fa fa-user"></i> View Client Plan #<?= $default->id ?></h1>
           </div><!-- /.col -->
         </div>
-        <form method="post" name="update_client_plan">
+        <form method="post" onsubmit="return confirm('Are You Sure?');" name="update_client_plan">
           <input type="hidden" name="id" value="<?= $default->id ?>">
           <section class="content">
             <div class="row">

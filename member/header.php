@@ -124,7 +124,7 @@ function activate($array)
               </a>
             </li>
             <li class="nav-item">
-              <a href="supplements.php" class="nav-link <?= activate(array("supplements")) ?>">
+              <a href="supplements.php" class="nav-link <?= activate(array("supplements", "checkout")) ?>">
                 <i class="fa fa-pills nav-icon"></i>
                 <p>Supplements</p>
               </a>
@@ -133,6 +133,12 @@ function activate($array)
               <a href="services.php" class="nav-link <?= activate(array("services")) ?>">
                 <i class="fa fa-handshake nav-icon"></i>
                 <p>Services</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="bmi.php" class="nav-link <?= activate(array("bmi")) ?>">
+                <i class="fa fa-calculator nav-icon"></i>
+                <p>BMI</p>
               </a>
             </li>
             <li class="nav-item">
