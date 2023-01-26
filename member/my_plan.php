@@ -43,7 +43,7 @@
       }
       ?>
       <?php echo (isset($_POST['update'])) ? update($_POST) : '';  ?>
-      <?php $default = get_one("SELECT * from tbl_client_plan where id = " . $_SESSION['user']->client_plan_id) ?>
+      <?php $default = get_one("SELECT * from tbl_client_plan where client_id = " . $_SESSION['user']->id . " order by expiration_date desc limit 1 ") ?>
       <?php $client_id = $default->client_id; ?>
 
       <div class="container-fluid" id="content">
