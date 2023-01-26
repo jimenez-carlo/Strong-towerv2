@@ -127,8 +127,13 @@
                   </thead>
                   <tbody>
                     <?php
-                    $available_workout = get_one("SELECT group_concat(workout_id) as workout_ids from tbl_progress p where p.plan_id = $plan_id and date = '$date_today' group by p.plan_id");
-                    $not_in = implode("','", array_map('intval', explode(',', $available_workout->workout_ids)));
+                    try {
+                      //code...
+                      $available_workout = get_one("SELECT group_concat(workout_id) as workout_ids from tbl_progress p where p.plan_id = $plan_id and date = '$date_today' group by p.plan_id");
+                      $not_in = !empty($available_workout->workout_ids) ? implode("','", array_map('intval', explode(',', $available_workout->workout_ids))) : 0;
+                    } catch (\Throwable $th) {
+                      //throw $th;
+                    }
                     ?>
                     <?php foreach (get_list("SELECT w.* FROM tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id WHERE wp.workout_id NOT IN ('" . $not_in . "') and wp.client_plan_id = '$plan_id' and wp.day_id = $day_id ") as $res) { ?>
                       <tr>
