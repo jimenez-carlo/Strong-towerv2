@@ -42,8 +42,8 @@
                 </tr>
               </thead>
               <tbody>
-                <?php $where = in_array($_SESSION['user']->access_id, array(2, 3)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : "";
-                $sql = "select b.name as `branch`,g.name as `gender`,ui.*,u.*,a.name as 'access' from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id in (2,3) and u.deleted_flag = 0 $where"; ?>
+                <?php $where = in_array($_SESSION['user']->access_id, array(2, 3, 5)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : "";
+                $sql = "select b.name as `branch`,g.name as `gender`,ui.*,u.*,a.name as 'access' from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id in (2,3,5) and u.deleted_flag = 0 $where"; ?>
                 <?php foreach (get_list($sql) as $res) { ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
@@ -124,7 +124,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: '<i class="fa fa-plus"></i> Add Employee/Trainer',
           action: function(e, dt, node, config) {

@@ -29,9 +29,7 @@
                   <th>Enabled/Disabled</th>
                   <th>Equipement name</th>
                   <th>Description</th>
-                  <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
-                    <th>Actions</th>
-                  <?php } ?>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>

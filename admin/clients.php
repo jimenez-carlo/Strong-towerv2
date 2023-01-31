@@ -57,27 +57,33 @@
                     <td><?php echo ucwords($res['first_name'] . ' ' . $res['last_name']); ?></td>
                     <td><?php echo strtoupper($res['gender']); ?></td>
                     <td><?php echo $res['contact_no']; ?></td>
-                    <td>
-                      <form method="post" onsubmit="return confirm('Are You Sure?');">
-                        <?php if ($_SESSION['user']->access_id == 2) { ?>
-                          <a href="edit_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
-                        <?php } ?>
-                        <?php if ($_SESSION['user']->access_id == 1) { ?>
-                          <a href="view_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
-                        <?php } ?>
-                        <?php if (empty($res['verified'])) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
+                      <td>
+                        <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <?php if ($_SESSION['user']->access_id == 2) { ?>
-                            <button type="submit" class="btn btn-sm btn-dark" name="verify" value="<?php echo $res['id']; ?>"> Verify <i class="fa fa-user-check"></i> </button>
-                            <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                            <a href="edit_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                           <?php } ?>
-                        <?php } else { ?>
-                          <?php if ($_SESSION['user']->access_id == 2) { ?>
-                            <button type="button" class="btn btn-sm btn-dark" disabled> Verify <i class="fa fa-user-check"></i> </button>
-                            <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                          <?php if ($_SESSION['user']->access_id == 1) { ?>
+                            <a href="view_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                           <?php } ?>
-                        <?php } ?>
-                      </form>
-                    </td>
+                          <?php if (empty($res['verified'])) { ?>
+                            <?php if ($_SESSION['user']->access_id == 2) { ?>
+                              <button type="submit" class="btn btn-sm btn-dark" name="verify" value="<?php echo $res['id']; ?>"> Verify <i class="fa fa-user-check"></i> </button>
+                              <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                            <?php } ?>
+                          <?php } else { ?>
+                            <?php if ($_SESSION['user']->access_id == 2) { ?>
+                              <button type="button" class="btn btn-sm btn-dark" disabled> Verify <i class="fa fa-user-check"></i> </button>
+                              <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                            <?php } ?>
+                          <?php } ?>
+                        </form>
+                      </td>
+                    <?php } else { ?>
+                      <td>
+                        <a href="view_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
+                      </td>
+                    <?php } ?>
                   </tr>
                 <?php } ?>
 
