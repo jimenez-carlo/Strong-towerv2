@@ -29,7 +29,7 @@
           return message_error("Workout Name Already In-use!");
         }
 
-        query("UPDATE tbl_workout set `name` = '$workout', `description` = '$description',`reps`='$reps',`sets`='$sets',duration= '$duration' where id = $id");
+        query("UPDATE tbl_workout set `name` = '$workout', `description` = '$description',`reps`='$reps',`sets`='$sets',duration= '$duration',category_id =  '$category' where id = $id");
         return message_success("Workout Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -56,6 +56,15 @@
                     </div>
                   </div>
                   <div class="card-body">
+
+                    <div class="form-group">
+                      <label for="">*Category</label>
+                      <select id="category" name="category" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>">
+                        <?php foreach (get_list("select * from tbl_category where deleted_flag = 0") as $res) { ?>
+                          <option value="<?= $res['id']; ?>" <?= ($workout->category_id == $res['id']) ? 'selected' : ''; ?>><?= $res['name']; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
 
                     <div class="form-group">
                       <label for="">*Workout Name</label>

@@ -29,7 +29,7 @@
           return message_error("Workout Name Already In-use!");
         }
 
-        query("INSERT INTO tbl_workout (`name`,`description`,`reps`,`sets`,`duration`) VALUES('$name', '$description','$reps','$sets','$duration')");
+        query("INSERT INTO tbl_workout (`name`,`description`,`reps`,`sets`,`duration`,`category_id`) VALUES('$name', '$description','$reps','$sets','$duration','$category')");
         unset($_POST);
         return message_success("Workout Created Successfully!", 'Successfull!');
       }
@@ -55,6 +55,14 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <div class="form-group">
+                      <label for="">*Category</label>
+                      <select id="category" name="category" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>">
+                        <?php foreach (get_list("select * from tbl_category where deleted_flag = 0") as $res) { ?>
+                          <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
                     <div class="form-group">
                       <label for="">*Workout Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Workout Name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">

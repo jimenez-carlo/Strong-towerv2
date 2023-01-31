@@ -26,8 +26,9 @@
                 <tr>
                   <!-- <th>ID#</th> -->
                   <th>Image</th>
+                  <th>Enabled/Disabled</th>
                   <th>Equipement name</th>
-                  <th>Qty</th>
+                  <th>Description</th>
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <th>Actions</th>
                   <?php } ?>
@@ -38,13 +39,14 @@
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><img src="../equipments/<?php echo $res['image']; ?>" style="width:100px;height:100px;object-fit:contain"></td>
+                    <td><?php echo ($res['enabled'] == 1) ? 'Enabled' : 'Disabled'; ?></td>
                     <td><?php echo ucfirst($res['name']); ?></td>
-                    <td><?php echo ucfirst($res['qty']); ?></td>
+                    <td><?php echo $res['description']; ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_equipment.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
-                          <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                          <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>
                       </td>
                     <?php } ?>

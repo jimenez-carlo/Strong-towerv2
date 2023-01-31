@@ -27,6 +27,7 @@
                   <!-- <th>ID#</th> -->
                   <th>Plan Name</th>
                   <th>Monthly Amount</th>
+                  <th>Description</th>
                   <!-- <th>Session Price</th> -->
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <th>Actions</th>
@@ -39,6 +40,7 @@
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo number_format($res['per_month'], 2); ?></td>
+                    <td><?php echo $res['description']; ?></td>
                     <!-- <td><?php echo number_format($res['per_session'], 2); ?></td> -->
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
@@ -48,7 +50,7 @@
                           <?php } else { ?>
                             <a href="view_membership_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                           <?php } ?>
-                          <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                          <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>
                       </td>
                     <?php } ?>

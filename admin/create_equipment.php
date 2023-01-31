@@ -9,7 +9,7 @@
       function create($data)
       {
         extract($data);
-        $required_fields = array('name', 'description', 'qty');
+        $required_fields = array('name', 'description');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -38,7 +38,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../equipments/' . $image_name);
         }
 
-        query("INSERT INTO tbl_equipment (`name`,`description`,`image`,`qty`) VALUES('$name', '$description','$image_name','$qty')");
+        query("INSERT INTO tbl_equipment (`name`,`description`,`image`,`enabled`) VALUES('$name', '$description','$image_name','$enabled')");
         unset($_POST);
         return message_success("Equipment Created Successfully!", 'Successfull!');
       }
@@ -73,13 +73,16 @@
                       <label for="">*Equipment Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Equipment Name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
                     </div>
-                    <div class="form-group">
-                      <label for="">*Equipment Qty</label>
-                      <input type="number" class="form-control <?= isset($_SESSION['error']['qty']) ? 'is-invalid' : '' ?>" id="qty" name="qty" placeholder="Equipment Qty" value="<?= isset($_POST['qty']) ? $_POST['qty'] : '' ?>">
-                    </div>
+
                     <div class="form-group">
                       <label for="">*Equipment Description</label>
                       <textarea class="form-control <?= isset($_SESSION['error']['description']) ? 'is-invalid' : '' ?>" rows="4" id="description" name="description" placeholder="Equipment Description"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <input type="radio" name="enabled" value="1">
+                      <label for="">Enabled</label>
+                      <input type="radio" name="enabled" value="0">
+                      <label for="">Disabled</label>
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-dark float-right" name="create"><i class="fa fa-save"></i> Add Equipment</button>

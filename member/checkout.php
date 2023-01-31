@@ -37,7 +37,7 @@
       {
         $customer_id = $_SESSION['user']->id;
         $invoice = date('dmyhis');
-        $id = insert_get_id("insert into tbl_invoice (invoice,status_id, customer_id) values ('$invoice',1,'$customer_id')");
+        $id = insert_get_id("insert into tbl_invoice (invoice,status_id, customer_id) values ('$invoice',2,'$customer_id')");
         query("update tbl_transaction_items set invoice_id = '$id' where customer_id = '$customer_id' and invoice_id is null ");
         return message_success("Cart Checkout Succesfully!");
       }
@@ -49,7 +49,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-check"></i> Cart</h1>
+            <h1 class="m-0"><i class="fa fa-shopping-cart"></i> Cart</h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">

@@ -26,27 +26,31 @@
                 <tr>
                   <!-- <th>ID#</th> -->
                   <th>Workout Name</th>
+                  <th>Category</th>
                   <th>Reps</th>
                   <th>Sets</th>
                   <th>Duration</th>
+                  <th>Description</th>
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <th>Actions</th>
                   <?php } ?>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $res) { ?>
+                <?php foreach (get_list("select w.*,c.name as `category` from tbl_workout w inner join tbl_category c on c.id = w.category_id where w.deleted_flag = 0") as $res) { ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>
+                    <td><?php echo ucfirst($res['category']); ?></td>
                     <td><?php echo $res['reps']; ?></td>
                     <td><?php echo $res['sets']; ?></td>
                     <td><?php echo $res['duration']; ?></td>
+                    <td><?php echo $res['description']; ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_workout.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
-                          <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                          <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>
                       </td>
                     <?php } ?>

@@ -95,6 +95,14 @@ function activate($array)
                 <p>Home</p>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a href="bmi.php" class="nav-link <?= activate(array("bmi")) ?>">
+                <i class="fa fa-calculator nav-icon"></i>
+                <p>BMI</p>
+              </a>
+            </li>
+
             <?php if (!(date('Y-m-d') > $_SESSION['user']->plan_expiration_date) && (!empty($_SESSION['user']->client_plan_id))) { ?>
               <li class="nav-item">
                 <a href="workout_today.php" class="nav-link <?= activate(array("workout_today")) ?>">
@@ -103,12 +111,14 @@ function activate($array)
                 </a>
               </li>
             <?php } ?>
+
             <li class="nav-item">
               <a href="my_activity.php" class="nav-link <?= activate(array("my_activity", "view_activity")) ?>">
                 <i class="fa fa-calendar nav-icon"></i>
                 <p>My Activity</p>
               </a>
             </li>
+
             <?php if (!(date('Y-m-d') > $_SESSION['user']->plan_expiration_date) && (!empty($_SESSION['user']->client_plan_id))) { ?>
               <li class="nav-item">
                 <a href="my_plan.php" class="nav-link <?= activate(array("my_plan")) ?>">
@@ -117,18 +127,9 @@ function activate($array)
                 </a>
               </li>
             <?php } ?>
-            <li class="nav-item">
-              <a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans")) ?>">
-                <i class="fa fa-clipboard nav-icon"></i>
-                <p>Membership Plans</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="supplements.php" class="nav-link <?= activate(array("supplements", "checkout")) ?>">
-                <i class="fa fa-pills nav-icon"></i>
-                <p>Supplements</p>
-              </a>
-            </li>
+
+
+
             <li class="nav-item">
               <a href="services.php" class="nav-link <?= activate(array("services")) ?>">
                 <i class="fa fa-handshake nav-icon"></i>
@@ -136,11 +137,30 @@ function activate($array)
               </a>
             </li>
             <li class="nav-item">
-              <a href="bmi.php" class="nav-link <?= activate(array("bmi")) ?>">
-                <i class="fa fa-calculator nav-icon"></i>
-                <p>BMI</p>
+              <a href="supplements.php" class="nav-link <?= activate(array("supplements")) ?>">
+                <i class="fa fa-pills nav-icon"></i>
+                <p>Supplements</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="checkout.php" class="nav-link <?= activate(array("checkout")) ?>">
+                <i class="fa fa-shopping-cart nav-icon"></i>
+                <p>Cart</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="orders.php" class="nav-link <?= activate(array("orders")) ?>">
+                <i class="fa fa-box nav-icon"></i>
+                <p>Orders</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans")) ?>">
+                <i class="fa fa-clipboard nav-icon"></i>
+                <p>Membership Plans</p>
+              </a>
+            </li>
+
             <li class="nav-item">
               <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
                 <i class="fa fa-user nav-icon"></i>

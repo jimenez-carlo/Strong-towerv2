@@ -1,4 +1,16 @@
 <?php include('header.php'); ?>
+
+<?php
+function save_bmi($data)
+{
+  extract($data);
+  $customer_id = $_SESSION['user']->id;
+  query("delete from tbl_bmi_history where customer_id = '$customer_id' and created_date >= curdate()");
+  query("insert into tbl_bmi_history (customer_id,weight,height,result) values($customer_id,'$w','$h','$value')");
+  return message_success("BMI Recorded");
+}
+
+?>
 <div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -6,50 +18,79 @@
     <div class="content-header">
       <div class="result">
       </div>
+      <?php echo (isset($_POST['save'])) ? save_bmi($_POST) : '';  ?>
       <div class="container-fluid" id="content">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-calculator"></i> BMI</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-12">
-            <div class="card card-secondary">
-              <div class="card-header">
-                <h3 class="card-title">Information</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
+        <form method="post">
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <h1 class="m-0"><i class="fa fa-calculator"></i> BMI</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-12">
+              <div class="card card-secondary">
+                <div class="card-header">
+                  <h3 class="card-title">Information</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label>*Height (in cm)</label>
-                      <input type="number" class="form-control " id="h" name="h" placeholder="Height">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>*Height (in cm)</label>
+                        <input type="number" class="form-control " id="h" name="h" placeholder="Height">
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label>*Weight (in kg)</label>
-                      <input type="number" class="form-control " id="w" name="w" placeholder="Weight">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>*Weight (in kg)</label>
+                        <input type="number" class="form-control " id="w" name="w" placeholder="Weight">
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label>Result</label>
-                      <input type="text" class="form-control " id="result" value="" disabled>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Result</label>
+                        <input type="text" class="form-control " id="result" value="" disabled>
+                        <input type="hidden" class="form-control " id="value" value="" name="value">
+                      </div>
                     </div>
-                  </div>
 
-                </div>
-                <div class="form-group">
-                  <button type="button" class="btn btn-dark float-right" id="btn"><i class="fa fa-save"></i> Calculate</button>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-dark float-right" name="save"><i class="fa fa-save"></i> Save</button>
+                    <button type="button" class="btn btn-dark float-right mr-1" id="btn"><i class="fa fa-save"></i> Calculate</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div><!-- /.row -->
+            <div class="col-sm-12">
+              <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                <thead>
+                  <tr>
+                    <th>Height</th>
+                    <th>Weight</th>
+                    <th>BMI</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $customer_id = $_SESSION['user']->id;  ?>
+                  <?php foreach (get_list("SELECT * from  tbl_bmi_history where customer_id ='$customer_id' order by created_date desc") as $res) { ?>
+                    <tr>
+                      <td><?php echo $res['height']; ?></td>
+                      <td><?php echo $res['weight']; ?></td>
+                      <td><?php echo $res['result']; ?></td>
+                      <td><?php echo $res['created_date']; ?></td>
+                    </tr>
+                  <?php } ?>
+
+                </tbody>
+              </table>
+            </div>
+          </div><!-- /.row -->
+        </form>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -82,6 +123,7 @@
       .querySelector("#w").value);
 
     let result = document.querySelector("#result");
+    let value = document.querySelector("#value");
 
     // Checking the user providing a proper
     // value or not
@@ -107,6 +149,16 @@
         `Normal : ${bmi}`;
 
       else result.value =
+        `Over Weight : ${bmi}`;
+
+      if (bmi < 18.6) value.value =
+        `Under Weight : ${bmi}`;
+
+      else if (bmi >= 18.6 && bmi < 24.9)
+        value.value =
+        `Normal : ${bmi}`;
+
+      else value.value =
         `Over Weight : ${bmi}`;
     }
   }

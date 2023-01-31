@@ -39,55 +39,40 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-pills"></i> Supplements</h1>
+            <h1 class="m-0"><i class="fa fa-box"></i> Orders</h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
-            <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
-              <thead>
-                <tr>
-                  <!-- <th>ID#</th> -->
-                  <th>Image</th>
-                  <th>Supplement name</th>
-                  <th>Price</th>
-                  <th>Actions</th>
-                  <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
-                    <th>Actions</th>
-                  <?php } ?>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach (get_list("select * from tbl_supplements where deleted_flag = 0") as $res) { ?>
-                  <tr>
-                    <!-- <td><?php echo $res['id']; ?></td> -->
-                    <td><img src="../supplements/<?php echo $res['image']; ?>" style="width:100px;height:100px;object-fit:contain"></td>
-                    <td><?php echo ucfirst($res['name']); ?></td>
-                    <td class="text-right"><?php echo number_format($res['price'], 2); ?></td>
-                    <td>
-                      <form method="post" onsubmit="return confirm('Are You Sure?');">
-                        <div class="input-group mb-3">
-                          <input type="hidden" name="supplement_id" value="<?php echo $res['id'] ?>">
-                          <input type="hidden" name="price" value="<?php echo $res['price'] ?>">
-                          <input type="number" class="form-control rounded-0" name="qty" required max="<?php echo $res['qty'] ?>" value="1">
-                          <span class="input-group-append">
-                            <button type="submit" class="btn btn-dark btn-sm" name="add_to_cart">Add to Cart</button>
-                          </span>
-                        </div>
-                      </form>
-                    </td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
-                      <td>
-                        <form method="post" onsubmit="return confirm('Are You Sure?');">
-                          <a href="edit_supplement.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
-                          <button type="button" class="btn btn-sm btn-dark btn-edit" name="admin/supplement_edit" value="<?php echo $res['id']; ?>"> Edit <i class="fa fa-edit"></i> </button>
-                          <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
-                        </form>
-                      </td>
-                    <?php } ?>
-                  </tr>
-                <?php } ?>
+            <?php foreach (get_list("select i.*,s.name from tbl_invoice i inner join tbl_status s on s.id = i.status_id where i.status_id <> 1 and i.customer_id = " . $_SESSION['user']->id . " order by created_date desc") as $res) { ?>
 
-              </tbody>
-            </table>
+              <h5 class="m-0">INVOICE: <?= $res['invoice'] ?> - <?= $res['name'] ?></h5>
+
+              <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $invoice_id = $res['id'];
+                  $tmp = 0; ?>
+
+                  <?php foreach (get_list("select t.*,s.name,s.price from tbl_transaction_items t inner join tbl_supplements s on s.id = t.supplement_id where t.invoice_id = $invoice_id") as $subres) { ?>
+                    <tr>
+                      <td><?php echo ucfirst($subres['name']); ?></td>
+                      <td class="text-right"><?php echo $subres['qty']; ?></td>
+                      <td class="text-right"><?php echo number_format($subres['price'] * $subres['qty'], 2); ?></td>
+                    </tr>
+                    <?php $tmp += $subres['price'] * $subres['qty'] ?>
+                  <?php } ?>
+                  <tr>
+                    <td colspan="2" style="font-weight: bold;">Total</td>
+                    <td class="text-right"><?php echo number_format($tmp, 2); ?></td>
+                  </tr>
+                </tbody>
+              </table>
+            <?php } ?>
           </div>
 
 
@@ -117,21 +102,3 @@
 <script src="../adminlte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script>
-  $('table').DataTable({
-    "paging": true,
-    "lengthChange": false,
-    "searching": true,
-    "ordering": true,
-    "info": true,
-    "autoWidth": false,
-    "responsive": true,
-    dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
-    buttons: [
-      <?php //if (in_array($_SESSION['user']->access_id, array(1, 2))) { 
-      ?>
-    ]
-    <?php // } 
-    ?>
-  });
-</script>

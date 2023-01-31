@@ -9,7 +9,7 @@
       function update($data)
       {
         extract($data);
-        $required_fields = array('equipement', 'description', 'qty');
+        $required_fields = array('equipement', 'description');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -36,7 +36,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../equipments/' . $image_name);
         }
 
-        query("UPDATE tbl_equipment set `name` = '$equipement', `description` = '$description',`image`='$image_name',`qty`='$qty' where id = $id");
+        query("UPDATE tbl_equipment set `name` = '$equipement', `description` = '$description',`image`='$image_name',`enabled`='$enabled' where id = $id");
         return message_success("Equipement Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -72,13 +72,16 @@
                       <label for="">*Equipement Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipement Name" value="<?= isset($_POST['equipement']) ? $_POST['equipement'] : $equipement->name ?>">
                     </div>
-                    <div class="form-group">
-                      <label for="">*Equipement Qty</label>
-                      <input type="number" class="form-control <?= isset($_SESSION['error']['qty']) ? 'is-invalid' : '' ?>" id="qty" name="qty" placeholder="Equipement Qty" value="<?= isset($_POST['qty']) ? $_POST['qty'] : $equipement->qty ?>">
-                    </div>
+
                     <div class="form-group">
                       <label for="">*Equipement Description</label>
                       <textarea class="form-control <?= isset($_SESSION['error']['description']) ? 'is-invalid' : '' ?>" rows="4" id="description" name="description" placeholder="Equipement Description"><?= isset($_POST['description']) ? $_POST['description'] : $equipement->description ?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <input type="radio" name="enabled" value="1" <?= ($equipement->enabled == 1) ? 'checked="checked"' : '' ?>>
+                      <label for="">Enabled</label>
+                      <input type="radio" name="enabled" value="0" <?= ($equipement->enabled == 0) ? 'checked="checked"' : '' ?>>
+                      <label for="">Disabled</label>
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-dark float-right" name="update"><i class="fa fa-save"></i> Update</button>

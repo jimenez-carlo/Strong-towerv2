@@ -9,7 +9,7 @@
       function update($data)
       {
         extract($data);
-        $required_fields = array('name', 'monthly', 'session', 'description');
+        $required_fields = array('name', 'monthly', 'description');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -29,7 +29,7 @@
           return message_error("Workout Name Already In-use!");
         }
 
-        query("UPDATE tbl_plan set `name` = '$name', `description` = '$description',`per_session`='$session',`monthly`='$monthly' where id = $id");
+        query("UPDATE tbl_plan set `name` = '$name', `description` = '$description',`monthly`='$monthly' where id = $id");
         return message_success("Workout Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -60,10 +60,6 @@
                     <div class="form-group">
                       <label for="">*Plan Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Plan Name" value="<?= isset($_POST['name']) ? $_POST['name'] : $plan->name ?>">
-                    </div>
-                    <div class="form-group">
-                      <label for="">*Plan Session Price</label>
-                      <input type="number" class="form-control <?= isset($_SESSION['error']['session']) ? 'is-invalid' : '' ?>" id="session" name="session" placeholder="Plan Session Price" value="<?= isset($_POST['session']) ? $_POST['session'] : $plan->per_session ?>">
                     </div>
                     <div class="form-group">
                       <label for="">*Plan Monthly Price</label>

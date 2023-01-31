@@ -10,44 +10,39 @@
       <?php
       function delete_user($id)
       {
-        query("UPDATE tbl_services set `deleted_flag` = 1 where id = $id");
-        return message_success("Service Deleted Successfully!");
+        query("UPDATE tbl_walkin set `deleted_flag` = 1 where id = $id");
+        return message_success("Walkin Deleted Successfully!");
       }
       ?>
       <?php echo (isset($_POST['delete'])) ? delete_user($_POST['delete']) : '';  ?>
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-handshake"></i> Services</h1>
+            <h1 class="m-0"><i class="fa fa-bell"></i> Walkin</h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
-                  <!-- <th>ID#</th> -->
-                  <th>Image</th>
-                  <th>Service name</th>
-                  <th>Description</th>
-                  <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
-                    <th>Actions</th>
-                  <?php } ?>
+                  <th>Customer</th>
+                  <th>Contact</th>
+                  <th>Price</th>
+                  <th>Date</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_services where deleted_flag = 0") as $res) { ?>
+                <?php foreach (get_list("select * from tbl_walkin where deleted_flag = 0") as $res) { ?>
                   <tr>
-                    <!-- <td><?php echo $res['id']; ?></td> -->
-                    <td><img src="../services/<?php echo $res['image']; ?>" style="width:100px;height:100px;object-fit:contain"></td>
-                    <td style="min-width: 140px;"><?php echo ucfirst($res['name']); ?></td>
-                    <td><?php echo ucfirst($res['description']); ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
-                      <td style="min-width:140px">
-                        <form method="post" onsubmit="return confirm('Are You Sure?');">
-                          <a href="edit_service.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
-                          <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
-                        </form>
-                      </td>
-                    <?php } ?>
+                    <td><?php echo ucfirst($res['first_name'] . ' ' . $res['last_name']); ?></td>
+                    <td><?php echo ucfirst($res['contact_no']); ?></td>
+                    <td style="text-align: right;"><?php echo number_format($res['price'], 2); ?></td>
+                    <td><?php echo ucfirst($res['created_date']); ?></td>
+                    <td>
+                      <form method="post" onsubmit="return confirm('Are You Sure?');">
+                        <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                      </form>
+                    </td>
                   </tr>
                 <?php } ?>
 
@@ -95,9 +90,9 @@
     buttons: [
       <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
           className: 'btn btn-sm btn-dark',
-          text: '<i class="fa fa-user-plus"></i> Add Service',
+          text: 'Add Walkin',
           action: function(e, dt, node, config) {
-            window.location = 'create_service.php';
+            window.location = 'create_walkin.php';
           }
         }
       ]
