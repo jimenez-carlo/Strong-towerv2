@@ -76,7 +76,7 @@
 
                           <select id="plan" name="plan" class="form-control">
                             <?php foreach (get_list("SELECT * from tbl_plan where deleted_flag = 0") as $res) { ?>
-                              <option value="<?= $res['id']; ?>" <?php echo ($default->plan_id == $res['id']) ? 'selected' : ''; ?>><?= strtoupper($res['name'] . ' - ' . $res['per_session'] . ' per session, ' . $res['per_month'] . ' per month'); ?></option>
+                              <option value="<?= $res['id']; ?>" <?php echo ($default->plan_id == $res['id']) ? 'selected' : ''; ?>><?= strtoupper($res['name'] . ' - ' . $res['per_month'] . ' per month'); ?></option>
                             <?php } ?>
                           </select>
                         </div>
