@@ -13,10 +13,13 @@
         $member_id = $_SESSION['user']->id;
         $plan_id = $_SESSION['user']->client_plan_id;
         query("DELETE from tbl_progress where `date` = '$date_today' and plan_id = '$plan_id'");
-        foreach ($workout_id as $key => $res) {
-          query("INSERT INTO tbl_progress (customer_id,plan_id,workout_id,date,reps,sets) VALUES('$member_id', '$plan_id','$res','$date_today',$reps[$key],$sets[$key])");
+        if (isset($workout_id)) {
+
+          foreach ($workout_id as $key => $res) {
+            query("INSERT INTO tbl_progress (customer_id,plan_id,workout_id,date,reps,sets) VALUES('$member_id', '$plan_id','$res','$date_today',$reps[$key],$sets[$key])");
+          }
+          return message_success("Workout Updated Successfully!", 'Successfull!');
         }
-        return message_success("Workout Updated Successfully!", 'Successfull!');
       }
 
       function delete($id)
