@@ -32,9 +32,7 @@
                   <th>Supplement name</th>
                   <th>Stock</th>
                   <th>Price</th>
-                  <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
-                    <th>Actions</th>
-                  <?php } ?>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -44,7 +42,7 @@
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo $res['qty'] ?></td>
                     <td class="text-right"><?php echo number_format($res['price'], 2); ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <div class="input-group mb-3">
@@ -53,10 +51,15 @@
                             <input type="number" class="form-control rounded-0" name="qty" value="0" style="width:10px">
                             <span class="input-group-append">
                               <button type="submit" class="btn btn-dark btn-sm" name="add_stock">Add Stock</button>
-                              <a href="inventory_view.php?id=<?php echo $res['id']; ?>" style="padding-top:7px" class="btn btn-dark btn-sm">View</a>
+                              <a href="inventory_view.php?id=<?php echo $res['id']; ?>" style="padding-top:7px" class="btn btn-dark btn-sm">View </a>
                             </span>
                           </div>
                         </form>
+                      </td>
+                    <?php } else { ?>
+                      <td>
+                        <a href="inventory_view.php?id=<?php echo $res['id']; ?>" style="padding-top:7px" class="btn btn-dark btn-sm">View <i class="fa fa-eye"></i></a>
+
                       </td>
                     <?php } ?>
                   </tr>

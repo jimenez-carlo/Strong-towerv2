@@ -46,12 +46,17 @@
                     <td><?php echo $res['sets']; ?></td>
                     <td><?php echo $res['duration']; ?></td>
                     <td><?php echo $res['description']; ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_workout.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                           <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>
+                      </td>
+                    <?php } else { ?>
+                      <td>
+                        <a href="view_workout.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
+
                       </td>
                     <?php } ?>
                   </tr>

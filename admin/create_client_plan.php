@@ -76,7 +76,7 @@
                           <label>*Client</label>
                           <select id="client" name="client" class="form-control <?= isset($_SESSION['error']['client']) ? 'is-invalid' : '' ?>">
                             <?php foreach (get_list("select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id = 4 and u.deleted_flag = 0 and (u.client_plan_id = 0 OR u.client_plan_id = null OR CURDATE() > u.plan_expiration_date OR u.plan_expiration_date is null) $where") as $res) { ?>
-                              <option value="<?= $res['id']; ?>"><?= strtoupper($res['first_name'] . ' ' . $res['middle_name'][0] . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
+                              <option value="<?= $res['id']; ?>"><?= strtoupper($res['first_name'] . ' ' . ($res['middle_name'][0] ?? '') . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
                             <?php } ?>
                           </select>
                         </div>
@@ -90,7 +90,7 @@
                           <select id="trainer" name="trainer" class="form-control <?= isset($_SESSION['error']['trainer']) ? 'is-invalid' : '' ?>">
                             <option value="0">NO TRAINER</option>
                             <?php foreach (get_list("select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id = 3 and u.deleted_flag = 0 $where") as $res) { ?>
-                              <option value="<?= $res['id']; ?>"><?= strtoupper($res['first_name'] . ' ' . $res['middle_name'][0] . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
+                              <option value="<?= $res['id']; ?>"><?= strtoupper($res['first_name'] . ' ' . ($res['middle_name'][0] ?? '') . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
                             <?php } ?>
                           </select>
                         </div>

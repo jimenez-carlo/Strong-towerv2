@@ -29,9 +29,7 @@
                   <th>Supplement name</th>
                   <th>Price</th>
                   <th>Description</th>
-                  <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
-                    <th>Actions</th>
-                  <?php } ?>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -42,13 +40,17 @@
                     <td style="min-width: 140px;"><?php echo ucfirst($res['name']); ?></td>
                     <td class="text-right"><?php echo number_format($res['price'], 2); ?></td>
                     <td><?php echo $res['description']; ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
                       <td style="min-width:140px">
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_supplement.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                           <!-- <button type="button" class="btn btn-sm btn-dark btn-edit" name="admin/supplement_edit" value="<?php echo $res['id']; ?>"> Edit <i class="fa fa-edit"></i> </button> -->
                           <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>
+                      </td>
+                    <?php } else { ?>
+                      <td>
+                        <a href="view_supplement.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                       </td>
                     <?php } ?>
                   </tr>

@@ -52,14 +52,20 @@
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo ucfirst($res['customer']); ?></td>
                     <td><?php echo ucfirst($res['created_date']); ?></td>
-                    <td>
+                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
+                      <td>
 
-                      <form method="post" onsubmit="return confirm('Are You Sure?');">
+                        <form method="post" onsubmit="return confirm('Are You Sure?');">
+                          <a href="view_order.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
+                          <button type="submit" class="btn btn-sm btn-dark btn-edit" name="pay" value="<?php echo $res['id']; ?>" <?= ($res['status_id'] != 2) ? 'disabled' : "" ?>> Pay <i class="fa fa-check"></i> </button>
+                          <button type="submit" class="btn btn-sm btn-danger" name="reject" value="<?php echo $res['id']; ?>" <?= ($res['status_id'] != 2) ? 'disabled' : "" ?>> Reject <i class="fa fa-times"></i> </button>
+                        </form>
+                      </td>
+                    <?php } else { ?>
+                      <td>
                         <a href="view_order.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
-                        <button type="submit" class="btn btn-sm btn-dark btn-edit" name="pay" value="<?php echo $res['id']; ?>" <?= ($res['status_id'] != 2) ? 'disabled' : "" ?>> Pay <i class="fa fa-check"></i> </button>
-                        <button type="submit" class="btn btn-sm btn-danger" name="reject" value="<?php echo $res['id']; ?>" <?= ($res['status_id'] != 2) ? 'disabled' : "" ?>> Reject <i class="fa fa-times"></i> </button>
-                      </form>
-                    </td>
+                      </td>
+                    <?php } ?>
                   </tr>
                 <?php } ?>
 
