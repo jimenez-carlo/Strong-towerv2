@@ -32,7 +32,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_walkin where deleted_flag = 0") as $res) { ?>
+                <?php foreach (get_list("select * from tbl_walkin where deleted_flag = 0 order by created_date desc") as $res) { ?>
                   <tr>
                     <td><?php echo ucfirst($res['first_name'] . ' ' . $res['last_name']); ?></td>
                     <td><?php echo ucfirst($res['contact_no']); ?></td>
@@ -82,7 +82,7 @@
     "paging": true,
     "lengthChange": false,
     "searching": true,
-    "ordering": true,
+    "ordering": false,
     "info": true,
     "autoWidth": false,
     "responsive": true,
