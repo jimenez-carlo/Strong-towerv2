@@ -9,7 +9,7 @@
       function update($data)
       {
         extract($data);
-        $required_fields = array('username', 'email', 'first_name', 'middle_name', 'last_name', 'contact');
+        $required_fields = array('username', 'email', 'first_name', 'last_name', 'contact');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -169,7 +169,7 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label>*Middle Name</label>
+                          <label>Middle Name</label>
                           <input type="text" class="form-control <?= isset($_SESSION['error']['middle_name']) ? 'is-invalid' : '' ?>" id="middle_name" name="middle_name" placeholder="Middle Name" value="<?= isset($_POST['middle_name']) ? $_POST['middle_name'] : $user->middle_name ?>">
                         </div>
                       </div>
