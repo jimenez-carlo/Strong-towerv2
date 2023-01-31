@@ -42,7 +42,7 @@
                     <td><?php echo number_format($res['per_month'], 2); ?></td>
                     <td><?php echo $res['description']; ?></td>
                     <!-- <td><?php echo number_format($res['per_session'], 2); ?></td> -->
-                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <?php if ($_SESSION['user']->access_id == 2) { ?>
@@ -52,6 +52,10 @@
                           <?php } ?>
                           <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>
+                      </td>
+                    <?php } else { ?>
+                      <td>
+                        <a href="view_membership_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                       </td>
                     <?php } ?>
                   </tr>

@@ -24,7 +24,7 @@ function login()
     return message_error("Please Fill Blank Fields!");
   }
 
-  $user = get_one("SELECT b.name as `branch`,ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_branch b on b.id = u.branch_id where u.username ='$username' and u.`password`='$password' and u.deleted_flag = 0 limit 1");
+  $user = get_one("SELECT b.name as `branch`,ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_branch b on b.id = u.branch_id where u.username ='$username' and u.`password`='$password' and u.deleted_flag = 0 and u.access_id in (1,2,5) limit 1");
   $check_user_is_verified = get_one("SELECT if(max(u.id) is null, 0, max(u.id) + 1) as `res` from tbl_user u where u.username ='$username' and u.`password`='$password' and u.deleted_flag = 0 limit 1");
 
   if (empty($check_user_is_verified->res)) {

@@ -136,7 +136,7 @@
                         <div class="form-group">
                           <label>Type</label>
                           <select id="access" name="access" class="form-control">
-                            <?php foreach (get_list("select * from tbl_access where deleted_flag = 0 and id in(2,3) and deleted_flag = 0") as $res) { ?>
+                            <?php foreach (get_list("select * from tbl_access where deleted_flag = 0 and id in(2,3,5) and deleted_flag = 0") as $res) { ?>
                               <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
                             <?php } ?>
                           </select>

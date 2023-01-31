@@ -28,7 +28,9 @@
                   <th>Contact</th>
                   <th>Price</th>
                   <th>Date</th>
-                  <th>Actions</th>
+                  <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
+                    <th>Actions</th>
+                  <?php } ?>
                 </tr>
               </thead>
               <tbody>
@@ -38,11 +40,13 @@
                     <td><?php echo ucfirst($res['contact_no']); ?></td>
                     <td style="text-align: right;"><?php echo number_format($res['price'], 2); ?></td>
                     <td><?php echo ucfirst($res['created_date']); ?></td>
-                    <td>
-                      <form method="post" onsubmit="return confirm('Are You Sure?');">
-                        <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
-                      </form>
-                    </td>
+                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
+                      <td>
+                        <form method="post" onsubmit="return confirm('Are You Sure?');">
+                          <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                        </form>
+                      </td>
+                    <?php } ?>
                   </tr>
                 <?php } ?>
 
@@ -88,14 +92,14 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: 'Add Walkin',
           action: function(e, dt, node, config) {
             window.location = 'create_walkin.php';
           }
         }
-      ]
-  <?php } ?>
+      <?php } ?>
+    ]
   });
 </script>

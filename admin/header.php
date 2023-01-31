@@ -120,10 +120,10 @@ function activate($array)
                 <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout", "view_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
                   </a></li>
-                <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
+                <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan", "view_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Membership Plans</p>
                   </a></li>
-                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
+                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan", "view_my_client")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
                 <li class="nav-item"><a href="walkin.php" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>"><i class="fa fa-bell nav-icon"></i>
@@ -188,38 +188,45 @@ function activate($array)
 
                 <?php break; ?>
               <?php
-              case 3: ?>
+              case 5: ?>
                 <!-- Trainer -->
-                <li class="nav-item"><a href="." class="nav-link btn-side active"><i class="fa fa-home nav-icon"></i>
+                <!-- Super Admin -->
+                <li class="nav-item"><a href="." class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
                     <p>Home</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/clients"><i class="fa fa-users nav-icon"></i>
-                    <p>Client List</p>
+                <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service", "view_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
+                    <p>Services</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/trainer_clients"><i class="fa fa-users nav-icon"></i>
-                    <p>My Clients</p>
-                  </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/plans"><i class="fa fa-clipboard nav-icon"></i>
-                    <p>Membership Plans</p>
-                  </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
-                    <p>Workouts</p>
-                  </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/equipments"><i class="fa fa-dumbbell nav-icon"></i>
-                    <p>Equipments</p>
-                  </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/supplements"><i class="fa fa-pills nav-icon"></i>
-                    <p>Supplements</p>
-                  </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/supplements"><i class="fa fa-pills nav-icon"></i>
+
+                <li class="nav-item"><a href="inventory.php" class="nav-link <?= activate(array("inventory", "inventory_view")) ?>"><i class="fa fa-box nav-icon"></i>
                     <p>Inventory</p>
                   </a></li>
                 <li class="nav-item"><a href="orders.php" class="nav-link <?= activate(array("orders", "view_order")) ?>"><i class="fa fa-shopping-cart nav-icon"></i>
                     <p>Orders</p>
                   </a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn-side" name="admin/services"><i class="fa fa-handshake nav-icon"></i>
-                    <p>Services</p>
+                <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment", "view_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
+                    <p>Equipments</p>
                   </a></li>
+                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category", "view_category")) ?>"><i class="fa fa-tag nav-icon"></i>
+                    <p>Categories</p>
+                  </a></li>
+                <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout", "view_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
+                    <p>Workouts</p>
+                  </a></li>
+
+                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan", "view_my_client")) ?>"><i class="fa fa-clipboard nav-icon"></i>
+                    <p>Client Plans</p>
+                  </a></li>
+                <li class="nav-item"><a href="walkin.php" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>"><i class="fa fa-bell nav-icon"></i>
+                    <p>Walkin</p>
+                  </a></li>
+                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
+                    <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
+                  </a></li>
+                <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
+                    <p>Employees & Trainers (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 3 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
+                  </a></li>
+
                 <?php break; ?>
               <?php
               case 4: ?>
