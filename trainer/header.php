@@ -1,7 +1,7 @@
 <?php
 require_once('../functions.php');
 require_once('../database/conn.php');
-if (!isset($_SESSION['user']->access_id) && !in_array($_SESSION['user']->access_id, array(1, 2))) {
+if (!isset($_SESSION['user']->access_id) && !in_array($_SESSION['user']->access_id, array(1, 2,  4, 5))) {
   header('location:../index.php');
 }
 

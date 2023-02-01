@@ -23,7 +23,9 @@ function save_bmi($data)
         <form method="post">
           <div class="row mb-2">
             <div class="col-sm-12">
-              <h1 class="m-0"><i class="fa fa-calculator"></i> BMI</h1>
+              <h1 class="m-0"><i class="fa fa-calculator"></i> BMI
+
+              </h1>
             </div><!-- /.col -->
             <div class="col-sm-12">
               <div class="card card-secondary">
