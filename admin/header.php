@@ -129,7 +129,7 @@ function activate($array)
                 <li class="nav-item"><a href="walkin.php" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>"><i class="fa fa-bell nav-icon"></i>
                     <p>Walkin</p>
                   </a></li>
-                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
+                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
                   </a></li>
                 <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
@@ -175,7 +175,7 @@ function activate($array)
                 <li class="nav-item"><a href="walkin.php" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>"><i class="fa fa-bell nav-icon"></i>
                     <p>Walkin</p>
                   </a></li>
-                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
+                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
                   </a></li>
                 <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
@@ -220,7 +220,7 @@ function activate($array)
                 <li class="nav-item"><a href="walkin.php" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>"><i class="fa fa-bell nav-icon"></i>
                     <p>Walkin</p>
                   </a></li>
-                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
+                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
                   </a></li>
                 <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>

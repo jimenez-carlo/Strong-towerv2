@@ -20,7 +20,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <!-- JavaScript Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
+  <script src="script.js"></script>
 </head>
 <style>
   .signup {
@@ -104,7 +104,7 @@
 
     // Insert Member
     $user_id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch',3)");
-    query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,`picture`) VALUES('$user_id','$first_name','$middle_name','$last_name','$gender','$contact','$address','$image_name')");
+    query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`picture`,`barangay`,`city`) VALUES('$user_id','$first_name','$middle_name','$last_name','$gender','$contact','$image_name','$barangay','$city')");
     echo "<script>document.getElementById('myForm').reset();</script>";
     return
       '<div class="alert alert-success d-flex align-items-center" role="alert">
@@ -185,12 +185,24 @@
         </div>
 
         <div class="col-md-3">
-          <label for="validationCustom03" class="form-label">*Address</label>
-          <textarea class="form-control <?= isset($_SESSION['error']['address']) ? 'is-invalid' : '' ?>" name="address" required rows="4" placeholder="Address"><?= isset($_POST['address']) ? $_POST['address'] : '' ?></textarea>
+          <label for="validationCustom03" class="form-label">*City & Barangay</label>
+          <div style="display: flex;">
+            <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
+              <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+                <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+              <?php } ?>
+            </select>
+            <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
+              <?php foreach (get_list("select * from tbl_barangay where city_id = 015501") as $res) { ?>
+                <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+              <?php } ?>
+            </select>
+          </div>
           <div class="invalid-feedback">
             <?= isset($_SESSION['error']['address']) ? $_SESSION['error']['address'] : '' ?>
           </div>
         </div>
+
 
         <div class="col-md-3">
           <label for="validationCustom02" class="form-label">*Username</label>
@@ -234,6 +246,14 @@
   </section>
 
   <?php require_once("footer.php"); ?>
+  <script>
+    $(document).on("change", "#city", function() {
+      let value = $(this).val();
+      $.get("../dropdown.php?city=" + value, function(result) {
+        $("#barangay").html(result);
+      });
+    });
+  </script>
 </body>
 
 </html>

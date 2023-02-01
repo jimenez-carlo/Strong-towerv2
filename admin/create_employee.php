@@ -51,7 +51,7 @@
         }
 
         $id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id,verified) VALUES('$username', '$email','$password','$branch','$access',1)");
-        query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`address`,`picture`) VALUES('$id','$first_name','$middle_name','$last_name','$gender','$contact','$address','$image_name')");
+        query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`picture`,`city`,`barangay`) VALUES('$id','$first_name','$middle_name','$last_name','$gender','$contact','$image_name','$city','$barangay')");
         unset($_POST);
         return message_success("Client Created Successfully!", 'Successfull!');
       }
@@ -186,8 +186,19 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label>Address</label>
-                          <textarea class="form-control <?= isset($_SESSION['error']['address']) ? 'is-invalid' : '' ?>" rows="4" id="address" name="address" placeholder="Address"><?= isset($_POST['address']) ? $_POST['address'] : '' ?></textarea>
+                          <label>*City & Barangay</label>
+                          <div style="display: flex;">
+                            <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+                                <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                            <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from tbl_barangay where city_id = 015501") as $res) { ?>
+                                <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -223,3 +234,11 @@
   }
 </script>
 <?php include('footer.php'); ?>
+<script>
+  $(document).on("change", "#city", function() {
+    let value = $(this).val();
+    $.get("../dropdown.php?city=" + value, function(result) {
+      $("#barangay").html(result);
+    });
+  });
+</script>

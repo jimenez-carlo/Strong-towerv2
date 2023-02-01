@@ -135,8 +135,19 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label>Address</label>
-                          <textarea disabled class="form-control <?= isset($_SESSION['error']['address']) ? 'is-invalid' : '' ?>" rows="4" id="address" name="address" placeholder="Address"><?= isset($_POST['address']) ? $_POST['address'] : $user->address ?></textarea>
+                          <label>*City & Barangay</label>
+                          <div style="display: flex;">
+                            <select disabled id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+                                <option value="<?= $res['id']; ?>" <?= $user->city == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                            <select disabled id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from tbl_barangay where city_id = " . $user->city . "") as $res) { ?>
+                                <option value="<?= $res['id']; ?>" <?= $user->barangay == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
                         </div>
                       </div>
                     </div>

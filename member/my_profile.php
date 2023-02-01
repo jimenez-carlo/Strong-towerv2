@@ -61,7 +61,7 @@
         // }
 
         query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `password` = '$new_password', `branch_id` = '$branch' where id = $id");
-        query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact', `address` = '$address',`picture`='$image_name' where id = $id");
+        query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact',`picture`='$image_name',barangay= '$barangay', city= '$city' where id = $id");
         return message_success("Client Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -200,8 +200,19 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label>Address</label>
-                          <textarea class="form-control <?= isset($_SESSION['error']['address']) ? 'is-invalid' : '' ?>" rows="4" id="address" name="address" placeholder="Address"><?= isset($_POST['address']) ? $_POST['address'] : $user->address ?></textarea>
+                          <label>*City & Barangay</label>
+                          <div style="display: flex;">
+                            <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+                                <option value="<?= $res['id']; ?>" <?= $user->city == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                            <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from tbl_barangay where city_id = " . $user->city . "") as $res) { ?>
+                                <option value="<?= $res['id']; ?>" <?= $user->barangay == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -247,3 +258,11 @@
   // }
 </script>
 <?php include('footer.php'); ?>
+<script>
+  $(document).on("change", "#city", function() {
+    let value = $(this).val();
+    $.get("../dropdown.php?city=" + value, function(result) {
+      $("#barangay").html(result);
+    });
+  });
+</script>
