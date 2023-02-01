@@ -42,7 +42,9 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-dumbell nav-icon"></i> <?= date_format(date_create($date), "D, M d, Y") ?></h1>
+            <h1 class="m-0"><i class="fa fa-dumbell nav-icon"></i> <?= date_format(date_create($date), "D, M d, Y") ?>
+              <a href="my_activity.php" class="btn btn-dark" style="float:right">Back</a>
+            </h1>
           </div><!-- /.col -->
           <?php
           $date_today = date('Y-m-d');
@@ -57,7 +59,8 @@
           <div class="col-sm-12">
             <div class="card card-secondary">
               <div class="card-header">
-                <h3 class="card-title">Work Out Details</h3>
+                <h3 class="card-title">Work Out Details
+                </h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>

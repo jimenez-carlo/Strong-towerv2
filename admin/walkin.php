@@ -18,7 +18,8 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-bell"></i> Walkin</h1>
+            <h1 class="m-0"><i class="fa fa-bell"></i> Walkin
+            </h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">

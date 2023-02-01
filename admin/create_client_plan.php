@@ -40,7 +40,9 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-user-plus"></i> Register Client</h1>
+            <h1 class="m-0"><i class="fa fa-user-plus"></i> Register Client
+              <a href="client_plans.php" class="btn btn-dark" style="float:right">Back</a>
+            </h1>
           </div><!-- /.col -->
         </div>
         <form method="post" onsubmit="return confirm('Are You Sure?');">

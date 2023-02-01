@@ -1,7 +1,7 @@
 <?php
 require_once('../functions.php');
 require_once('../database/conn.php');
-if (!isset($_SESSION['user']->access_id) && !in_array($_SESSION['user']->access_id, array(1, 2, 5))) {
+if (!isset($_SESSION['user']->access_id) && !in_array($_SESSION['user']->access_id, array(3, 4))) {
   header('location:../index.php');
 }
 
@@ -96,7 +96,7 @@ function activate($array)
             <?php switch ($_SESSION['user']->access_id) {
               case 1: ?>
                 <!-- Super Admin -->
-                <li class="nav-item"><a href="." class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
+                <li class="nav-item"><a href="home.php" class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
                     <p>Home</p>
                   </a></li>
                 <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service", "view_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
@@ -142,7 +142,7 @@ function activate($array)
               <?php
               case 2: ?>
                 <!-- Manager -->
-                <li class="nav-item"><a href="." class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
+                <li class="nav-item"><a href="home.php" class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
                     <p>Home</p>
                   </a></li>
                 <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
@@ -191,7 +191,7 @@ function activate($array)
               case 5: ?>
                 <!-- Trainer -->
                 <!-- Super Admin -->
-                <li class="nav-item"><a href="." class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
+                <li class="nav-item"><a href="home.php" class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
                     <p>Home</p>
                   </a></li>
                 <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service", "view_service")) ?>"><i class="fa fa-handshake nav-icon"></i>

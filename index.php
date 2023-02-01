@@ -2,7 +2,7 @@
 require_once('database/conn.php');
 require_once('functions.php');
 if (isset($_SESSION['user']->access_id)) {
-    if (in_array($_SESSION['user']->access_id, array(1, 2))) {
+    if (in_array($_SESSION['user']->access_id, array(1, 2, 5))) {
         // Super Admin/Admin
         header('location:admin/home.php');
     } else if (in_array($_SESSION['user']->access_id, array(3, 4))) {

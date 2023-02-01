@@ -60,7 +60,9 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-user-plus"></i> Register Employee/Trainer</h1>
+            <h1 class="m-0"><i class="fa fa-user-plus"></i> Register Employee/Trainer
+              <a href="employees.php" class="btn btn-dark" style="float:right">Back</a>
+            </h1>
           </div><!-- /.col -->
         </div>
         <form method="post" onsubmit="return confirm('Are You Sure?');" enctype="multipart/form-data">
