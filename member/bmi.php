@@ -41,13 +41,13 @@ function save_bmi($data)
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="form-group">
-                        <label>*Height (in cm)</label>
+                        <label>*Height (inches)</label>
                         <input type="number" class="form-control " id="h" name="h" placeholder="Height">
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group">
-                        <label>*Weight (in kg)</label>
+                        <label>*Weight (kilogram)</label>
                         <input type="number" class="form-control " id="w" name="w" placeholder="Weight">
                       </div>
                     </div>

@@ -17,7 +17,7 @@
 
           <div class="col-sm-12">
             <h1 class="m-0 text-center">Strong Tower Gym</h1><br>
-            <h5 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, ex praesentium! Numquam quis excepturi assumenda voluptatum molestiae consectetur sapiente corrupti sequi! Ipsa ex magnam quos assumenda magni minima rem vero.</h5>
+            <h5 class="m-0 text-center">Strong Tower Gym is the ultimate fitness hub in Urdaneta City. Located at the heart of the bustling</h5>
             <br>
           </div>
           <div class="col-sm-6">

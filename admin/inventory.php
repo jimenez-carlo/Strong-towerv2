@@ -51,7 +51,7 @@
                             <input type="number" class="form-control rounded-0" name="qty" value="0" style="width:10px">
                             <span class="input-group-append">
                               <button type="submit" class="btn btn-dark btn-sm" name="add_stock">Add Stock</button>
-                              <a href="inventory_view.php?id=<?php echo $res['id']; ?>" style="padding-top:7px" class="btn btn-dark btn-sm">View </a>
+                              <a href="inventory_view.php?id=<?php echo $res['id']; ?>" style="padding-top:7px" class="btn btn-primary btn-sm">View </a>
                             </span>
                           </div>
                         </form>

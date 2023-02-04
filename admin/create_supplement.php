@@ -49,7 +49,7 @@
         <div class="row mb-2">
           <div class="col-sm-12">
             <h1 class="m-0"><i class="fa fa-pills"></i> Add Supplement
-              <a href="supplments.php" class="btn btn-dark" style="float:right">Back</a>
+              <a href="supplements.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
         </div>

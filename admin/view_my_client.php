@@ -50,7 +50,7 @@
         <div class="row mb-2">
           <div class="col-sm-12">
             <h1 class="m-0"><i class="fa fa-user"></i> View Client Plan #<?= $default->id ?>
-              <a href="clients.php" class="btn btn-dark" style="float:right">Back</a>
+              <a href="client_plans.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
         </div>
