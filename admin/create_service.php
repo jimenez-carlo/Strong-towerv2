@@ -22,7 +22,8 @@
           return message_error("Please Fill Blank Fields!");
         }
 
-        $check_service_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_services b where b.name ='$service' and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_service_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_services b where b.name ='$service' and deleted_flag = 0 $branch_id limit 1");
 
         if (!empty($check_service_name->res)) {
           $_SESSION['error']['service'] = true;

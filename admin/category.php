@@ -30,7 +30,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_category where deleted_flag = 0") as $res) { ?>
+                <?php foreach (get_list("select * from tbl_category where deleted_flag = 0 and branch_id =" . $_SESSION['user']->branch_id) as $res) { ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>

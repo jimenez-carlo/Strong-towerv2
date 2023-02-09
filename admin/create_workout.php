@@ -21,15 +21,16 @@
         if (!empty($errors)) {
           return message_error("Please Fill Blank Fields!");
         }
-
-        $check_workout_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$name' and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_workout_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$name' and deleted_flag = 0  and branch_id = '$branch_id' limit 1");
 
         if (!empty($check_workout_name->res)) {
           $_SESSION['error']['name'] = true;
           return message_error("Workout Name Already In-use!");
         }
 
-        query("INSERT INTO tbl_workout (`name`,`description`,`reps`,`sets`,`duration`,`category_id`) VALUES('$name', '$description','$reps','$sets','$duration','$category')");
+
+        query("INSERT INTO tbl_workout (`name`,`description`,`reps`,`sets`,`duration`,`category_id`,`branch_id`) VALUES('$name', '$description','$reps','$sets','$duration','$category', '$branch_id')");
         unset($_POST);
         return message_success("Workout Created Successfully!", 'Successfull!');
       }
@@ -60,7 +61,10 @@
                     <div class="form-group">
                       <label for="">*Category</label>
                       <select id="category" name="category" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>">
-                        <?php foreach (get_list("select * from tbl_category where deleted_flag = 0") as $res) { ?>
+                        <?php
+                        $branch = $_SESSION['user']->branch_id == 1 ? " " : " and branch_id =" . $_SESSION['user']->branch_id;
+                        ?>
+                        <?php foreach (get_list("select * from tbl_category where deleted_flag = 0 $branch") as $res) { ?>
                           <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
                         <?php } ?>
                       </select>

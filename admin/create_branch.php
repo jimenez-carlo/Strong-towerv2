@@ -29,7 +29,7 @@
           return message_error("Branch Name Already In-use!");
         }
 
-        query("INSERT INTO tbl_branch (`name`,`description`) VALUES('$branch', '$description')");
+        query("INSERT INTO tbl_branch (`name`,`description`,`address`,`contact_no`,`email`,`google_map`) VALUES('$branch', '$description','$address','$contact','$map')");
         unset($_POST);
         return message_success("Branch Created Successfully!", 'Successfull!');
       }
@@ -60,6 +60,22 @@
                     <div class="form-group">
                       <label for="">*Branch Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['branch']) ? 'is-invalid' : '' ?>" id="branch" name="branch" placeholder="Branch Name" value="<?= isset($_POST['branch']) ? $_POST['branch'] : '' ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Branch Address</label>
+                      <input type="text" class="form-control <?= isset($_SESSION['error']['address']) ? 'is-invalid' : '' ?>" id="address" name="address" placeholder="Branch Address" value="<?= isset($_POST['address']) ? $_POST['address'] : '' ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Branch Contact</label>
+                      <input type="text" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Branch Contact" value="<?= isset($_POST['contact']) ? $_POST['contact'] : '' ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Branch Email</label>
+                      <input type="text" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Branch Email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Branch Map</label>
+                      <textarea class="form-control <?= isset($_SESSION['error']['map']) ? 'is-invalid' : '' ?>" rows="4" id="map" name="map" placeholder="Branch Map"><?= isset($_POST['map']) ? $_POST['map'] : '' ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="">*Branch Description</label>

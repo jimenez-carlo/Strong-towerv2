@@ -27,61 +27,30 @@
     <?php require_once("headers.php"); ?>
 
     <div class="contents">
-      <h1>Branch</h1>
+      <h1>Branches</h1>
     </div>
   </section>
 
-  <!-- Contact Start -->
-  <div class="container pt-5" id="contact">
-    <div class="d-flex flex-column text-center mb-5">
-      <h4 class="font-weight-bold">Get In Touch</h4>
-    </div>
-    <div class="row px-3 pb-2">
-      <div class="col-sm-4 text-center mb-3">
-        <i class="fa fa-2x fa-map-marker-alt mb-3"></i>
-        <h4 class="font-weight-bold">Address</h4>
-        <p>3rd floor SP North Building (EastWestBank), Urdaneta, Philippines, 2400</p>
-      </div>
-      <div class="col-sm-4 text-center mb-3">
-        <i class="fa fa-2x fa-phone-alt mb-3"></i>
-        <h4 class="font-weight-bold">Phone</h4>
-        <p>+639083403181</p>
-      </div>
-      <div class="col-sm-4 text-center mb-3">
-        <i class="far fa-2x fa-envelope mb-3"></i>
-        <h4 class="font-weight-bold">Email</h4>
-        <p>strongtower@gmail.com</p>
-      </div>
-    </div>
+  <section class="container mb-5">
     <div class="row">
-      <div class="col-md-12 pb-5">
-        <iframe style="width: 100%; height: 392px;" src="https://maps.google.com/maps?q=East%20West%20Bank%20-%20Urdaneta%20City&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-      </div>
-
-    </div>
-  </div>
-  <!-- <section class="container mb-5">
-    <div class="row">
-      <?php foreach (get_list("SELECT * from tbl_branch where  deleted_flag = 0 limit 2") as $res) { ?>
-
+      <?php foreach (get_list("SELECT * from tbl_branch") as $res) { ?>
         <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="../landing/images/gym.jpg" class="img-fluid rounded-start" alt="..." style="object-fit: cover;height:100%">
+          <a href="branch_view.php?id=<?= $res['id']; ?>" class="text-dark">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><?= $res['name'] ?></h5>
+                <p class="card-text"><?= $res['address'] ?></p>
               </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h3 class="card-title"><?= $res['name'] ?></h3>
-                  <p class="card-text"><?= $res['description'] ?></p>
-                </div>
+              <div class="card-footer text-muted text-center">
+                View
               </div>
             </div>
-          </div>
+          </a>
         </div>
       <?php } ?>
     </div>
-  </section> -->
+  </section>
+
   <?php require_once("footer.php"); ?>
 </body>
 

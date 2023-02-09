@@ -22,15 +22,15 @@
           return message_error("Please Fill Blank Fields!");
         }
 
-        $check_category_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_category b where b.name ='$category' and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_category_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_category b where b.name ='$category' and branch_id = '$branch_id' and deleted_flag = 0 limit 1");
 
         if (!empty($check_category_name->res)) {
           $_SESSION['error']['category'] = true;
           return message_error("Category Name Already In-use!");
         }
 
-
-        query("INSERT INTO tbl_category (`name`) VALUES('$category')");
+        query("INSERT INTO tbl_category (`name`,`branch_id`) VALUES('$category','$branch_id')");
         unset($_POST);
         return message_success("Category Created Successfully!", 'Successfull!');
       }

@@ -138,6 +138,12 @@ function activate($array)
                 <li class="nav-item"><a href="branches.php" class="nav-link <?= activate(array("branches", "create_branch", "edit_branch")) ?>"><i class="fa fa-store nav-icon"></i>
                     <p>Branches</p>
                   </a></li>
+                <li class="nav-item">
+                  <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
+                    <i class="fa fa-user nav-icon"></i>
+                    <p>My Profile</p>
+                  </a>
+                </li>
                 <?php break; ?>
               <?php
               case 2: ?>
@@ -184,6 +190,12 @@ function activate($array)
                 <!-- <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Trainers</p>
                   </a></li> -->
+                <li class="nav-item">
+                  <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
+                    <i class="fa fa-user nav-icon"></i>
+                    <p>My Profile</p>
+                  </a>
+                </li>
 
 
                 <?php break; ?>
@@ -226,7 +238,12 @@ function activate($array)
                 <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Employees & Trainers (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 3 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
                   </a></li>
-
+                <li class="nav-item">
+                  <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
+                    <i class="fa fa-user nav-icon"></i>
+                    <p>My Profile</p>
+                  </a>
+                </li>
                 <?php break; ?>
               <?php
               case 4: ?>

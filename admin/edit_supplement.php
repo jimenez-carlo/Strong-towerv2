@@ -36,7 +36,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../supplements/' . $image_name);
         }
 
-        query("UPDATE tbl_supplements set `name` = '$supplement',`price`='$price', `description` = '$description',`image`='$image_name' where id = $id");
+        query("UPDATE tbl_supplements set `name` = '$supplement',`price`='$price', `description` = '$description',`image`='$image_name',`expiration_date`='$expiration' where id = $id");
         return message_success("Supplement Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -78,6 +78,10 @@
                     <div class="form-group">
                       <label for="">*Supplement Price</label>
                       <input type="number" class="form-control <?= isset($_SESSION['error']['price']) ? 'is-invalid' : '' ?>" id="price" name="price" placeholder="Supplement Price" value="<?= isset($_POST['price']) ? $_POST['price'] : $supplement->price ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Supplement Expiration Date</label>
+                      <input type="date" class="form-control <?= isset($_SESSION['error']['expiration']) ? 'is-invalid' : '' ?>" id="expiration" name="expiration" placeholder="Supplement Expiration Date" value="<?= isset($_POST['expiration']) ? $_POST['expiration'] : $supplement->expiration_date ?>">
                     </div>
 
                     <div class="form-group">

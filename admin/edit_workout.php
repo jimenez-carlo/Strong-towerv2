@@ -22,14 +22,15 @@
           return message_error("Please Fill Blank Fields!");
         }
 
-        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$workout' and id <> $id  and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$workout' and id <> $id  and deleted_flag = 0 and branch_id = '$branch_id' limit 1");
 
         if (!empty($check_equipement_name->res)) {
           $_SESSION['error']['equipement'] = true;
           return message_error("Workout Name Already In-use!");
         }
 
-        query("UPDATE tbl_workout set `name` = '$workout', `description` = '$description',`reps`='$reps',`sets`='$sets',duration= '$duration',category_id =  '$category' where id = $id");
+        query("UPDATE tbl_workout set `name` = '$workout', `description` = '$description',`reps`='$reps',`sets`='$sets',duration= '$duration',category_id =  '$category',`branch_id`='$branch_id' where id = $id");
         return message_success("Workout Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -61,8 +62,12 @@
 
                     <div class="form-group">
                       <label for="">*Category</label>
+
                       <select id="category" name="category" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>">
-                        <?php foreach (get_list("select * from tbl_category where deleted_flag = 0") as $res) { ?>
+                        <?php
+                        $branch = $_SESSION['user']->branch_id == 1 ? " " : " and branch_id =" . $_SESSION['user']->branch_id;
+                        ?>
+                        <?php foreach (get_list("select * from tbl_category where deleted_flag = 0 $branch") as $res) { ?>
                           <option value="<?= $res['id']; ?>" <?= ($workout->category_id == $res['id']) ? 'selected' : ''; ?>><?= $res['name']; ?></option>
                         <?php } ?>
                       </select>

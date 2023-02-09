@@ -38,7 +38,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../supplements/' . $image_name);
         }
 
-        $id = insert_get_id("INSERT INTO tbl_supplements (`name`,`description`, price,`image`) VALUES('$supplement', '$description','$price','$image_name')");
+        $id = insert_get_id("INSERT INTO tbl_supplements (`name`,`description`, price,`image`,`expiration_date`) VALUES('$supplement', '$description','$price','$image_name','$expiration')");
         query("INSERT into tbl_supplement_invetory (supplement_id) values($id)");
         unset($_POST);
         return message_success("Supplement Created Successfully!", 'Successfull!');
@@ -79,6 +79,10 @@
                     <div class="form-group">
                       <label for="">*Supplement Price</label>
                       <input type="number" class="form-control <?= isset($_SESSION['error']['price']) ? 'is-invalid' : '' ?>" id="price" name="price" placeholder="Supplement Name" value="<?= isset($_POST['price']) ? $_POST['price'] : '' ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Supplement Expiration Date</label>
+                      <input type="date" class="form-control <?= isset($_SESSION['error']['expiration']) ? 'is-invalid' : '' ?>" id="expiration" name="expiration" placeholder="Supplement Expiration Date" value="<?= isset($_POST['expiration']) ? $_POST['expiration'] : '' ?>">
                     </div>
                     <div class="form-group">
                       <label for="">Supplement Description</label>

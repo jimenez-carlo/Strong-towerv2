@@ -29,7 +29,7 @@
           return message_error("Branch Name Already In-use!");
         }
 
-        query("UPDATE tbl_branch set `name` = '$name', `description` = '$description' where id = $id");
+        query("UPDATE tbl_branch set `name` = '$name', `description` = '$description',`address`='$address',`contact_no`= '$contact', `email`='$email',`google_map`='$map' where id = $id");
         return message_success("Branch Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -60,7 +60,23 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label for="">*Branch Name</label>
-                      <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Branch Name" value="<?= isset($_POST['service']) ? $_POST['service'] : $branch->name ?>">
+                      <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Branch Name" value="<?= isset($_POST['name']) ? $_POST['name'] : $branch->name ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Branch Address</label>
+                      <input type="text" class="form-control <?= isset($_SESSION['error']['address']) ? 'is-invalid' : '' ?>" id="address" name="address" placeholder="Branch Address" value="<?= isset($_POST['address']) ? $_POST['address'] : $branch->address ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Branch Contact</label>
+                      <input type="text" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Branch Contact" value="<?= isset($_POST['contact']) ? $_POST['contact'] : $branch->contact_no ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Branch Email</label>
+                      <input type="text" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Branch Email" value="<?= isset($_POST['email']) ? $_POST['email'] : $branch->email ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Branch Map</label>
+                      <textarea class="form-control <?= isset($_SESSION['error']['map']) ? 'is-invalid' : '' ?>" rows="4" id="map" name="map" placeholder="Branch Map"><?= isset($_POST['map']) ? $_POST['description'] : $branch->google_map ?></textarea>
                     </div>
                     <div class="form-group">
                       <label for="">*Branch Description</label>
