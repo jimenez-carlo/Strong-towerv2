@@ -1,0 +1,78 @@
+landing page
+ branch
+  -add select box (ex. view landing/branch.php)
+
+admin/trainer/secretary
+ add slides
+
+secretary
+ add profile
+
+profile format resume
+
+supplements
+-expiration supplement (date)
+
+category per branch
+
+-------------------------------------
+
+workouts
+-remove reps
+-remove sets
+-remove duration
+
+date format
+ Fri, 12 Apr 2013(D, d M Y)
+
+inventory
+ -supplements
+ -equipment
+
+per branch
+-services
+-supplements
+-inventory
+-equipments
+-category
+-workouts
+-membership plan
+-client plans
+-walkin
+-clients
+-employee & trainer
+
+-fixed counter clients per branch
+-fixed counter employee & trainer per branch
+
+landing/admin/trainer/secretary
+ sign up font style
+ login font style
+
+admin
+ home change slides
+ no viewing
+
+admin/secretary
+ -remove orders
+ -add walkin order(cart,order)
+ -add delete walkin
+walkin
+-add date
+-add,edit
+
+customer
+ -remove cart
+ -order
+
+trainer
+-add workouts
+-add client bmi history
+
+trainer/client
+-add reps,sets,duration assigning
+
+client
+-add height,weight
+ workout today
+ -remove target reps,sets

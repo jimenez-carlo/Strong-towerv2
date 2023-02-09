@@ -28,8 +28,7 @@
           $_SESSION['error']['branch'] = true;
           return message_error("Branch Name Already In-use!");
         }
-
-        query("INSERT INTO tbl_branch (`name`,`description`,`address`,`contact_no`,`email`,`google_map`) VALUES('$branch', '$description','$address','$contact','$map')");
+        query("INSERT INTO tbl_branch (`name`,`description`,`address`,`contact_no`,`email`,`google_map`) VALUES('$branch', '$description','$address','$contact','$email','$map')");
         unset($_POST);
         return message_success("Branch Created Successfully!", 'Successfull!');
       }
