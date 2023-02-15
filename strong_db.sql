@@ -260,6 +260,7 @@ CREATE TABLE `tbl_equipment` (
   `updated_date` datetime DEFAULT current_timestamp(),
   `deleted_flag` tinyint(4) DEFAULT 0,
   `enabled` tinyint(4) DEFAULT 1,
+  `branch_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -270,7 +271,7 @@ CREATE TABLE `tbl_equipment` (
 
 LOCK TABLES `tbl_equipment` WRITE;
 /*!40000 ALTER TABLE `tbl_equipment` DISABLE KEYS */;
-INSERT INTO `tbl_equipment` VALUES (1,'image_20221201220424.jpeg','Treadmill',4,'test','2022-10-24 04:20:22','2022-10-24 04:20:22',0,1),(2,'default.png','Seated Dip Machine',1,'test','2022-10-24 04:20:22','2022-10-24 04:20:22',0,1),(3,'default.png','Chest Press Machine',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1),(4,'default.png','Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1),(5,'default.png','Incline Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1),(6,'default.png','Decline Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1),(7,'default.png','Preacher Curl Bench',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1),(8,'default.png','test',NULL,'test','2022-12-02 05:17:04','2022-12-02 05:17:04',1,1);
+INSERT INTO `tbl_equipment` VALUES (1,'image_20221201220424.jpeg','Treadmill',4,'test','2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(2,'default.png','Seated Dip Machine',1,'test','2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(3,'default.png','Chest Press Machine',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(4,'default.png','Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(5,'default.png','Incline Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(6,'default.png','Decline Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(7,'default.png','Preacher Curl Bench',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(8,'default.png','test',NULL,'test','2022-12-02 05:17:04','2022-12-02 05:17:04',1,1,1);
 /*!40000 ALTER TABLE `tbl_equipment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,6 +316,7 @@ CREATE TABLE `tbl_invoice` (
   `customer_id` int(11) DEFAULT NULL,
   `member_id` int(11) DEFAULT NULL,
   `created_date` datetime DEFAULT current_timestamp(),
+  `branch_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -325,7 +327,7 @@ CREATE TABLE `tbl_invoice` (
 
 LOCK TABLES `tbl_invoice` WRITE;
 /*!40000 ALTER TABLE `tbl_invoice` DISABLE KEYS */;
-INSERT INTO `tbl_invoice` VALUES (2,'250123043243',3,4,2,'2023-01-25 11:32:43'),(3,'260123041324',4,4,2,'2023-01-26 11:13:24'),(4,'260123044808',3,4,2,'2023-01-26 11:48:08'),(5,'280123122813',3,4,2,'2023-01-28 19:28:13'),(8,'310123042032',3,4,2,'2023-01-31 11:20:32'),(9,'310123044026',2,4,NULL,'2023-01-31 11:40:26');
+INSERT INTO `tbl_invoice` VALUES (2,'250123043243',3,4,2,'2023-01-25 11:32:43',NULL),(3,'260123041324',4,4,2,'2023-01-26 11:13:24',NULL),(4,'260123044808',3,4,2,'2023-01-26 11:48:08',NULL),(5,'280123122813',3,4,2,'2023-01-28 19:28:13',NULL),(8,'310123042032',3,4,2,'2023-01-31 11:20:32',NULL),(9,'310123044026',2,4,NULL,'2023-01-31 11:40:26',NULL);
 /*!40000 ALTER TABLE `tbl_invoice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,6 +371,7 @@ CREATE TABLE `tbl_plan` (
   `description` text DEFAULT NULL,
   `deleted_flag` tinyint(4) DEFAULT 0,
   `backup` text DEFAULT NULL,
+  `branch_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -379,7 +382,7 @@ CREATE TABLE `tbl_plan` (
 
 LOCK TABLES `tbl_plan` WRITE;
 /*!40000 ALTER TABLE `tbl_plan` DISABLE KEYS */;
-INSERT INTO `tbl_plan` VALUES (1,'Platinum','1500','150','All weights, bike, elleptical  and treadmills',0,'<li><i class=\"fa-solid fa-check\"></i> Use of weights and<br> body building machines</li>'),(2,'Gold','700','100','All weights, bikes and elelliptical',0,'<li><i class=\"fa-solid fa-check\"></i>use of weights <br>and body building machines</li>'),(3,'Silver','500','70','All weights and bikes',0,'<li><i class=\"fa-solid fa-check\"></i> Use of weights <br>and body building <br> only</li>');
+INSERT INTO `tbl_plan` VALUES (1,'Platinum','1500','150','All weights, bike, elleptical  and treadmills',0,'<li><i class=\"fa-solid fa-check\"></i> Use of weights and<br> body building machines</li>',1),(2,'Gold','700','100','All weights, bikes and elelliptical',0,'<li><i class=\"fa-solid fa-check\"></i>use of weights <br>and body building machines</li>',1),(3,'Silver','500','70','All weights and bikes',0,'<li><i class=\"fa-solid fa-check\"></i> Use of weights <br>and body building <br> only</li>',1);
 /*!40000 ALTER TABLE `tbl_plan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -400,7 +403,7 @@ CREATE TABLE `tbl_progress` (
   `duration` text DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=260 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -409,7 +412,7 @@ CREATE TABLE `tbl_progress` (
 
 LOCK TABLES `tbl_progress` WRITE;
 /*!40000 ALTER TABLE `tbl_progress` DISABLE KEYS */;
-INSERT INTO `tbl_progress` VALUES (1,4,3,4,'0','0',NULL,'2022-12-18'),(2,4,3,2,'0','0',NULL,'2022-12-18'),(3,4,3,1,'0','0',NULL,'2022-12-18'),(4,4,3,6,'0','0',NULL,'2022-12-18'),(192,4,3,6,'1','1',NULL,'2022-12-19'),(193,4,3,2,'1','2',NULL,'2022-12-19'),(217,4,3,4,'2','2',NULL,'2023-01-12'),(218,4,3,2,'1','1',NULL,'2023-01-12'),(219,4,3,1,'1','1',NULL,'2023-01-12'),(220,4,3,6,'0','0',NULL,'2023-01-12'),(221,4,1,3,'0','0',NULL,'2023-01-13'),(222,4,1,2,'0','0',NULL,'2023-01-13'),(223,4,1,6,'0','0',NULL,'2023-01-13'),(224,4,1,1,'0','0',NULL,'2023-01-13'),(225,4,1,3,'0','0',NULL,'2023-01-13'),(226,4,1,5,'0','0',NULL,'2023-01-13'),(227,4,1,4,'0','0',NULL,'2023-01-13'),(228,11,8,2,'0','0',NULL,'2023-01-13'),(229,11,8,3,'0','0',NULL,'2023-01-13'),(230,11,8,3,'0','0',NULL,'2023-01-13'),(231,4,1,3,'0','0',NULL,'2023-01-23'),(232,4,1,2,'0','0',NULL,'2023-01-23'),(233,4,1,6,'0','0',NULL,'2023-01-23'),(234,4,1,1,'0','0',NULL,'2023-01-23'),(235,4,1,3,'0','0',NULL,'2023-01-23'),(236,4,1,5,'0','0',NULL,'2023-01-23'),(237,4,1,4,'0','0',NULL,'2023-01-23'),(238,4,1,3,'0','0',NULL,'2023-01-25'),(239,4,1,2,'0','0',NULL,'2023-01-25'),(240,4,1,6,'0','0',NULL,'2023-01-25'),(241,4,1,1,'0','0',NULL,'2023-01-25'),(242,4,1,3,'0','0',NULL,'2023-01-25'),(243,4,1,5,'0','0',NULL,'2023-01-25'),(244,4,1,4,'0','0',NULL,'2023-01-25'),(250,11,8,3,'0','0',NULL,'2023-01-25'),(255,4,3,1,'0','0',NULL,'2023-01-31'),(258,4,3,3,'0','0',NULL,'2023-01-31'),(259,4,3,6,'0','0',NULL,'2023-02-04');
+INSERT INTO `tbl_progress` VALUES (1,4,3,4,'0','0',NULL,'2022-12-18'),(2,4,3,2,'0','0',NULL,'2022-12-18'),(3,4,3,1,'0','0',NULL,'2022-12-18'),(4,4,3,6,'0','0',NULL,'2022-12-18'),(192,4,3,6,'1','1',NULL,'2022-12-19'),(193,4,3,2,'1','2',NULL,'2022-12-19'),(217,4,3,4,'2','2',NULL,'2023-01-12'),(218,4,3,2,'1','1',NULL,'2023-01-12'),(219,4,3,1,'1','1',NULL,'2023-01-12'),(220,4,3,6,'0','0',NULL,'2023-01-12'),(221,4,1,3,'0','0',NULL,'2023-01-13'),(222,4,1,2,'0','0',NULL,'2023-01-13'),(223,4,1,6,'0','0',NULL,'2023-01-13'),(224,4,1,1,'0','0',NULL,'2023-01-13'),(225,4,1,3,'0','0',NULL,'2023-01-13'),(226,4,1,5,'0','0',NULL,'2023-01-13'),(227,4,1,4,'0','0',NULL,'2023-01-13'),(228,11,8,2,'0','0',NULL,'2023-01-13'),(229,11,8,3,'0','0',NULL,'2023-01-13'),(230,11,8,3,'0','0',NULL,'2023-01-13'),(231,4,1,3,'0','0',NULL,'2023-01-23'),(232,4,1,2,'0','0',NULL,'2023-01-23'),(233,4,1,6,'0','0',NULL,'2023-01-23'),(234,4,1,1,'0','0',NULL,'2023-01-23'),(235,4,1,3,'0','0',NULL,'2023-01-23'),(236,4,1,5,'0','0',NULL,'2023-01-23'),(237,4,1,4,'0','0',NULL,'2023-01-23'),(238,4,1,3,'0','0',NULL,'2023-01-25'),(239,4,1,2,'0','0',NULL,'2023-01-25'),(240,4,1,6,'0','0',NULL,'2023-01-25'),(241,4,1,1,'0','0',NULL,'2023-01-25'),(242,4,1,3,'0','0',NULL,'2023-01-25'),(243,4,1,5,'0','0',NULL,'2023-01-25'),(244,4,1,4,'0','0',NULL,'2023-01-25'),(250,11,8,3,'0','0',NULL,'2023-01-25'),(255,4,3,1,'0','0',NULL,'2023-01-31'),(258,4,3,3,'0','0',NULL,'2023-01-31'),(259,4,3,6,'0','0',NULL,'2023-02-04'),(264,4,3,6,'0','0',NULL,'2023-02-11');
 /*!40000 ALTER TABLE `tbl_progress` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,6 +431,7 @@ CREATE TABLE `tbl_services` (
   `created_date` datetime DEFAULT current_timestamp(),
   `updated_date` datetime DEFAULT current_timestamp(),
   `deleted_flag` tinyint(4) DEFAULT 0,
+  `branch_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -438,7 +442,7 @@ CREATE TABLE `tbl_services` (
 
 LOCK TABLES `tbl_services` WRITE;
 /*!40000 ALTER TABLE `tbl_services` DISABLE KEYS */;
-INSERT INTO `tbl_services` VALUES (1,'Zumba','zumba.jpg','Zumba Is A Form Of Fitness Class In Which You Burn Off Calories By Dancing To Different Kinds Of Lively Tunes, Often Latin-American Inspired Such As Salsa, Merengue And Samba, But Also Other Types Of Modern Music Like Hip Hop And Bollywood (Music From The Indian Film Industry).a','2022-11-07 18:02:52','2022-11-07 18:02:52',0),(2,'Taekwondo','taekwondo.jpg','Taekwondo Comes From Three Korean Words, Tae, \"Kick,\" Kwon, \"Fist Or Punch,\" And Do, \"The Art Of.\" That\'s A Pretty Good Description Of This Dynamic Martial Art, Which Involves Acrobatic Kicks And Graceful Punches. Like All Martial Arts, Taekwondo Isn\'t Just Combat — It\'s Also An Art And A Discipline.','2022-11-07 18:02:52','2022-11-07 18:02:52',0),(3,'Muai Thai','muaythai.jpg','Muay Thai Is A Stand-Up Striking Sport, With Two Competitors In The Ring Throwing Punches, Elbows, Knees And Kicks At Each Other. Clinching, Sweeps And Throws Are Also Allowed.','2022-11-07 18:02:52','2022-11-07 18:02:52',0),(9,'test','image_20221123180630.jpeg','test','2022-11-24 01:06:30','2022-11-24 01:06:30',1),(10,'test','image_20221123180731.jpeg','test','2022-11-24 01:07:31','2022-11-24 01:07:31',1),(11,'aaaaaaa','image_20221123181704.jpeg','aaaa','2022-11-24 01:08:14','2022-11-24 01:08:14',1);
+INSERT INTO `tbl_services` VALUES (1,'Zumba','zumba.jpg','Zumba Is A Form Of Fitness Class In Which You Burn Off Calories By Dancing To Different Kinds Of Lively Tunes, Often Latin-American Inspired Such As Salsa, Merengue And Samba, But Also Other Types Of Modern Music Like Hip Hop And Bollywood (Music From The Indian Film Industry).a','2022-11-07 18:02:52','2022-11-07 18:02:52',0,1),(2,'Taekwondo','taekwondo.jpg','Taekwondo Comes From Three Korean Words, Tae, \"Kick,\" Kwon, \"Fist Or Punch,\" And Do, \"The Art Of.\" That\'s A Pretty Good Description Of This Dynamic Martial Art, Which Involves Acrobatic Kicks And Graceful Punches. Like All Martial Arts, Taekwondo Isn\'t Just Combat — It\'s Also An Art And A Discipline.','2022-11-07 18:02:52','2022-11-07 18:02:52',0,1),(3,'Muai Thai','muaythai.jpg','Muay Thai Is A Stand-Up Striking Sport, With Two Competitors In The Ring Throwing Punches, Elbows, Knees And Kicks At Each Other. Clinching, Sweeps And Throws Are Also Allowed.','2022-11-07 18:02:52','2022-11-07 18:02:52',0,1),(9,'test','image_20221123180630.jpeg','test','2022-11-24 01:06:30','2022-11-24 01:06:30',1,1),(10,'test','image_20221123180731.jpeg','test','2022-11-24 01:07:31','2022-11-24 01:07:31',1,1),(11,'aaaaaaa','image_20221123181704.jpeg','aaaa','2022-11-24 01:08:14','2022-11-24 01:08:14',1,1);
 /*!40000 ALTER TABLE `tbl_services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -515,6 +519,7 @@ CREATE TABLE `tbl_supplements` (
   `updated_date` datetime DEFAULT current_timestamp(),
   `deleted_flag` tinyint(4) DEFAULT 0,
   `expiration_date` date DEFAULT NULL,
+  `branch_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -525,7 +530,7 @@ CREATE TABLE `tbl_supplements` (
 
 LOCK TABLES `tbl_supplements` WRITE;
 /*!40000 ALTER TABLE `tbl_supplements` DISABLE KEYS */;
-INSERT INTO `tbl_supplements` VALUES (1,'img1.webp','Prothin Whey Ripped',50,500,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-24 04:33:53','2022-10-24 04:33:53',0,'2022-10-24'),(2,'img2.webp','Weider Amino Max 8000',64,299,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-24 04:33:53','2022-10-24 04:33:53',0,'2022-10-24'),(3,'img3.webp','Creatine Capsules',65,164,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-24 04:33:53','2022-10-24 04:33:53',0,'2022-10-24'),(4,'img4.webp','MuscleTech Muscle Builder',50,1762,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-24 04:33:53','2022-10-24 04:33:53',0,'2022-10-24'),(5,'default.png','test',50,23,'test','2022-11-01 01:24:09','2022-11-01 01:24:09',1,'2022-10-24'),(6,'default.png','',50,0,'test','2022-11-07 18:45:12','2022-11-07 18:45:12',1,'2022-10-24'),(7,'default.png','',50,0,'test','2022-11-07 18:45:16','2022-11-07 18:45:16',1,'2022-10-24'),(8,'default.png','',50,0,'test','2022-11-07 18:45:21','2022-11-07 18:45:21',1,'2022-10-24'),(9,'default.png','',50,0,'test','2022-11-07 18:45:24','2022-11-07 18:45:24',1,'2022-10-24'),(10,'image_20221123183046.jpeg','test',52,323,'test','2022-11-24 01:22:23','2022-11-24 01:22:23',0,'2022-10-24');
+INSERT INTO `tbl_supplements` VALUES (1,'img1.webp','Prothin Whey Ripped',50,500,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-24 04:33:53','2022-10-24 04:33:53',0,'2022-10-24',1),(2,'img2.webp','Weider Amino Max 8000',64,299,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-24 04:33:53','2022-10-24 04:33:53',0,'2022-10-24',1),(3,'img3.webp','Creatine Capsules',65,164,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-24 04:33:53','2022-10-24 04:33:53',0,'2022-10-24',1),(4,'img4.webp','MuscleTech Muscle Builder',50,1762,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, distinctio sint ratione ipsam cumque provident obcaecati praesentium similique.','2022-10-24 04:33:53','2022-10-24 04:33:53',0,'2022-10-24',1),(5,'default.png','test',50,23,'test','2022-11-01 01:24:09','2022-11-01 01:24:09',1,'2022-10-24',1),(6,'default.png','',50,0,'test','2022-11-07 18:45:12','2022-11-07 18:45:12',1,'2022-10-24',1),(7,'default.png','',50,0,'test','2022-11-07 18:45:16','2022-11-07 18:45:16',1,'2022-10-24',1),(8,'default.png','',50,0,'test','2022-11-07 18:45:21','2022-11-07 18:45:21',1,'2022-10-24',1),(9,'default.png','',50,0,'test','2022-11-07 18:45:24','2022-11-07 18:45:24',1,'2022-10-24',1),(10,'image_20221123183046.jpeg','test',52,323,'test','2022-11-24 01:22:23','2022-11-24 01:22:23',0,'2022-10-24',1);
 /*!40000 ALTER TABLE `tbl_supplements` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -588,7 +593,7 @@ CREATE TABLE `tbl_user` (
 
 LOCK TABLES `tbl_user` WRITE;
 /*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
-INSERT INTO `tbl_user` VALUES (1,'admin','admin@gmail.com','123',1,1,NULL,NULL,1,'2022-10-07 21:25:06','2022-10-07 21:25:06',0,'admin'),(2,'secretary','secretary@gmail.com','123',1,2,NULL,NULL,1,'2022-10-07 21:25:06','2022-10-07 21:25:06',0,'admin'),(3,'trainer','trainer@gmail.com','123',1,3,NULL,NULL,1,'2022-10-07 21:25:06','2022-10-07 21:25:06',0,'admin'),(4,'customer','customer@gmail.com','123',1,4,3,'2024-01-01',1,'2022-10-07 21:29:59','2022-10-07 21:29:59',0,'customer'),(5,'asdasd','admin23@gmail.com23','23232',1,4,5,'2023-01-01',0,'2023-01-12 11:46:36','2023-01-12 11:46:36',0,NULL),(6,'asdasd2','admin23@gmail.com232','23232',1,4,9,'2023-01-01',0,'2023-01-12 11:46:53','2023-01-12 11:46:53',0,NULL),(7,'asdasd22','admin232@gmail.com232','23232',1,4,0,NULL,0,'2023-01-12 11:48:35','2023-01-12 11:48:35',0,NULL),(8,'test23','tests23@gmail.com','23',1,4,1,'2025-01-01',0,'2023-01-12 12:26:35','2023-01-12 12:26:35',0,NULL),(9,'jesslyn','jesslyn@gmail.com','123',1,4,1,'2024-02-01',0,'2023-01-13 17:44:56','2023-01-13 17:44:56',0,NULL),(11,'johnjohn','johnjohn@gmail.com','123',1,4,8,'2024-02-02',1,'2023-01-13 18:22:15','2023-01-13 18:22:15',0,NULL),(12,'adminaadssadas','user3@gmail.com2323','123123',0,4,0,NULL,0,'2023-01-20 15:57:35','2023-01-20 15:57:35',0,NULL),(13,'a','a@gmail.com','a',1,4,11,'2025-01-01',1,'2023-01-26 12:10:13','2023-01-26 12:10:13',0,NULL),(14,'branch','branch@gmail.com','123',1,5,0,NULL,1,'2023-01-31 12:16:51','2023-01-31 12:16:51',0,NULL);
+INSERT INTO `tbl_user` VALUES (1,'admin','admin@gmail.com','123',1,1,NULL,NULL,1,'2022-10-07 21:25:06','2022-10-07 21:25:06',0,'admin'),(2,'secretary','secretary@gmail.com','123',1,2,NULL,NULL,1,'2022-10-07 21:25:06','2022-10-07 21:25:06',0,'admin'),(3,'trainer','trainer@gmail.com','123',1,3,NULL,NULL,1,'2022-10-07 21:25:06','2022-10-07 21:25:06',0,'admin'),(4,'customer','customer@gmail.com','123',0,4,1,'2024-01-01',1,'2022-10-07 21:29:59','2022-10-07 21:29:59',0,'customer'),(5,'asdasd','admin23@gmail.com23','23232',1,4,5,'2023-01-01',0,'2023-01-12 11:46:36','2023-01-12 11:46:36',0,NULL),(6,'asdasd2','admin23@gmail.com232','23232',1,4,9,'2023-01-01',0,'2023-01-12 11:46:53','2023-01-12 11:46:53',0,NULL),(7,'asdasd22','admin232@gmail.com232','23232',1,4,0,NULL,0,'2023-01-12 11:48:35','2023-01-12 11:48:35',0,NULL),(8,'test23','tests23@gmail.com','23',1,4,0,NULL,0,'2023-01-12 12:26:35','2023-01-12 12:26:35',0,NULL),(9,'jesslyn','jesslyn@gmail.com','123',1,4,1,'2024-02-01',0,'2023-01-13 17:44:56','2023-01-13 17:44:56',0,NULL),(11,'johnjohn','johnjohn@gmail.com','123',1,4,8,'2024-02-02',1,'2023-01-13 18:22:15','2023-01-13 18:22:15',0,NULL),(12,'adminaadssadas','user3@gmail.com2323','123123',0,4,0,NULL,0,'2023-01-20 15:57:35','2023-01-20 15:57:35',0,NULL),(13,'a','a@gmail.com','a',1,4,11,'2025-01-01',1,'2023-01-26 12:10:13','2023-01-26 12:10:13',0,NULL),(14,'branch','branch@gmail.com','123',1,5,0,NULL,1,'2023-01-31 12:16:51','2023-01-31 12:16:51',0,NULL);
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -614,6 +619,8 @@ CREATE TABLE `tbl_user_info` (
   `medical_certificate` varchar(225) DEFAULT 'default.jpg',
   `city` int(11) DEFAULT NULL,
   `barangay` int(11) DEFAULT NULL,
+  `height` varchar(225) DEFAULT NULL,
+  `weight` varchar(225) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -624,7 +631,7 @@ CREATE TABLE `tbl_user_info` (
 
 LOCK TABLES `tbl_user_info` WRITE;
 /*!40000 ALTER TABLE `tbl_user_info` DISABLE KEYS */;
-INSERT INTO `tbl_user_info` VALUES (1,'admin','admin','admin',1,'09000000000','default.png','2022-10-07 21:39:28','2022-10-07 21:39:28',0,'admin','default.jpg',15502,15502002),(2,'secretary','secretary','secretary',1,'09000000000','default.png','2022-10-07 21:39:28','2022-10-07 21:39:28',0,'manager','default.jpg',15502,15502002),(3,'trainer','trainer','trainer',1,'09000000000','default.png','2022-10-07 21:39:28','2022-10-07 21:39:28',0,'trainer','default.jpg',15502,15502002),(4,'customer','customer','customer',1,'09000000000','default.png','2022-10-07 21:39:28','2022-10-07 21:39:28',0,'customer','default.jpg',15502,15502002),(5,'asdsad','aasd','aasd',1,'323232232232','default.jpg','2023-01-12 11:46:36','2023-01-12 11:46:36',0,'a','default.jpg',15502,15502002),(6,'asdsad','aasd','aasd',1,'323232232232','image_20230112044653jfif','2023-01-12 11:46:53','2023-01-12 11:46:53',0,'a','image_20230112044653jfif',15502,15502002),(7,'asdsad','aasd','aasd',1,'323232232232','image_20230112044835jfif','2023-01-12 11:48:35','2023-01-12 11:48:35',0,'a','image_20230112044835jfif',15502,15502002),(8,'asdas','asdas','asd',1,'09123456789','default.png','2023-01-12 12:26:35','2023-01-12 12:26:35',0,'asd','default.jpg',15502,15502002),(9,'jesslyn','m','delacruz',2,'09123456665','image_20230113104456.jpg','2023-01-13 17:44:56','2023-01-13 17:44:56',0,'basista pangasinan','',15502,15502002),(11,'johnjohn','r','teria',1,'09502830740','image_20230113112215.jpg','2023-01-13 18:22:15','2023-01-13 18:22:15',0,'bayambang','default.jpg',15502,15502002),(12,'customer 3','asdas','customer 3',1,'09000000000','default.png','2023-01-20 15:57:35','2023-01-20 15:57:35',0,'asd','default.jpg',15502,15502002),(13,'a','a','a',1,'09217635295','default.png','2023-01-26 12:10:13','2023-01-26 12:10:13',0,'a','default.jpg',15502,15502002),(14,'branch','branch','branch',1,'09217635295','default.png','2023-01-31 12:16:51','2023-01-31 12:16:51',0,'branch','default.jpg',15502,15502002);
+INSERT INTO `tbl_user_info` VALUES (1,'admin','admin','admin',1,'09000000000','default.png','2022-10-07 21:39:28','2022-10-07 21:39:28',0,'admin','default.jpg',15502,15502002,NULL,NULL),(2,'secretary','secretary','secretary',1,'09000000000','default.png','2022-10-07 21:39:28','2022-10-07 21:39:28',0,'manager','default.jpg',15502,15502002,NULL,NULL),(3,'trainer','trainer','trainer',1,'09000000000','default.png','2022-10-07 21:39:28','2022-10-07 21:39:28',0,'trainer','default.jpg',15502,15502002,NULL,NULL),(4,'customer','customer','customer',1,'09000000000','default.png','2022-10-07 21:39:28','2022-10-07 21:39:28',0,'customer','default.jpg',15502,15502002,'50','50'),(5,'asdsad','aasd','aasd',1,'323232232232','default.jpg','2023-01-12 11:46:36','2023-01-12 11:46:36',0,'a','default.jpg',15502,15502002,NULL,NULL),(6,'asdsad','aasd','aasd',1,'323232232232','image_20230112044653jfif','2023-01-12 11:46:53','2023-01-12 11:46:53',0,'a','image_20230112044653jfif',15502,15502002,NULL,NULL),(7,'asdsad','aasd','aasd',1,'323232232232','image_20230112044835jfif','2023-01-12 11:48:35','2023-01-12 11:48:35',0,'a','image_20230112044835jfif',15502,15502002,NULL,NULL),(8,'asdas','asdas','asd',1,'09123456789','default.png','2023-01-12 12:26:35','2023-01-12 12:26:35',0,'asd','default.jpg',15502,15502002,NULL,NULL),(9,'jesslyn','m','delacruz',2,'09123456665','image_20230113104456.jpg','2023-01-13 17:44:56','2023-01-13 17:44:56',0,'basista pangasinan','',15502,15502002,NULL,NULL),(11,'johnjohn','r','teria',1,'09502830740','image_20230113112215.jpg','2023-01-13 18:22:15','2023-01-13 18:22:15',0,'bayambang','default.jpg',15502,15502002,NULL,NULL),(12,'customer 3','asdas','customer 3',1,'09000000000','default.png','2023-01-20 15:57:35','2023-01-20 15:57:35',0,'asd','default.jpg',15502,15502002,NULL,NULL),(13,'a','a','a',1,'09217635295','default.png','2023-01-26 12:10:13','2023-01-26 12:10:13',0,'a','default.jpg',15502,15502002,NULL,NULL),(14,'branch','branch','branch',1,'09217635295','default.png','2023-01-31 12:16:51','2023-01-31 12:16:51',0,'branch','default.jpg',15502,15502002,NULL,NULL);
 /*!40000 ALTER TABLE `tbl_user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -646,8 +653,10 @@ CREATE TABLE `tbl_walkin` (
   `created_date` datetime DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `deleted_flag` int(11) DEFAULT 0,
+  `date` date DEFAULT NULL,
+  `branch_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -656,7 +665,7 @@ CREATE TABLE `tbl_walkin` (
 
 LOCK TABLES `tbl_walkin` WRITE;
 /*!40000 ALTER TABLE `tbl_walkin` DISABLE KEYS */;
-INSERT INTO `tbl_walkin` VALUES (1,'member','member','member',NULL,'123','09217635295','2023-01-30 01:47:44',2,0),(2,'asddasdasdas','member','asdsaasda',NULL,'123','09217635295','2023-01-31 11:10:44',2,0),(3,'customer','member','customer',NULL,'600','09217635295','2023-01-31 11:25:13',2,0);
+INSERT INTO `tbl_walkin` VALUES (1,'member','member','member',NULL,'123','09217635295','2023-01-30 01:47:44',2,0,NULL,NULL),(2,'adasd','sd','asdasdasdsa',NULL,'100','23232323','2023-01-31 11:10:44',2,0,'2023-01-01',NULL),(3,'customer','member','customer',NULL,'600','09217635295','2023-01-31 11:25:13',2,0,NULL,NULL),(4,'adasd','sd','asdasdasdsa',NULL,'100','23232323','2023-02-13 07:30:31',2,0,'2023-01-01',NULL);
 /*!40000 ALTER TABLE `tbl_walkin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -689,7 +698,7 @@ CREATE TABLE `tbl_workout` (
 
 LOCK TABLES `tbl_workout` WRITE;
 /*!40000 ALTER TABLE `tbl_workout` DISABLE KEYS */;
-INSERT INTO `tbl_workout` VALUES (1,2,'Barbel Bench Press',12,3,'None',NULL,'2022-10-24 04:46:09','2022-10-24 04:46:09',0,NULL),(2,2,'Barbel Inclined Bench Press',12,3,'None',NULL,'2022-10-24 04:46:09','2022-10-24 04:46:09',0,NULL),(3,2,'Dumbell Flyes',12,3,'None',NULL,'2022-10-24 04:46:09','2022-10-24 04:46:09',0,NULL),(4,2,'Chest Dips',12,4,'None',NULL,'2022-10-24 04:46:09','2022-10-24 04:46:09',0,NULL),(5,2,'Chest Dips',12,3,'None',NULL,'2022-10-24 04:46:48','2022-10-24 04:46:48',0,NULL),(6,3,'Cardio',2,1,'30mins','test','2022-10-24 04:49:42','2022-10-24 04:49:42',0,NULL),(7,1,'test',1,1,'1','test','2022-12-02 05:26:21','2022-12-02 05:26:21',1,NULL);
+INSERT INTO `tbl_workout` VALUES (1,2,'Barbel Bench Press',12,3,'None',NULL,'2022-10-24 04:46:09','2022-10-24 04:46:09',0,1),(2,2,'Barbel Inclined Bench Press',12,3,'None',NULL,'2022-10-24 04:46:09','2022-10-24 04:46:09',0,1),(3,2,'Dumbell Flyes',12,3,'None',NULL,'2022-10-24 04:46:09','2022-10-24 04:46:09',0,1),(4,2,'Chest Dips',12,4,'None',NULL,'2022-10-24 04:46:09','2022-10-24 04:46:09',0,1),(5,2,'Chest Dips',12,3,'None',NULL,'2022-10-24 04:46:48','2022-10-24 04:46:48',0,1),(6,3,'Cardio',2,1,'30mins','test','2022-10-24 04:49:42','2022-10-24 04:49:42',0,1),(7,1,'test',1,1,'1','test','2022-12-02 05:26:21','2022-12-02 05:26:21',1,1);
 /*!40000 ALTER TABLE `tbl_workout` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -732,8 +741,11 @@ CREATE TABLE `tbl_workout_plan` (
   `updated_date` datetime DEFAULT current_timestamp(),
   `deleted_flag` tinyint(4) DEFAULT 0,
   `day_id` int(11) DEFAULT NULL,
+  `reps` varchar(45) DEFAULT NULL,
+  `sets` varchar(45) DEFAULT NULL,
+  `duration` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -742,7 +754,7 @@ CREATE TABLE `tbl_workout_plan` (
 
 LOCK TABLES `tbl_workout_plan` WRITE;
 /*!40000 ALTER TABLE `tbl_workout_plan` DISABLE KEYS */;
-INSERT INTO `tbl_workout_plan` VALUES (91,2,1,'2022-12-07 15:04:36','2022-12-07 15:04:36',0,NULL),(92,2,1,'2022-12-07 15:04:36','2022-12-07 15:04:36',0,NULL),(93,2,1,'2022-12-07 15:04:36','2022-12-07 15:04:36',0,NULL),(94,2,1,'2022-12-07 15:04:36','2022-12-07 15:04:36',0,NULL),(124,1,3,'2023-01-12 12:51:12','2023-01-12 12:51:12',0,NULL),(125,1,2,'2023-01-12 12:51:12','2023-01-12 12:51:12',0,NULL),(126,1,6,'2023-01-12 12:51:12','2023-01-12 12:51:12',0,NULL),(127,1,1,'2023-01-12 12:51:12','2023-01-12 12:51:12',0,NULL),(128,1,3,'2023-01-12 12:51:12','2023-01-12 12:51:12',0,NULL),(129,1,5,'2023-01-12 12:51:12','2023-01-12 12:51:12',0,NULL),(130,1,4,'2023-01-12 12:51:12','2023-01-12 12:51:12',0,NULL),(134,4,1,'2023-01-12 12:51:31','2023-01-12 12:51:31',0,NULL),(135,4,3,'2023-01-12 12:51:31','2023-01-12 12:51:31',0,NULL),(136,4,3,'2023-01-12 12:51:31','2023-01-12 12:51:31',0,NULL),(140,6,1,'2023-01-12 12:54:47','2023-01-12 12:54:47',0,NULL),(141,7,2,'2023-01-13 18:06:43','2023-01-13 18:06:43',0,NULL),(142,7,4,'2023-01-13 18:06:43','2023-01-13 18:06:43',0,NULL),(143,7,5,'2023-01-13 18:06:43','2023-01-13 18:06:43',0,NULL),(150,9,1,'2023-01-20 15:57:06','2023-01-20 15:57:06',0,NULL),(151,5,1,'2023-01-25 11:48:54','2023-01-25 11:48:54',0,1),(158,8,2,'2023-01-25 11:51:43','2023-01-25 11:51:43',0,1),(159,8,6,'2023-01-25 11:51:43','2023-01-25 11:51:43',0,2),(160,8,3,'2023-01-25 11:51:43','2023-01-25 11:51:43',0,3),(173,11,1,'2023-01-26 19:19:27','2023-01-26 19:19:27',0,1),(174,11,1,'2023-01-26 19:19:27','2023-01-26 19:19:27',0,2),(175,11,1,'2023-01-26 19:19:27','2023-01-26 19:19:27',0,5),(176,3,4,'2023-01-31 12:38:28','2023-01-31 12:38:28',0,5),(177,3,2,'2023-01-31 12:38:28','2023-01-31 12:38:28',0,5),(178,3,1,'2023-01-31 12:38:28','2023-01-31 12:38:28',0,1),(179,3,6,'2023-01-31 12:38:28','2023-01-31 12:38:28',0,6),(180,3,1,'2023-01-31 12:38:28','2023-01-31 12:38:28',0,2),(181,3,3,'2023-01-31 12:38:28','2023-01-31 12:38:28',0,2);
+INSERT INTO `tbl_workout_plan` VALUES (91,2,1,'2022-12-07 15:04:36','2022-12-07 15:04:36',0,NULL,NULL,NULL,NULL),(92,2,1,'2022-12-07 15:04:36','2022-12-07 15:04:36',0,NULL,NULL,NULL,NULL),(93,2,1,'2022-12-07 15:04:36','2022-12-07 15:04:36',0,NULL,NULL,NULL,NULL),(94,2,1,'2022-12-07 15:04:36','2022-12-07 15:04:36',0,NULL,NULL,NULL,NULL),(134,4,1,'2023-01-12 12:51:31','2023-01-12 12:51:31',0,NULL,NULL,NULL,NULL),(135,4,3,'2023-01-12 12:51:31','2023-01-12 12:51:31',0,NULL,NULL,NULL,NULL),(136,4,3,'2023-01-12 12:51:31','2023-01-12 12:51:31',0,NULL,NULL,NULL,NULL),(140,6,1,'2023-01-12 12:54:47','2023-01-12 12:54:47',0,NULL,NULL,NULL,NULL),(141,7,2,'2023-01-13 18:06:43','2023-01-13 18:06:43',0,NULL,NULL,NULL,NULL),(142,7,4,'2023-01-13 18:06:43','2023-01-13 18:06:43',0,NULL,NULL,NULL,NULL),(143,7,5,'2023-01-13 18:06:43','2023-01-13 18:06:43',0,NULL,NULL,NULL,NULL),(150,9,1,'2023-01-20 15:57:06','2023-01-20 15:57:06',0,NULL,NULL,NULL,NULL),(151,5,1,'2023-01-25 11:48:54','2023-01-25 11:48:54',0,1,NULL,NULL,NULL),(158,8,2,'2023-01-25 11:51:43','2023-01-25 11:51:43',0,1,NULL,NULL,NULL),(159,8,6,'2023-01-25 11:51:43','2023-01-25 11:51:43',0,2,NULL,NULL,NULL),(160,8,3,'2023-01-25 11:51:43','2023-01-25 11:51:43',0,3,NULL,NULL,NULL),(200,11,1,'2023-02-11 11:23:51','2023-02-11 11:23:51',0,1,'1','1','2hrs'),(201,11,1,'2023-02-11 11:23:51','2023-02-11 11:23:51',0,2,'2','3','2hrs'),(202,11,1,'2023-02-11 11:23:51','2023-02-11 11:23:51',0,5,'3','3','2hrs'),(209,3,4,'2023-02-11 11:36:13','2023-02-11 11:36:13',0,5,'12','30','none'),(210,3,2,'2023-02-11 11:36:13','2023-02-11 11:36:13',0,5,'12','3','none'),(211,3,1,'2023-02-11 11:36:13','2023-02-11 11:36:13',0,1,'12','3','none'),(212,3,6,'2023-02-11 11:36:13','2023-02-11 11:36:13',0,6,'12','3','none'),(213,3,1,'2023-02-11 11:36:13','2023-02-11 11:36:13',0,2,'12','3','none'),(214,3,3,'2023-02-11 11:36:13','2023-02-11 11:36:13',0,2,'12','3','none'),(215,1,3,'2023-02-11 11:39:40','2023-02-11 11:39:40',0,1,'12','3','none'),(216,1,2,'2023-02-11 11:39:40','2023-02-11 11:39:40',0,1,'12','3','none'),(217,1,6,'2023-02-11 11:39:40','2023-02-11 11:39:40',0,1,'12','3','none'),(218,1,1,'2023-02-11 11:39:40','2023-02-11 11:39:40',0,1,'12','3','none'),(219,1,3,'2023-02-11 11:39:40','2023-02-11 11:39:40',0,1,'12','3','none'),(220,1,5,'2023-02-11 11:39:40','2023-02-11 11:39:40',0,1,'12','3','none'),(221,1,4,'2023-02-11 11:39:40','2023-02-11 11:39:40',0,1,'12','3','none');
 /*!40000 ALTER TABLE `tbl_workout_plan` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -755,4 +767,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-09  9:25:07
+-- Dump completed on 2023-02-15 19:16:36
