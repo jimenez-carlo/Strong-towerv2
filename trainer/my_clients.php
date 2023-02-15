@@ -57,6 +57,7 @@
                     <td>
                       <form method="post" onsubmit="return confirm('Are You Sure?');">
                         <a href="edit_my_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                        <a href="bmi.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> BMI History <i class="fa fa-eye"></i> </a>
 
                       </form>
                     </td>

@@ -99,15 +99,15 @@ function activate($array)
             <!-- <li class="nav-item"><a href="client_list.php" class="nav-link <?= activate(array("client_list", "create_client_list", "edit_client_list")) ?>" name="admin/clients"><i class="fa fa-users nav-icon"></i>
                 <p>Client List</p>
               </a></li> -->
-            <li class="nav-item"><a href="my_clients.php" class="nav-link <?= activate(array("my_clients", "create_my_client", "edit_my_client")) ?>" name="admin/trainer_clients"><i class="fa fa-users nav-icon"></i>
+            <li class="nav-item"><a href="my_clients.php" class="nav-link <?= activate(array("my_clients", "create_my_client", "edit_my_client", "bmi")) ?>" name="admin/trainer_clients"><i class="fa fa-users nav-icon"></i>
                 <p>My Clients</p>
               </a></li>
             <!-- <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>" name="admin/plans"><i class="fa fa-clipboard nav-icon"></i>
                 <p>Membership Plans</p>
               </a></li> -->
-            <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
+            <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
                 <p>Workouts</p>
-              </a></li> -->
+              </a></li>
             <!-- <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipements", "create_equipement", "edit_equipement")) ?>" name="admin/equipments"><i class="fa fa-dumbbell nav-icon"></i>
                 <p>Equipments</p>
               </a></li>

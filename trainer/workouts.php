@@ -26,9 +26,9 @@
                 <tr>
                   <th>ID#</th>
                   <th>Workout Name</th>
-                  <th>Reps</th>
+                  <!-- <th>Reps</th>
                   <th>Sets</th>
-                  <th>Duration</th>
+                  <th>Duration</th> -->
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2, 3))) { ?>
                     <th>Actions</th>
                   <?php } ?>
@@ -39,9 +39,9 @@
                   <tr>
                     <td><?php echo $res['id']; ?></td>
                     <td><?php echo ucfirst($res['name']); ?></td>
-                    <td><?php echo $res['reps']; ?></td>
+                    <!-- <td><?php echo $res['reps']; ?></td>
                     <td><?php echo $res['sets']; ?></td>
-                    <td><?php echo $res['duration']; ?></td>
+                    <td><?php echo $res['duration']; ?></td> -->
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2, 3))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">

@@ -126,7 +126,7 @@
                         </thead>
                         <tbody id="wrapper2">
 
-                          <?php foreach (get_list("SELECT w.* from tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id where wp.client_plan_id = $default->id") as $res) { ?>
+                          <?php foreach (get_list("SELECT w.*,wp.* from tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id where wp.client_plan_id = $default->id") as $res) { ?>
                             <tr>
                               <td><?= strtoupper($res['name']) ?></td>
                               <td><?= $res['reps'] ?></td>

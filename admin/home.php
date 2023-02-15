@@ -34,35 +34,125 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="9"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="10"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="11"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="12"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="13"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="14"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="15"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="16"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="17"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="18"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="19"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="20"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="21"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="22"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="23"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="24"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="25"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="26"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="27"></li>
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img class="d-block w-100 carousel-img" src="../facilities/1.jpg" alt="First slide" style="height:445px">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_1.jpg" alt="First slide" style="height:445px">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 carousel-img" src="../facilities/2.jpg" alt="First slide" style="height:445px">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_2.jpg" alt="First slide" style="height:445px">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 carousel-img" src="../facilities/3.jpg" alt="First slide" style="height:445px">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_3.jpg" alt="First slide" style="height:445px">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 carousel-img" src="../facilities/4.jpg" alt="First slide" style="height:445px">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_4.jpg" alt="First slide" style="height:445px">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 carousel-img" src="../facilities/5.jpg" alt="First slide" style="height:445px">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_5.jpg" alt="First slide" style="height:445px">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 carousel-img" src="../facilities/6.jpg" alt="First slide" style="height:445px">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_6.jpg" alt="First slide" style="height:445px">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 carousel-img" src="../facilities/7.jpg" alt="First slide" style="height:445px">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_7.jpg" alt="First slide" style="height:445px">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 carousel-img" src="../facilities/8.jpg" alt="First slide" style="height:445px">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_8.jpg" alt="First slide" style="height:445px">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 carousel-img" src="../facilities/9.jpg" alt="First slide" style="height:445px">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_9.jpg" alt="First slide" style="height:445px">
                 </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_10.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_11.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_12.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_13.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_14.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_15.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_16.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_17.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_18.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_19.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_20.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_21.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_22.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_23.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_24.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_25.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_26.jpg" alt="First slide" style="height:445px">
+                </div>
+
+                <div class="carousel-item">
+                  <img class="d-block w-100 carousel-img" src="../facilities/_27.jpg" alt="First slide" style="height:445px">
+                </div>
+
               </div>
               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

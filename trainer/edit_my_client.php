@@ -39,7 +39,10 @@
         query("DELETE FROM tbl_workout_plan where client_plan_id = $id");
         foreach ($workout as $key => $res) {
           $date = $day[$key];
-          query("INSERT INTO tbl_workout_plan (client_plan_id,workout_id,day_id) VALUES ($id,'$res', $date)");
+          $repsv = $reps[$key];
+          $setsv = $sets[$key];
+          $durationv = $duration[$key];
+          query("INSERT INTO tbl_workout_plan (client_plan_id,workout_id,day_id,`reps`,`sets`,`duration`) VALUES ($id,'$res', $date,'$repsv','$setsv','$durationv')");
         }
 
         return message_success("Client Workout Updated Successfully!", 'Successfull!');
@@ -112,31 +115,28 @@
                         <thead>
                           <tr>
                             <th>Workout</th>
+                            <th>Reps</th>
+                            <th>Sets</th>
+                            <th>Duration</th>
                             <th>Day</th>
                             <th>Actions</th>
                           </tr>
                         </thead>
                         <tbody id="wrapper2">
-                          <?php if (isset($_POST['workout'])) { ?>
-                            <?php foreach ($_POST['workout'] as $res) { ?>
-                              <tr>
-                                <td><select name="workout[]" class="form-control"><?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $subres) { ?> <option value="<?= $subres['id']; ?>" <?= ($res == $subres['id'] ? "selected" : "") ?>> <?= strtoupper($subres['name'] . ' - ' . $subres['reps'] . ' Reps - ' . $subres['sets'] . ' Sets - ' . $subres['duration'] . ' Duration'); ?> </option><?php } ?> </select> </td>
-                                <td><select name="day[]" class="form-control"><?php foreach (get_list("select * from tbl_workout_day ") as $subres) { ?> <option value="<?= $subres['id']; ?>" <?= ($res == $subres['id'] ? "selected" : "") ?>> <?= strtoupper($subres['name']); ?> </option><?php } ?> </select> </td>
-                                <td><button type="button" class="btn btn-sm btn-dark btn-remove-workout"> Remove </button> <button type="button" class="btn btn-sm btn-dark btn-view"> View </button></td>
-                              </tr>
-                            <?php } ?>
-                          <?php } else { ?>
-                            <?php foreach (get_list("SELECT * from tbl_workout_plan where client_plan_id = $default->id") as $res) { ?>
-                              <tr>
-                                <td><select name="workout[]" class="form-control">
-                                    <?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $subres) { ?>
-                                      <option value="<?= $subres['id']; ?>" <?php echo ($res['workout_id'] == $subres['id']) ? 'selected' : ''; ?>> <?= strtoupper($subres['name'] . ' - ' . $subres['reps'] . ' Reps - ' . $subres['sets'] . ' Sets - ' . $subres['duration'] . ' Duration'); ?> </option>
-                                    <?php } ?>
-                                  </select> </td>
-                                <td><select name="day[]" class="form-control"><?php foreach (get_list("select * from tbl_workout_day ") as $subres) { ?> <option value="<?= $subres['id']; ?>" <?= ($res['day_id'] == $subres['id'] ? "selected" : "") ?>> <?= strtoupper($subres['name']); ?> </option><?php } ?> </select> </td>
-                                <td><button type="button" class="btn btn-sm btn-dark btn-remove-workout"> Remove </button> <button type="button" class="btn btn-sm btn-dark btn-view"> View </button> </td>
-                              </tr>
-                            <?php } ?>
+
+                          <?php foreach (get_list("SELECT * from tbl_workout_plan where client_plan_id = $default->id") as $res) { ?>
+                            <tr>
+                              <td><select name="workout[]" class="form-control">
+                                  <?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $subres) { ?>
+                                    <option value="<?= $subres['id']; ?>" <?php echo ($res['workout_id'] == $subres['id']) ? 'selected' : ''; ?>> <?= strtoupper($subres['name']); ?> </option>
+                                  <?php } ?>
+                                </select> </td>
+                              <td style="width:50px"><input type="number" name="reps[]" class="form-control" value="<?= $res['reps'] ?>"></td>
+                              <td style="width:50px"><input type="number" name="sets[]" class="form-control" value="<?= $res['sets'] ?>"></td>
+                              <td style="width:50px"><input type="text" name="duration[]" class="form-control" value="<?= $res['duration'] ?>"></td>
+                              <td><select name="day[]" class="form-control"><?php foreach (get_list("select * from tbl_workout_day ") as $subres) { ?> <option value="<?= $subres['id']; ?>" <?= ($res['day_id'] == $subres['id'] ? "selected" : "") ?>> <?= strtoupper($subres['name']); ?> </option><?php } ?> </select> </td>
+                              <td><button type="button" class="btn btn-sm btn-dark btn-remove-workout"> Remove </button> <button type="button" class="btn btn-sm btn-dark btn-view"> View </button> </td>
+                            </tr>
                           <?php } ?>
                         </tbody>
                       </table>
@@ -241,7 +241,7 @@
 
     $(add_button).click(function(e) {
       e.preventDefault();
-      $(wrapper).append('<tr><td><select name = "workout[]" class="form-control"><?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $res) { ?> <option value="<?= $res['id']; ?>" > <?= strtoupper($res['name'] . ' - ' . $res['reps'] . ' Reps - ' . $res['sets'] . ' Sets - ' . $res['duration'] . ' Duration'); ?> </option><?php } ?> </select> </td><td><select name = "day[]" class="form-control"><?php foreach (get_list("select * from tbl_workout_day") as $res) { ?> <option value="<?= $res['id']; ?>" > <?= strtoupper($res['name']); ?> </option><?php } ?> </select> </td><td><button type ="button" class="btn btn-sm btn-dark btn-remove-workout" > Remove </button> <button type="button" class="btn btn-sm btn-dark btn-view"> View </button></td></tr> ');
+      $(wrapper).append('<tr><td><select name = "workout[]" class="form-control"><?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $res) { ?> <option value="<?= $res['id']; ?>" > <?= strtoupper($res['name']); ?> </option><?php } ?> </select> </td><td style="width:50px"><input type="number" name="reps[]" class="form-control"></td><td style="width:50px"><input type="number" name="sets[]" class="form-control"></td><td style="width:50px"><input type="text" name="duration[]" class="form-control"></td><td><select name = "day[]" class="form-control"><?php foreach (get_list("select * from tbl_workout_day") as $res) { ?> <option value="<?= $res['id']; ?>" > <?= strtoupper($res['name']); ?> </option><?php } ?> </select> </td><td><button type ="button" class="btn btn-sm btn-dark btn-remove-workout" > Remove </button> <button type="button" class="btn btn-sm btn-dark btn-view"> View </button></td></tr> ');
     });
 
     $(wrapper).on("click", ".btn-remove-workout", function(e) {

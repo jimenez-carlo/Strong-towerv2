@@ -27,9 +27,6 @@
                   <!-- <th>ID#</th> -->
                   <th>Workout Name</th>
                   <th>Category</th>
-                  <th>Reps</th>
-                  <th>Sets</th>
-                  <th>Duration</th>
                   <th>Description</th>
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <th>Actions</th>
@@ -42,9 +39,6 @@
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo ucfirst($res['category']); ?></td>
-                    <td><?php echo $res['reps']; ?></td>
-                    <td><?php echo $res['sets']; ?></td>
-                    <td><?php echo $res['duration']; ?></td>
                     <td><?php echo $res['description']; ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
                       <td>

@@ -22,14 +22,15 @@
           return message_error("Please Fill Blank Fields!");
         }
 
-        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$workout' and id <> $id  and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$workout' and id <> $id  and deleted_flag = 0 and branch_id = '$branch_id' limit 1");
 
         if (!empty($check_equipement_name->res)) {
           $_SESSION['error']['equipement'] = true;
           return message_error("Workout Name Already In-use!");
         }
 
-        query("UPDATE tbl_workout set `name` = '$workout', `description` = '$description',`reps`='$reps',`sets`='$sets',duration= '$duration' where id = $id");
+        query("UPDATE tbl_workout set `name` = '$workout', `description` = '$description',category_id =  '$category',`branch_id`='$branch_id' where id = $id");
         return message_success("Workout Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -60,21 +61,23 @@
                   <div class="card-body">
 
                     <div class="form-group">
+                      <label for="">*Category</label>
+
+                      <select id="category" name="category" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>">
+                        <?php
+                        $branch = $_SESSION['user']->branch_id == 1 ? " " : " and branch_id =" . $_SESSION['user']->branch_id;
+                        ?>
+                        <?php foreach (get_list("select * from tbl_category where deleted_flag = 0 $branch") as $res) { ?>
+                          <option value="<?= $res['id']; ?>" <?= ($workout->category_id == $res['id']) ? 'selected' : ''; ?>><?= $res['name']; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
                       <label for="">*Workout Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="workout" name="workout" placeholder="Workout Name" value="<?= isset($_POST['name']) ? $_POST['name'] : $workout->name ?>">
                     </div>
-                    <div class="form-group">
-                      <label for="">*Workout Reps</label>
-                      <input type="number" class="form-control <?= isset($_SESSION['error']['reps']) ? 'is-invalid' : '' ?>" id="reps" name="reps" placeholder="Workout Reps" value="<?= isset($_POST['reps']) ? $_POST['reps'] : $workout->reps ?>">
-                    </div>
-                    <div class="form-group">
-                      <label for="">*Workout Sets</label>
-                      <input type="number" class="form-control <?= isset($_SESSION['error']['sets']) ? 'is-invalid' : '' ?>" id="sets" name="sets" placeholder="Workout Sets" value="<?= isset($_POST['sets']) ? $_POST['sets'] : $workout->sets ?>">
-                    </div>
-                    <div class="form-group">
-                      <label for="">*Workout Duration</label>
-                      <textarea class="form-control <?= isset($_SESSION['error']['duration']) ? 'is-invalid' : '' ?>" rows="4" id="duration" name="duration" placeholder="Workout Duration"><?= isset($_POST['duration']) ? $_POST['duration'] : $workout->duration ?></textarea>
-                    </div>
+
                     <div class="form-group">
                       <label for="">*Workout Description</label>
                       <textarea class="form-control <?= isset($_SESSION['error']['description']) ? 'is-invalid' : '' ?>" rows="4" id="description" name="description" placeholder="Workout Description"><?= isset($_POST['description']) ? $_POST['description'] : $workout->description ?></textarea>

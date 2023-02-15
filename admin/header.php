@@ -19,6 +19,18 @@ function activate($array)
     return "";
   }
 }
+function activate2($array)
+{
+  $page = $_SERVER['PHP_SELF'];
+  $page = explode("/", $page);
+  $current = end($page);
+  $current = str_replace(".php", "", $current);
+  if (in_array($current, $array)) {
+    return " menu-is-opening menu-open active";
+  } {
+    return "";
+  }
+}
 
 ?>
 <!DOCTYPE html>
@@ -128,9 +140,31 @@ function activate($array)
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan", "view_my_client")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
-                <li class="nav-item"><a href="walkin.php" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>"><i class="fa fa-bell nav-icon"></i>
-                    <p>Walkin</p>
-                  </a></li>
+
+                <li class="nav-item">
+                  <a href="#" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                      Walkin
+                      <i class="fas fa-angle-left right"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                      <a href="walkin.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Workout</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="orders.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Orders</p>
+                      </a>
+                    </li>
+
+                  </ul>
+                </li>
                 <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
                   </a></li>
@@ -162,9 +196,7 @@ function activate($array)
                 <li class="nav-item"><a href="inventory.php" class="nav-link <?= activate(array("inventory", "inventory_view")) ?>"><i class="fa fa-box nav-icon"></i>
                     <p>Inventory</p>
                   </a></li>
-                <li class="nav-item"><a href="orders.php" class="nav-link <?= activate(array("orders", "view_order")) ?>"><i class="fa fa-shopping-cart nav-icon"></i>
-                    <p>Orders</p>
-                  </a></li>
+
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
                   </a></li>
@@ -180,15 +212,60 @@ function activate($array)
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
-                <li class="nav-item"><a href="walkin.php" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>"><i class="fa fa-bell nav-icon"></i>
-                    <p>Walkin</p>
-                  </a></li>
+
+                <li class="nav-item">
+                  <a href="#" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                      Walkin
+                      <i class="fas fa-angle-left right"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                      <a href="walkin.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Workout</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="orders.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Orders</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="nav-item">
+                  <a href="#" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                      Walkin
+                      <i class="fas fa-angle-left right"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                      <a href="walkin.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Workout</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="orders.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Orders</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
                 <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
+                    <?php $where = $_SESSION['user']->access_id == 1 ? '' : " and branch_id = " . $_SESSION['user']->branch_id ?>
+                    <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 $where group by verified")->pending ?? 0 ?>)</p>
                   </a></li>
-                <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Employees & Trainers (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 3 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
-                  </a></li>
+
                 <!-- <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Trainers</p>
                   </a></li> -->
@@ -215,9 +292,7 @@ function activate($array)
                 <li class="nav-item"><a href="inventory.php" class="nav-link <?= activate(array("inventory", "inventory_view")) ?>"><i class="fa fa-box nav-icon"></i>
                     <p>Inventory</p>
                   </a></li>
-                <li class="nav-item"><a href="orders.php" class="nav-link <?= activate(array("orders", "view_order")) ?>"><i class="fa fa-shopping-cart nav-icon"></i>
-                    <p>Orders</p>
-                  </a></li>
+
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment", "view_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
                   </a></li>
@@ -231,15 +306,35 @@ function activate($array)
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan", "view_my_client")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
-                <li class="nav-item"><a href="walkin.php" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>"><i class="fa fa-bell nav-icon"></i>
-                    <p>Walkin</p>
-                  </a></li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                      Walkin
+                      <i class="fas fa-angle-left right"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                      <a href="walkin.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Workout</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="orders.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Orders</p>
+                      </a>
+                    </li>
+
+                  </ul>
+                </li>
                 <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
+                    <?php $where = $_SESSION['user']->access_id == 1 ? '' : " and branch_id = " . $_SESSION['user']->branch_id ?>
+                    <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 $where group by verified")->pending ?? 0 ?>)</p>
                   </a></li>
-                <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Employees & Trainers (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 3 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
-                  </a></li>
+
                 <li class="nav-item">
                   <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
                     <i class="fa fa-user nav-icon"></i>

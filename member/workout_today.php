@@ -76,9 +76,9 @@
                 <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
                   <thead>
                     <tr>
-                      <th>Workout - Duration</th>
-                      <th style="width: 0.1%;white-space: nowrap;">Target Sets</th>
-                      <th style="width: 0.1%;white-space: nowrap;">Target Reps</th>
+                      <th>Workout</th>
+                      <!-- <th style="width: 0.1%;white-space: nowrap;">Sets</th>
+                      <th style="width: 0.1%;white-space: nowrap;">Reps</th> -->
                       <th style="width: 0.1%;white-space: nowrap;">Actual Sets</th>
                       <th style="width: 0.1%;white-space: nowrap;">Actual Reps</th>
                       <th style="width: 0.1%;white-space: nowrap;">Actions</th>
@@ -89,9 +89,9 @@
 
                     <?php foreach (get_list("select w.*,w.id as workout_id,p.id,p.reps as `actual_reps`,p.sets as `actual_sets` from tbl_progress p  inner join tbl_workout  w on w.id = p.workout_id where p.plan_id = $plan_id and date = '$date_today' and p.customer_id = '$member_id'") as $res) { ?>
                       <tr>
-                        <td><input type="hidden" name="workout_id[<?= $res['id'] ?>]" value="<?= $res['workout_id'] ?>"> <?= ucfirst($res['name']) . " - " . $res['duration']; ?></td>
-                        <td><?= $res['sets'] ?></td>
-                        <td><?= $res['reps'] ?></td>
+                        <td><input type="hidden" name="workout_id[<?= $res['id'] ?>]" value="<?= $res['workout_id'] ?>"> <?= ucfirst($res['name']); ?></td>
+                        <!-- <td><?= $res['sets'] ?></td>
+                        <td><?= $res['reps'] ?></td> -->
                         <td><input type="number" class="form-control" name="sets[<?= $res['id'] ?>]" value="<?= $res['actual_sets'] ?>" max="<?= $res['sets'] ?>"></td>
                         <td><input type="number" class="form-control" name="reps[<?= $res['id'] ?>]" value="<?= $res['actual_reps'] ?>" max="<?= $res['reps'] ?>"></td>
                         <td>
@@ -122,9 +122,9 @@
                 <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
                   <thead>
                     <tr>
-                      <th>Workout - Duration</th>
-                      <th>Sets</th>
-                      <th>Reps</th>
+                      <th>Workout</th>
+                      <!-- <th>Sets</th>
+                      <th>Reps</th> -->
                       <th style="width: 0.1%;white-space: nowrap;">Actions</th>
                     </tr>
                   </thead>
@@ -140,9 +140,9 @@
                     ?>
                     <?php foreach (get_list("SELECT w.* FROM tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id WHERE wp.workout_id NOT IN ('" . $not_in . "') and wp.client_plan_id = '$plan_id' and wp.day_id = $day_id ") as $res) { ?>
                       <tr>
-                        <td><?= ucfirst($res['name']) . " - " . $res['duration']; ?></td>
-                        <td><?= $res['sets'] ?></td>
-                        <td><?= $res['reps'] ?></td>
+                        <td><?= ucfirst($res['name']); ?></td>
+                        <!-- <td><?= $res['sets'] ?></td>
+                        <td><?= $res['reps'] ?></td> -->
                         <td>
                           <button type="submit" class="btn btn-sm btn-dark" name="add" value="<?= $res['id']; ?>"><i class="fa fa-plus"></i> </button>
                         </td>

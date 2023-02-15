@@ -23,7 +23,7 @@
         }
 
         $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
-        $check_service_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_services b where b.name ='$service' and deleted_flag = 0 $branch_id limit 1");
+        $check_service_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_services b where b.name ='$service' and b.deleted_flag = 0 and b.branch_id = '$branch_id' limit 1");
 
         if (!empty($check_service_name->res)) {
           $_SESSION['error']['service'] = true;
@@ -39,7 +39,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../services/' . $image_name);
         }
 
-        query("INSERT INTO tbl_services (`name`,`description`,`image`) VALUES('$service', '$description','$image_name')");
+        query("INSERT INTO tbl_services (`name`,`description`,`image`,`branch_id`) VALUES('$service', '$description','$image_name','$branch_id')");
         unset($_POST);
         return message_success("Service Created Successfully!", 'Successfull!');
       }
@@ -48,7 +48,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-user-plus"></i> Register Client
+            <h1 class="m-0"><i class="fa fa-user-plus"></i> Create Service
               <a href="services.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
@@ -72,6 +72,16 @@
                       <img src="../services/default.png" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
                       <input type="file" class="form-control" id="image" name="image" accept="image/*">
                     </div>
+                    <?php if ($_SESSION['user']->access_id == 1) { ?>
+                      <div class="form-group">
+                        <label for="">*Branch</label>
+                        <select name="branch" id="">
+                          <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                            <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    <?php } ?>
                     <div class="form-group">
                       <label for="">*Service Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="service" name="service" placeholder="Service Name" value="<?= isset($_POST['service']) ? $_POST['service'] : '' ?>">
@@ -80,6 +90,7 @@
                       <label for="">*Service Description</label>
                       <textarea class="form-control <?= isset($_SESSION['error']['description']) ? 'is-invalid' : '' ?>" rows="4" id="description" name="description" placeholder="Service Description"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
                     </div>
+
                     <div class="form-group">
                       <button type="submit" class="btn btn-dark float-right" name="create"><i class="fa fa-save"></i> Add Service</button>
                     </div>

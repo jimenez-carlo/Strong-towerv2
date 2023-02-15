@@ -32,7 +32,8 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_services where deleted_flag = 0") as $res) { ?>
+                <?php $where = ($_SESSION['user']->access_id == 1) ? "" : " and  branch_id = " . $_SESSION['user']->branch_id  ?>
+                <?php foreach (get_list("select * from tbl_services where deleted_flag = 0 $where") as $res) { ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><img src="../services/<?php echo $res['image']; ?>" style="width:100px;height:100px;object-fit:contain"></td>

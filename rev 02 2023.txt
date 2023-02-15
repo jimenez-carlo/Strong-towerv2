@@ -15,12 +15,49 @@ supplements
 
 category per branch
 
--------------------------------------
-
 workouts
 -remove reps
 -remove sets
 -remove duration
+
+trainer/client
+-add workouts
+-add reps,sets,duration assigning
+
+trainer
+-add client bmi history
+
+client
+ workout today
+ -remove target reps,sets
+ -remove cart
+ -order
+ -add height,weight
+
+walkin
+-add date
+-add,edit
+
+admin/secretary
+ -remove employees & trainer
+ -remove orders
+ -add walkin order(cart,order)
+ -add delete walkin
+
+admin
+ home change slides
+ no viewing
+
+-fixed counter clients per branch
+-fixed counter employee & trainer per branch
+
+per branch
+-services
+  -list
+  -create
+  -edit
+-------------------------------------
+
 
 date format
  Fri, 12 Apr 2013(D, d M Y)
@@ -30,49 +67,55 @@ inventory
  -equipment
 
 per branch
--services
--supplements
--inventory
 -equipments
+  -list
+  -create
+  -edit
+-supplements
+  -list
+  -create
+  -edit
+-inventory
+  -list
+  -create
+  -edit
 -category
+  -list
+  -create
+  -edit
 -workouts
+  -list
+  -create
+  -edit
 -membership plan
+  -list
+  -create
+  -edit
 -client plans
+  -list
+  -create
+  -edit
 -walkin
+  -list
+  -create
+  -edit
 -clients
+  -list
+  -create
+  -edit
 -employee & trainer
+  -list
+  -create
+  -edit
 
--fixed counter clients per branch
--fixed counter employee & trainer per branch
+
 
 landing/admin/trainer/secretary
  sign up font style
  login font style
 
-admin
- home change slides
- no viewing
 
-admin/secretary
- -remove orders
- -add walkin order(cart,order)
- -add delete walkin
-walkin
--add date
--add,edit
 
-customer
- -remove cart
- -order
 
-trainer
--add workouts
--add client bmi history
 
-trainer/client
--add reps,sets,duration assigning
 
-client
--add height,weight
- workout today
- -remove target reps,sets

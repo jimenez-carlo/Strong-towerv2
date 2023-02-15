@@ -40,10 +40,11 @@
                     <td><?php echo ucfirst($res['first_name'] . ' ' . $res['last_name']); ?></td>
                     <td><?php echo ucfirst($res['contact_no']); ?></td>
                     <td style="text-align: right;"><?php echo number_format($res['price'], 2); ?></td>
-                    <td><?php echo ucfirst($res['created_date']); ?></td>
+                    <td><?php echo ucfirst($res['date']); ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
+                          <a href="edit_walkin.php?id=<?php echo $res['id']; ?>" class="btn btn-sm btn-dark">Edit <i class="fa fa-edit"></i></a>
                           <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>
                       </td>

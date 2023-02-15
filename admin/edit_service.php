@@ -21,8 +21,8 @@
         if (!empty($errors)) {
           return message_error("Please Fill Blank Fields!");
         }
-
-        $check_service_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_services b where b.name ='$service' and id <> $id  and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_service_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_services b where b.name ='$service' and id <> $id  and b.deleted_flag = 0 and b.branch_id = '$branch_id' limit 1");
 
         if (!empty($check_service_name->res)) {
           $_SESSION['error']['service'] = true;
@@ -36,7 +36,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../services/' . $image_name);
         }
 
-        query("UPDATE tbl_services set `name` = '$service', `description` = '$description',`image`='$image_name' where id = $id");
+        query("UPDATE tbl_services set `name` = '$service', `description` = '$description',`image`='$image_name',`branch_id`= '$branch_id' where id = $id");
         return message_success("Service Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -70,6 +70,16 @@
                       <img src="../services/<?= $service->image ?>" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
                       <input type="file" class="form-control" id="image" name="image" accept="image/*">
                     </div>
+                    <?php if ($_SESSION['user']->access_id == 1) { ?>
+                      <div class="form-group">
+                        <label for="">*Branch</label>
+                        <select name="branch" id="">
+                          <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                            <option value="<?= $res['id'] ?>" <?= isset($_POST['branch']) && $_POST['branch'] == $res['id'] ? 'selected' : '' ?>><?= $res['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    <?php } ?>
                     <div class="form-group">
                       <label for="">*Service Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="service" name="service" placeholder="Service Name" value="<?= isset($_POST['service']) ? $_POST['service'] : $service->name ?>">

@@ -146,7 +146,7 @@ function activate($array)
                 <p>Supplements</p>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="checkout.php" class="nav-link <?= activate(array("checkout")) ?>">
                 <i class="fa fa-shopping-cart nav-icon"></i>
                 <p>Cart</p>
@@ -157,7 +157,7 @@ function activate($array)
                 <i class="fa fa-box nav-icon"></i>
                 <p>Orders</p>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans")) ?>">
                 <i class="fa fa-clipboard nav-icon"></i>

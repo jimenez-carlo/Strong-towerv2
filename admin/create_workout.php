@@ -9,7 +9,7 @@
       function create($data)
       {
         extract($data);
-        $required_fields = array('name', 'description', 'reps', 'sets', 'duration');
+        $required_fields = array('name', 'description');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -30,7 +30,7 @@
         }
 
 
-        query("INSERT INTO tbl_workout (`name`,`description`,`reps`,`sets`,`duration`,`category_id`,`branch_id`) VALUES('$name', '$description','$reps','$sets','$duration','$category', '$branch_id')");
+        query("INSERT INTO tbl_workout (`name`,`description`,`category_id`,`branch_id`) VALUES('$name', '$description','$category', '$branch_id')");
         unset($_POST);
         return message_success("Workout Created Successfully!", 'Successfull!');
       }
@@ -73,18 +73,7 @@
                       <label for="">*Workout Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Workout Name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
                     </div>
-                    <div class="form-group">
-                      <label for="">*Workout Reps</label>
-                      <input type="number" class="form-control <?= isset($_SESSION['error']['reps']) ? 'is-invalid' : '' ?>" id="reps" name="reps" placeholder="Workout Reps" value="<?= isset($_POST['reps']) ? $_POST['reps'] : '' ?>">
-                    </div>
-                    <div class="form-group">
-                      <label for="">*Workout Sets</label>
-                      <input type="number" class="form-control <?= isset($_SESSION['error']['sets']) ? 'is-invalid' : '' ?>" id="sets" name="sets" placeholder="Workout Sets" value="<?= isset($_POST['sets']) ? $_POST['sets'] : '' ?>">
-                    </div>
-                    <div class="form-group">
-                      <label for="">*Workout Duration</label>
-                      <textarea class="form-control <?= isset($_SESSION['error']['duration']) ? 'is-invalid' : '' ?>" rows="4" id="duration" name="duration" placeholder="Workout Duration"><?= isset($_POST['duration']) ? $_POST['duration'] : '' ?></textarea>
-                    </div>
+
                     <div class="form-group">
                       <label for="">*Workout Description</label>
                       <textarea class="form-control <?= isset($_SESSION['error']['description']) ? 'is-invalid' : '' ?>" rows="4" id="description" name="description" placeholder="Workout Description"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>

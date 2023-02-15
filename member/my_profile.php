@@ -60,8 +60,8 @@
         //   move_uploaded_file($_FILES["image"]["tmp_name"],   '../medical_certificate/' . $medical_certificate);
         // }
 
-        query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `password` = '$new_password', `branch_id` = '$branch' where id = $id");
-        query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact',`picture`='$image_name',barangay= '$barangay', city= '$city' where id = $id");
+        query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `password` = '$new_password' where id = $id");
+        query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact',`picture`='$image_name',barangay= '$barangay', city= '$city',`weight` = '$weight',`height` ='$height' where id = $id");
         return message_success("Client Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -179,6 +179,26 @@
                           <?php } ?>
                         </div>
                       </div>
+
+
+                      <div class="col-sm-3">
+
+                      </div>
+
+                      <div class="col-sm-3">
+
+                        <div class="form-group">
+                          <label>*Height</label>
+                          <input type="text" class="form-control <?= isset($_SESSION['error']['height']) ? 'is-invalid' : '' ?>" id="height" name="height" placeholder="height" value="<?= isset($_POST['height']) ? $_POST['height'] : $user->height ?>">
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label>*Weight</label>
+                          <input type="text" class="form-control <?= isset($_SESSION['error']['weight']) ? 'is-invalid' : '' ?>" id="weight" name="weight" placeholder="weight" value="<?= isset($_POST['weight']) ? $_POST['weight'] : $user->weight ?>">
+                        </div>
+                      </div>
+
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-success float-right" name="update"><i class="fa fa-save"></i> Save Changes</button>
@@ -187,17 +207,18 @@
                 </div>
               </div>
             </div>
-          </section>
-        </form>
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-
-    <!-- /.content -->
+      </div>
+      </section>
+      </form>
+    </div><!-- /.container-fluid -->
   </div>
-  <!-- /.content-wrapper -->
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 </div>
 <script>
   inputImage = document.getElementById('image');
