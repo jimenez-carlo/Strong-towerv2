@@ -32,7 +32,11 @@ function activate($array)
   <link rel="stylesheet" href="../adminlte/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../adminlte/css/admin.css">
 </head>
-
+<style>
+  .nav-item:hover{
+    background: red;
+  }
+</style>
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -90,7 +94,7 @@ function activate($array)
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="home.php" class="nav-link <?= activate(array("home")) ?>">
+              <a href="home.php"  class="nav-link <?= activate(array("home")) ?>">
                 <i class="fa fa-home nav-icon"></i>
                 <p>Home</p>
               </a>

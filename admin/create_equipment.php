@@ -38,7 +38,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../equipments/' . $image_name);
         }
 
-        query("INSERT INTO tbl_equipment (`name`,`description`,`image`,`enabled`) VALUES('$name', '$description','$image_name','$enabled')");
+        query("INSERT INTO tbl_equipment (`name`,`reason`,`description`,`image`,`enabled`) VALUES('$name','$reason','$description','$image_name','$enabled')");
         unset($_POST);
         return message_success("Equipment Created Successfully!", 'Successfull!');
       }
@@ -48,7 +48,7 @@
         <div class="row mb-2">
           <div class="col-sm-12">
             <h1 class="m-0"><i class="fa fa-dumbbell"></i> Add Equipment
-              <a href="equipements.php" class="btn btn-dark" style="float:right">Back</a>
+              <a href="equipments.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
         </div>
@@ -74,6 +74,10 @@
                     <div class="form-group">
                       <label for="">*Equipment Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Equipment Name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Reason</label>
+                      <input type="text" class="form-control <?= isset($_SESSION['error']['reason']) ? 'is-invalid' : '' ?>" id="reason" name="reason" placeholder="reason" value="<?= isset($_POST['reason']) ? $_POST['reason'] : '' ?>">
                     </div>
 
                     <div class="form-group">

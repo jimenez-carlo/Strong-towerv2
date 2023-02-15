@@ -185,8 +185,8 @@
           </div>
 
           <div class="div">
-            <button name="submit" class="btn btn-primary" value="trainer">LogIn</button><br><br>
-            <a href="trainer_signup.php" type="submit" class="btn btn-primary">SignUp</a>
+            <button name="submit" class="btn btn-success" value="trainer">LogIn</button><br><br>
+            <a href="trainer_signup.php" type="submit" class="btn btn-success">SignUp</a>
           </div>
         </form>
 
@@ -213,8 +213,8 @@
           </div>
 
           <div class="div">
-            <button name="submit" class="btn btn-primary" value="member">LogIn</button><br><br>
-            <a href="member_signup.php" type="submit" class="btn btn-primary">SignUp</a>
+            <button name="submit" class="btn btn-success" value="member">LogIn</button><br><br>
+            <a href="member_signup.php" type="submit" class="btn btn-success">SignUp</a>
           </div>
         </form>
       </div>

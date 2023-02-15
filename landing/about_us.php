@@ -24,6 +24,7 @@
         font-size: 60px;
         font-weight: bold;
     }
+  
 </style>
 
 <body>
@@ -42,7 +43,7 @@
             </div>
             <div class="content">
                 <h1>About Strong Tower</h1>
-                <p>Strong Tower Fitness was started in 2016 and has the same mission it had then, help people, help our community. We strive to help everyone who comes through our door to become the best person they can be. We believe that there is much more to our gym than just working out. Our members and culture promote a positive and encouraging atmosphere that is addictive! New members are surrounded by people trying to improve and are excited to see a new face! We consider our members to be family. It doesn't matter what your cardiovascular endurance is, how much you weigh, or how old you are. If you are looking to improve yourself and are willing to put the work in this is the place for you!</p>
+                <p style="font size: 20px;">Strong Tower Fitness was started in 2016 and has the same mission it had then, help people, help our community. We strive to help everyone who comes through our door to become the best person they can be. We believe that there is much more to our gym than just working out. Our members and culture promote a positive and encouraging atmosphere that is addictive! New members are surrounded by people trying to improve and are excited to see a new face! We consider our members to be family. It doesn't matter what your cardiovascular endurance is, how much you weigh, or how old you are. If you are looking to improve yourself and are willing to put the work in this is the place for you!</p>
             </div>
         </div>
     </section>

@@ -38,6 +38,7 @@ function activate($array)
 </head>
 
 
+
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <!-- Navbar -->
@@ -79,7 +80,8 @@ function activate($array)
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="../profile/<?= $_SESSION['user']->picture ?>" class="img-circle elevation-2" alt="User Image">
+            <img src="../profile/<?= $_SESSION['user']->picture ?>" class="img-circle elevation-2" alt="User Image" >
+            <!---style="height:50px;width:50px;border:2px solid #fff;" -->
           </div>
           <div class="info">
             <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?></a>

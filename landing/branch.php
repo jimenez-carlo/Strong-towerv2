@@ -21,7 +21,11 @@
 
 
 </head>
-
+<style>
+  .col{
+    margin-top: 5%;
+   }
+</style>
 <body>
   <section class="headers">
     <?php require_once("headers.php"); ?>

@@ -181,7 +181,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-dark float-right" name="update"><i class="fa fa-save"></i> Save Changes</button>
+                      <button type="submit" class="btn btn-success float-right" name="update"><i class="fa fa-save"></i> Save Changes</button>
                     </div>
                   </div>
                 </div>

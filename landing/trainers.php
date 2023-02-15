@@ -24,13 +24,20 @@
         height: 21rem;
         width: 15rem;
     }
-
+    .container {
+        margin-top: 5%;
+    }
+   .d-block{ 
+         width: 100%; 
+         height: 400px; 
+     }
     img {
         height: 286px;
         width: 100%;
         object-fit: contain;
         /* background: red; */
     }
+ 
 </style>
 
 <body>
@@ -61,7 +68,7 @@
 
                         </div>
                     </div>
-                    <div data-bs-toggle="modal" data-bs-target="#modal_2" class="carousel-item" data-bs-interval="2000">
+                    <div data-bs-toggle="modal" data-bs-target="#modal_2" class="carousel-item" data-bs-interval="10000">
                         <img src="images/2.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Crossfit</h5>
@@ -69,7 +76,7 @@
                         </div>
                     </div>
                     <div data-bs-toggle="modal" data-bs-target="#modal_3" class="carousel-item">
-                        <img src="images/3.jpg" class="d-block w-100" alt="...">
+                        <img src="images/3.jpg" class="d-block w-200" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Power Lifting</h5>
 
@@ -165,6 +172,7 @@
                     <div class="card-body">
                         <h5 class="card-title">John Doe</h5>
                         <p class="card-text">Cardio</p>
+                        <p class="card-text">09501440705</p>
                     </div>
                 </div>
             </div>

@@ -32,6 +32,7 @@
 
   .container {
     padding: 2px 16px;
+    margin-top: 50px;
   }
 
   .card-footer.text-muted>* {

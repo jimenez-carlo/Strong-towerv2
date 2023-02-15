@@ -18,17 +18,17 @@ function login()
 {
   extract(escape_data($_POST));
 
-  if (empty($username) && empty($password)) {
-    $_SESSION['error']['username'] = true;
+  if (empty($email) && empty($password)) {
+    $_SESSION['error']['email'] = true;
     $_SESSION['error']['password']  = true;
     return message_error("Please Fill Blank Fields!");
   }
 
-  $user = get_one("SELECT b.name as `branch`,ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_branch b on b.id = u.branch_id where u.username ='$username' and u.`password`='$password' and u.deleted_flag = 0 and u.access_id in (1,2,5) limit 1");
-  $check_user_is_verified = get_one("SELECT if(max(u.id) is null, 0, max(u.id) + 1) as `res` from tbl_user u where u.username ='$username' and u.`password`='$password' and u.deleted_flag = 0 limit 1");
+  $user = get_one("SELECT b.name as `branch`,ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_branch b on b.id = u.branch_id where u.email ='$email' and u.`password`='$password' and u.deleted_flag = 0 and u.access_id in (1,2,5) limit 1");
+  $check_user_is_verified = get_one("SELECT if(max(u.id) is null, 0, max(u.id) + 1) as `res` from tbl_user u where u.email ='$email' and u.`password`='$password' and u.deleted_flag = 0 limit 1");
 
   if (empty($check_user_is_verified->res)) {
-    $_SESSION['error']['username'] = true;
+    $_SESSION['error']['email'] = true;
     $_SESSION['error']['password']  = true;
     return message_error("Invalid Username/Password!");
   }
@@ -62,9 +62,9 @@ function login()
     <div class="card">
       <div class="card-body login-card-body">
         <?php echo (isset($_POST['login'])) ? login() : '';  ?>
-        <form method="post">
+        <form method="post" >
           <div class="input-group mb-3">
-            <input type="text" class="form-control <?= isset($_SESSION['error']['username']) ? 'is-invalid' : '' ?>" placeholder="Username" name="username" value="<?= isset($_POST['username']) ? $_POST['username'] : '' ?>">
+            <input type="text" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" placeholder="Email" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
