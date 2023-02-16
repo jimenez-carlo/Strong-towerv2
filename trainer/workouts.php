@@ -28,7 +28,7 @@
                   <th>Workout Name</th>
                   <th>Category</th>
                   <th>Description</th>
-                  <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
+                  <?php if (in_array($_SESSION['user']->access_id, array(1, 2, 3))) { ?>
                     <th>Actions</th>
                   <?php } ?>
                 </tr>
@@ -41,7 +41,7 @@
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo ucfirst($res['category']); ?></td>
                     <td><?php echo $res['description']; ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2, 3))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_workout.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
@@ -99,7 +99,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(1, 2, 3))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: '<i class="fa fa-plus"></i> New Workout',
           action: function(e, dt, node, config) {
