@@ -126,9 +126,9 @@ function activate2($array)
                 <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category", "view_category")) ?>"><i class="fa fa-tag nav-icon"></i>
                     <p>Categories</p>
                   </a></li>
-                <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout", "view_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
+                <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout", "view_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
-                  </a></li>
+                  </a></li> -->
                 <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan", "view_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Membership Plans</p>
                   </a></li>
@@ -195,9 +195,9 @@ function activate2($array)
                 <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
                     <p>Categories</p>
                   </a></li>
-                <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
+                <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
-                  </a></li>
+                  </a></li> -->
                 <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Membership Plans</p>
                   </a></li>
