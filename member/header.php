@@ -36,6 +36,11 @@ function activate($array)
   .nav-item:hover {
     background: red;
   }
+
+  body {
+    /* font-size: 12px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  }
 </style>
 
 <body class="hold-transition sidebar-mini">
