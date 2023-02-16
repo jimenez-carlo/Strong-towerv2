@@ -75,7 +75,7 @@
                     <?php if ($_SESSION['user']->access_id == 1) { ?>
                       <div class="form-group">
                         <label for="">*Branch</label>
-                        <select name="branch" id="">
+                        <select name="branch" id="" class="form-control">
                           <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
                             <option value="<?= $res['id'] ?>" <?= isset($_POST['branch']) && $_POST['branch'] == $res['id'] ? 'selected' : '' ?>><?= $res['name'] ?></option>
                           <?php } ?>

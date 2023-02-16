@@ -129,9 +129,7 @@ function activate2($array)
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment", "view_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
                   </a></li>
-                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category", "view_category")) ?>"><i class="fa fa-tag nav-icon"></i>
-                    <p>Categories</p>
-                  </a></li>
+
                 <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout", "view_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
                   </a></li> -->
@@ -192,9 +190,7 @@ function activate2($array)
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
                   </a></li>
-                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
-                    <p>Categories</p>
-                  </a></li>
+
                 <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
                   </a></li> -->
