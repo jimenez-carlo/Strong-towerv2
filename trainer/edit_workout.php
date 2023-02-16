@@ -9,7 +9,7 @@
       function update($data)
       {
         extract($data);
-        $required_fields = array('workout', 'description', 'reps', 'sets', 'duration');
+        $required_fields = array('workout', 'description');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
