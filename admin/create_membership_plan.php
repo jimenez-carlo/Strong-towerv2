@@ -22,14 +22,15 @@
           return message_error("Please Fill Blank Fields!");
         }
 
-        $check_workout_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_plan b where b.name ='$name' and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_workout_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_plan b where b.name ='$name' and b.deleted_flag = 0 and b.branch_id = '$branch_id' limit 1");
 
         if (!empty($check_workout_name->res)) {
           $_SESSION['error']['name'] = true;
           return message_error("Membership Plan Name Already In-use!");
         }
 
-        query("INSERT INTO tbl_plan (`name`,`per_month`,`description`) VALUES('$name', '$monthly','$description')");
+        query("INSERT INTO tbl_plan (`name`,`per_month`,`description`,`branch_id`) VALUES('$name', '$monthly','$description','$branch_id')");
         unset($_POST);
         return message_success("Membership Plan Created Successfully!", 'Successfull!');
       }
@@ -39,8 +40,8 @@
         <div class="row mb-2">
           <div class="col-sm-12">
             <h1 class="m-0"><i class="fa fa-clipboard"></i> Create Membership Plan
-            <a href="membership_plans.php" class="btn btn-dark" style="float:right">Back</a>
-          </h1>
+              <a href="membership_plans.php" class="btn btn-dark" style="float:right">Back</a>
+            </h1>
           </div><!-- /.col -->
         </div>
         <form method="post" onsubmit="return confirm('Are You Sure?');" enctype="multipart/form-data">
@@ -57,7 +58,18 @@
                       </button>
                     </div>
                   </div>
+
                   <div class="card-body">
+                    <?php if ($_SESSION['user']->access_id == 1) { ?>
+                      <div class="form-group">
+                        <label for="">*Branch</label>
+                        <select name="branch" id="">
+                          <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                            <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    <?php } ?>
                     <div class="form-group">
                       <label for="">*Plan Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Plan Name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">

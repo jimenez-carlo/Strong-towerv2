@@ -271,8 +271,36 @@ CREATE TABLE `tbl_equipment` (
 
 LOCK TABLES `tbl_equipment` WRITE;
 /*!40000 ALTER TABLE `tbl_equipment` DISABLE KEYS */;
-INSERT INTO `tbl_equipment` VALUES (1,'image_20221201220424.jpeg','Treadmill',4,'test','2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(2,'default.png','Seated Dip Machine',1,'test','2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(3,'default.png','Chest Press Machine',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(4,'default.png','Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(5,'default.png','Incline Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(6,'default.png','Decline Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(7,'default.png','Preacher Curl Bench',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(8,'default.png','test',NULL,'test','2022-12-02 05:17:04','2022-12-02 05:17:04',1,1,1);
+INSERT INTO `tbl_equipment` VALUES (1,'image_20221201220424.jpeg','Treadmill',4,'test','2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(2,'default.png','Seated Dip Machine',3,'test','2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(3,'default.png','Chest Press Machine',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(4,'default.png','Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(5,'default.png','Incline Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(6,'default.png','Decline Bench Press',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(7,'default.png','Preacher Curl Bench',1,NULL,'2022-10-24 04:20:22','2022-10-24 04:20:22',0,1,1),(8,'default.png','test',NULL,'test','2022-12-02 05:17:04','2022-12-02 05:17:04',1,1,1);
 /*!40000 ALTER TABLE `tbl_equipment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_equipment_inventory`
+--
+
+DROP TABLE IF EXISTS `tbl_equipment_inventory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl_equipment_inventory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment_id` int(11) DEFAULT NULL,
+  `original_qty` int(11) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `date_created` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_equipment_inventory`
+--
+
+LOCK TABLES `tbl_equipment_inventory` WRITE;
+/*!40000 ALTER TABLE `tbl_equipment_inventory` DISABLE KEYS */;
+INSERT INTO `tbl_equipment_inventory` VALUES (1,2,1,2,2,NULL);
+/*!40000 ALTER TABLE `tbl_equipment_inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -665,7 +693,7 @@ CREATE TABLE `tbl_walkin` (
 
 LOCK TABLES `tbl_walkin` WRITE;
 /*!40000 ALTER TABLE `tbl_walkin` DISABLE KEYS */;
-INSERT INTO `tbl_walkin` VALUES (1,'member','member','member',NULL,'123','09217635295','2023-01-30 01:47:44',2,0,NULL,NULL),(2,'adasd','sd','asdasdasdsa',NULL,'100','23232323','2023-01-31 11:10:44',2,0,'2023-01-01',NULL),(3,'customer','member','customer',NULL,'600','09217635295','2023-01-31 11:25:13',2,0,NULL,NULL),(4,'adasd','sd','asdasdasdsa',NULL,'100','23232323','2023-02-13 07:30:31',2,0,'2023-01-01',NULL);
+INSERT INTO `tbl_walkin` VALUES (1,'member','member','member',NULL,'123','09217635295','2023-01-30 01:47:44',2,0,NULL,1),(2,'adasd','sd','asdasdasdsa',NULL,'100','23232323','2023-01-31 11:10:44',2,0,'2023-01-01',1),(3,'customer','member','customer',NULL,'600','09217635295','2023-01-31 11:25:13',2,0,NULL,1),(4,'adasd','sd','asdasdasdsa',NULL,'100','23232323','2023-02-13 07:30:31',2,0,'2023-01-01',1);
 /*!40000 ALTER TABLE `tbl_walkin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -767,4 +795,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-15 19:16:36
+-- Dump completed on 2023-02-16  9:11:01

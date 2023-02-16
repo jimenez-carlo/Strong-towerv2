@@ -22,7 +22,8 @@
           return message_error("Please Fill Blank Fields!");
         }
 
-        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_equipment b where b.name ='$equipement' and id <> $id  and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_equipment b where b.name ='$equipement' and id <> $id  and b.deleted_flag = 0  and b.branch_id = '$branch_id' limit 1");
 
         if (!empty($check_equipement_name->res)) {
           $_SESSION['error']['equipement'] = true;
@@ -36,7 +37,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../equipments/' . $image_name);
         }
 
-        query("UPDATE tbl_equipment set `name` = '$equipement', `description` = '$description',`image`='$image_name',`enabled`='$enabled' where id = $id");
+        query("UPDATE tbl_equipment set `name` = '$equipement', `description` = '$description',`image`='$image_name',`enabled`='$enabled',`branch_id`='$branch_id' where id = $id");
         return message_success("Equipement Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -72,6 +73,16 @@
                       <img src="../equipments/<?= $equipement->image ?>" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
                       <input type="file" class="form-control" id="image" name="image" accept="image/*">
                     </div>
+                    <?php if ($_SESSION['user']->access_id == 1) { ?>
+                      <div class="form-group">
+                        <label for="">*Branch</label>
+                        <select name="branch" id="">
+                          <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                            <option value="<?= $res['id'] ?>" <?= isset($_POST['branch']) && $_POST['branch'] == $res['id'] ? 'selected' : '' ?>><?= $res['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    <?php } ?>
                     <div class="form-group">
                       <label for="">*Equipement Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipement Name" value="<?= isset($_POST['equipement']) ? $_POST['equipement'] : $equipement->name ?>">

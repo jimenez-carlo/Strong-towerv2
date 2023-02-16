@@ -11,7 +11,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-box"></i> Supplement #<?php echo $_GET['id'] ?></h1>
+            <h1 class="m-0"><i class="fa fa-box"></i> Equipement #<?php echo $_GET['id'] ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
@@ -25,7 +25,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_supplement_inventory where supplement_id = " . $_GET['id']) as $res) { ?>
+                <?php foreach (get_list("select * from tbl_equipment_inventory where equipment_id = " . $_GET['id']) as $res) { ?>
                   <tr>
                     <td><?php echo $res['qty'] ?></td>
                     <td><?php echo $res['original_qty'] + $res['qty'] ?></td>

@@ -52,7 +52,7 @@
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo ucfirst($res['customer']); ?></td>
                     <td><?php echo ucfirst($res['created_date']); ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(1,2))) { ?>
                       <td>
 
                         <form method="post" onsubmit="return confirm('Are You Sure?');">

@@ -59,14 +59,14 @@
                     <td><?php echo ucwords($res['first_name'] . ' ' . $res['last_name']); ?></td>
                     <td><?php echo strtoupper($res['gender']); ?></td>
                     <td><?php echo $res['contact_no']; ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
-                          <?php if ($_SESSION['user']->access_id == 2) { ?>
+                          <?php if ($_SESSION['user']->access_id == 2  || $_SESSION['user']->access_id == 1) { ?>
                             <a href="edit_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                           <?php } ?>
                           <?php if ($_SESSION['user']->access_id == 1) { ?>
-                            <a href="view_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
+                            <!-- <a href="view_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a> -->
                           <?php } ?>
                           <?php if (empty($res['verified'])) { ?>
                             <?php if ($_SESSION['user']->access_id == 2) { ?>
@@ -132,7 +132,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: '<i class="fa fa-user-plus"></i> Add Client',
           action: function(e, dt, node, config) {

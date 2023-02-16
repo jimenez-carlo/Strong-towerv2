@@ -22,7 +22,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-box"></i> Inventory</h1>
+            <h1 class="m-0"><i class="fa fa-box"></i> Inventory Supplement</h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
@@ -36,13 +36,14 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_supplements where deleted_flag = 0") as $res) { ?>
+                <?php $where = ($_SESSION['user']->access_id == 1) ? "" : " and  branch_id = " . $_SESSION['user']->branch_id  ?>
+                <?php foreach (get_list("select * from tbl_supplements where deleted_flag = 0 $where") as $res) { ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo $res['qty'] ?></td>
                     <td class="text-right"><?php echo number_format($res['price'], 2); ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(1,2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <div class="input-group mb-3">

@@ -35,17 +35,18 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_plan where deleted_flag = 0") as $res) { ?>
+                <?php $where = ($_SESSION['user']->access_id == 1) ? "" : " and  branch_id = " . $_SESSION['user']->branch_id  ?>
+                <?php foreach (get_list("select * from tbl_plan where deleted_flag = 0 $where") as $res) { ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo number_format($res['per_month'], 2); ?></td>
                     <td><?php echo $res['description']; ?></td>
                     <!-- <td><?php echo number_format($res['per_session'], 2); ?></td> -->
-                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
-                          <?php if ($_SESSION['user']->access_id == 2) { ?>
+                          <?php if ($_SESSION['user']->access_id == 2 || $_SESSION['user']->access_id == 1) { ?>
                             <a href="edit_membership_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                           <?php } else { ?>
                             <a href="view_membership_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
@@ -103,7 +104,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: '<i class="fa fa-plus"></i> New Membership Plan',
           action: function(e, dt, node, config) {

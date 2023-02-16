@@ -22,7 +22,8 @@
           return message_error("Please Fill Blank Fields!");
         }
 
-        $check_supplement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_supplements b where b.name ='$supplement' and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_supplement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_supplements b where b.name ='$supplement' and b.deleted_flag = 0  and b.branch_id = '$branch_id' limit 1");
 
         if (!empty($check_supplement_name->res)) {
           $_SESSION['error']['supplement'] = true;
@@ -38,7 +39,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../supplements/' . $image_name);
         }
 
-        $id = insert_get_id("INSERT INTO tbl_supplements (`name`,`description`, price,`image`,`expiration_date`) VALUES('$supplement', '$description','$price','$image_name','$expiration')");
+        $id = insert_get_id("INSERT INTO tbl_supplements (`name`,`description`, price,`image`,`expiration_date`,`branch_id`) VALUES('$supplement', '$description','$price','$image_name','$expiration','$branch_id')");
         query("INSERT into tbl_supplement_invetory (supplement_id) values($id)");
         unset($_POST);
         return message_success("Supplement Created Successfully!", 'Successfull!');
@@ -72,6 +73,16 @@
                       <img src="../supplements/default.png" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
                       <input type="file" class="form-control" id="image" name="image" accept="image/*">
                     </div>
+                    <?php if ($_SESSION['user']->access_id == 1) { ?>
+                      <div class="form-group">
+                        <label for="">*Branch</label>
+                        <select name="branch" id="">
+                          <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                            <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    <?php } ?>
                     <div class="form-group">
                       <label for="">*Supplement Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['supplement']) ? 'is-invalid' : '' ?>" id="supplement" name="supplement" placeholder="Supplement Name" value="<?= isset($_POST['supplement']) ? $_POST['supplement'] : '' ?>">

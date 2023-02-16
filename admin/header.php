@@ -92,7 +92,7 @@ function activate2($array)
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="../profile/<?= $_SESSION['user']->picture ?>" class="img-circle elevation-2" alt="User Image" >
+            <img src="../profile/<?= $_SESSION['user']->picture ?>" class="img-circle elevation-2" alt="User Image">
             <!---style="height:50px;width:50px;border:2px solid #fff;" -->
           </div>
           <div class="info">
@@ -119,12 +119,7 @@ function activate2($array)
                 <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement", "view_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
                     <p>Supplements</p>
                   </a></li>
-                <li class="nav-item"><a href="inventory.php" class="nav-link <?= activate(array("inventory", "inventory_view")) ?>"><i class="fa fa-box nav-icon"></i>
-                    <p>Inventory</p>
-                  </a></li>
-                <li class="nav-item"><a href="orders.php" class="nav-link <?= activate(array("orders", "view_order")) ?>"><i class="fa fa-shopping-cart nav-icon"></i>
-                    <p>Orders</p>
-                  </a></li>
+
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment", "view_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
                   </a></li>
@@ -142,7 +137,7 @@ function activate2($array)
                   </a></li>
 
                 <li class="nav-item">
-                  <a href="#" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>">
+                  <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle"></i>
                     <p>
                       Walkin
@@ -153,15 +148,15 @@ function activate2($array)
                     <li class="nav-item">
                       <a href="walkin.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Workout</p>
+                        <p>Per Session</p>
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                       <a href="orders.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Orders</p>
                       </a>
-                    </li>
+                    </li> -->
 
                   </ul>
                 </li>
@@ -193,9 +188,6 @@ function activate2($array)
                 <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
                     <p>Supplements</p>
                   </a></li>
-                <li class="nav-item"><a href="inventory.php" class="nav-link <?= activate(array("inventory", "inventory_view")) ?>"><i class="fa fa-box nav-icon"></i>
-                    <p>Inventory</p>
-                  </a></li>
 
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
@@ -214,31 +206,31 @@ function activate2($array)
                   </a></li>
 
                 <li class="nav-item">
-                  <a href="#" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>">
+                  <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle"></i>
                     <p>
-                      Walkin
+                      Inventory
                       <i class="fas fa-angle-left right"></i>
                     </p>
                   </a>
                   <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                      <a href="walkin.php" class="nav-link">
+                      <a href="inventory.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Workout</p>
+                        <p>Supplements</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="orders.php" class="nav-link">
+                      <a href="inventory2.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Orders</p>
+                        <p>Equipements</p>
                       </a>
                     </li>
                   </ul>
                 </li>
 
                 <li class="nav-item">
-                  <a href="#" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>">
+                  <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle"></i>
                     <p>
                       Walkin
@@ -249,15 +241,15 @@ function activate2($array)
                     <li class="nav-item">
                       <a href="walkin.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Workout</p>
+                        <p>Per Session</p>
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                       <a href="orders.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Orders</p>
                       </a>
-                    </li>
+                    </li> -->
                   </ul>
                 </li>
 
@@ -289,9 +281,6 @@ function activate2($array)
                     <p>Services</p>
                   </a></li>
 
-                <li class="nav-item"><a href="inventory.php" class="nav-link <?= activate(array("inventory", "inventory_view")) ?>"><i class="fa fa-box nav-icon"></i>
-                    <p>Inventory</p>
-                  </a></li>
 
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment", "view_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
@@ -307,7 +296,7 @@ function activate2($array)
                     <p>Client Plans</p>
                   </a></li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link <?= activate(array("walkin", "create_walkin")) ?>">
+                  <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle"></i>
                     <p>
                       Walkin
@@ -318,15 +307,15 @@ function activate2($array)
                     <li class="nav-item">
                       <a href="walkin.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Workout</p>
+                        <p>Per Session</p>
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                       <a href="orders.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Orders</p>
                       </a>
-                    </li>
+                    </li> -->
 
                   </ul>
                 </li>
