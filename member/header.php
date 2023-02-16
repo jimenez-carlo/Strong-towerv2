@@ -33,7 +33,7 @@ function activate($array)
   <link rel="stylesheet" href="../adminlte/css/admin.css">
 </head>
 <style>
-  .nav-item:hover{
+  .nav-item:hover {
     background: red;
   }
 </style>
@@ -94,7 +94,7 @@ function activate($array)
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="home.php"  class="nav-link <?= activate(array("home")) ?>">
+              <a href="home.php" class="nav-link <?= activate(array("home")) ?>">
                 <i class="fa fa-home nav-icon"></i>
                 <p>Home</p>
               </a>
@@ -133,17 +133,23 @@ function activate($array)
             <?php } ?>
 
 
-
             <li class="nav-item">
-              <a href="services.php" class="nav-link <?= activate(array("services")) ?>">
-                <i class="fa fa-handshake nav-icon"></i>
-                <p>Services</p>
+              <a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans")) ?>">
+                <i class="fa fa-clipboard nav-icon"></i>
+                <p>Membership Plans</p>
               </a>
             </li>
+
             <li class="nav-item">
               <a href="supplements.php" class="nav-link <?= activate(array("supplements")) ?>">
                 <i class="fa fa-pills nav-icon"></i>
                 <p>Supplements</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="services.php" class="nav-link <?= activate(array("services")) ?>">
+                <i class="fa fa-handshake nav-icon"></i>
+                <p>Services</p>
               </a>
             </li>
             <!-- <li class="nav-item">
@@ -158,12 +164,6 @@ function activate($array)
                 <p>Orders</p>
               </a>
             </li> -->
-            <li class="nav-item">
-              <a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans")) ?>">
-                <i class="fa fa-clipboard nav-icon"></i>
-                <p>Membership Plans</p>
-              </a>
-            </li>
 
             <li class="nav-item">
               <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
