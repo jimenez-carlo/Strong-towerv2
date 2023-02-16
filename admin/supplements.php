@@ -34,7 +34,8 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_supplements where deleted_flag = 0") as $res) { ?>
+                <?php $where = ($_SESSION['user']->access_id == 1) ? "" : " and  branch_id = " . $_SESSION['user']->branch_id  ?>
+                <?php foreach (get_list("select * from tbl_supplements where deleted_flag = 0 $where") as $res) { ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><img src="../supplements/<?php echo $res['image']; ?>" style="width:100px;height:100px;object-fit:contain"></td>
@@ -42,7 +43,7 @@
                     <td><?php echo date_format(date_create($res['expiration_date']), "D, d M Y"); ?></td>
                     <td class="text-right"><?php echo date($res['price']); ?></td>
                     <td><?php echo $res['description']; ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(1,2))) { ?>
                       <td style="min-width:140px">
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_supplement.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
@@ -100,7 +101,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: '<i class="fa fa-user-plus"></i> Add Supplement',
           action: function(e, dt, node, config) {

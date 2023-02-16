@@ -56,26 +56,7 @@ per branch
   -list
   -create
   -edit
--------------------------------------
-
-
-date format
- Fri, 12 Apr 2013(D, d M Y)
-
-inventory
- -supplements
- -equipment
-
-per branch
 -equipments
-  -list
-  -create
-  -edit
--supplements
-  -list
-  -create
-  -edit
--inventory
   -list
   -create
   -edit
@@ -91,14 +72,6 @@ per branch
   -list
   -create
   -edit
--client plans
-  -list
-  -create
-  -edit
--walkin
-  -list
-  -create
-  -edit
 -clients
   -list
   -create
@@ -107,6 +80,40 @@ per branch
   -list
   -create
   -edit
+-client plans
+  -list
+  -create
+  -edit
+-walkin
+  -list
+  -create
+  -edit
+-supplements
+  -list
+  -create
+  -edit
+-inventory
+  -list
+  -create
+  -edit
+
+
+inventory
+ -supplements
+ -equipment
+
+date format
+ Fri, 12 Apr 2013(D, d M Y)
+
+
+
+-------------------------------------
+
+
+
+
+
+
 
 
 

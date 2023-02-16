@@ -22,14 +22,15 @@
           return message_error("Please Fill Blank Fields!");
         }
 
-        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_plan b where b.name ='$name' and id <> $id  and deleted_flag = 0 limit 1");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_plan b where b.name ='$name' and id <> $id  and b.deleted_flag = 0 and b.branch_id = '$branch_id' limit 1");
 
         if (!empty($check_equipement_name->res)) {
           $_SESSION['error']['equipement'] = true;
           return message_error("Workout Name Already In-use!");
         }
 
-        query("UPDATE tbl_plan set `name` = '$name', `description` = '$description',`monthly`='$monthly' where id = $id");
+        query("UPDATE tbl_plan set `name` = '$name', `description` = '$description',`monthly`='$monthly',`branch_id` = '$branch_id' where id = $id");
         return message_success("Workout Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -60,6 +61,16 @@
                   </div>
                   <div class="card-body">
 
+                    <?php if ($_SESSION['user']->access_id == 1) { ?>
+                      <div class="form-group">
+                        <label for="">*Branch</label>
+                        <select name="branch" id="">
+                          <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                            <option value="<?= $res['id'] ?>" <?= isset($_POST['branch']) && $_POST['branch'] == $res['id'] ? 'selected' : '' ?>><?= $res['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    <?php } ?>
                     <div class="form-group">
                       <label for="">*Plan Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Plan Name" value="<?= isset($_POST['name']) ? $_POST['name'] : $plan->name ?>">

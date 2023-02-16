@@ -22,7 +22,7 @@
           return message_error("Please Fill Blank Fields!");
         }
         $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
-        $check_category_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_category b where b.name ='$category' and id <> $id  and deleted_flag = 0 and branch_id = '$branch_id' limit 1");
+        $check_category_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_category b where b.name ='$category' and id <> $id  and b.deleted_flag = 0 and b.branch_id = '$branch_id' limit 1");
 
         if (!empty($check_category_name->res)) {
           $_SESSION['error']['category'] = true;
@@ -60,6 +60,16 @@
                   </div>
                   <div class="card-body">
 
+                    <?php if ($_SESSION['user']->access_id == 1) { ?>
+                      <div class="form-group">
+                        <label for="">*Branch</label>
+                        <select name="branch" id="">
+                          <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                            <option value="<?= $res['id'] ?>" <?= isset($_POST['branch']) && $_POST['branch'] == $res['id'] ? 'selected' : '' ?>><?= $res['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    <?php } ?>
                     <div class="form-group">
                       <label for="">*Category Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>" id="category" name="category" placeholder="Category Name" value="<?= isset($_POST['category']) ? $_POST['category'] : $category->name ?>">

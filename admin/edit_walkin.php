@@ -24,7 +24,8 @@
 
 
         $id = $_SESSION['user']->id;
-        query("UPDATE tbl_walkin set first_name='$first_name',middle_name='$middle_name',last_name='$last_name',price='$price',contact_no='$contact',`date`= '$date'  where id = $id");
+        $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
+        query("UPDATE tbl_walkin set first_name='$first_name',middle_name='$middle_name',last_name='$last_name',price='$price',contact_no='$contact',`date`= '$date',`branch_id`='$branch_id'  where id = $id");
         unset($_POST);
         return message_success("Walkin Updated Successfully!", 'Successfull!');
       }
@@ -94,6 +95,18 @@
                         </div>
                       </div>
 
+                    </div>
+                    <div class="row">
+                      <?php if ($_SESSION['user']->access_id == 1) { ?>
+                        <div class="form-group">
+                          <label for="">*Branch</label>
+                          <select name="branch" id="">
+                            <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                              <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                      <?php } ?>
                     </div>
 
                     <div class="form-group">

@@ -22,7 +22,7 @@
           return message_error("Please Fill Blank Fields!");
         }
         $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
-        $check_workout_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$name' and deleted_flag = 0  and branch_id = '$branch_id' limit 1");
+        $check_workout_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$name' and b.deleted_flag = 0  and b.branch_id = '$branch_id' limit 1");
 
         if (!empty($check_workout_name->res)) {
           $_SESSION['error']['name'] = true;
@@ -58,6 +58,16 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <?php if ($_SESSION['user']->access_id == 1) { ?>
+                      <div class="form-group">
+                        <label for="">*Branch</label>
+                        <select name="branch" id="">
+                          <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                            <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    <?php } ?>
                     <div class="form-group">
                       <label for="">*Category</label>
                       <select id="category" name="category" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>">
