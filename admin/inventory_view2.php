@@ -18,17 +18,17 @@
               <thead>
                 <tr>
                   <!-- <th>ID#</th> -->
-                  <th>Stocked Qty</th>
-                  <th>New Qty</th>
+                  <th>Add Stock</th>
+                  <th>New Stock</th>
+                  <th>Old Stock</th>
                   <th>Date Created</th>
-
                 </tr>
-              </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_equipment_inventory where equipment_id = " . $_GET['id']) as $res) { ?>
+                <?php foreach (get_list("select i.* from tbl_equipment_inventory i inner join tbl_equipment s on s.id= i.equipment_id where i.equipment_id = " . $_GET['id'] . " order by i.date_created desc") as $res) { ?>
                   <tr>
                     <td><?php echo $res['qty'] ?></td>
                     <td><?php echo $res['original_qty'] + $res['qty'] ?></td>
+                    <td><?php echo $res['original_qty']  ?></td>
                     <td><?php echo date_format(date_create($res['date_created']), "D, d M Y"); ?></td>
 
                   </tr>

@@ -18,18 +18,21 @@
               <thead>
                 <tr>
                   <!-- <th>ID#</th> -->
-                  <th>Stocked Qty</th>
-                  <th>New Qty</th>
+                  <th>Add Stock</th>
+                  <th>New Stock</th>
+                  <th>Old Stock</th>
                   <th>Date Created</th>
-
+                  <th>Expiration Date</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_supplement_inventory where supplement_id = " . $_GET['id']) as $res) { ?>
+                <?php foreach (get_list("select s.expiration_date,i.* from tbl_supplement_inventory i inner join tbl_supplements s on s.id= i.supplement_id where i.supplement_id = " . $_GET['id'] . " order by i.date_created desc") as $res) { ?>
                   <tr>
                     <td><?php echo $res['qty'] ?></td>
                     <td><?php echo $res['original_qty'] + $res['qty'] ?></td>
+                    <td><?php echo $res['original_qty']  ?></td>
                     <td><?php echo date_format(date_create($res['date_created']), "D, d M Y"); ?></td>
+                    <td><?php echo date_format(date_create($res['expiration_date']), "D, d M Y"); ?></td>
 
                   </tr>
                 <?php } ?>
