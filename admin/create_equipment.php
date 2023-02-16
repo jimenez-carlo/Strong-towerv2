@@ -39,8 +39,13 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../equipments/' . $image_name);
         }
 
-        $id = insert_get_id("INSERT INTO tbl_equipment (`name`,`reason`,`description`,`image`,`enabled`,`branch_id`) VALUES('$name','$reason','$description','$image_name','$enabled', '$branch_id')");
-        query("INSERT into tbl_equipment_inventory (equipment_id) values($id)");
+        try {
+          //code...
+          $id = insert_get_id("INSERT INTO tbl_equipment (`name`,`reason`,`description`,`image`,`enabled`,`branch_id`) VALUES('$name','$reason','$description','$image_name','$enabled', '$branch_id')");
+          query("INSERT into tbl_equipment_inventory (equipment_id) values($id)");
+        } catch (\Throwable $th) {
+          //throw $th;
+        }
         unset($_POST);
         return message_success("Equipment Created Successfully!", 'Successfull!');
       }
