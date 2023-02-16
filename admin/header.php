@@ -113,6 +113,12 @@ function activate2($array)
                 <li class="nav-item"><a href="home.php" class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
                     <p>Home</p>
                   </a></li>
+                <li class="nav-item"><a href="branches.php" class="nav-link <?= activate(array("branches", "create_branch", "edit_branch")) ?>"><i class="fa fa-store nav-icon"></i>
+                    <p>Branches</p>
+                  </a></li>
+                <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
+                    <p>Employees & Trainers (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 3 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
+                  </a></li>
                 <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service", "view_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
                     <p>Services</p>
                   </a></li>
@@ -162,12 +168,6 @@ function activate2($array)
                 </li>
                 <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
-                  </a></li>
-                <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Employees & Trainers (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 3 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
-                  </a></li>
-                <li class="nav-item"><a href="branches.php" class="nav-link <?= activate(array("branches", "create_branch", "edit_branch")) ?>"><i class="fa fa-store nav-icon"></i>
-                    <p>Branches</p>
                   </a></li>
                 <li class="nav-item">
                   <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
