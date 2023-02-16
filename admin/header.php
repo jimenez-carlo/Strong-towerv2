@@ -151,12 +151,12 @@ function activate2($array)
                         <p>Workout</p>
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                       <a href="orders.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Orders</p>
                       </a>
-                    </li>
+                    </li> -->
 
                   </ul>
                 </li>
@@ -244,12 +244,12 @@ function activate2($array)
                         <p>Workout</p>
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                       <a href="orders.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Orders</p>
                       </a>
-                    </li>
+                    </li> -->
                   </ul>
                 </li>
 
