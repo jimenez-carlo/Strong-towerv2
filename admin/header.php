@@ -119,25 +119,15 @@ function activate2($array)
                 <li class="nav-item"><a href="employees.php" class="nav-link <?= activate(array("employees", "view_employee", "create_employee", "edit_employee")) ?>"><i class="fa fa-users nav-icon"></i>
                     <p>Employees & Trainers (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 3 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
                   </a></li>
-                <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service", "view_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
-                    <p>Services</p>
+                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
+                    <?php $where = $_SESSION['user']->access_id == 1 ? '' : " and branch_id = " . $_SESSION['user']->branch_id ?>
+                    <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 $where group by verified")->pending ?? 0 ?>)</p>
                   </a></li>
-                <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement", "view_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
-                    <p>Supplements</p>
-                  </a></li>
-
-                <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment", "view_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
-                    <p>Equipments</p>
-                  </a></li>
-
-                <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout", "view_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
-                    <p>Workouts</p>
-                  </a></li> -->
-                <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan", "view_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
-                    <p>Membership Plans</p>
-                  </a></li>
-                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan", "view_my_client")) ?>"><i class="fa fa-clipboard nav-icon"></i>
+                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
+                  </a></li>
+                <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
+                    <p>Membership Plans</p>
                   </a></li>
 
                 <li class="nav-item">
@@ -161,44 +151,13 @@ function activate2($array)
                         <p>Orders</p>
                       </a>
                     </li> -->
-
                   </ul>
                 </li>
-                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 group by verified")->pending ?? 0 ?>)</p>
-                  </a></li>
-                <li class="nav-item">
-                  <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
-                    <i class="fa fa-user nav-icon"></i>
-                    <p>My Profile</p>
-                  </a>
-                </li>
-                <?php break; ?>
-              <?php
-              case 2: ?>
-                <!-- Manager -->
-                <li class="nav-item"><a href="home.php" class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
-                    <p>Home</p>
-                  </a></li>
-                <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
-                    <p>Services</p>
-                  </a></li>
                 <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
                     <p>Supplements</p>
                   </a></li>
-
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
-                  </a></li>
-
-                <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
-                    <p>Workouts</p>
-                  </a></li> -->
-                <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
-                    <p>Membership Plans</p>
-                  </a></li>
-                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
-                    <p>Client Plans</p>
                   </a></li>
 
                 <li class="nav-item">
@@ -225,6 +184,33 @@ function activate2($array)
                   </ul>
                 </li>
 
+                <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
+                    <p>Services</p>
+                  </a></li>
+                <li class="nav-item">
+                  <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
+                    <i class="fa fa-user nav-icon"></i>
+                    <p>My Profile</p>
+                  </a>
+                </li>
+                <?php break; ?>
+              <?php
+              case 2: ?>
+                <!-- Manager -->
+                <li class="nav-item"><a href="home.php" class="nav-link btn-side <?= activate(array("home")) ?>"><i class="fa fa-home nav-icon"></i>
+                    <p>Home</p>
+                  </a></li>
+                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
+                    <?php $where = $_SESSION['user']->access_id == 1 ? '' : " and branch_id = " . $_SESSION['user']->branch_id ?>
+                    <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 $where group by verified")->pending ?? 0 ?>)</p>
+                  </a></li>
+                <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
+                    <p>Client Plans</p>
+                  </a></li>
+                <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
+                    <p>Membership Plans</p>
+                  </a></li>
+
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle"></i>
@@ -248,21 +234,58 @@ function activate2($array)
                     </li> -->
                   </ul>
                 </li>
-
-                <li class="nav-item"><a href="clients.php" class="nav-link <?= activate(array("clients", "view_client", "create_client", "edit_client")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <?php $where = $_SESSION['user']->access_id == 1 ? '' : " and branch_id = " . $_SESSION['user']->branch_id ?>
-                    <p>Clients (<?= get_one("select  count(*) as pending from tbl_user where verified = 0 and access_id = 4 and deleted_flag = 0 $where group by verified")->pending ?? 0 ?>)</p>
+                <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
+                    <p>Supplements</p>
+                  </a></li>
+                <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
+                    <p>Equipments</p>
                   </a></li>
 
-                <!-- <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Trainers</p>
-                  </a></li> -->
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                      Inventory
+                      <i class="fas fa-angle-left right"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                      <a href="inventory.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Supplements</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="inventory2.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Equipements</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
+                    <p>Services</p>
+                  </a></li>
                 <li class="nav-item">
                   <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
                     <i class="fa fa-user nav-icon"></i>
                     <p>My Profile</p>
                   </a>
                 </li>
+
+
+                <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
+                    <p>Workouts</p>
+                  </a></li> -->
+
+
+
+
+                <!-- <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
+                    <p>Trainers</p>
+                  </a></li> -->
 
 
                 <?php break; ?>

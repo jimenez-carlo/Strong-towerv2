@@ -179,7 +179,7 @@
                 <?php $ctr = 0; ?>
                 <?php foreach (get_list("SELECT * from tbl_services where deleted_flag = 0") as $res) { ?>
                   <div class="carousel-item <?= ($ctr == 0) ? 'active' : '' ?>">
-                    <img class="d-block w-100 carousel-img" src="../services/<?= $res['image'] ?>" alt="First slide">
+                    <img class="d-block w-100 carousel-img" src="../services/<?= $res['image'] ?>" alt="First slide" style="height:445px">
                     <div class="carousel-caption d-none d-md-block">
                       <h5><?= $res['name'] ?></h5>
                       <p><?= $res['description'] ?></p>
