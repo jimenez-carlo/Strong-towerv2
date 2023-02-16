@@ -38,10 +38,9 @@
           $image_name = 'image_' . date('YmdHis') . $ext;
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../equipments/' . $image_name);
         }
-
         try {
           //code...
-          $id = insert_get_id("INSERT INTO tbl_equipment (`name`,`reason`,`description`,`image`,`enabled`,`branch_id`) VALUES('$name','$reason','$description','$image_name','$enabled', '$branch_id')");
+          $id = insert_get_id("INSERT INTO tbl_equipment (`name`,`description`,`image`,`enabled`,`branch_id`) VALUES('$name','$reason','$image_name','$enabled', '$branch_id')");
           query("INSERT into tbl_equipment_inventory (equipment_id) values($id)");
         } catch (\Throwable $th) {
           //throw $th;
