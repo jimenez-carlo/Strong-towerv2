@@ -84,7 +84,7 @@
     font-size: 3.8rem;
     padding: 2rem;
     display: inline-block;
-    color: black;
+    color: white;
     border-bottom: .3rem solid white;
     margin-bottom: 2.2rem;
   }
