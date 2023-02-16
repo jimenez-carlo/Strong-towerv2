@@ -121,6 +121,12 @@ function activate($array)
                 <p>Services</p>
               </a></li>
 
+            <li class="nav-item">
+              <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
+                <i class="fa fa-user nav-icon"></i>
+                <p>My Profile</p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
