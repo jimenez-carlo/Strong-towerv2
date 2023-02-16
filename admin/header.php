@@ -148,7 +148,7 @@ function activate2($array)
                     <li class="nav-item">
                       <a href="walkin.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Workout</p>
+                        <p>Per Session</p>
                       </a>
                     </li>
                     <!-- <li class="nav-item">
@@ -241,7 +241,7 @@ function activate2($array)
                     <li class="nav-item">
                       <a href="walkin.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Workout</p>
+                        <p>Per Session</p>
                       </a>
                     </li>
                     <!-- <li class="nav-item">
@@ -307,15 +307,15 @@ function activate2($array)
                     <li class="nav-item">
                       <a href="walkin.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Workout</p>
+                        <p>Per Session</p>
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                       <a href="orders.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Orders</p>
                       </a>
-                    </li>
+                    </li> -->
 
                   </ul>
                 </li>
