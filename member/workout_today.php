@@ -92,8 +92,10 @@
                         <td><input type="hidden" name="workout_id[<?= $res['id'] ?>]" value="<?= $res['workout_id'] ?>"> <?= ucfirst($res['name']); ?></td>
                         <!-- <td><?= $res['sets'] ?></td>
                         <td><?= $res['reps'] ?></td> -->
-                        <td><input type="number" class="form-control" name="sets[<?= $res['id'] ?>]" value="<?= $res['actual_sets'] ?>" max="<?= $res['sets'] ?>"></td>
-                        <td><input type="number" class="form-control" name="reps[<?= $res['id'] ?>]" value="<?= $res['actual_reps'] ?>" max="<?= $res['reps'] ?>"></td>
+                        <td><input type="number" class="form-control" name="sets[<?= $res['id'] ?>]" value="<?= $res['sets'] ?>" max="<?= $res['sets'] ?>" disabled></td>
+                        <td><input type="number" class="form-control" name="reps[<?= $res['id'] ?>]" value="<?= $res['reps'] ?>" max="<?= $res['reps'] ?>" disabled></td>
+                        <input type="hidden" name="sets[<?= $res['id'] ?>]" value="<?= $res['sets'] ?>" max="<?= $res['sets'] ?>">
+                        <input type="hidden" name="reps[<?= $res['id'] ?>]" value="<?= $res['reps'] ?>" max="<?= $res['reps'] ?>">
                         <td>
                           <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?= $res['id']; ?>"> <i class="fa fa-times"></i> </button>
                         </td>

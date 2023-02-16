@@ -43,8 +43,6 @@
                   <thead>
                     <tr>
                       <th>Workout - Duration</th>
-                      <th style="width: 0.1%;white-space: nowrap;">Target Sets</th>
-                      <th style="width: 0.1%;white-space: nowrap;">Target Reps</th>
                       <th style="width: 0.1%;white-space: nowrap;">Actual Sets</th>
                       <th style="width: 0.1%;white-space: nowrap;">Actual Reps</th>
                     </tr>
@@ -57,8 +55,7 @@
                         <td><input type="hidden" name="workout_id[<?= $res['id'] ?>]" value="<?= $res['workout_id'] ?>"> <?= ucfirst($res['name']) . " - " . $res['duration']; ?></td>
                         <td><?= $res['sets'] ?></td>
                         <td><?= $res['reps'] ?></td>
-                        <td><?= $res['actual_sets'] ?></td>
-                        <td><?= $res['actual_reps'] ?></td>
+
                       </tr>
                     <?php } ?>
                   </tbody>
