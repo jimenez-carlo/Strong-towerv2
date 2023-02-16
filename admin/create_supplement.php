@@ -39,8 +39,14 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../supplements/' . $image_name);
         }
 
-        $id = insert_get_id("INSERT INTO tbl_supplements (`name`,`description`, price,`image`,`expiration_date`,`branch_id`) VALUES('$supplement', '$description','$price','$image_name','$expiration','$branch_id')");
-        query("INSERT into tbl_supplement_invetory (supplement_id) values($id)");
+
+        try {
+          //code...
+          $id = insert_get_id("INSERT INTO tbl_supplements (`name`,`description`, price,`image`,`expiration_date`,`branch_id`) VALUES('$supplement', '$description','$price','$image_name','$expiration','$branch_id')");
+          query("INSERT into tbl_supplement_invetory (supplement_id) values($id)");
+        } catch (\Throwable $th) {
+        }
+        //throw $th;
         unset($_POST);
         return message_success("Supplement Created Successfully!", 'Successfull!');
       }
