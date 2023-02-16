@@ -49,10 +49,10 @@
                   <th>Image</th>
                   <th>Supplement name</th>
                   <th>Price</th>
-                  <th>Actions</th>
-                  <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
+                  <!-- <th>Actions</th> -->
+                  <!-- <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <th>Actions</th>
-                  <?php } ?>
+                  <?php } ?> -->
                 </tr>
               </thead>
               <tbody>
@@ -62,7 +62,7 @@
                     <td><img src="../supplements/<?php echo $res['image']; ?>" style="width:100px;height:100px;object-fit:contain"></td>
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td class="text-right"><?php echo number_format($res['price'], 2); ?></td>
-                    <td>
+                    <!-- <td>
                       <form method="post" onsubmit="return confirm('Are You Sure?');">
                         <div class="input-group mb-3">
                           <input type="hidden" name="supplement_id" value="<?php echo $res['id'] ?>">
@@ -73,7 +73,7 @@
                           </span>
                         </div>
                       </form>
-                    </td>
+                    </td> -->
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
