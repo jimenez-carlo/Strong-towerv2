@@ -35,7 +35,7 @@
                       <td><?php echo $res['height']; ?></td>
                       <td><?php echo $res['weight']; ?></td>
                       <td><?php echo $res['result']; ?></td>
-                      <td><?php echo $res['created_date']; ?></td>
+                      <td> <?php echo date_format(date_create($res['created_date']), "D, d M Y"); ?></td>
                     </tr>
                   <?php } ?>
 
