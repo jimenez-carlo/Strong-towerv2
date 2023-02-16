@@ -40,7 +40,7 @@
         }
         try {
           //code...
-          $id = insert_get_id("INSERT INTO tbl_equipment (`name`,`description`,`image`,`enabled`,`branch_id`) VALUES('$name','$reason','$image_name','$enabled', '$branch_id')");
+          $id = insert_get_id("INSERT INTO tbl_equipment (`name`,`description`,`image`,`enabled`,`branch_id`) VALUES('$name','$description','$image_name','$enabled', '$branch_id')");
           query("INSERT into tbl_equipment_inventory (equipment_id) values($id)");
         } catch (\Throwable $th) {
           //throw $th;
@@ -91,10 +91,7 @@
                       <label for="">*Equipment Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Equipment Name" value="<?= isset($_POST['name']) ? $_POST['name'] : '' ?>">
                     </div>
-                    <div class="form-group">
-                      <label for="">*Reason</label>
-                      <input type="text" class="form-control <?= isset($_SESSION['error']['reason']) ? 'is-invalid' : '' ?>" id="reason" name="reason" placeholder="reason" value="<?= isset($_POST['reason']) ? $_POST['reason'] : '' ?>">
-                    </div>
+
 
                     <div class="form-group">
                       <label for="">*Equipment Description</label>
