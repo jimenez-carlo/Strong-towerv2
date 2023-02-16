@@ -23,24 +23,26 @@
       {
         extract($data);
         $required_fields = array('plan', 'client', 'trainer', 'expiration_date');
+
         $errors = 0;
-        foreach ($required_fields as $res) {
-          if (empty(${$res})) {
-            $_SESSION['error'][$res] = true;
-            $errors++;
-          }
-        }
-
-        if (!empty($errors)) {
-          return message_error("Please Fill Blank Fields!");
-        }
-
-        if (!isset($workout)) {
-          return message_error("No Workout Assigned Yet!");
-        }
-
-
         try {
+          foreach ($required_fields as $res) {
+            if (empty(${$res})) {
+              $_SESSION['error'][$res] = true;
+              $errors++;
+            }
+          }
+
+          if (!empty($errors)) {
+            return message_error("Please Fill Blank Fields!");
+          }
+
+          if (!isset($workout)) {
+            return message_error("No Workout Assigned Yet!");
+          }
+
+
+
           $old_client_id = get_one("SELECT id from tbl_user where client_plan_id = $id")->id;
           if ($old_client_id != $client) {
             query("UPDATE tbl_user set plan_expiration_date = null,client_plan_id = 0 where id = '$old_client_id'");
