@@ -160,10 +160,14 @@
                             <?php } ?>
                           </select>
                         </div>
+
                         <div class="form-group">
                           <label>Type</label>
-                          <input type="text" class="form-control" value="Client" disabled>
-                          <input type="hidden" id="access" name="access" value="5">
+                          <select id="access" name="access" class="form-control" disabled>
+                            <?php foreach (get_list("select * from tbl_access where id in(1,2,3,4,5) and deleted_flag = 0") as $res) { ?>
+                              <option value="<?= $res['id']; ?>" <?php echo ($user->access_id == $res['id']) ? 'selected' : ''; ?>><?= $res['name']; ?></option>
+                            <?php } ?>
+                          </select>
                         </div>
                         <div class="form-group">
                           <label>Branch</label>
