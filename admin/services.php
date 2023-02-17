@@ -43,7 +43,7 @@
                       <td style="min-width:140px">
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_service.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
-                          <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
+                          <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>
                       </td>
                     <?php } else { ?>

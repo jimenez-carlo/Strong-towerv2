@@ -133,7 +133,7 @@
 
         <div class="col-md-3">
           <label for="validationCustom01" class="form-label">Middle Name</label>
-          <input type="text" class="form-control <?= isset($_SESSION['error']['middle_name']) ? 'is-invalid' : '' ?>" name="middle_name" value="<?= isset($_POST['middle_name']) ? $_POST['middle_name'] : '' ?>">
+          <input type="text" class="form-control <?= isset($_SESSION['error']['middle_name']) ? 'is-invalid' : '' ?>" name="middle_name" placeholder="Optional" value="<?= isset($_POST['middle_name']) ? $_POST['middle_name'] : '' ?>">
           <div class="invalid-feedback">
             <?= isset($_SESSION['error']['middle_name']) ? $_SESSION['error']['middle_name'] : '' ?>
           </div>

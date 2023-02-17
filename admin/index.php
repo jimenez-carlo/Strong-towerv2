@@ -64,7 +64,7 @@ function login()
         <?php echo (isset($_POST['login'])) ? login() : '';  ?>
         <form method="post">
           <div class="input-group mb-3">
-            <input type="text" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" placeholder="Email" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+            <input type="text" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" placeholder="Username" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>

@@ -169,24 +169,28 @@
         <?php echo (isset($_POST['submit']) && $_POST['submit'] == 'trainer') ? login($_POST['submit']) : '';  ?>
         <form method="POST" class="row g-3 needs-validation" novalidate>
 
-          <label for="validationCustomUsername" class="form-label" style="text-align: left;">Email</label>
+          <!-- <label for="validationCustomUsername" class="form-label" style="text-align: left;">Email</label> -->
           <div class="input-group has-validation">
-            <span class="input-group-text" id="inputGroupPrepend">@</span>
+            <span class="input-group-text" id="inputGroupPrepend">email</span>
             <input type="email" class="form-control <?= isset($_SESSION['error']['trainer_email']) ? 'is-invalid' : '' ?>" name="trainer_email" required value="<?= isset($_POST['trainer_email']) ? $_POST['trainer_email'] : '' ?>">
             <div class="invalid-feedback">
               <?= isset($_SESSION['error']['trainer_email']) ? $_SESSION['error']['trainer_email'] : '' ?>
             </div>
           </div>
 
-          <label for="validationCustom02" class="form-label" style="text-align: left;">Password</label>
-          <input type="password" class="form-control <?= isset($_SESSION['error']['trainer_password']) ? 'is-invalid' : '' ?>" name="trainer_password" required value="<?= isset($_POST['trainer_password']) ? $_POST['trainer_password'] : '' ?>">
+          <!-- <label for="validationCustom02" class="form-label" style="text-align: left;">Password</label> -->
+          <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend">Password</span>
+          <input type="password" class="form-control <?= isset($_SESSION['error']
+          ['trainer_password']) ? 'is-invalid' : '' ?>" name="trainer_password" required value="<?= isset($_POST['trainer_password']) ? $_POST['trainer_password'] : '' ?>">
           <div class="invalid-feedback">
             <?= isset($_SESSION['error']['trainer_password']) ? $_SESSION['error']['trainer_password'] : '' ?>
           </div>
+        </div>
 
           <div class="div">
-            <button name="submit" class="btn btn-success" value="trainer">LogIn</button><br><br>
-            <a href="trainer_signup.php" type="submit" class="btn btn-success">SignUp</a>
+            <button name="submit" class="btn btn-danger" value="trainer">LogIn</button>
+            <a href="trainer_signup.php" type="submit" class="btn btn-danger">SignUp</a>
           </div>
         </form>
 
@@ -196,9 +200,9 @@
         <?php echo (isset($_POST['submit']) && $_POST['submit'] == 'member') ? login($_POST['submit']) : '';  ?>
         <form method="POST" class="row g-3 needs-validation" novalidate>
 
-          <label for="validationCustomUsername" class="form-label" style="text-align: left;">Email</label>
+          <!-- <label for="validationCustomUsername" class="form-label" style="text-align: left;">Email</label> -->
           <div class="input-group has-validation">
-            <span class="input-group-text" id="inputGroupPrepend">@</span>
+            <span class="input-group-text" id="inputGroupPrepend">email</span>
             <input type="email" class="form-control <?= isset($_SESSION['error']['member_email']) ? 'is-invalid' : '' ?>" name="member_email" required value="<?= isset($_POST['member_email']) ? $_POST['member_email'] : '' ?>">
             <div class="invalid-feedback">
               <?= isset($_SESSION['error']['member_email']) ? $_SESSION['error']['member_email'] : '' ?>
@@ -206,15 +210,18 @@
           </div>
 
 
-          <label for="validationCustom02" class="form-label" style="text-align: left;">Password</label>
+          <!-- <label for="validationCustom02" class="form-label" style="text-align: left;">Password</label> -->
+          <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend">Password</span>
           <input type="password" class="form-control <?= isset($_SESSION['error']['member_password']) ? 'is-invalid' : '' ?>" name="member_password" required value="<?= isset($_POST['member_password']) ? $_POST['member_password'] : '' ?>">
           <div class="invalid-feedback">
             <?= isset($_SESSION['error']['member_password']) ? $_SESSION['error']['member_password'] : '' ?>
           </div>
-
+        </div>
+<br><br>
           <div class="div">
-            <button name="submit" class="btn btn-success" value="member">LogIn</button><br><br>
-            <a href="member_signup.php" type="submit" class="btn btn-success">SignUp</a>
+            <button name="submit" class="btn btn-danger" value="member">LogIn</button>
+            <a href="member_signup.php" type="submit" class="btn btn-danger">SignUp</a>
           </div>
         </form>
       </div>

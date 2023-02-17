@@ -186,7 +186,7 @@
                       </div>
 
                       <div class="col-sm-3">
-
+<!-- 
                         <div class="form-group">
                           <label>*Height</label>
                           <input type="text" class="form-control <?= isset($_SESSION['error']['height']) ? 'is-invalid' : '' ?>" id="height" name="height" placeholder="height" value="<?= isset($_POST['height']) ? $_POST['height'] : $user->height ?>">
@@ -198,8 +198,7 @@
                           <input type="text" class="form-control <?= isset($_SESSION['error']['weight']) ? 'is-invalid' : '' ?>" id="weight" name="weight" placeholder="weight" value="<?= isset($_POST['weight']) ? $_POST['weight'] : $user->weight ?>">
                         </div>
                       </div>
-
-                    </div>
+                    </div> -->
                     <div class="form-group">
                       <button type="submit" class="btn btn-success float-right" name="update"><i class="fa fa-save"></i> Save Changes</button>
                     </div>

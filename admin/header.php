@@ -184,7 +184,7 @@ function activate2($array)
                   </ul>
                 </li>
 
-                <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
+                <li class="nav-item"><a href="#" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
                     <p>Services</p>
                   </a></li>
                 <li class="nav-item">

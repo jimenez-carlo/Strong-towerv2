@@ -26,7 +26,7 @@
                 <tr>
                   <!-- <th>ID#</th> -->
                   <th>Image</th>
-                  <th>Enabled/Disabled</th>
+                  <th>Status</th>
                   <th>Equipement name</th>
                   <th>Description</th>
                   <th>Actions</th>

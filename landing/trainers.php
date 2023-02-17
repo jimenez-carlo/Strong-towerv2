@@ -32,8 +32,8 @@
          height: 400px; 
      }
     img {
-        height: 286px;
-        width: 100%;
+        height: 250px;
+        width: 45px;
         object-fit: contain;
         /* background: red; */
     }
@@ -170,7 +170,7 @@
                 <div class="card">
                     <img src="images/1.jpg" class="card-img-top" alt="..." style="height:286px;width:100%;object-fit:contain;background:red">
                     <div class="card-body">
-                        <h5 class="card-title">John Doe</h5>
+                        <h5 class="card-title">Coach John Doe</h5>
                         <p class="card-text">Cardio</p>
                         <p class="card-text">09501440705</p>
                     </div>
@@ -187,7 +187,7 @@
                 <div class="card">
                     <img src="images/2.jpg" class="card-img-top" alt="..." style="height:286px;width:100%;object-fit:contain;background:red">
                     <div class="card-body">
-                        <h5 class="card-title">John Doe</h5>
+                        <h5 class="card-title">Coach Fernandez</h5>
                         <p class="card-text">Cardio</p>
                     </div>
                 </div>

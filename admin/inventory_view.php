@@ -31,7 +31,7 @@
                     <td><?php echo $res['qty'] ?></td>
                     <td><?php echo $res['original_qty'] + $res['qty'] ?></td>
                     <td><?php echo $res['original_qty']  ?></td>
-                    <td><?php echo date_format(date_create($res['date_created']), "D, d M Y"); ?></td>
+                    <td><?php echo date_format(date_create($res['date_created']), " D, d M Y"); ?></td>
                     <td><?php echo date_format(date_create($res['expiration_date']), "D, d M Y"); ?></td>
 
                   </tr>

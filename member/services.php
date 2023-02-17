@@ -41,7 +41,7 @@
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
-                          <a href="edit_service.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
+                          <a href="#" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                           <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                         </form>
                       </td>
