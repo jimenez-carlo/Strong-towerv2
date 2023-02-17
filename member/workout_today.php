@@ -87,7 +87,7 @@
                   </thead>
                   <tbody>
 
-                    <?php foreach (get_list("select w.*,w.id as workout_id,p.id,p.reps as `actual_reps`,p.sets as `actual_sets` from tbl_progress p  inner join tbl_workout  w on w.id = p.workout_id where p.plan_id = $plan_id and date = '$date_today' and p.customer_id = '$member_id' and w.branch_id=" . $_SESSION['user']->branch_id) as $res) { ?>
+                    <?php foreach (get_list("select w.*,w.id as workout_id,p.id,p.reps as `actual_reps`,p.sets as `actual_sets` from tbl_progress p  inner join tbl_workout  w on w.id = p.workout_id where p.plan_id = $plan_id and date = '$date_today' and p.customer_id = '$member_id' ") as $res) { ?>
                       <tr>
                         <td><input type="hidden" name="workout_id[<?= $res['id'] ?>]" value="<?= $res['workout_id'] ?>"> <?= ucfirst($res['name']); ?></td>
                         <!-- <td><?= $res['sets'] ?></td>
