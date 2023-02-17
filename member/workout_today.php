@@ -33,7 +33,8 @@
         $date_today = date('Y-m-d');
         $member_id = $_SESSION['user']->id;
         $plan_id = $_SESSION['user']->client_plan_id;
-        query("INSERT INTO tbl_progress (customer_id,plan_id,workout_id,date,reps,sets) VALUES('$member_id', '$plan_id','$id','$date_today',0,0)");
+        $workout = get_one("select * from tbl_workout_plan where client_plan_id = $plan_id and workout_id = $id limit 1");
+        query("INSERT INTO tbl_progress (customer_id,plan_id,workout_id,date,reps,sets) VALUES('$member_id', '$plan_id','$id','$date_today','$workout->reps','$workout->sets')");
         return message_success("Workout Added Successfully!", 'Successfull!');
       }
       ?>
@@ -53,7 +54,7 @@
           $day_id = get_one("select id from tbl_workout_day where name = '" . strtolower(date('l') . "'"))->id;
 
           if (empty($workout_today->res)) {
-            query("INSERT INTO tbl_progress (customer_id,plan_id,workout_id,reps,sets,duration,date) SELECT $member_id,$plan_id,workout_id,0,0,null,'$date_today' from tbl_workout_plan where     client_plan_id = $plan_id and day_id = '$day_id'");
+            query("INSERT INTO tbl_progress (customer_id,plan_id,workout_id,reps,sets,duration,date) SELECT $member_id,$plan_id,workout_id,reps,sets,null,'$date_today' from tbl_workout_plan where     client_plan_id = $plan_id and day_id = '$day_id'");
           }
           // print_r($plan_id);
 
@@ -86,16 +87,15 @@
                   </thead>
                   <tbody>
 
-
-                    <?php foreach (get_list("select w.*,w.id as workout_id,p.id,p.reps as `actual_reps`,p.sets as `actual_sets` from tbl_progress p  inner join tbl_workout  w on w.id = p.workout_id where p.plan_id = $plan_id and date = '$date_today' and p.customer_id = '$member_id'") as $res) { ?>
+                    <?php foreach (get_list("select w.*,w.id as workout_id,p.id,p.reps as `actual_reps`,p.sets as `actual_sets` from tbl_progress p  inner join tbl_workout  w on w.id = p.workout_id where p.plan_id = $plan_id and date = '$date_today' and p.customer_id = '$member_id' and w.branch_id=" . $_SESSION['user']->branch_id) as $res) { ?>
                       <tr>
                         <td><input type="hidden" name="workout_id[<?= $res['id'] ?>]" value="<?= $res['workout_id'] ?>"> <?= ucfirst($res['name']); ?></td>
                         <!-- <td><?= $res['sets'] ?></td>
                         <td><?= $res['reps'] ?></td> -->
-                        <td><input type="number" class="form-control" name="sets[<?= $res['id'] ?>]" value="<?= $res['sets'] ?>" max="<?= $res['sets'] ?>" disabled></td>
-                        <td><input type="number" class="form-control" name="reps[<?= $res['id'] ?>]" value="<?= $res['reps'] ?>" max="<?= $res['reps'] ?>" disabled></td>
-                        <input type="hidden" name="sets[<?= $res['id'] ?>]" value="<?= $res['sets'] ?>" max="<?= $res['sets'] ?>">
-                        <input type="hidden" name="reps[<?= $res['id'] ?>]" value="<?= $res['reps'] ?>" max="<?= $res['reps'] ?>">
+                        <td><input type="number" class="form-control" name="sets[<?= $res['id'] ?>]" value="<?= $res['actual_reps'] ?>" max="<?= $res['actual_reps'] ?>" disabled></td>
+                        <td><input type="number" class="form-control" name="reps[<?= $res['id'] ?>]" value="<?= $res['actual_sets'] ?>" max="<?= $res['actual_sets'] ?>" disabled></td>
+                        <input type="hidden" name="sets[<?= $res['id'] ?>]" value="<?= $res['actual_sets'] ?>">
+                        <input type="hidden" name="reps[<?= $res['id'] ?>]" value="<?= $res['actual_reps'] ?>">
                         <td>
                           <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?= $res['id']; ?>"> <i class="fa fa-times"></i> </button>
                         </td>
