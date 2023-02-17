@@ -261,7 +261,7 @@
 
     $(wrapper).on("click", ".btn-remove-workout", function(e) {
       e.preventDefault();
-      $(this).parent().parent().parent().parent().parent().remove();
+      $(this).parent().parent().remove();
     })
 
 
