@@ -1,0 +1,3 @@
+ALTER TABLE `strong_db`.`tbl_user_info` 
+CHANGE COLUMN `city` `city` INT(11) NULL DEFAULT 015501 ,
+CHANGE COLUMN `barangay` `barangay` INT(11) NULL DEFAULT 015501001 ;
