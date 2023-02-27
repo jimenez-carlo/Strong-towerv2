@@ -357,90 +357,6 @@ function signup($data)
         <!-- Team End -->
 
 
-        <!-- Contact Start -->
-        <div class="container pt-5" id="contact">
-            <div class="d-flex flex-column text-center mb-5">
-                <h4 class="text-primary font-weight-bold">Get In Touch</h4>
-                <h4 class="display-4 font-weight-bold">Email Us For Any Query</h4>
-            </div>
-            <div class="row px-3 pb-2">
-                <div class="col-sm-4 text-center mb-3">
-                    <i class="fa fa-2x fa-map-marker-alt mb-3 text-primary"></i>
-                    <h4 class="font-weight-bold">Address</h4>
-                    <p>3rd floor SP North Building (EastWestBank), Urdaneta, Philippines, 2400</p>
-                </div>
-                <div class="col-sm-4 text-center mb-3">
-                    <i class="fa fa-2x fa-phone-alt mb-3 text-primary"></i>
-                    <h4 class="font-weight-bold">Phone</h4>
-                    <p>+639083403181</p>
-                </div>
-                <div class="col-sm-4 text-center mb-3">
-                    <i class="far fa-2x fa-envelope mb-3 text-primary"></i>
-                    <h4 class="font-weight-bold">Email</h4>
-                    <p>strongtower@gmail.com</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 pb-5">
-                    <iframe style="width: 100%; height: 392px;" src="https://maps.google.com/maps?q=East%20West%20Bank%20-%20Urdaneta%20City&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                </div>
-                <!-- <div class="col-md-6 pb-5">
-                    <div class="contact-form">
-                        <div id="success"></div>
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                            <div class="control-group">
-                                <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <textarea class="form-control" rows="6" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div>
-                                <button class="btn btn-outline-primary" type="submit" id="sendMessageButton">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div> -->
-            </div>
-        </div>
-
-        <!-- Team Start -->
-        <div class="container pt-5 team " id="supplements">
-            <div class="d-flex flex-column text-center mb-5">
-                <h4 class="text-primary font-weight-bold">Supplements</h4>
-            </div>
-            <div class="row">
-
-                <?php foreach (get_list("SELECT * from tbl_supplements where  deleted_flag = 0 limit 4") as $res) { ?>
-                    <div class="col-lg-3 col-md-6 mb-5">
-                        <div class="card border-0 bg-secondary text-center text-white">
-                            <img class="card-img-top" src="supplements/<?= $res['image'] ?>" alt="" style="min-height: 290px;max-height: 290px;object-fit:contain">
-                            <div class="card-social d-flex align-items-center justify-content-center">
-                                <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                            <div class="card-body bg-secondary" style="min-height:277px">
-                                <h4 class="card-title text-primary"><?= $res['name'] ?></h4>
-                                <p class="card-text"><?= $res['description'] ?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-            </div>
-        </div>
-
         <!-- Team Start -->
         <div class="container pt-5 team " id="plans">
             <div class="d-flex flex-column text-center mb-5">
@@ -470,191 +386,317 @@ function signup($data)
         </div>
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <?php echo (isset($_POST['login'])) ? login($_POST) : '';  ?>
-                    <form method="post" name="landing_login">
-                        <div class="modal-body">
-                            <div id="login_result"></div>
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-user"></i></div>
-                                </div>
-                                <input type="text" class="form-control" id="inlineFormInputGroup" name="email" id="email" placeholder="Username">
-                            </div>
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-lock"></i></div>
-                                </div>
-                                <input type="password" class="form-control" id="inlineFormInputGroup" name="password" id="password" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" name="login">Submit</button>
-                        </div>
-                    </form>
-                </div>
+        <!-- Team Start -->
+        <div class="container pt-5 team " id="contact">
+            <div class="d-flex flex-column text-center mb-5">
+                <h4 class="text-primary font-weight-bold">Branches</h4>
             </div>
-        </div>
+            <div class="row">
 
-        <!-- Modal -->
-        <div class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                <?php foreach (get_list("SELECT b.*,upper(b.name) as `name`, bb.name as barangay, c.name as city from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where  b.deleted_flag = 0 limit 4") as $res) { ?>
+                    <div class="col-lg-3 col-md-6 mb-5" data-toggle="modal" data-target="#view_branch_<?= $res['id'] ?>">
+                        <div class="card border-0 bg-secondary text-center text-white">
+                            <div class="card-body bg-secondary" style="min-height:200px">
+                                <h4 class="card-title text-primary"><?= $res['name'] ?></h4>
+                                <p class="card-text"><?= $res['city'] ?><br><?= $res['barangay'] ?></p>
+                            </div>
+                        </div>
                     </div>
-                    <?php echo (isset($_POST['register'])) ? signup($_POST) : '';  ?>
-                    <form method="post" name="landing_signup" onsubmit="return confirm('Are You Sure?');">
-                        <div class="modal-body">
-                            <div id="signup_result"></div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">*Username</label>
-                                    <input type="text" class="form-control" name="username" id="inputEmail4">
+                    <div class="modal fade" id="view_branch_<?= $res['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Branch - <?= $res['name'] ?></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputPassword4">*Email</label>
-                                    <input type="email" class="form-control" name="email" id="inputPassword4">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">*Password</label>
-                                    <input type="password" class="form-control" name="password" id="inputEmail4">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputPassword4">*Re-Type Password</label>
-                                    <input type="password" class="form-control" name="re_password" id="inputPassword4">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">*First Name</label>
-                                    <input type="text" class="form-control" name="first_name" id="inputEmail4">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputPassword4">*Last Name</label>
-                                    <input type="text" class="form-control" name="last_name" id="inputPassword4">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label for="inputPassword4">*Contact No</label>
-                                    <input type="number" class="form-control" name="contact" id="inputPassword4">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Gender</label>
-                                    <select class="custom-select" name="gender" style="width: 100%;height:38px">
-                                        <?php foreach (get_list("select * from tbl_gender where deleted_flag = 0") as $res) { ?>
-                                            <option value="<?php echo $res['id']; ?>"><?php echo $res['name']; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Type</label>
-                                    <select class="custom-select" name="type" style="width: 100%;height:38px">
-                                        <?php foreach (get_list("select * from tbl_access where deleted_flag = 0 and id in(3,4) and deleted_flag = 0") as $res) { ?>
-                                            <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label for="inputEmail4">Branch</label>
-                                    <select class="custom-select" name="branch" style="width: 100%;height:38px">
-                                        <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
-                                            <option value="<?php echo $res['id']; ?>"><?php echo $res['name']; ?></option>
-                                        <?php } ?>
-                                    </select>
+                                <!-- Contact Start -->
+                                <div class="container pt-5" id="contact">
+                                    <div class="d-flex flex-column text-center mb-5">
+                                        <h4 class="text-primary font-weight-bold">Get In Touch</h4>
+                                        <h4 class="display-4 font-weight-bold">Email Us For Any Query</h4>
+                                    </div>
+                                    <div class="row px-3 pb-2">
+                                        <div class="col-sm-4 text-center mb-3">
+                                            <i class="fa fa-2x fa-map-marker-alt mb-3 text-primary"></i>
+                                            <h4 class="font-weight-bold">Address</h4>
+                                            <p><?= $res['address'] ?></p>
+                                        </div>
+                                        <div class="col-sm-4 text-center mb-3">
+                                            <i class="fa fa-2x fa-phone-alt mb-3 text-primary"></i>
+                                            <h4 class="font-weight-bold">Phone</h4>
+                                            <p><?= $res['contact_no'] ?></p>
+                                        </div>
+                                        <div class="col-sm-4 text-center mb-3">
+                                            <i class="far fa-2x fa-envelope mb-3 text-primary"></i>
+                                            <h4 class="font-weight-bold">Email</h4>
+                                            <p><?= $res['email'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 pb-5">
+                                            <iframe style="width: 100%; height: 392px;" src="<?= $res['google_map'] ?>" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                        </div>
 
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" name="register">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                <?php } ?>
             </div>
+
         </div>
+    </div>
 
-        <!-- Footer Start -->
-        <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
-            <div class="row pt-5">
-                <div class="col-lg-9 col-md-6 mb-5">
-                    <h4 class="text-primary mb-4">Get In Touch</h4>
-                    <p><i class="fa fa-map-marker-alt mr-2"></i>3rd floor SP North Building (EastWestBank), Urdaneta, Philippines, 2400</p>
-                    <p><i class="fa fa-phone-alt mr-2"></i>+639083403181</p>
-                    <p><i class="fa fa-envelope mr-2"></i>strongtower@gmail.com</p>
-                    <div class="d-flex justify-content-start mt-4">
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
 
+    <!-- Team Start -->
+    <div class="container pt-5 team " id="supplements">
+        <div class="d-flex flex-column text-center mb-5">
+            <h4 class="text-primary font-weight-bold">Supplements</h4>
+        </div>
+        <div class="row">
+
+            <?php foreach (get_list("SELECT * from tbl_supplements where  deleted_flag = 0 limit 4") as $res) { ?>
                 <div class="col-lg-3 col-md-6 mb-5">
-                    <h4 class="text-primary mb-4">Opening Hours</h4>
-                    <h5 class="text-white">Monday - Saturday</h5>
-                    <p>7 AM - 8.30 PM</p>
-                    <h5 class="text-white">Sunday</h5>
-                    <p>1 PM - 8.00 PM</p>
+                    <div class="card border-0 bg-secondary text-center text-white">
+                        <img class="card-img-top" src="supplements/<?= $res['image'] ?>" alt="" style="min-height: 290px;max-height: 290px;object-fit:contain">
+                        <div class="card-social d-flex align-items-center justify-content-center">
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                        <div class="card-body bg-secondary" style="min-height:277px">
+                            <h4 class="card-title text-primary"><?= $res['name'] ?></h4>
+                            <p class="card-text"><?= $res['description'] ?></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="container border-top border-dark pt-5">
-                <p class="m-0 text-center text-white">
-                    &copy; <a class="text-white font-weight-bold" href="#">Strong Tower Gym</a>. All Rights Reserved.</a>
-                </p>
+            <?php } ?>
+
+        </div>
+    </div>
+
+    <!-- Team Start -->
+    <div class="container pt-5 team " id="plans">
+        <div class="d-flex flex-column text-center mb-5">
+            <h4 class="text-primary font-weight-bold">Plans</h4>
+        </div>
+        <div class="row">
+
+            <?php foreach (get_list("SELECT * from tbl_plan where  deleted_flag = 0 limit 4") as $res) { ?>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <div class="card border-0 bg-secondary text-center text-white">
+                        <div class="card-social d-flex align-items-center justify-content-center">
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                        <div class="card-body bg-secondary">
+                            <h4 class="card-title text-primary"><?= $res['name'] ?></h4>
+                            <p class="card-text"><?= number_format($res['per_month'], 2) ?> <small class="text-muted">/ Monthly</small></p>
+                            <p class="card-text"><?= number_format($res['per_month'], 2) ?> <small class="text-muted">/ Walk In</small></p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php echo (isset($_POST['login'])) ? login($_POST) : '';  ?>
+                <form method="post" name="landing_login">
+                    <div class="modal-body">
+                        <div id="login_result"></div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-user"></i></div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroup" name="email" id="email" placeholder="Username">
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-lock"></i></div>
+                            </div>
+                            <input type="password" class="form-control" id="inlineFormInputGroup" name="password" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="login">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <!-- Footer End -->
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php echo (isset($_POST['register'])) ? signup($_POST) : '';  ?>
+                <form method="post" name="landing_signup" onsubmit="return confirm('Are You Sure?');">
+                    <div class="modal-body">
+                        <div id="signup_result"></div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">*Username</label>
+                                <input type="text" class="form-control" name="username" id="inputEmail4">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">*Email</label>
+                                <input type="email" class="form-control" name="email" id="inputPassword4">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">*Password</label>
+                                <input type="password" class="form-control" name="password" id="inputEmail4">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">*Re-Type Password</label>
+                                <input type="password" class="form-control" name="re_password" id="inputPassword4">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">*First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="inputEmail4">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">*Last Name</label>
+                                <input type="text" class="form-control" name="last_name" id="inputPassword4">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="inputPassword4">*Contact No</label>
+                                <input type="number" class="form-control" name="contact" id="inputPassword4">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Gender</label>
+                                <select class="custom-select" name="gender" style="width: 100%;height:38px">
+                                    <?php foreach (get_list("select * from tbl_gender where deleted_flag = 0") as $res) { ?>
+                                        <option value="<?php echo $res['id']; ?>"><?php echo $res['name']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Type</label>
+                                <select class="custom-select" name="type" style="width: 100%;height:38px">
+                                    <?php foreach (get_list("select * from tbl_access where deleted_flag = 0 and id in(3,4) and deleted_flag = 0") as $res) { ?>
+                                        <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="inputEmail4">Branch</label>
+                                <select class="custom-select" name="branch" style="width: 100%;height:38px">
+                                    <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
+                                        <option value="<?php echo $res['id']; ?>"><?php echo $res['name']; ?></option>
+                                    <?php } ?>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="register">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
+        <div class="row pt-5">
+            <div class="col-lg-9 col-md-6 mb-5">
+                <h4 class="text-primary mb-4">Get In Touch</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>3rd floor SP North Building (EastWestBank), Urdaneta, Philippines, 2400</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>+639083403181</p>
+                <p><i class="fa fa-envelope mr-2"></i>strongtower@gmail.com</p>
+                <div class="d-flex justify-content-start mt-4">
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-primary mb-4">Opening Hours</h4>
+                <h5 class="text-white">Monday - Saturday</h5>
+                <p>7 AM - 8.30 PM</p>
+                <h5 class="text-white">Sunday</h5>
+                <p>1 PM - 8.00 PM</p>
+            </div>
+        </div>
+        <div class="container border-top border-dark pt-5">
+            <p class="m-0 text-center text-white">
+                &copy; <a class="text-white font-weight-bold" href="#">Strong Tower Gym</a>. All Rights Reserved.</a>
+            </p>
+        </div>
+    </div>
+    <!-- Footer End -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-outline-primary back-to-top" id="go-up"><i class="fa fa-angle-double-up"></i></a>
-        <a href="#" class="btn btn-outline-primary back-to-top" style="margin-right:127px" data-toggle="modal" data-target="#register_modal">Register</a>
-        <a href="#" class="btn btn-outline-primary back-to-top" style="margin-right:46px" data-toggle="modal" data-target="#login_modal">Login</a>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-outline-primary back-to-top" id="go-up"><i class="fa fa-angle-double-up"></i></a>
+    <a href="#" class="btn btn-outline-primary back-to-top" style="margin-right:127px" data-toggle="modal" data-target="#register_modal">Register</a>
+    <a href="#" class="btn btn-outline-primary back-to-top" style="margin-right:46px" data-toggle="modal" data-target="#login_modal">Login</a>
 
 
-        <!-- JavaScript Libraries -->
-        <script src="landing_jquery.js"></script>
-        <script src="landing_boostrap.js"></script>
-        <script src="select2.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="landing_jquery.js"></script>
+    <script src="landing_boostrap.js"></script>
+    <script src="select2.js"></script>
 
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
 
 
-        <!-- Template Javascript -->
-        <!-- <script src="js/main.js"></script> -->
-        <script src="landing_page.js"></script>
-        <script>
-            $(document).on("change", "#city", function() {
-                let value = $(this).val();
-                $.get("../dropdown.php?city=" + value, function(result) {
-                    $("#barangay").html(result);
-                });
+    <!-- Template Javascript -->
+    <!-- <script src="js/main.js"></script> -->
+    <script src="landing_page.js"></script>
+    <script>
+        $(document).on("change", "#city", function() {
+            let value = $(this).val();
+            $.get("../dropdown.php?city=" + value, function(result) {
+                $("#barangay").html(result);
             });
-        </script>
+        });
+    </script>
 </body>
 
 </html>
