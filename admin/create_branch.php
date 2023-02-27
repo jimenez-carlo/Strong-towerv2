@@ -28,7 +28,7 @@
           $_SESSION['error']['branch'] = true;
           return message_error("Branch Name Already In-use!");
         }
-        query("INSERT INTO tbl_branch (`name`,`description`,`address`,`contact_no`,`email`,`google_map`) VALUES('$branch', '$description','$address','$contact','$email','$map')");
+        query("INSERT INTO tbl_branch (`name`,`description`,`contact_no`,`email`,`google_map`,`city`,`barangay`) VALUES('$branch', '$description','$contact','$email','$map','$city','$barangay')");
         unset($_POST);
         return message_success("Branch Created Successfully!", 'Successfull!');
       }
@@ -61,8 +61,19 @@
                       <input type="text" class="form-control <?= isset($_SESSION['error']['branch']) ? 'is-invalid' : '' ?>" id="branch" name="branch" placeholder="Branch Name" value="<?= isset($_POST['branch']) ? $_POST['branch'] : '' ?>">
                     </div>
                     <div class="form-group">
-                      <label for="">*Branch Address</label>
-                      <input type="text" class="form-control <?= isset($_SESSION['error']['address']) ? 'is-invalid' : '' ?>" id="address" name="address" placeholder="Branch Address" value="<?= isset($_POST['address']) ? $_POST['address'] : '' ?>">
+                      <label>*City & Barangay</label>
+                      <div style="display: flex;">
+                        <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
+                          <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+                            <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                          <?php } ?>
+                        </select>
+                        <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
+                          <?php foreach (get_list("select * from tbl_barangay where  city_id = 015501") as $res) { ?>
+                            <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="">*Branch Contact</label>
@@ -100,3 +111,11 @@
   <!-- /.content-wrapper -->
 </div>
 <?php include('footer.php'); ?>
+<script>
+  $(document).on("change", "#city", function() {
+    let value = $(this).val();
+    $.get("../dropdown.php?city=" + value, function(result) {
+      $("#barangay").html(result);
+    });
+  });
+</script>

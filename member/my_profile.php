@@ -1,5 +1,10 @@
 <?php include('header.php'); ?>
 <div>
+  <style>
+    #content {
+      min-height: unset !important;
+    }
+  </style>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -60,12 +65,42 @@
         //   move_uploaded_file($_FILES["image"]["tmp_name"],   '../medical_certificate/' . $medical_certificate);
         // }
 
-        query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `password` = '$new_password' where id = $id");
-        query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact',`picture`='$image_name',barangay= '$barangay', city= '$city',`weight` = '$weight',`height` ='$height' where id = $id");
+        query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `branch_id` = '$branch' where id = $id");
+        query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact',`picture`='$image_name',barangay= '$barangay', city= '$city' where id = $id");
         return message_success("Client Updated Successfully!", 'Successfull!');
+      }
+      function update_password($data)
+      {
+        extract($data);
+        $required_fields = array('password', 're_password');
+        $errors = 0;
+        foreach ($required_fields as $res) {
+          if (empty(${$res})) {
+            $_SESSION['error'][$res] = true;
+            $errors++;
+          }
+        }
+
+        if (!empty($errors)) {
+          return message_error("Please Fill Blank Fields!");
+        }
+
+        $old_password = get_one("SELECT `password` from tbl_user b where id = $id limit 1")->password;
+        $new_password = $old_password;
+        if (!empty($password) && !empty($re_password)) {
+          if ($re_password != $old_password) {
+            $_SESSION['error']['re_password'] = true;
+            return message_error("Old Password Is Wrong!");
+          }
+          $new_password = $password;
+        }
+
+        query("UPDATE tbl_user set  `password` = '$new_password' where id = $id");
+        return message_success("Client Password Changed Successfully!", 'Successfull!');
       }
       ?>
       <?php echo (isset($_POST['update'])) ? update(array_merge($_POST, $_FILES)) : '';  ?>
+      <?php echo (isset($_POST['update_password'])) ? update_password(array_merge($_POST, $_FILES)) : '';  ?>
       <?php
       $id = $_SESSION['user']->id;
       $user = get_one("SELECT tp.*,u.*,ui.*,if(u.plan_expiration_date>curdate(),u.plan_expiration_date, null )  as `plan_expiration_date`,if(u.plan_expiration_date>curdate(),u.client_plan_id, 0 )  as `client_plan_id` FROM tbl_user u inner join tbl_user_info ui on ui.id = u.id left join tbl_client_plan tc on (tc.id = u.client_plan_id and u.plan_expiration_date > curdate()) left join tbl_plan tp on tp.id = tc.plan_id where u.id = " . $id) ?>
@@ -123,8 +158,6 @@
                           <input type="text" class="form-control <?= isset($_SESSION['error']['username']) ? 'is-invalid' : '' ?>" id="username" name="username" placeholder="Username" value="<?= isset($_POST['username']) ? $_POST['username'] : $user->username ?>">
                         </div>
                         <div class="form-group">
-                          <label>*New Password</label>
-                          <input type="password" class="form-control <?= isset($_SESSION['error']['password']) ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="New Password" value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>">
                         </div>
                       </div>
                       <div class="col-sm-3">
@@ -141,8 +174,6 @@
                           <input type="email" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : $user->email ?>">
                         </div>
                         <div class="form-group">
-                          <label>*Old Password</label>
-                          <input type="password" class="form-control <?= isset($_SESSION['error']['re_password']) ? 'is-invalid' : '' ?>" id="re_password" name="re_password" placeholder="Old Password" value="<?= isset($_POST['re_password']) ? $_POST['re_password'] : '' ?>">
                         </div>
                       </div>
 
@@ -160,10 +191,14 @@
                             <?php } ?>
                           </select>
                         </div>
+
                         <div class="form-group">
                           <label>Type</label>
-                          <input type="text" class="form-control" value="Client" disabled>
-                          <input type="hidden" id="access" name="access" value="5">
+                          <select id="access" name="access" class="form-control" disabled>
+                            <?php foreach (get_list("select * from tbl_access where id in(1,2,3,4,5) and deleted_flag = 0") as $res) { ?>
+                              <option value="<?= $res['id']; ?>" <?php echo ($user->access_id == $res['id']) ? 'selected' : ''; ?>><?= $res['name']; ?></option>
+                            <?php } ?>
+                          </select>
                         </div>
                         <div class="form-group">
                           <label>Branch</label>
@@ -179,45 +214,74 @@
                           <?php } ?>
                         </div>
                       </div>
-
-
-                      <div class="col-sm-3">
-
-                      </div>
-
-                      <div class="col-sm-3">
-<!-- 
-                        <div class="form-group">
-                          <label>*Height</label>
-                          <input type="text" class="form-control <?= isset($_SESSION['error']['height']) ? 'is-invalid' : '' ?>" id="height" name="height" placeholder="height" value="<?= isset($_POST['height']) ? $_POST['height'] : $user->height ?>">
-                        </div>
-                      </div>
-                      <div class="col-sm-3">
-                        <div class="form-group">
-                          <label>*Weight</label>
-                          <input type="text" class="form-control <?= isset($_SESSION['error']['weight']) ? 'is-invalid' : '' ?>" id="weight" name="weight" placeholder="weight" value="<?= isset($_POST['weight']) ? $_POST['weight'] : $user->weight ?>">
-                        </div>
-                      </div>
-                    </div> -->
+                    </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-success float-right" name="update"><i class="fa fa-save"></i> Save Changes</button>
+                      <button type="submit" class="btn btn-dark float-right" name="update"><i class="fa fa-save"></i> Save Changes</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-      </div>
-      </section>
-      </form>
-    </div><!-- /.container-fluid -->
+          </section>
+        </form>
+      </div><!-- /.container-fluid -->
+
+      <div class="container-fluid" id="content">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1 class="m-0"><i class="fa fa-edit"></i> Change Password </h1>
+          </div><!-- /.col -->
+        </div>
+        <form method="post" onsubmit="return confirm('Are You Sure?');" enctype="multipart/form-data">
+          <input type="hidden" id="id" name="id" value="<?= $user->id ?>">
+          <section class="content">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card card-secondary">
+                  <div class="card-header">
+                    <h3 class="card-title">Client Details</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+
+                      <div class="col-sm-6">
+
+                        <div class="form-group">
+                          <label>*New Password</label>
+                          <input type="password" class="form-control <?= isset($_SESSION['error']['password']) ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="New Password" value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>" required>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+
+                        <div class="form-group">
+                          <label>*Old Password</label>
+                          <input type="password" class="form-control <?= isset($_SESSION['error']['re_password']) ? 'is-invalid' : '' ?>" id="re_password" name="re_password" placeholder="Old Password" value="<?= isset($_POST['re_password']) ? $_POST['re_password'] : '' ?>" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-dark float-right" name="update_password"><i class="fa fa-save"></i> Save Changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </form>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+
+    <!-- /.content -->
   </div>
-  <!-- /.content-header -->
-
-  <!-- Main content -->
-
-  <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+  <!-- /.content-wrapper -->
 </div>
 <script>
   inputImage = document.getElementById('image');

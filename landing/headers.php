@@ -29,73 +29,52 @@ function activate($current, $page)
 }
 
 ?>
-<style>
-    .links {
-        font-weight: bold;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    .headers {
-        width: 100%;
-        height: 50vh;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-            url(images/backgroud.jpg);
-        background-position: center;
-        background-size: cover;
-        clip-path: polygon(100% 0, 100% 91%, 47% 100%, 0 89%, 0 0);
-    }
+<head>
+    <meta charset="utf-8">
+    <title>Strong Tower Gym</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    .contents {
-        margin-top: 5%;
-        color: red;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-        font-size: 50px;
-        font-weight: bold;
-        /* text-shadow: 3px 3px 10px #fff; */
-        text-shadow: 3px 3px 10px #836d6d;
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
-    }
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    a {
-        text-decoration: none;
-    }
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
 
-    h1 {
-        font-size: 6rem;
-    }
-</style>
-
-<nav>
-    <div class="logo">STRONG<span>TOWER</span></div>
-    <div class="open"><i class="fas fa-bars"></i></div>
-    <ul class="links">
-        <li><a href="../index.php" class="<?= activate($current, "index") ?>">Home</a></li>
-        <li><a href="trainers.php" class="<?= activate($current, "trainers") ?>">Trainers</a></li>
-        <li><a href="branch.php" class="<?= activate($current, "branch") ?>">Branch</a></li>
-        <li><a href="supplement.php" class="<?= activate($current, "supplement") ?>">Supplement</a></li>
-        <!-- <li><a href="schedule.php" class="<?= activate($current, "schedule") ?>">Schedule</a></li> -->
-        <li><a href="plan.php" class="<?= activate($current, "plan") ?>">Plan</a></li>
-        <li><a href="about_us.php" class="<?= activate($current, "about_us") ?>">About</a></li>
-        <li><a href="join.php" class="<?= activate($current, "join") ?>">Login</a></li>
-        <div class="close"><i class="fas fa-times"></i></div>
-    </ul>
-</nav>
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="landing_page.css" rel="stylesheet">
+    <link href="landing_page_custom.css" rel="stylesheet">
+    <link href="select2.css" rel="stylesheet">
+</head>
 <script>
-    var mainMenu = document.querySelector('.links')
-    var openMenu = document.querySelector('.open')
-    var closeMenu = document.querySelector('.close')
-
-    openMenu.addEventListener('click', show)
-    closeMenu.addEventListener('click', close)
-
-    function show() {
-        mainMenu.style.display = 'flex'
-        mainMenu.style.right = '0'
-    }
-
-    function close() {
-        mainMenu.style.right = '-60%'
-    }
+    var base_url = "<?php echo "http://" . $_SERVER['SERVER_NAME'] . str_replace("index.php", "", strtok($_SERVER["REQUEST_URI"], '?')); ?>";
 </script>
+
+<body class="bg-white">
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0 nav-bar">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="" class="navbar-brand">
+                <h1 class="m-0 display-4 font-weight-bold text-uppercase text-white">WE CREATE<span class="text-primary">SHAPES</span></h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4 bg-secondary">
+                    <a href="#home" class="nav-item nav-link active">Home</a>
+                    <a href="#about" class="nav-item nav-link">About Us</a>
+                    <a href="#class" class="nav-item nav-link">Classes</a>
+                    <a href="#trainer" class="nav-item nav-link">Trainers</a>
+                    <a href="#contact" class="nav-item nav-link">Contact Us</a>
+                    <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#register_modal">Register</a>
+                    <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#login_modal">Login</a>
+                </div>
+            </div>
+        </nav>
+    </div>

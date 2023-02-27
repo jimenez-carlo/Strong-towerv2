@@ -24,7 +24,7 @@
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
-                  <th>ID#</th>
+                  <!-- <th>ID#</th> -->
                   <th>Branch name</th>
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <th>Actions</th>
@@ -32,10 +32,10 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                <?php foreach (get_list("select b.*,bb.name as barangay,c.name as city from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
                   <tr>
-                    <td><?php echo $res['id']; ?></td>
-                    <td><?php echo ucfirst($res['name']); ?></td>
+                    <!-- <td><?php echo $res['id']; ?></td> -->
+                    <td><?php echo strtoupper($res['name'] . ' - ' . $res['city'] . ' - ' . $res['barangay']); ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">

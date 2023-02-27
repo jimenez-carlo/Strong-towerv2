@@ -9,7 +9,7 @@
       function update($data)
       {
         extract($data);
-        $required_fields = array('workout', 'description', 'reps', 'sets', 'duration');
+        $required_fields = array('workout', 'description');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -23,7 +23,7 @@
         }
 
         $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
-        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$workout' and id <> $id  and b.deleted_flag = 0 and b.branch_id = '$branch_id' limit 1");
+        $check_equipement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_workout b where b.name ='$workout' and id <> $id  and deleted_flag = 0 and branch_id = '$branch_id' limit 1");
 
         if (!empty($check_equipement_name->res)) {
           $_SESSION['error']['equipement'] = true;

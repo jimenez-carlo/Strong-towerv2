@@ -32,7 +32,7 @@
 
         query("INSERT INTO tbl_workout (`name`,`description`,`category_id`,`branch_id`) VALUES('$name', '$description','$category', '$branch_id')");
         unset($_POST);
-        return message_success("Workout Created Successfully!", 'Successfull!');
+        return message_success("Workout Created Successfully!", 'Successfull!') . "<script>window.location = 'workouts.php'</script>";
       }
       ?>
       <?php echo (isset($_POST['create'])) ? create(array_merge($_POST, $_FILES)) : '';  ?>

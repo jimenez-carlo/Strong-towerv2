@@ -29,7 +29,7 @@
           return message_error("Branch Name Already In-use!");
         }
 
-        query("UPDATE tbl_branch set `name` = '$name', `description` = '$description',`address`='$address',`contact_no`= '$contact', `email`='$email',`google_map`='$map' where id = $id");
+        query("UPDATE tbl_branch set `name` = '$name', `description` = '$description',`barangay`='$barangay',`city`='$city',`contact_no`= '$contact', `email`='$email',`google_map`='$map' where id = $id");
         return message_success("Branch Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -63,8 +63,19 @@
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Branch Name" value="<?= isset($_POST['name']) ? $_POST['name'] : $branch->name ?>">
                     </div>
                     <div class="form-group">
-                      <label for="">*Branch Address</label>
-                      <input type="text" class="form-control <?= isset($_SESSION['error']['address']) ? 'is-invalid' : '' ?>" id="address" name="address" placeholder="Branch Address" value="<?= isset($_POST['address']) ? $_POST['address'] : $branch->address ?>">
+                      <label>*City & Barangay</label>
+                      <div style="display: flex;">
+                        <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
+                          <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+                            <option value="<?= $res['id']; ?>" <?= $branch->city == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
+                          <?php } ?>
+                        </select>
+                        <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
+                          <?php foreach (get_list("select * from tbl_barangay where city_id = " . $branch->city . "") as $res) { ?>
+                            <option value="<?= $res['id']; ?>" <?= $branch->barangay == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="">*Branch Contact</label>
@@ -102,3 +113,11 @@
   <!-- /.content-wrapper -->
 </div>
 <?php include('footer.php'); ?>
+<script>
+  $(document).on("change", "#city", function() {
+    let value = $(this).val();
+    $.get("../dropdown.php?city=" + value, function(result) {
+      $("#barangay").html(result);
+    });
+  });
+</script>

@@ -45,13 +45,14 @@
               <tbody>
                 <?php
                 $where = in_array($_SESSION['user']->access_id, array(2, 3, 4)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : "";
-                $sql = "select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id = 4 and u.deleted_flag = 0 $where ORDER BY u.created_date DESC" ;
+                $sql = "select concat(b.name ,' - ', c.name, ' - ', bb.name) as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where u.access_id = 4 and u.deleted_flag = 0 $where ORDER BY u.created_date DESC";
                 ?>
                 <?php $x = 0;
-                foreach (get_list($sql) as $res) { $x++;?>
+                foreach (get_list($sql) as $res) {
+                  $x++; ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
-                    <!-- <td><?=$x?></td> -->
+                    <!-- <td><?= $x ?></td> -->
                     <td><?php echo ucfirst($res['branch']); ?></td>
                     <td><?php echo ($res['verified']) ? 'VERIFIED' : 'PENDING'; ?></td>
                     <td><?php echo $res['username']; ?></td>
@@ -66,7 +67,7 @@
                             <a href="edit_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                           <?php } ?>
                           <?php if ($_SESSION['user']->access_id == 1) { ?>
-                            <!-- <a href="view_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a> -->
+                            <a href="view_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                           <?php } ?>
                           <?php if (empty($res['verified'])) { ?>
                             <?php if ($_SESSION['user']->access_id == 2) { ?>
@@ -132,7 +133,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: '<i class="fa fa-user-plus"></i> Add Client',
           action: function(e, dt, node, config) {

@@ -81,7 +81,7 @@ function activate($array)
             <img src="../profile/<?= $_SESSION['user']->picture ?>" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?></a>
+            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id); ?></a>
           </div>
         </div>
 
@@ -105,12 +105,12 @@ function activate($array)
             <!-- <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>" name="admin/plans"><i class="fa fa-clipboard nav-icon"></i>
                 <p>Membership Plans</p>
               </a></li> -->
-            <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
+            <!-- <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
                 <p>Categories</p>
               </a></li>
             <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
                 <p>Workouts</p>
-              </a></li>
+              </a></li> -->
             <!-- <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipements", "create_equipement", "edit_equipement")) ?>" name="admin/equipments"><i class="fa fa-dumbbell nav-icon"></i>
                 <p>Equipments</p>
               </a></li>

@@ -1,0 +1,39 @@
+*(branch user only)
+ show branch
+Walkin
+ -price = plans
+
+Profile
+ separate change password
+Customer
+ remove available workout
+Trainer
+ remove workout
+ remove category
+ edit_my_client remove duration
+
+Admin
+ Add Category
+ Add Workout
+ Branch 
+  - long address
+  - remove id
+ Clients
+ -remove add
+ -viewing
+ Client Plans 
+ -remove add 
+ -viewing
+ Walkin
+ -remove add 
+ -viewing
+
+Landing
+ old landing page
+
+
+Trainer
+edit_my_client edit bug
+
+
+ //Carousel

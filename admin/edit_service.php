@@ -74,7 +74,7 @@
                       <div class="form-group">
                         <label for="">*Branch</label>
                         <select name="branch" id="" class="form-control">
-                          <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                                                        <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
                             <option value="<?= $res['id'] ?>" <?= isset($_POST['branch']) && $_POST['branch'] == $res['id'] ? 'selected' : '' ?>><?= $res['name'] ?></option>
                           <?php } ?>
                         </select>

@@ -96,7 +96,7 @@ function activate2($array)
             <!---style="height:50px;width:50px;border:2px solid #fff;" -->
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?></a>
+            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id); ?></a>
           </div>
         </div>
 
@@ -125,6 +125,12 @@ function activate2($array)
                   </a></li>
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
+                  </a></li>
+                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
+                    <p>Categories</p>
+                  </a></li>
+                <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
+                    <p>Workouts</p>
                   </a></li>
                 <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Membership Plans</p>
@@ -184,7 +190,7 @@ function activate2($array)
                   </ul>
                 </li>
 
-                <li class="nav-item"><a href="#" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
+                <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
                     <p>Services</p>
                   </a></li>
                 <li class="nav-item">
@@ -206,6 +212,12 @@ function activate2($array)
                   </a></li>
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
+                  </a></li>
+                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
+                    <p>Categories</p>
+                  </a></li>
+                <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
+                    <p>Workouts</p>
                   </a></li>
                 <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Membership Plans</p>

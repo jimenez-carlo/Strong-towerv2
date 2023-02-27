@@ -85,7 +85,13 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">*Price</label>
-                          <input type="number" class="form-control <?= isset($_SESSION['error']['price']) ? 'is-invalid' : '' ?>" id="price" name="price" placeholder="Price" value="<?= isset($_POST['price']) ? $_POST['price'] : $walkin->price ?>">
+
+                          <select name="price" id="" class="form-control">
+                            <?php $where_branch = $_SESSION['user']->access_id == 1 ? '' : ' and branch_id = ' . $_SESSION['user']->branch_id ?>
+                            <?php foreach (get_list("select * from tbl_plan where deleted_flag = 0 $where_branch") as $res) { ?>
+                              <option value="<?= $res['per_month'] ?>" <?= $walkin->price == $res['per_month'] ? 'selected' : ''  ?>><?= $res['name'] . ' ' . number_format($res['per_month'], 2) ?></option>
+                            <?php } ?>
+                          </select>
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -101,7 +107,7 @@
                         <div class="form-group">
                           <label for="">*Branch</label>
                           <select name="branch" id="" class="form-control">
-                            <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
+                                                          <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
                               <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
                             <?php } ?>
                           </select>

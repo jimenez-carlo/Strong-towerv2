@@ -103,59 +103,12 @@
                     <?php } ?>
                   </tbody>
                 </table>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-dark float-right" name="update"><i class="fa fa-save"></i> Update</button>
-                </div>
+
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12">
-            <div class="card card-secondary">
-              <div class="card-header">
-                <h3 class="card-title">Available Workout</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
-                  <thead>
-                    <tr>
-                      <th>Workout</th>
-                      <!-- <th>Sets</th>
-                      <th>Reps</th> -->
-                      <th style="width: 0.1%;white-space: nowrap;">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    try {
-                      //code...
-                      $available_workout = get_one("SELECT group_concat(workout_id) as workout_ids from tbl_progress p where p.plan_id = $plan_id and date = '$date_today' group by p.plan_id");
-                      $not_in = !empty($available_workout->workout_ids) ? implode("','", array_map('intval', explode(',', $available_workout->workout_ids))) : 0;
-                    } catch (\Throwable $th) {
-                      //throw $th;
-                    }
-                    ?>
-                    <?php foreach (get_list("SELECT w.* FROM tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id WHERE wp.workout_id NOT IN ('" . $not_in . "') and wp.client_plan_id = '$plan_id' and wp.day_id = $day_id ") as $res) { ?>
-                      <tr>
-                        <td><?= ucfirst($res['name']); ?></td>
-                        <!-- <td><?= $res['sets'] ?></td>
-                        <td><?= $res['reps'] ?></td> -->
-                        <td>
-                          <button type="submit" class="btn btn-sm btn-dark" name="add" value="<?= $res['id']; ?>"><i class="fa fa-plus"></i> </button>
-                        </td>
-                      </tr>
-                    <?php } ?>
 
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
         </form>
       </div><!-- /.container-fluid -->
     </div>

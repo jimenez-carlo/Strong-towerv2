@@ -14,7 +14,10 @@ function escape_data($data = array())
     return $data;
   }
 }
-
+function get_access($id)
+{
+  return get_one("select name from tbl_branch where id = " . $id)->name;
+}
 function get_list($sql)
 {
   $data = array();

@@ -57,17 +57,17 @@
                       </button>
                     </div>
                   </div>
-                  <?php if ($_SESSION['user']->access_id == 1) { ?>
-                    <div class="form-group">
-                      <label for="">*Branch</label>
-                      <select name="branch" id="" class="form-control">
-                        <?php foreach (get_list("select * from tbl_branch where deleted_flag = 0") as $res) { ?>
-                          <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                  <?php } ?>
                   <div class="card-body">
+                    <?php if ($_SESSION['user']->access_id == 1) { ?>
+                      <div class="form-group">
+                        <label for="">*Branch</label>
+                        <select name="branch" id="" class="form-control">
+                                                        <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
+                            <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    <?php } ?>
                     <div class="form-group">
                       <label for="">*Category Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>" id="category" name="category" placeholder="Category Name" value="<?= isset($_POST['category']) ? $_POST['category'] : '' ?>">

@@ -1,0 +1,27 @@
+.page-item.active .page-link{
+background-color: #dc3545!important;
+    border-color: #dc3545!important;
+
+}
+
+.dataTables_filter>label{
+display: flex;
+justify-content: end;
+}
+
+label>input[type=search]{
+width: fit-content;
+}
+
+.dt-buttons{
+float:left;
+}
+.right-col{
+    margin-bottom: 3px;
+}
+
+#content{
+padding: 3em;
+    padding-top: 0px;
+    min-height: 85vh;
+}

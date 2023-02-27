@@ -56,8 +56,8 @@
           $date = $day[$key];
           $repsv = $reps[$key];
           $setsv = $sets[$key];
-          $durationv = $duration[$key];
-          query("INSERT INTO tbl_workout_plan (client_plan_id,workout_id,day_id,`reps`,`sets`,`duration`) VALUES ($id,'$res', $date,'$repsv','$setsv','$durationv')");
+          // $durationv = $duration[$key];
+          query("INSERT INTO tbl_workout_plan (client_plan_id,workout_id,day_id,`reps`,`sets`) VALUES ($id,'$res', $date,'$repsv','$setsv')");
         }
 
         return message_success("Client Workout Updated Successfully!", 'Successfull!');
@@ -132,7 +132,7 @@
                             <th>Workout</th>
                             <th>Reps</th>
                             <th>Sets</th>
-                            <th>Duration</th>
+                            <!-- <th>Duration</th> -->
                             <th>Day</th>
                             <th>Actions</th>
                           </tr>
@@ -148,7 +148,7 @@
                                 </select> </td>
                               <td style="width:50px"><input type="number" name="reps[]" class="form-control" value="<?= $res['reps'] ?>"></td>
                               <td style="width:50px"><input type="number" name="sets[]" class="form-control" value="<?= $res['sets'] ?>"></td>
-                              <td style="width:50px"><input type="text" name="duration[]" class="form-control" value="<?= $res['duration'] ?>"></td>
+                              <!-- <td style="width:50px"><input type="text" name="duration[]" class="form-control" value="<?= $res['duration'] ?>"></td> -->
                               <td><select name="day[]" class="form-control"><?php foreach (get_list("select * from tbl_workout_day ") as $subres) { ?> <option value="<?= $subres['id']; ?>" <?= ($res['day_id'] == $subres['id'] ? "selected" : "") ?>> <?= strtoupper($subres['name']); ?> </option><?php } ?> </select> </td>
                               <td><button type="button" class="btn btn-sm btn-dark btn-remove-workout"> Remove </button> <button type="button" class="btn btn-sm btn-dark btn-view"> View </button> </td>
                             </tr>
@@ -256,7 +256,7 @@
 
     $(add_button).click(function(e) {
       e.preventDefault();
-      $(wrapper).append('<tr><td><select name = "workout[]" class="form-control"><?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $res) { ?> <option value="<?= $res['id']; ?>" > <?= strtoupper($res['name']); ?> </option><?php } ?> </select> </td><td style="width:50px"><input type="number" name="reps[]" class="form-control"></td><td style="width:50px"><input type="number" name="sets[]" class="form-control"></td><td style="width:50px"><input type="text" name="duration[]" class="form-control"></td><td><select name = "day[]" class="form-control"><?php foreach (get_list("select * from tbl_workout_day") as $res) { ?> <option value="<?= $res['id']; ?>" > <?= strtoupper($res['name']); ?> </option><?php } ?> </select> </td><td><button type ="button" class="btn btn-sm btn-dark btn-remove-workout" > Remove </button> <button type="button" class="btn btn-sm btn-dark btn-view"> View </button></td></tr> ');
+      $(wrapper).append('<tr><td><select name = "workout[]" class="form-control"><?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $res) { ?> <option value="<?= $res['id']; ?>" > <?= strtoupper($res['name']); ?> </option><?php } ?> </select> </td><td style="width:50px"><input type="number" name="reps[]" class="form-control"></td><td style="width:50px"><input type="number" name="sets[]" class="form-control"></td><td><select name = "day[]" class="form-control"><?php foreach (get_list("select * from tbl_workout_day") as $res) { ?> <option value="<?= $res['id']; ?>" > <?= strtoupper($res['name']); ?> </option><?php } ?> </select> </td><td><button type ="button" class="btn btn-sm btn-dark btn-remove-workout" > Remove </button> <button type="button" class="btn btn-sm btn-dark btn-view"> View </button></td></tr> ');
     });
 
     $(wrapper).on("click", ".btn-remove-workout", function(e) {

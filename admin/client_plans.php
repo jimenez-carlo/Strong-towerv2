@@ -37,7 +37,7 @@
               </thead>
               <tbody>
                 <?php $where = in_array($_SESSION['user']->access_id, array(2, 3, 4)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : ""; ?>
-                <?php foreach (get_list("select tp.name as 'plan',b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.*,ui2.first_name as `t_first_name`,ui2.middle_name as `t_middle_name`, ui2.last_name as `t_last_name`,tc.id, ui2.id as `trainer_id` from tbl_client_plan tc inner join tbl_user u on u.id = tc.client_id inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id inner join tbl_plan tp on tp.id = tc.plan_id  left join tbl_user_info ui2 on ui2.id = tc.trainer_id where u.access_id = 4 and tc.deleted_flag = 0 $where") as $res) { ?>
+                <?php foreach (get_list("select tp.name as 'plan',concat(b.name ,' - ', c.name, ' - ', bb.name) as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.*,ui2.first_name as `t_first_name`,ui2.middle_name as `t_middle_name`, ui2.last_name as `t_last_name`,tc.id, ui2.id as `trainer_id` from tbl_client_plan tc inner join tbl_user u on u.id = tc.client_id inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id inner join tbl_plan tp on tp.id = tc.plan_id  left join tbl_user_info ui2 on ui2.id = tc.trainer_id left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where u.access_id = 4 and tc.deleted_flag = 0 $where") as $res) { ?>
                   <!-- <td><?php echo $res['id']; ?></td> -->
                   <td><?php echo strtoupper($res['plan']); ?></td>
                   <td><?php echo ucfirst($res['branch']); ?></td>
@@ -53,7 +53,7 @@
                           <a href="edit_client_plan.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>
                         <?php } ?>
                         <?php if ($_SESSION['user']->access_id == 1) { ?>
-                          <!-- <a href="view_my_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a> -->
+                          <a href="view_my_client.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> View <i class="fa fa-eye"></i> </a>
                         <?php } ?>
                         <button type="submit" class="btn btn-sm btn-danger" name="delete" value="<?php echo $res['id']; ?>"> Delete <i class="fa fa-trash"></i> </button>
                       </form>
@@ -108,7 +108,7 @@
     "responsive": true,
     dom: '<"top"<"left-col"B><"center-col"><"right-col"f>> <"row"<"col-sm-12"tr>><"row"<"col-sm-10"li><"col-sm-2"p>>',
     buttons: [
-      <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
+      <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?> {
           className: 'btn btn-sm btn-dark',
           text: '<i class="fa fa-plus"></i> Add Client Plan',
           action: function(e, dt, node, config) {
