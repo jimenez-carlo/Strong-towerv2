@@ -82,7 +82,7 @@
                       <th style="width: 0.1%;white-space: nowrap;">Reps</th> -->
                       <th style="width: 0.1%;white-space: nowrap;">Actual Sets</th>
                       <th style="width: 0.1%;white-space: nowrap;">Actual Reps</th>
-                      <th style="width: 0.1%;white-space: nowrap;">Actions</th>
+                      <!-- <th style="width: 0.1%;white-space: nowrap;">Actions</th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -96,9 +96,9 @@
                         <td><input type="number" class="form-control" name="reps[<?= $res['id'] ?>]" value="<?= $res['actual_sets'] ?>" max="<?= $res['actual_sets'] ?>" disabled></td>
                         <input type="hidden" name="sets[<?= $res['id'] ?>]" value="<?= $res['actual_sets'] ?>">
                         <input type="hidden" name="reps[<?= $res['id'] ?>]" value="<?= $res['actual_reps'] ?>">
-                        <td>
+                        <!-- <td>
                           <button type="submit" class="btn btn-sm btn-dark" name="delete" value="<?= $res['id']; ?>"> <i class="fa fa-times"></i> </button>
-                        </td>
+                        </td> -->
                       </tr>
                     <?php } ?>
                   </tbody>
