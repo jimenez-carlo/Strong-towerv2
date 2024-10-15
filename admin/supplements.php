@@ -27,7 +27,7 @@
                   <!-- <th>ID#</th> -->
                   <th>Image</th>
                   <th>Supplement name</th>
-                  <th>Expiration Date</th>
+                  <!-- <th>Expiration Date</th> -->
                   <th>Price</th>
                   <th>Description</th>
                   <th>Actions</th>
@@ -40,10 +40,10 @@
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><img src="../supplements/<?php echo $res['image']; ?>" style="width:100px;height:100px;object-fit:contain"></td>
                     <td style="min-width: 140px;"><?php echo ucfirst($res['name']); ?></td>
-                    <td><?php echo date_format(date_create($res['expiration_date']), "D, d M Y"); ?></td>
+                    <!-- <td><?php echo date_format(date_create($res['expiration_date']), "D, d M Y"); ?></td> -->
                     <td class="text-right"><?php echo date($res['price']); ?></td>
                     <td><?php echo $res['description']; ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1,2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td style="min-width:140px">
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_supplement.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>

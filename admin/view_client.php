@@ -59,7 +59,7 @@
                           <label>Branch</label>
                           <?php if (in_array($_SESSION['user']->access_id, array(1))) { ?>
                             <select disabled id="branch" name="branch" class="form-control <?= isset($_SESSION['error']['branch']) ? 'is-invalid' : '' ?>">
-                                                            <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
+                              <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
                                 <option value="<?= $res['id']; ?>" <?= ($user->branch_id == $res['id']) ? 'selected' : ''; ?>><?= $res['name']; ?></option>
                               <?php } ?>
                             </select>
@@ -142,7 +142,7 @@
                               <?php } ?>
                             </select>
                             <select disabled id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
-                              <?php foreach (get_list("select * from tbl_barangay where city_id = " . $user->city . "") as $res) { ?>
+                              <?php foreach (get_list("select * from tbl_barangay where city_id = " . ($user->city ?? 0) . "") as $res) { ?>
                                 <option value="<?= $res['id']; ?>" <?= $user->barangay == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
                               <?php } ?>
                             </select>

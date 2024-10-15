@@ -9,7 +9,7 @@
       function create($data)
       {
         extract($data);
-        $required_fields = array('first_name', 'last_name', 'contact', 'price', 'date');
+        $required_fields = array('first_name', 'last_name', 'contact', 'price_raw', 'date');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -26,7 +26,8 @@
         $id = $_SESSION['user']->id;
         $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
 
-        query("INSERT INTO tbl_walkin (`first_name`,`middle_name`,`last_name`,`price`,`contact_no`,`created_by`,`date`,`branch_id`) VALUES('$first_name', '$middle_name','$last_name','$price','$contact','$id','$date','$branch_id')");
+        // query("INSERT INTO tbl_walkin (`first_name`,`middle_name`,`last_name`,`price`,`contact_no`,`created_by`,`date`,`branch_id`) VALUES('$first_name', '$middle_name','$last_name','$price','$contact','$id','$date','$branch_id')");
+        query("INSERT INTO tbl_walkin (`first_name`,`middle_name`,`last_name`,`price_raw`,`contact_no`,`created_by`,`date`,`branch_id`) VALUES('$first_name', '$middle_name','$last_name','$price_raw','$contact','$id','$date','$branch_id')");
         unset($_POST);
         return message_success("Walkin Created Successfully!", 'Successfull!');
       }
@@ -86,12 +87,13 @@
                           <label for="">*Price</label>
                           <!-- <input type="number" class="form-control <?= isset($_SESSION['error']['price']) ? 'is-invalid' : '' ?>" id="price" name="price" placeholder="Price" value="<?= isset($_POST['price']) ? $_POST['price'] : '' ?>"> -->
 
-                          <select name="price" id="" class="form-control">
+                          <input type="number" class="form-control <?= isset($_SESSION['error']['price_raw']) ? 'is-invalid' : '' ?>" id="price_raw" name="price_raw" placeholder="50.00" value="<?= isset($_POST['price_raw']) ? $_POST['price_raw'] : '' ?>">
+                          <!-- <select name="price" id="" class="form-control">
                             <?php $where_branch = $_SESSION['user']->access_id == 1 ? '' : ' and branch_id = ' . $_SESSION['user']->branch_id ?>
                             <?php foreach (get_list("select * from tbl_plan where deleted_flag = 0 $where_branch") as $res) { ?>
                               <option value="<?= $res['per_month'] ?>"><?= $res['name'] . ' ' . number_format($res['per_month'], 2) ?></option>
                             <?php } ?>
-                          </select>
+                          </select> -->
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -107,7 +109,7 @@
                         <div class="form-group">
                           <label for="">*Branch</label>
                           <select name="branch" id="" class="form-control">
-                                                          <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
+                            <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
                               <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
                             <?php } ?>
                           </select>

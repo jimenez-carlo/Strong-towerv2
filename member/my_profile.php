@@ -147,7 +147,7 @@
                               <?php } ?>
                             </select>
                             <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
-                              <?php foreach (get_list("select * from tbl_barangay where city_id = " . $user->city . "") as $res) { ?>
+                              <?php foreach (get_list("select * from tbl_barangay where city_id = " . ($user->city ?? 0) . "") as $res) { ?>
                                 <option value="<?= $res['id']; ?>" <?= $user->barangay == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
                               <?php } ?>
                             </select>

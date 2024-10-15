@@ -26,7 +26,7 @@
         //   return message_error("No Workout Assigned Yet!");
         // }
 
-        $plan_id = insert_get_id("INSERT INTO tbl_client_plan (`client_id`,`plan_id`,`trainer_id`,`expiration_date`) VALUES('$client', '$plan','$trainer','$expiration_date')");
+        $plan_id = insert_get_id("INSERT INTO tbl_client_plan (`client_id`,`plan_id`,`trainer_id`,`expiration_date`,`status`) VALUES('$client', '$plan','$trainer','$expiration_date', '$status')");
         query("UPDATE tbl_user set plan_expiration_date = '$expiration_date',client_plan_id ='$plan' where id = '$client'");
         // foreach ($workout as $res) {
         //   query("INSERT INTO tbl_workout_plan (client_plan_id,workout_id) VALUES ($plan_id,'$res')");
@@ -92,7 +92,7 @@
                           <select id="trainer" name="trainer" class="form-control <?= isset($_SESSION['error']['trainer']) ? 'is-invalid' : '' ?>">
                             <option value="0">NO TRAINER</option>
                             <?php foreach (get_list("select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id = 3 and u.deleted_flag = 0 $where") as $res) { ?>
-                              <option value="<?= $res['id']; ?>"><?= strtoupper($res['first_name'] . ' ' . ($res['middle_name'][0] ?? '') . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
+                              <option value="<?= $res['id']; ?>"><?= strtoupper($res['first_name'] . ' ' . (($res['middle_name'][0] ?? '') ?? '') . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
                             <?php } ?>
                           </select>
                         </div>
@@ -104,6 +104,19 @@
                         <div class="form-group">
                           <label>*Expiration Date</label>
                           <input type="date" class="form-control <?= isset($_SESSION['error']['expiration_date']) ? 'is-invalid' : '' ?>" name="expiration_date" id="expiration_date" value="<?= isset($_POST['expiration_date']) ? $_POST['expiration_date'] : '' ?>">
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label>*Paid</label>
+                          <select id="status" name="status" class="form-control <?= isset($_SESSION['error']['status']) ? 'is-invalid' : '' ?>">
+                            <option value="UNPAID" <?= isset($_POST['status']) && $_POST['status'] == 'UNPAID' ? 'selected' : '' ?>>UNPAID</option>
+                            <option value="PAID" <?= isset($_POST['status']) && $_POST['status'] == 'PAID' ? 'selected' : '' ?>>PAID</option>
+                          </select>
                         </div>
                       </div>
                     </div>

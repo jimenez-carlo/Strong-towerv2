@@ -213,7 +213,7 @@ function activate2($array)
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
-                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
+                <!-- <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
                     <p>Categories</p>
                   </a></li>
                 <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
@@ -222,7 +222,7 @@ function activate2($array)
                 <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Membership Plans</p>
                   </a></li>
-
+ -->
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle"></i>
@@ -279,6 +279,9 @@ function activate2($array)
 
                 <li class="nav-item"><a href="services.php" class="nav-link <?= activate(array("services", "create_service", "edit_service")) ?>"><i class="fa fa-handshake nav-icon"></i>
                     <p>Services</p>
+                  </a></li>
+                <li class="nav-item"><a href="buy_supplement.php" class="nav-link <?= activate(array("buy_supplement")) ?>"><i class="fa fa-usd nav-icon"></i>
+                    <p>Sell Supplement</p>
                   </a></li>
                 <li class="nav-item">
                   <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">

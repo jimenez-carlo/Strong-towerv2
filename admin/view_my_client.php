@@ -76,7 +76,7 @@
                           <label>*Client Name</label>
                           <select disabled id="client" name="client" class="form-control">
                             <?php foreach (get_list("select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id = 4 and u.deleted_flag = 0 and (u.client_plan_id = 0 OR u.plan_expiration_date > CURDATE() OR u.id = $client_id OR u.plan_expiration_date is null)") as $res) { ?>
-                              <option value="<?= $res['id']; ?>" <?php echo ($default->client_id == $res['id']) ? 'selected' : ''; ?>><?= strtoupper($res['first_name'] . ' ' . $res['middle_name'][0] . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
+                              <option value="<?= $res['id']; ?>" <?php echo ($default->client_id == $res['id']) ? 'selected' : ''; ?>><?= strtoupper($res['first_name'] . ' ' . ($res['middle_name'][0] ?? '') . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
                             <?php } ?>
                           </select>
                         </div>

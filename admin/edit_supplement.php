@@ -37,7 +37,8 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../supplements/' . $image_name);
         }
 
-        query("UPDATE tbl_supplements set `name` = '$supplement',`price`='$price', `description` = '$description',`image`='$image_name',`expiration_date`='$expiration',`branch_id`='$branch_id' where id = $id");
+        // query("UPDATE tbl_supplements set `name` = '$supplement',`price`='$price', `description` = '$description',`image`='$image_name',`expiration_date`='$expiration',`branch_id`='$branch_id' where id = $id");
+        query("UPDATE tbl_supplements set `name` = '$supplement',`price`='$price', `description` = '$description',`image`='$image_name',`branch_id`='$branch_id' where id = $id");
         return message_success("Supplement Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -76,7 +77,7 @@
                       <div class="form-group">
                         <label for="">*Branch</label>
                         <select name="branch" id="" class="form-control">
-                                                        <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
+                          <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
                             <option value="<?= $res['id'] ?>" <?= isset($_POST['branch']) && $_POST['branch'] == $res['id'] ? 'selected' : '' ?>><?= $res['name'] ?></option>
                           <?php } ?>
                         </select>
@@ -90,10 +91,10 @@
                       <label for="">*Supplement Price</label>
                       <input type="number" class="form-control <?= isset($_SESSION['error']['price']) ? 'is-invalid' : '' ?>" id="price" name="price" placeholder="Supplement Price" value="<?= isset($_POST['price']) ? $_POST['price'] : $supplement->price ?>">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="">*Supplement Expiration Date</label>
                       <input type="date" class="form-control <?= isset($_SESSION['error']['expiration']) ? 'is-invalid' : '' ?>" id="expiration" name="expiration" placeholder="Supplement Expiration Date" value="<?= isset($_POST['expiration']) ? $_POST['expiration'] : $supplement->expiration_date ?>">
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                       <label for="">Supplement Description</label>

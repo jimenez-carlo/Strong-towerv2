@@ -9,7 +9,7 @@
       function create($data)
       {
         extract($data);
-        $required_fields = array('supplement', 'price');
+        $required_fields = array('supplement_id', 'amount');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -23,40 +23,37 @@
         }
 
         $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
-        $check_supplement_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_supplements b where b.name ='$supplement' and b.deleted_flag = 0  and b.branch_id = '$branch_id' limit 1");
+        $product = get_one("SELECT b.price,b.qty from tbl_supplements b where b.id ='$supplement_id' and b.deleted_flag = 0  and b.branch_id = '$branch_id' limit 1");
 
-        if (!empty($check_supplement_name->res)) {
-          $_SESSION['error']['supplement'] = true;
-          return message_error("Supplement Name Already In-use!");
+        if (!empty($product->price) && ($product->price * $product->qty) < $amount) {
+          $_SESSION['error']['amount'] = true;
+          return message_error("Amount is less than Price(" . number_format($product->price * $product->qty, 2) . ")!");
         }
 
-
-        $image_name = 'default.png';
-
-        if ($_FILES['image']['error'] == 0) {
-          $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-          $image_name = 'image_' . date('YmdHis') . $ext;
-          move_uploaded_file($_FILES["image"]["tmp_name"],   '../supplements/' . $image_name);
+        if (!empty($product->qty) && ($qty > $product->qty)) {
+          $_SESSION['error']['qty'] = true;
+          return message_error("Total Quantity is greater than available stock(" . $product->qty . ")!");
         }
-
 
         try {
+          $change = $product->price * $product->qty - $amount;
           //code...
           // $id = insert_get_id("INSERT INTO tbl_supplements (`name`,`description`, price,`image`,`expiration_date`,`branch_id`) VALUES('$supplement', '$description','$price','$image_name','$expiration','$branch_id')");
-          $id = insert_get_id("INSERT INTO tbl_supplements (`name`,`description`, price,`image`,`branch_id`) VALUES('$supplement', '$description','$price','$image_name','$branch_id')");
-          query("INSERT into tbl_supplement_invetory (supplement_id) values($id)");
+          $id = insert_get_id("INSERT INTO tbl_supplement_sell (`supplement_id`,`qty`, amount, `change`) VALUES('$supplement_id', '$qty', '$amount','$change')");
+          query("UPDATE tbl_supplements set `qty`= qty-$qty where id = $supplement_id");
+          query("INSERT into tbl_supplement_inventory (supplement_id, original_qty, qty, created_by) values($supplement_id, $product->qty, -$qty,'" . $_SESSION['user']->id . "' )");
         } catch (\Throwable $th) {
         }
         //throw $th;
         unset($_POST);
-        return message_success("Supplement Created Successfully!", 'Successfull!');
+        return message_success("Supplement Sold Successfully!", 'Successfull!');
       }
       ?>
       <?php echo (isset($_POST['create'])) ? create(array_merge($_POST, $_FILES)) : '';  ?>
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-pills"></i> Add Supplement
+            <h1 class="m-0"><i class="fa fa-usd"></i> Sell Supplement
               <a href="supplements.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
@@ -67,7 +64,7 @@
               <div class="col-md-12">
                 <div class="card card-secondary">
                   <div class="card-header">
-                    <h3 class="card-title">Supplement Details</h3>
+                    <h3 class="card-title">Transaction Details</h3>
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -75,11 +72,6 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    <div class="form-group">
-                      <label for="">Image</label>
-                      <img src="../supplements/default.png" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
-                      <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                    </div>
                     <?php if ($_SESSION['user']->access_id == 1) { ?>
                       <div class="form-group">
                         <label for="">*Branch</label>
@@ -90,24 +82,28 @@
                         </select>
                       </div>
                     <?php } ?>
+
                     <div class="form-group">
-                      <label for="">*Supplement Name</label>
-                      <input type="text" class="form-control <?= isset($_SESSION['error']['supplement']) ? 'is-invalid' : '' ?>" id="supplement" name="supplement" placeholder="Supplement Name" value="<?= isset($_POST['supplement']) ? $_POST['supplement'] : '' ?>">
+                      <label for="">*Supplement - Price - Stock</label>
+                      <select name="supplement_id" id="" class="form-control">
+                        <?php
+                        $branch = $_SESSION['user']->branch_id == 1 ? " " : " and s.branch_id =" . $_SESSION['user']->branch_id;
+                        ?>
+                        <?php foreach (get_list("select s.* from tbl_supplements s  where s.deleted_flag = 0 $branch") as $res) { ?>
+                          <option value="<?= $res['id'] ?>"><?= $res['name'] . ' - ' . number_format($res['price'], 2) . ' - ' . $res['qty'] ?> qty</option>
+                        <?php } ?>
+                      </select>
                     </div>
                     <div class="form-group">
-                      <label for="">*Supplement Price</label>
-                      <input type="number" class="form-control <?= isset($_SESSION['error']['price']) ? 'is-invalid' : '' ?>" id="price" name="price" placeholder="Supplement Name" value="<?= isset($_POST['price']) ? $_POST['price'] : '' ?>">
-                    </div>
-                    <!-- <div class="form-group">
-                      <label for="">*Supplement Expiration Date</label>
-                      <input type="date" class="form-control <?= isset($_SESSION['error']['expiration']) ? 'is-invalid' : '' ?>" id="expiration" name="expiration" placeholder="Supplement Expiration Date" value="<?= isset($_POST['expiration']) ? $_POST['expiration'] : '' ?>">
-                    </div> -->
-                    <div class="form-group">
-                      <label for="">Supplement Description</label>
-                      <textarea class="form-control <?= isset($_SESSION['error']['description']) ? 'is-invalid' : '' ?>" rows="4" id="description" name="description" placeholder="Supplement Description"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
+                      <label for="">*Qty</label>
+                      <input type="number" required class="form-control <?= isset($_SESSION['error']['qty']) ? 'is-invalid' : '' ?>" id="qty" name="qty" placeholder="1" value="<?= isset($_POST['qty']) ? $_POST['qty'] : '' ?>">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-dark float-right" name="create"><i class="fa fa-save"></i> Add Supplement</button>
+                      <label for="">*Amount</label>
+                      <input type="number" required class="form-control <?= isset($_SESSION['error']['amount']) ? 'is-invalid' : '' ?>" id="amount" name="amount" placeholder="100.00" value="<?= isset($_POST['amount']) ? $_POST['amount'] : '' ?>">
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-dark float-right" name="create"><i class="fa fa-save"></i> Create Sale</button>
                     </div>
                   </div>
                 </div>

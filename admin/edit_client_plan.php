@@ -32,7 +32,7 @@
         if ($old_client_id != $client) {
           query("UPDATE tbl_user set plan_expiration_date = null,client_plan_id = 0 where id = '$old_client_id'");
         }
-        query("UPDATE tbl_client_plan set `client_id` = '$client', `plan_id` = '$plan',`trainer_id`='$trainer',`expiration_date`='$expiration_date' where id = $id");
+        query("UPDATE tbl_client_plan set `client_id` = '$client', `plan_id` = '$plan',`trainer_id`='$trainer',`expiration_date`='$expiration_date',`status`='$status' where id = $id");
         query("UPDATE tbl_user set plan_expiration_date = '$expiration_date',client_plan_id = $id where id = '$client'");
         // query("DELETE FROM tbl_workout_plan where client_plan_id = $id");
         // foreach ($workout as $res) {
@@ -91,7 +91,10 @@
                           <label>*Client</label>
                           <select id="client" name="client" class="form-control">
                             <?php foreach (get_list("select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id = 4 and u.deleted_flag = 0 and (u.client_plan_id = 0 OR u.plan_expiration_date > CURDATE() OR u.id = $client_id OR u.plan_expiration_date is null)") as $res) { ?>
-                              <option value="<?= $res['id']; ?>" <?php echo ($default->client_id == $res['id']) ? 'selected' : ''; ?>><?= strtoupper($res['first_name'] . ' ' . $res['middle_name'][0] . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
+                              <option value="<?= $res['id']; ?>" <?php echo ($default->client_id == $res['id']) ? 'selected' : ''; ?>>
+                                <?= strtoupper($res['first_name'] . ' 
+                                ' . ($res['middle_name'][0] ?? '') . '. ' .
+                                  $res['last_name'] . ' - ' . $res['branch']); ?></option>
                             <?php } ?>
                           </select>
                         </div>
@@ -103,10 +106,10 @@
                         <div class="form-group">
                           <label>*Trainer</label>
                           <select id="trainer" name="trainer" class="form-control">
+                            <option value="0" <?php echo ($default->trainer_id == 0) ? 'selected' : ''; ?>>NO TRAINER</option>
                             <?php foreach (get_list("select b.name as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id where u.access_id = 3 and u.deleted_flag = 0") as $res) { ?>
 
-                              <option value="0" <?php echo ($default->trainer_id == 0) ? 'selected' : ''; ?>>NO TRAINER</option>
-                              <option value="<?= $res['id']; ?>" <?php echo ($default->trainer_id == $res['id']) ? 'selected' : ''; ?>><?= strtoupper($res['first_name'] . ' ' . $res['middle_name'][0] . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
+                              <option value="<?= $res['id']; ?>" <?php echo ($default->trainer_id == $res['id']) ? 'selected' : ''; ?>><?= strtoupper($res['first_name'] . ' ' . ($res['middle_name'][0] ?? '') . '. ' . $res['last_name'] . ' - ' . $res['branch']); ?></option>
                             <?php } ?>
                           </select>
                         </div>
@@ -118,6 +121,18 @@
                         <div class="form-group">
                           <label>*Expiration Date</label>
                           <input type="date" class="form-control" name="expiration_date" id="expiration_date" value="<?= $default->expiration_date; ?>">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label>*Paid</label>
+                          <select id="status" name="status" class="form-control <?= isset($_SESSION['error']['status']) ? 'is-invalid' : '' ?>">
+                            <option value="UNPAID" <?= $default->status  == 'UNPAID' ? 'selected' : '' ?>>UNPAID</option>
+                            <option value="PAID" <?= $default->status  == 'PAID' ? 'selected' : '' ?>>PAID</option>
+                          </select>
                         </div>
                       </div>
                     </div>
