@@ -121,12 +121,12 @@ function activate($array)
               </li>
             <?php } ?>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="my_activity.php" class="nav-link <?= activate(array("my_activity", "view_activity")) ?>">
                 <i class="fa fa-calendar nav-icon"></i>
                 <p>My Activity</p>
               </a>
-            </li>
+            </li> -->
 
             <?php if (!(date('Y-m-d') > $_SESSION['user']->plan_expiration_date) && (!empty($_SESSION['user']->client_plan_id))) { ?>
               <li class="nav-item">
