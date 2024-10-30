@@ -40,8 +40,8 @@
                   <tr>
                     <td><?php echo ucfirst($res['first_name'] . ' ' . $res['last_name']); ?></td>
                     <td><?php echo ucfirst($res['contact_no']); ?></td>
-                    <!-- <td style="text-align: right;"><?php echo number_format($res['price'], 2); ?></td> -->
-                    <td style="text-align: right;"><?php echo number_format($res['price_raw'], 2); ?></td>
+                    <!-- <td style="text-align: right;"><?php echo number_format($res['price'] ?? 0, 2); ?></td> -->
+                    <td style="text-align: right;"><?php echo number_format($res['price_raw'] ?? 0, 2); ?></td>
                     <td><?php echo date_format(date_create($res['date']), "D, d M Y");   ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(2))) { ?>
                       <td>

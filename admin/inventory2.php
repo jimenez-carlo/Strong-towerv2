@@ -12,7 +12,7 @@
       {
         extract($data);
         $created_by = $_SESSION['user']->id;
-        $new_qty = $original_qty + $qty;
+        $new_qty = floatval($original_qty) + floatval($qty);
         query("UPDATE tbl_equipment set qty = $new_qty where id = $supplement_id");
         query("INSERT into tbl_equipment_inventory (equipment_id,original_qty, qty, created_by) values('$supplement_id','$original_qty','$qty', '$created_by')");
         return message_success("Stock Updated Successfully!");
@@ -41,7 +41,7 @@
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo $res['qty'] ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1,2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <div class="input-group mb-3">

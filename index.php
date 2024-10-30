@@ -126,6 +126,14 @@ function signup($data)
     <link href="landing_page_custom.css" rel="stylesheet">
     <link href="select2.css" rel="stylesheet">
 </head>
+<style>
+    .team .card:hover .card-social {
+        top: 0;
+        height: calc(100% - 100px);
+        opacity: 0;
+        background: rgba(0, 0, 0, .3)
+    }
+</style>
 
 <body class="bg-white">
     <!-- Navbar Start -->
