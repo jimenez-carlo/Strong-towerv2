@@ -10,6 +10,9 @@ function save_bmi($data)
   return message_success("BMI Recorded");
 }
 
+$customer_id = $_SESSION['user']->id;
+$a = get_one("select * from tbl_bmi_history where customer_id = '$customer_id' and created_date >= curdate()");
+$disabled = !empty($a) ? true : false;
 ?>
 <div>
   <!-- Content Wrapper. Contains page content -->
@@ -42,13 +45,13 @@ function save_bmi($data)
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label>*Height (inches)</label>
-                        <input type="number" class="form-control " id="h" name="h" placeholder="Height">
+                        <input type="number" class="form-control " id="h" name="h" placeholder="Height" <?= $disabled ? "disabled" : "" ?>>
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label>*Weight (kilogram)</label>
-                        <input type="number" class="form-control " id="w" name="w" placeholder="Weight">
+                        <input type="number" class="form-control " id="w" name="w" placeholder="Weight" <?= $disabled ? "disabled" : "" ?>>
                       </div>
                     </div>
                     <div class="col-sm-4">
@@ -61,28 +64,35 @@ function save_bmi($data)
 
                   </div>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-dark float-right" name="save"><i class="fa fa-save"></i> Save</button>
-                    <button type="button" class="btn btn-dark float-right mr-1" id="btn"><i class="fa fa-save"></i> Calculate</button>
+                    <button type="submit" class="btn btn-dark float-right" name="save" <?= $disabled ? "disabled" : "" ?>><i class="fa fa-save"></i> Save</button>
+                    <button type="button" class="btn btn-dark float-right mr-1" id="btn" <?= $disabled ? "disabled" : "" ?>><i class="fa fa-save"></i> Calculate</button>
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="col-sm-12">
               <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
                 <thead>
                   <tr>
                     <th>Height</th>
                     <th>Weight</th>
+                    <th>Progress</th>
                     <th>BMI</th>
                     <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php $customer_id = $_SESSION['user']->id;  ?>
-                  <?php foreach (get_list("SELECT * from  tbl_bmi_history where customer_id ='$customer_id' order by created_date desc") as $res) { ?>
+                  <?php foreach (
+                    get_list("SELECT *,
+    LAG(weight) OVER (ORDER BY id) AS previous_value_weight,
+    weight - LAG(weight) OVER (ORDER BY id) AS difference_weight from  tbl_bmi_history where customer_id ='$customer_id' order by created_date desc") as $res
+                  ) { ?>
                     <tr>
                       <td><?php echo $res['height']; ?></td>
                       <td><?php echo $res['weight']; ?></td>
+                      <td><?php echo $res['difference_weight'] ?? 0; ?></td>
                       <td><?php echo $res['result']; ?></td>
                       <td>
                         <?php echo date_format(date_create($res['created_date']), "D, d M Y"); ?>

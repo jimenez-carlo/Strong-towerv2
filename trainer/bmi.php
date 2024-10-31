@@ -25,15 +25,21 @@
                   <tr>
                     <th>Height</th>
                     <th>Weight</th>
+                    <th>Progress</th>
                     <th>BMI</th>
                     <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach (get_list("SELECT * from  tbl_bmi_history where customer_id ='$customer_id' order by created_date desc") as $res) { ?>
+                  <?php foreach (
+                    get_list("SELECT *,
+    LAG(weight) OVER (ORDER BY id) AS previous_value_weight,
+    weight - LAG(weight) OVER (ORDER BY id) AS difference_weight from  tbl_bmi_history where customer_id ='$customer_id' order by created_date desc") as $res
+                  ) { ?>
                     <tr>
                       <td><?php echo $res['height']; ?></td>
                       <td><?php echo $res['weight']; ?></td>
+                      <td><?php echo $res['difference_weight'] ?? 0; ?></td>
                       <td><?php echo $res['result']; ?></td>
                       <td> <?php echo date_format(date_create($res['created_date']), "D, d M Y"); ?></td>
                     </tr>

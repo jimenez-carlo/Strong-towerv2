@@ -103,7 +103,13 @@
                       <div class="col-sm-12">
                         <div class="form-group">
                           <label>*Expiration Date</label>
-                          <input type="date" class="form-control <?= isset($_SESSION['error']['expiration_date']) ? 'is-invalid' : '' ?>" name="expiration_date" id="expiration_date" value="<?= isset($_POST['expiration_date']) ? $_POST['expiration_date'] : '' ?>">
+                          <?php
+
+                          $date = new DateTime(); // Y-m-d
+                          $date->add(new DateInterval('P30D'));
+
+                          ?>
+                          <input type="date" class="form-control <?= isset($_SESSION['error']['expiration_date']) ? 'is-invalid' : '' ?>" name="expiration_date" id="expiration_date" value="<?= isset($_POST['expiration_date']) ? $_POST['expiration_date'] : $date->format('Y-m-d') ?>">
                         </div>
                       </div>
                     </div>

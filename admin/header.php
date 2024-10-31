@@ -35,6 +35,11 @@ function activate2($array)
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+  .nav-item:hover {
+    background: #dc3545;
+  }
+</style>
 
 <head>
   <meta charset="utf-8">

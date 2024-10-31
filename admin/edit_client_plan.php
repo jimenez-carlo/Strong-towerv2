@@ -121,6 +121,8 @@
                         <div class="form-group">
                           <label>*Expiration Date</label>
                           <input type="date" class="form-control" name="expiration_date" id="expiration_date" value="<?= $default->expiration_date; ?>">
+
+
                         </div>
                       </div>
                     </div>

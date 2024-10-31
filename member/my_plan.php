@@ -43,7 +43,7 @@
       }
       ?>
       <?php echo (isset($_POST['update'])) ? update($_POST) : '';  ?>
-      <?php $default = get_one("SELECT * from tbl_client_plan where client_id = " . $_SESSION['user']->id . " order by expiration_date desc limit 1 ") ?>
+      <?php $default = get_one("SELECT *,DATE_FORMAT(created_date, '%Y-%m-%d') as created_date from tbl_client_plan where client_id = " . $_SESSION['user']->id . " order by expiration_date desc limit 1 ") ?>
       <?php $client_id = $default->client_id; ?>
 
       <div class="container-fluid" id="content">
@@ -92,7 +92,7 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-6">
+                      <div class="col-sm-3">
                         <div class="form-group">
                           <label>*Plan</label>
 
@@ -104,12 +104,25 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-sm-6">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label>*Status</label>
+                          <input disabled type="text" class="form-control" name="expiration_date" id="expiration_date" value="<?= $default->status ?? 'UNPAID'; ?>">
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label>*Start Date</label>
+                          <input disabled type="date" class="form-control" name="expiration_date" id="expiration_date" value="<?= $default->created_date; ?>">
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
                         <div class="form-group">
                           <label>*Expiration Date</label>
                           <input disabled type="date" class="form-control" name="expiration_date" id="expiration_date" value="<?= $default->expiration_date; ?>">
                         </div>
                       </div>
+
                     </div>
 
 
@@ -120,18 +133,20 @@
                             <th>Workout</th>
                             <th>Reps</th>
                             <th>Sets</th>
-                            <th>Duration</th>
+                            <!-- <th>Duration</th> -->
+                            <th>Day</th>
                             <th>Description</th>
                           </tr>
                         </thead>
                         <tbody id="wrapper2">
 
-                          <?php foreach (get_list("SELECT w.*,wp.* from tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id where wp.client_plan_id = $default->id") as $res) { ?>
+                          <?php foreach (get_list("SELECT w.*,wp.*,d.name as `day` from tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id inner join tbl_workout_day d on d.id = wp.day_id where wp.client_plan_id = $default->id") as $res) { ?>
                             <tr>
                               <td><?= strtoupper($res['name']) ?></td>
                               <td><?= $res['reps'] ?></td>
                               <td><?= $res['sets'] ?></td>
-                              <td><?= $res['duration'] ?></td>
+                              <!-- <td><?= $res['duration'] ?></td> -->
+                              <td><?= $res['day'] ?></td>
                               <td><?= $res['description'] ?></td>
                             </tr>
                           <?php } ?>

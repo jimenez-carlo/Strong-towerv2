@@ -34,7 +34,7 @@ function activate($array)
 </head>
 <style>
   .nav-item:hover {
-    background: red;
+    background: #007bff;
   }
 
   body {
@@ -46,7 +46,7 @@ function activate($array)
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-danger navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-primary navbar-light">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -72,7 +72,7 @@ function activate($array)
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar elevation-4 sidebar-dark-danger">
+    <aside class="main-sidebar elevation-4 sidebar-dark-primary">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
         <img src="../adminlte/dist/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
