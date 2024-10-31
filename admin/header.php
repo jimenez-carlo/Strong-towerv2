@@ -37,7 +37,7 @@ function activate2($array)
 <html lang="en">
 <style>
   .nav-item:hover {
-    background: #dc3545;
+    background: <?= $_SESSION['user']->access_id == 2 ? "#ffc107" : "#dc3545" ?>;
   }
 </style>
 
@@ -59,7 +59,7 @@ function activate2($array)
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-danger navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-<?= $_SESSION['user']->access_id == 2 ? "warning" : "danger" ?> navbar-light">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -85,7 +85,7 @@ function activate2($array)
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar elevation-4 sidebar-dark-danger">
+    <aside class="main-sidebar elevation-4 sidebar-dark-<?= $_SESSION['user']->access_id == 2 ? "warning" : "danger" ?>">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
         <img src="../adminlte/dist/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
