@@ -32,7 +32,10 @@
 
         query("INSERT INTO tbl_workout (`name`,`description`,`category_id`,`branch_id`) VALUES('$name', '$description','$category', '$branch_id')");
         unset($_POST);
-        return message_success("Workout Created Successfully!", 'Successfull!');
+        // header('workouts.php');
+        echo '<script>window.location.href = "' . dirname((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}") . '/workouts.php";</script>';
+        // return message_success("Workout Created Successfully!", 'Successfull!');
+
       }
       ?>
       <?php echo (isset($_POST['create'])) ? create(array_merge($_POST, $_FILES)) : '';  ?>
@@ -62,7 +65,7 @@
                       <div class="form-group">
                         <label for="">*Branch</label>
                         <select name="branch" id="" class="form-control">
-                                                        <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
+                          <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
                             <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
                           <?php } ?>
                         </select>

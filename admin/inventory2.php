@@ -30,6 +30,7 @@
                 <tr>
                   <!-- <th>ID#</th> -->
                   <th>Equipement name</th>
+                  <th>Status</th>
                   <th>Stock</th>
                   <th>Actions</th>
                 </tr>
@@ -40,6 +41,7 @@
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
                     <td><?php echo ucfirst($res['name']); ?></td>
+                    <td><?php echo !empty($res['enabled']) ? "enabled" : "disabled" ?></td>
                     <td><?php echo $res['qty'] ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
