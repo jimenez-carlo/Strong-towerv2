@@ -22,14 +22,14 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-box"></i> Inventory Equipement</h1>
+            <h1 class="m-0"><i class="fa fa-dumbbell"></i> Inventory Equipment</h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
                   <!-- <th>ID#</th> -->
-                  <th>Equipement name</th>
+                  <th>Equipment name</th>
                   <th>Status</th>
                   <th>Stock</th>
                   <th>Actions</th>

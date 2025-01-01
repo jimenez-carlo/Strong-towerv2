@@ -91,7 +91,7 @@ function activate($array)
             <img src="../profile/<?= $_SESSION['user']->picture ?>" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id); ?></a>
+            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><br><?= ucfirst($_SESSION['user']->access)  ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id); ?></a>
           </div>
         </div>
 
@@ -135,6 +135,12 @@ function activate($array)
               <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
                 <i class="fa fa-user nav-icon"></i>
                 <p>My Profile</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="manage_account.php" class="nav-link <?= activate(array("manage_account")) ?>">
+                <i class="fa fa-lock nav-icon"></i>
+                <p>Manage User Account</p>
               </a>
             </li>
           </ul>

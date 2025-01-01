@@ -35,7 +35,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-edit"></i> Walkin History
+            <h1 class="m-0"><i class="fa fa-edit"></i> Edit Walkin #<?= $_GET['id'] ?>
               <a href="walkin.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
@@ -107,7 +107,7 @@
                         <div class="form-group">
                           <label for="">*Branch</label>
                           <select name="branch" id="" class="form-control" disabled>
-                            <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
+                                                          <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
                               <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
                             <?php } ?>
                           </select>
@@ -121,30 +121,6 @@
             </div>
           </section>
         </form>
-
-        <div class="col-sm-12">
-          <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
-            <thead>
-              <tr>
-                <th>Price</th>
-                <th>Date</th>
-
-              </tr>
-            </thead>
-            <tbody>
-              <?php $where = ($_SESSION['user']->access_id == 1) ? "" : " and  branch_id = " . $_SESSION['user']->branch_id  ?>
-              <?php foreach (get_list("select *, sum(price_raw) as price_raw from tbl_walkin where deleted_flag = 0 $where and first_name = '$walkin->first_name' and last_name = '$walkin->last_name'  order by created_date desc") as $res) { ?>
-                <tr>
-                  <!-- <td style="text-align: right;"><?php echo number_format($res['price'] ?? 0, 2); ?></td> -->
-                  <td style="text-align: right;"><?php echo number_format($res['price_raw'] ?? 0, 2); ?></td>
-                  <td><?php echo date_format(date_create($res['date']), "D, d M Y");   ?></td>
-
-                </tr>
-              <?php } ?>
-
-            </tbody>
-          </table>
-        </div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->

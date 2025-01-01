@@ -30,7 +30,7 @@
           return message_error("Workout Name Already In-use!");
         }
 
-        query("UPDATE tbl_workout set `name` = '$workout', `description` = '$description',category_id =  '$category',`branch_id`='$branch_id' where id = $id");
+        query("UPDATE tbl_workout set `name` = '$workout', `description` = '$description',category_id =  '$category',`branch_id`='$branch_id', body_part_id = '$body_part' where id = $id");
         return message_success("Workout Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -69,6 +69,18 @@
                         ?>
                         <?php foreach (get_list("select * from tbl_category where deleted_flag = 0 $branch") as $res) { ?>
                           <option value="<?= $res['id']; ?>" <?= ($workout->category_id == $res['id']) ? 'selected' : ''; ?>><?= $res['name']; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Body Part</label>
+
+                      <select id="body_part" name="body_part" class="form-control <?= isset($_SESSION['error']['body_part']) ? 'is-invalid' : '' ?>">
+                        <?php
+                        $branch = $_SESSION['user']->branch_id == 1 ? " " : " and branch_id =" . $_SESSION['user']->branch_id;
+                        ?>
+                        <?php foreach (get_list("select * from tbl_body_part where deleted_flag = 0 $branch") as $res) { ?>
+                          <option value="<?= $res['id']; ?>" <?= ($workout->body_part_id == $res['id']) ? 'selected' : ''; ?>><?= $res['name']; ?></option>
                         <?php } ?>
                       </select>
                     </div>

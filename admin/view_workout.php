@@ -32,6 +32,14 @@
                   <div class="card-body">
 
                     <div class="form-group">
+                      <label for="">*Body Part</label>
+                      <select disabled id="category" name="category" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>">
+                        <?php foreach (get_list("select * from tbl_body_part where deleted_flag = 0") as $res) { ?>
+                          <option value="<?= $res['id']; ?>" <?= ($workout->body_part_id == $res['id']) ? 'selected' : ''; ?>><?= $res['name']; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
                       <label for="">*Category</label>
                       <select disabled id="category" name="category" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>">
                         <?php foreach (get_list("select * from tbl_category where deleted_flag = 0") as $res) { ?>

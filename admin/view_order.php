@@ -80,19 +80,19 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="">*First Name</label>
-                      <input type="text" disabled class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipement Name" value="<?= $user->first_name ?>">
+                      <input type="text" disabled class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipment Name" value="<?= $user->first_name ?>">
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="">*Middle Name</label>
-                      <input type="text" disabled class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipement Name" value="<?= $user->middle_name ?>">
+                      <input type="text" disabled class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipment Name" value="<?= $user->middle_name ?>">
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="">*Last Name</label>
-                      <input type="text" disabled class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipement Name" value="<?= $user->last_name ?>">
+                      <input type="text" disabled class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipment Name" value="<?= $user->last_name ?>">
                     </div>
                   </div>
                 </div>

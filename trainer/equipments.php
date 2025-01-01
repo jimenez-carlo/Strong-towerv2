@@ -26,7 +26,7 @@
                 <tr>
                   <th>ID#</th>
                   <th>Image</th>
-                  <th>Equipement name</th>
+                  <th>Equipment name</th>
                   <th>Qty</th>
                   <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                     <th>Actions</th>

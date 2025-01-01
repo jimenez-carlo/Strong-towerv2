@@ -33,7 +33,7 @@ function login($data)
         return message_error("Please Fill Blank Fields!");
     }
 
-    $user = get_one("SELECT b.name as `branch`,ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_branch b on b.id = u.branch_id where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0 limit 1");
+    $user = get_one("SELECT b.name as `branch`,ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_branch b on b.id = u.branch_id left join refcitymun c on c.id = b.city where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0 and u.active_flag = 1 limit 1");
     $check_user_is_verified = get_one("SELECT if(max(u.id) is null, 0, max(u.id) + 1) as `res` from tbl_user u where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0  limit 1");
 
     if (empty($check_user_is_verified->res)) {
@@ -41,6 +41,8 @@ function login($data)
         $_SESSION['error'][$password]  = '';
         return message_error("Invalid Username/Password!");
     }
+
+
 
     if (isset($user->verified) && !empty($user->verified)) {
         remove_error();
@@ -578,7 +580,7 @@ function signup($data)
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPassword4">*Email</label>
-                                <input type="email" class="form-control" name="email" id="inputPassword4">
+                                <input type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$" class="form-control" name="email" id="inputPassword4">
                             </div>
                         </div>
                         <div class="form-row">

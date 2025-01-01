@@ -27,7 +27,7 @@
                   <!-- <th>ID#</th> -->
                   <th>Image</th>
                   <th>Status</th>
-                  <th>Equipement name</th>
+                  <th>Equipment name</th>
                   <th>Description</th>
                   <th>Actions</th>
                 </tr>
@@ -41,7 +41,7 @@
                     <td><?php echo ($res['enabled'] == 1) ? 'Enabled' : 'Disabled'; ?></td>
                     <td><?php echo ucfirst($res['name']); ?></td>
                     <td><?php echo $res['description']; ?></td>
-                    <?php if (in_array($_SESSION['user']->access_id, array(1,2))) { ?>
+                    <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
                           <a href="edit_equipment.php?id=<?= $res['id']; ?>" class="btn btn-sm btn-dark"> Edit <i class="fa fa-edit"></i> </a>

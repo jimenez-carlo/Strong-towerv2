@@ -9,7 +9,7 @@
       function create($data)
       {
         extract($data);
-        $required_fields = array('branch', 'description');
+        $required_fields = array('branch', 'description', 'province', 'city', 'barangay');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -28,7 +28,7 @@
           $_SESSION['error']['branch'] = true;
           return message_error("Branch Name Already In-use!");
         }
-        query("INSERT INTO tbl_branch (`name`,`description`,`contact_no`,`email`,`google_map`,`city`,`barangay`) VALUES('$branch', '$description','$contact','$email','$map','$city','$barangay')");
+        query("INSERT INTO tbl_branch (`name`,`description`,`contact_no`,`email`,`google_map`,`city`,`barangay`,`province`) VALUES('$branch', '$description','$contact','$email','$map','$city','$barangay','$province')");
         unset($_POST);
         return message_success("Branch Created Successfully!", 'Successfull!');
       }
@@ -37,7 +37,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-user-plus"></i> Add Branch
+            <h1 class="m-0"><i class="fa fa-store"></i> Add Branch
               <a href="branches.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
@@ -61,15 +61,20 @@
                       <input type="text" class="form-control <?= isset($_SESSION['error']['branch']) ? 'is-invalid' : '' ?>" id="branch" name="branch" placeholder="Branch Name" value="<?= isset($_POST['branch']) ? $_POST['branch'] : '' ?>">
                     </div>
                     <div class="form-group">
-                      <label>*City & Barangay</label>
+                      <label>*Address</label>
                       <div style="display: flex;">
+                        <select id="province" name="province" style="width:50%" class="form-control <?= isset($_SESSION['error']['province']) ? 'is-invalid' : '' ?>">
+                          <?php foreach (get_list("select * from refprovince") as $res) { ?>
+                            <option value="<?= $res['id']; ?>"><?= $res['provDesc']; ?></option>
+                          <?php } ?>
+                        </select>
                         <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
-                          <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+                          <?php foreach (get_list("select * from tbl_city where province_id = '0128'") as $res) { ?>
                             <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
                           <?php } ?>
                         </select>
                         <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
-                          <?php foreach (get_list("select * from tbl_barangay where  city_id = 015501") as $res) { ?>
+                          <?php foreach (get_list("select * from tbl_barangay where  city_id = 012801") as $res) { ?>
                             <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
                           <?php } ?>
                         </select>
@@ -77,7 +82,7 @@
                     </div>
                     <div class="form-group">
                       <label for="">*Branch Contact</label>
-                      <input type="text" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Branch Contact" value="<?= isset($_POST['contact']) ? $_POST['contact'] : '' ?>">
+                      <input type="number" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Branch Contact" value="<?= isset($_POST['contact']) ? $_POST['contact'] : '' ?>">
                     </div>
                     <div class="form-group">
                       <label for="">*Branch Email</label>
@@ -112,6 +117,13 @@
 </div>
 <?php include('footer.php'); ?>
 <script>
+  $(document).on("change", "#province", function() {
+    const province = $(this).val();
+    $.get("../dropdown2.php?province=" + province, function(result) {
+      $("#city").html(result).trigger("change");
+    });
+  });
+
   $(document).on("change", "#city", function() {
     let value = $(this).val();
     $.get("../dropdown.php?city=" + value, function(result) {

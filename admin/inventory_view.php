@@ -11,14 +11,14 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-box"></i> Supplement #<?php echo $_GET['id'] ?></h1>
+            <h1 class="m-0"><i class="fa fa-box"></i> Supplement
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
               <thead>
                 <tr>
                   <!-- <th>ID#</th> -->
-                  <th>Add Stock</th>
+                  <th>Available Stock</th>
                   <th>New Stock</th>
                   <th>Old Stock</th>
                   <th>Date Created</th>
@@ -28,11 +28,11 @@
               <tbody>
                 <?php foreach (get_list("select s.expiration_date,i.* from tbl_supplement_inventory i inner join tbl_supplements s on s.id= i.supplement_id where i.supplement_id = " . $_GET['id'] . " order by i.date_created desc") as $res) { ?>
                   <tr>
-                    <td><?php echo $res['qty'] ?></td>
                     <td><?php echo $res['original_qty'] + $res['qty'] ?></td>
+                    <td><?php echo $res['qty'] ?></td>
                     <td><?php echo $res['original_qty']  ?></td>
-                    <td><?php echo date_format(date_create($res['date_created']), " D, d M Y"); ?></td>
-                    <!-- <td><?php echo date_format(date_create($res['expiration_date']), "D, d M Y"); ?></td> -->
+                    <td><?php echo date_format(date_create($res['date_created']), " D, d M Y h:i:s"); ?></td>
+                    <!-- <td><?php echo date_format(date_create($res['expiration_date']), "D, d M Y h:i:s"); ?></td> -->
 
                   </tr>
                 <?php } ?>

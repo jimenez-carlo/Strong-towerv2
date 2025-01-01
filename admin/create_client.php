@@ -9,7 +9,7 @@
       function create($data)
       {
         extract($data);
-        $required_fields = array('username', 'email', 'password', 're_password', 'first_name', 'last_name', 'contact');
+        $required_fields = array('username', 'email', 'password', 're_password', 'first_name', 'last_name', 'contact', 'province', 'city', 'barangay');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -50,7 +50,7 @@
         }
         $branch = $_SESSION['user']->branch_id;
         $id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id) VALUES('$username', '$email','$password','$branch','$access')");
-        query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`picture`,`city`,`barangay`) VALUES('$id','$first_name','$middle_name','$last_name','$gender','$contact','$image_name','$city','$barangay')");
+        query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`picture`,`city`,`barangay`,`province`) VALUES('$id','$first_name','$middle_name','$last_name','$gender','$contact','$image_name','$city','$barangay','$province')");
         unset($_POST);
         return message_success("Client Created Successfully!", 'Successfull!');
       }
@@ -59,7 +59,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-user-plus"></i> Assign Client Plan
+            <h1 class="m-0"><i class="fa fa-user-plus"></i> Create Client
               <a href="clients.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
@@ -94,30 +94,37 @@
                         </div>
 
                         <div class="form-group">
-                          <label>*City & Barangay</label>
+                          <label>*Province</label>
                           <div style="display: flex;">
-                            <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
-                              <?php foreach (get_list("select * from tbl_city") as $res) { ?>
-                                <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                            <select id="city" name="city" style="" class="form-control <?= isset($_SESSION['error']['province']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from refprovince") as $res) { ?>
+                                <option value="<?= $res['id']; ?>"><?= $res['provDesc']; ?></option>
                               <?php } ?>
                             </select>
-                            <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
-                              <?php foreach (get_list("select * from tbl_barangay where city_id = 015501") as $res) { ?>
-                                <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
-                              <?php } ?>
-                            </select>
+
                           </div>
                         </div>
 
                         <div class="form-group">
-                          <label>*Username</label>
-                          <input type="text" class="form-control <?= isset($_SESSION['error']['username']) ? 'is-invalid' : '' ?>" id="username" name="username" placeholder="Username" value="<?= isset($_POST['username']) ? $_POST['username'] : '' ?>">
+                          <label>Gender</label>
+                          <select id="gender" class="form-control <?= isset($_SESSION['error']['gender']) ? 'is-invalid' : '' ?> custom-select" name="gender">
+                            <?php foreach (get_list("select * from tbl_gender where deleted_flag = 0") as $res) { ?>
+                              <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                            <?php } ?>
+                          </select>
+
                         </div>
 
                         <div class="form-group">
+                          <label>*Contact No#</label>
+                          <input type="number" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Contact No#" value="<?= isset($_POST['contact']) ? $_POST['contact'] : '' ?>">
+                        </div>
+                        <div class="form-group">
                           <label>*Password</label>
                           <input type="password" class="form-control <?= isset($_SESSION['error']['password']) ? 'is-invalid' : '' ?>" id="password" name="password" placeholder="Password" value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>">
+
                         </div>
+
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
@@ -126,15 +133,25 @@
                         </div>
 
                         <div class="form-group">
-                          <label>*Contact No#</label>
-                          <input type="number" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Contact No#" value="<?= isset($_POST['contact']) ? $_POST['contact'] : '' ?>">
+                          <label>*City</label>
+                          <select id="city" name="city" style="" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
+                            <?php foreach (get_list("select * from tbl_city where province_id = '0128'") as $res) { ?>
+                              <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                            <?php } ?>
+                          </select>
+
                         </div>
 
                         <div class="form-group">
                           <label>*Email</label>
-                          <input type="email" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                          <input type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
                         </div>
 
+                        <div class="form-group">
+                          <label>*Username</label>
+                          <input type="text" class="form-control <?= isset($_SESSION['error']['username']) ? 'is-invalid' : '' ?>" id="username" name="username" placeholder="Username" value="<?= isset($_POST['username']) ? $_POST['username'] : '' ?>">
+
+                        </div>
                         <div class="form-group">
                           <label>*Re-type Password</label>
                           <input type="password" class="form-control <?= isset($_SESSION['error']['re_password']) ? 'is-invalid' : '' ?>" id="re_password" name="re_password" placeholder="Re-type Password" value="<?= isset($_POST['re_password']) ? $_POST['re_password'] : '' ?>">
@@ -147,12 +164,13 @@
                           <input type="text" class="form-control <?= isset($_SESSION['error']['last_name']) ? 'is-invalid' : '' ?>" id="last_name" name="last_name" placeholder="Last Name" value="<?= isset($_POST['last_name']) ? $_POST['last_name'] : '' ?>">
                         </div>
                         <div class="form-group">
-                          <label>Gender</label>
-                          <select id="gender" class="form-control <?= isset($_SESSION['error']['gender']) ? 'is-invalid' : '' ?> custom-select" name="gender">
-                            <?php foreach (get_list("select * from tbl_gender where deleted_flag = 0") as $res) { ?>
+                          <label>*Barangay</label>
+                          <select id="barangay" name="barangay" style=";" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
+                            <?php foreach (get_list("select * from tbl_barangay where city_id = 012801") as $res) { ?>
                               <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
                             <?php } ?>
                           </select>
+
                         </div>
                         <div class="form-group">
                           <label>Type</label>
@@ -211,6 +229,13 @@
 </script>
 <?php include('footer.php'); ?>
 <script>
+  $(document).on("change", "#province", function() {
+    const province = $(this).val();
+    $.get("../dropdown2.php?province=" + province, function(result) {
+      $("#city").html(result).trigger("change");
+    });
+  });
+
   $(document).on("change", "#city", function() {
     let value = $(this).val();
     $.get("../dropdown.php?city=" + value, function(result) {

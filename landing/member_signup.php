@@ -46,7 +46,7 @@
     color: #fff;
   }
 
-  input[type="email"] {
+  input[type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$"] {
     text-transform: lowercase;
   }
 </style>
@@ -179,7 +179,7 @@
           <label for="validationCustomUsername" class="form-label">*Email</label>
           <div class="input-group has-validation">
             <span class="input-group-text" id="inputGroupPrepend">@</span>
-            <input type="email" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" name="email" placeholder="Email Address" required value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+            <input type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" name="email" placeholder="Email Address" required value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
             <div class="invalid-feedback">
               <?= isset($_SESSION['error']['email']) ? $_SESSION['error']['email'] : '' ?>
             </div>
@@ -190,12 +190,12 @@
           <label for="validationCustom03" class="form-label">*City & Barangay</label>
           <div style="display: flex;">
             <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
-              <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+              <?php foreach (get_list("select * from tbl_city where province_id = '0128'") as $res) { ?>
                 <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
               <?php } ?>
             </select>
             <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
-              <?php foreach (get_list("select * from tbl_barangay where city_id = 015501") as $res) { ?>
+              <?php foreach (get_list("select * from tbl_barangay where city_id = 012801") as $res) { ?>
                 <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
               <?php } ?>
             </select>

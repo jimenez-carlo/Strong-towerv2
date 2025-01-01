@@ -18,7 +18,7 @@
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-handshake"></i> Branch</h1>
+            <h1 class="m-0"><i class="fa fa-store"></i> Branch</h1>
           </div><!-- /.col -->
           <div class="col-sm-12">
             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
@@ -32,10 +32,10 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach (get_list("select b.*,bb.name as barangay,c.name as city from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
+                <?php foreach (get_list("select b.*,bb.name as barangay,c.name as city,p.provDesc as province from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city left join  refprovince p on p.id = c.province_id where b.deleted_flag = 0") as $res) { ?>
                   <tr>
                     <!-- <td><?php echo $res['id']; ?></td> -->
-                    <td><?php echo strtoupper($res['name'] . ' - ' . $res['city'] . ' - ' . $res['barangay']); ?></td>
+                    <td><?php echo strtoupper($res['name'] . ' - ' . $res['province'] . ' - ' . $res['city'] . ' - ' . $res['barangay']); ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">
@@ -91,7 +91,7 @@
     buttons: [
       <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?> {
           className: 'btn btn-sm btn-dark',
-          text: '<i class="fa fa-user-plus"></i> Add Branch',
+          text: '<i class="fa fa-plus"></i> Add Branch',
           action: function(e, dt, node, config) {
             window.location = 'create_branch.php';
           }

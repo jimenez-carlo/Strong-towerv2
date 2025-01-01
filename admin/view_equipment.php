@@ -5,11 +5,11 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
 
-      <?php $equipement = get_one("select * from tbl_equipment where id =" . $_GET['id']); ?>
+      <?php $Equipment = get_one("select * from tbl_equipment where id =" . $_GET['id']); ?>
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-edit"></i> View Equipement #<?= $equipement->id ?>
+            <h1 class="m-0"><i class="fa fa-edit"></i> View Equipment #<?= $equipement->id ?>
               <a href="equipments.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
@@ -21,7 +21,7 @@
               <div class="col-md-12">
                 <div class="card card-secondary">
                   <div class="card-header">
-                    <h3 class="card-title">Equipement Details</h3>
+                    <h3 class="card-title">Equipment Details</h3>
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -34,13 +34,13 @@
                       <img src="../equipments/<?= $equipement->image ?>" alt="" style="width:200px;height:200px;align-self: center;" id="preview">
                     </div>
                     <div class="form-group">
-                      <label for="">*Equipement Name</label>
-                      <input disabled type="text" class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipement Name" value="<?= isset($_POST['equipement']) ? $_POST['equipement'] : $equipement->name ?>">
+                      <label for="">*Equipment Name</label>
+                      <input disabled type="text" class="form-control <?= isset($_SESSION['error']['service']) ? 'is-invalid' : '' ?>" id="equipement" name="equipement" placeholder="Equipment Name" value="<?= isset($_POST['equipement']) ? $_POST['equipement'] : $equipement->name ?>">
                     </div>
 
                     <div class="form-group">
-                      <label for="">*Equipement Description</label>
-                      <textarea disabled class="form-control <?= isset($_SESSION['error']['description']) ? 'is-invalid' : '' ?>" rows="4" id="description" name="description" placeholder="Equipement Description"><?= isset($_POST['description']) ? $_POST['description'] : $equipement->description ?></textarea>
+                      <label for="">*Equipment Description</label>
+                      <textarea disabled class="form-control <?= isset($_SESSION['error']['description']) ? 'is-invalid' : '' ?>" rows="4" id="description" name="description" placeholder="Equipment Description"><?= isset($_POST['description']) ? $_POST['description'] : $equipement->description ?></textarea>
                     </div>
                     <div class="form-group">
                       <input disabled type="radio" name="enabled" value="1" <?= ($equipement->enabled == 1) ? 'checked="checked"' : '' ?>>

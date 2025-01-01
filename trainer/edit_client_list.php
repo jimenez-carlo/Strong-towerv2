@@ -104,7 +104,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label>*Email</label>
-                          <input disabled type="email" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : $user->email ?>">
+                          <input disabled type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : $user->email ?>">
                         </div>
                       </div>
                       <div class="col-sm-4">

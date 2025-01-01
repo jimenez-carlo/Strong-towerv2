@@ -9,7 +9,7 @@
       function update($data)
       {
         extract($data);
-        $required_fields = array('name', 'description');
+        $required_fields = array('name', 'description', 'province', 'city', 'barangay');
         $errors = 0;
         foreach ($required_fields as $res) {
           if (empty(${$res})) {
@@ -29,7 +29,7 @@
           return message_error("Branch Name Already In-use!");
         }
 
-        query("UPDATE tbl_branch set `name` = '$name', `description` = '$description',`barangay`='$barangay',`city`='$city',`contact_no`= '$contact', `email`='$email',`google_map`='$map' where id = $id");
+        query("UPDATE tbl_branch set `name` = '$name', `description` = '$description',`barangay`='$barangay',`city`='$city',`province`='$province',`contact_no`= '$contact', `email`='$email',`google_map`='$map' where id = $id");
         return message_success("Branch Updated Successfully!", 'Successfull!');
       }
       ?>
@@ -63,10 +63,15 @@
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Branch Name" value="<?= isset($_POST['name']) ? $_POST['name'] : $branch->name ?>">
                     </div>
                     <div class="form-group">
-                      <label>*City & Barangay</label>
+                      <label>*Address</label>
                       <div style="display: flex;">
+                        <select id="province" name="province" style="width:50%" class="form-control <?= isset($_SESSION['error']['province']) ? 'is-invalid' : '' ?>">
+                          <?php foreach (get_list("select * from refprovince") as $res) { ?>
+                            <option value="<?= $res['id']; ?>" <?= $branch->province == $res['id'] ? 'selected' : '' ?>><?= $res['provDesc']; ?></option>
+                          <?php } ?>
+                        </select>
                         <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
-                          <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+                          <?php foreach (get_list("select * from tbl_city where province_id = '0128'") as $res) { ?>
                             <option value="<?= $res['id']; ?>" <?= $branch->city == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
                           <?php } ?>
                         </select>
@@ -79,7 +84,7 @@
                     </div>
                     <div class="form-group">
                       <label for="">*Branch Contact</label>
-                      <input type="text" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Branch Contact" value="<?= isset($_POST['contact']) ? $_POST['contact'] : $branch->contact_no ?>">
+                      <input type="number" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Branch Contact" value="<?= isset($_POST['contact']) ? $_POST['contact'] : $branch->contact_no ?>">
                     </div>
                     <div class="form-group">
                       <label for="">*Branch Email</label>
@@ -114,6 +119,13 @@
 </div>
 <?php include('footer.php'); ?>
 <script>
+  $(document).on("change", "#province", function() {
+    const province = $(this).val();
+    $.get("../dropdown2.php?province=" + province, function(result) {
+      $("#city").html(result).trigger("change");
+    });
+  });
+
   $(document).on("change", "#city", function() {
     let value = $(this).val();
     $.get("../dropdown.php?city=" + value, function(result) {

@@ -23,7 +23,7 @@
         }
 
         $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
-        $check_category_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_category b where b.name ='$category' and branch_id = '$branch_id' and b.deleted_flag = 0 limit 1");
+        $check_category_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_category b where b.name ='$category' and b.deleted_flag = 0 limit 1");
 
         if (!empty($check_category_name->res)) {
           $_SESSION['error']['category'] = true;
@@ -62,7 +62,7 @@
                       <div class="form-group">
                         <label for="">*Branch</label>
                         <select name="branch" id="" class="form-control">
-                                                        <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
+                          <?php foreach (get_list("select b.*,concat(UPPER(b.name) ,' - ', c.name, ' - ', bb.name) as `name` from tbl_branch b left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where b.deleted_flag = 0") as $res) { ?>
                             <option value="<?= $res['id'] ?>"><?= $res['name'] ?></option>
                           <?php } ?>
                         </select>

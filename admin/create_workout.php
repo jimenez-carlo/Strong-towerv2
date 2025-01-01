@@ -30,7 +30,7 @@
         }
 
 
-        query("INSERT INTO tbl_workout (`name`,`description`,`category_id`,`branch_id`) VALUES('$name', '$description','$category', '$branch_id')");
+        query("INSERT INTO tbl_workout (`name`,`description`,`category_id`,`branch_id`,`body_part_id`) VALUES('$name', '$description','$category', '$branch_id','$body_part')");
         unset($_POST);
         // header('workouts.php');
         echo '<script>window.location.href = "' . dirname((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}") . '/workouts.php";</script>';
@@ -78,6 +78,17 @@
                         $branch = $_SESSION['user']->branch_id == 1 ? " " : " and branch_id =" . $_SESSION['user']->branch_id;
                         ?>
                         <?php foreach (get_list("select * from tbl_category where deleted_flag = 0 $branch") as $res) { ?>
+                          <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="">*Body Part</label>
+                      <select id="body_part" name="body_part" class="form-control <?= isset($_SESSION['error']['body_part']) ? 'is-invalid' : '' ?>">
+                        <?php
+                        $branch = $_SESSION['user']->branch_id == 1 ? " " : " and branch_id =" . $_SESSION['user']->branch_id;
+                        ?>
+                        <?php foreach (get_list("select * from tbl_body_part where deleted_flag = 0 $branch") as $res) { ?>
                           <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
                         <?php } ?>
                       </select>

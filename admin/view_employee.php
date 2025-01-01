@@ -49,7 +49,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label>*Email</label>
-                          <input disabled type="email" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : $user->email ?>">
+                          <input disabled type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : $user->email ?>">
                         </div>
                       </div>
                       <div class="col-sm-4">
@@ -138,7 +138,7 @@
                           <label>*City & Barangay</label>
                           <div style="display: flex;">
                             <select disabled id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
-                              <?php foreach (get_list("select * from tbl_city") as $res) { ?>
+                              <?php foreach (get_list("select * from tbl_city where province_id = '0128'") as $res) { ?>
                                 <option value="<?= $res['id']; ?>" <?= $user->city == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
                               <?php } ?>
                             </select>

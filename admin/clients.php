@@ -45,7 +45,7 @@
               <tbody>
                 <?php
                 $where = in_array($_SESSION['user']->access_id, array(2, 3, 4)) ? " and u.branch_id = '" . $_SESSION['user']->branch_id . "'" : "";
-                $sql = "select concat(b.name ,' - ', c.name, ' - ', bb.name) as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where u.access_id = 4 and u.deleted_flag = 0 $where ORDER BY u.created_date DESC";
+                $sql = "select concat(b.name) as `branch`,g.name as `gender`,UPPER(a.name) as 'access',ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access a on a.id = u.access_id inner join tbl_gender g on g.id = ui.gender_id inner join tbl_branch b on b.id = u.branch_id left join tbl_barangay bb on bb.id = b.barangay left join tbl_city c on c.id = b.city where u.access_id = 4 and u.deleted_flag = 0 $where ORDER BY u.created_date DESC";
                 ?>
                 <?php $x = 0;
                 foreach (get_list($sql) as $res) {

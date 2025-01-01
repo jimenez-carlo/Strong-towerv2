@@ -101,7 +101,7 @@ function activate2($array)
             <!---style="height:50px;width:50px;border:2px solid #fff;" -->
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id); ?></a>
+            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><br><?= ucfirst($_SESSION['user']->access)  ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id); ?></a>
           </div>
         </div>
 
@@ -131,8 +131,11 @@ function activate2($array)
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
-                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
+                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tags nav-icon"></i>
                     <p>Categories</p>
+                  </a></li>
+                <li class="nav-item"><a href="body_part.php" class="nav-link <?= activate(array("body_part", "create_body_part", "edit_body_part")) ?>"><i class="fa fa-hand nav-icon"></i>
+                    <p>Body Part</p>
                   </a></li>
                 <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
@@ -156,12 +159,7 @@ function activate2($array)
                         <p>Per Session</p>
                       </a>
                     </li>
-                    <!-- <li class="nav-item">
-                      <a href="orders.php" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Orders</p>
-                      </a>
-                    </li> -->
+
                   </ul>
                 </li>
                 <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
@@ -189,7 +187,7 @@ function activate2($array)
                     <li class="nav-item">
                       <a href="inventory2.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Equipements</p>
+                        <p>Equipments</p>
                       </a>
                     </li>
                   </ul>
@@ -202,6 +200,12 @@ function activate2($array)
                   <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
                     <i class="fa fa-user nav-icon"></i>
                     <p>My Profile</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="manage_account.php" class="nav-link <?= activate(array("manage_account")) ?>">
+                    <i class="fa fa-lock nav-icon"></i>
+                    <p>Manage User Account</p>
                   </a>
                 </li>
                 <?php break; ?>
@@ -218,13 +222,7 @@ function activate2($array)
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
-                <!-- <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category")) ?>"><i class="fa fa-tag nav-icon"></i>
-                    <p>Categories</p>
-                  </a></li>
-                <li class="nav-item"><a href="membership_plans.php" class="nav-link <?= activate(array("membership_plans", "create_membership_plan", "edit_membership_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
-                    <p>Membership Plans</p>
-                  </a></li>
- -->
+
                 <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
                   </a></li>
@@ -243,12 +241,7 @@ function activate2($array)
                         <p>Per Session</p>
                       </a>
                     </li>
-                    <!-- <li class="nav-item">
-                      <a href="orders.php" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Orders</p>
-                      </a>
-                    </li> -->
+
                   </ul>
                 </li>
                 <li class="nav-item"><a href="supplements.php" class="nav-link <?= activate(array("supplements", "create_supplement", "edit_supplement")) ?>"><i class="fa fa-pills nav-icon"></i>
@@ -276,7 +269,7 @@ function activate2($array)
                     <li class="nav-item">
                       <a href="inventory2.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Equipements</p>
+                        <p>Equipments</p>
                       </a>
                     </li>
                   </ul>
@@ -294,18 +287,15 @@ function activate2($array)
                     <p>My Profile</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="manage_account.php" class="nav-link <?= activate(array("manage_account")) ?>">
+                    <i class="fa fa-lock nav-icon"></i>
+                    <p>Manage User Account</p>
+                  </a>
+                </li>
 
 
-                <!-- <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
-                    <p>Workouts</p>
-                  </a></li> -->
 
-
-
-
-                <!-- <li class="nav-item"><a href="trainers.php" class="nav-link <?= activate(array("trainers", "create_trainer", "edit_trainer")) ?>"><i class="fa fa-users nav-icon"></i>
-                    <p>Trainers</p>
-                  </a></li> -->
 
 
                 <?php break; ?>
@@ -324,7 +314,7 @@ function activate2($array)
                 <li class="nav-item"><a href="equipments.php" class="nav-link <?= activate(array("equipments", "create_equipment", "edit_equipment", "view_equipment")) ?>"><i class="fa fa-dumbbell nav-icon"></i>
                     <p>Equipments</p>
                   </a></li>
-                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category", "view_category")) ?>"><i class="fa fa-tag nav-icon"></i>
+                <li class="nav-item"><a href="category.php" class="nav-link <?= activate(array("category", "create_category", "edit_category", "view_category")) ?>"><i class="fa fa-hand nav-icon"></i>
                     <p>Categories</p>
                   </a></li>
                 <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout", "view_workout")) ?>"><i class="fa fa-hand-rock nav-icon"></i>
@@ -349,12 +339,7 @@ function activate2($array)
                         <p>Per Session</p>
                       </a>
                     </li>
-                    <!-- <li class="nav-item">
-                      <a href="orders.php" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Orders</p>
-                      </a>
-                    </li> -->
+
 
                   </ul>
                 </li>
@@ -367,6 +352,12 @@ function activate2($array)
                   <a href="my_profile.php" class="nav-link <?= activate(array("my_profile")) ?>">
                     <i class="fa fa-user nav-icon"></i>
                     <p>My Profile</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="manage_account.php" class="nav-link <?= activate(array("manage_account")) ?>">
+                    <i class="fa fa-lock nav-icon"></i>
+                    <p>Manage User Account</p>
                   </a>
                 </li>
                 <?php break; ?>

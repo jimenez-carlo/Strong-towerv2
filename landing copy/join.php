@@ -172,7 +172,7 @@
           <!-- <label for="validationCustomUsername" class="form-label" style="text-align: left;">Email</label> -->
           <div class="input-group has-validation">
             <span class="input-group-text" id="inputGroupPrepend">email</span>
-            <input type="email" class="form-control <?= isset($_SESSION['error']['trainer_email']) ? 'is-invalid' : '' ?>" name="trainer_email" required value="<?= isset($_POST['trainer_email']) ? $_POST['trainer_email'] : '' ?>">
+            <input type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$" class="form-control <?= isset($_SESSION['error']['trainer_email']) ? 'is-invalid' : '' ?>" name="trainer_email" required value="<?= isset($_POST['trainer_email']) ? $_POST['trainer_email'] : '' ?>">
             <div class="invalid-feedback">
               <?= isset($_SESSION['error']['trainer_email']) ? $_SESSION['error']['trainer_email'] : '' ?>
             </div>
@@ -181,12 +181,11 @@
           <!-- <label for="validationCustom02" class="form-label" style="text-align: left;">Password</label> -->
           <div class="input-group has-validation">
             <span class="input-group-text" id="inputGroupPrepend">Password</span>
-          <input type="password" class="form-control <?= isset($_SESSION['error']
-          ['trainer_password']) ? 'is-invalid' : '' ?>" name="trainer_password" required value="<?= isset($_POST['trainer_password']) ? $_POST['trainer_password'] : '' ?>">
-          <div class="invalid-feedback">
-            <?= isset($_SESSION['error']['trainer_password']) ? $_SESSION['error']['trainer_password'] : '' ?>
+            <input type="password" class="form-control <?= isset($_SESSION['error']['trainer_password']) ? 'is-invalid' : '' ?>" name="trainer_password" required value="<?= isset($_POST['trainer_password']) ? $_POST['trainer_password'] : '' ?>">
+            <div class="invalid-feedback">
+              <?= isset($_SESSION['error']['trainer_password']) ? $_SESSION['error']['trainer_password'] : '' ?>
+            </div>
           </div>
-        </div>
 
           <div class="div">
             <button name="submit" class="btn btn-danger" value="trainer">LogIn</button>
@@ -203,7 +202,7 @@
           <!-- <label for="validationCustomUsername" class="form-label" style="text-align: left;">Email</label> -->
           <div class="input-group has-validation">
             <span class="input-group-text" id="inputGroupPrepend">email</span>
-            <input type="email" class="form-control <?= isset($_SESSION['error']['member_email']) ? 'is-invalid' : '' ?>" name="member_email" required value="<?= isset($_POST['member_email']) ? $_POST['member_email'] : '' ?>">
+            <input type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$" class="form-control <?= isset($_SESSION['error']['member_email']) ? 'is-invalid' : '' ?>" name="member_email" required value="<?= isset($_POST['member_email']) ? $_POST['member_email'] : '' ?>">
             <div class="invalid-feedback">
               <?= isset($_SESSION['error']['member_email']) ? $_SESSION['error']['member_email'] : '' ?>
             </div>
@@ -213,12 +212,12 @@
           <!-- <label for="validationCustom02" class="form-label" style="text-align: left;">Password</label> -->
           <div class="input-group has-validation">
             <span class="input-group-text" id="inputGroupPrepend">Password</span>
-          <input type="password" class="form-control <?= isset($_SESSION['error']['member_password']) ? 'is-invalid' : '' ?>" name="member_password" required value="<?= isset($_POST['member_password']) ? $_POST['member_password'] : '' ?>">
-          <div class="invalid-feedback">
-            <?= isset($_SESSION['error']['member_password']) ? $_SESSION['error']['member_password'] : '' ?>
+            <input type="password" class="form-control <?= isset($_SESSION['error']['member_password']) ? 'is-invalid' : '' ?>" name="member_password" required value="<?= isset($_POST['member_password']) ? $_POST['member_password'] : '' ?>">
+            <div class="invalid-feedback">
+              <?= isset($_SESSION['error']['member_password']) ? $_SESSION['error']['member_password'] : '' ?>
+            </div>
           </div>
-        </div>
-<br><br>
+          <br><br>
           <div class="div">
             <button name="submit" class="btn btn-danger" value="member">LogIn</button>
             <a href="member_signup.php" type="submit" class="btn btn-danger">SignUp</a>
