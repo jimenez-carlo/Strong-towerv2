@@ -50,7 +50,7 @@
           move_uploaded_file($_FILES["image"]["tmp_name"],   '../profile/' . $image_name);
         }
 
-        $id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id,verified) VALUES('$username', '$email','$password','$branch','$access',1)");
+        $id = insert_get_id("INSERT INTO tbl_user (`username`,`email`,`password`,branch_id,access_id,verified,active_flag) VALUES('$username', '$email','$password','$branch','$access',1,'$active_flag')");
         query("INSERT INTO tbl_user_info (id,first_name,middle_name,last_name,gender_id,contact_no,`picture`,`province`,`city`,`barangay`) VALUES('$id','$first_name','$middle_name','$last_name','$gender','$contact','$image_name','$province','$city','$barangay')");
         unset($_POST);
         return message_success("Client Created Successfully!", 'Successfull!');
@@ -198,6 +198,13 @@
                             <input type="text" class="form-control <?= isset($_SESSION['error']['branch']) ? 'is-invalid' : '' ?>" value="<?= $_SESSION['user']->branch ?>" disabled>
                             <input type="hidden" id="branch" name="branch" value="<?= $_SESSION['user']->branch_id ?>">
                           <?php } ?>
+                        </div>
+                        <div class="form-group">
+                          <label for="">Status</label>
+                          <select id="active_flag" name="active_flag" style=";float:right" class="form-control <?= isset($_SESSION['error']['active_flag']) ? 'is-invalid' : '' ?>">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                          </select>
                         </div>
                       </div>
                     </div>

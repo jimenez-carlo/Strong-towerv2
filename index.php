@@ -35,6 +35,7 @@ function login($data)
 
     $user = get_one("SELECT b.name as `branch`,ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_branch b on b.id = u.branch_id left join refcitymun c on c.id = b.city where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0 and u.active_flag = 1 limit 1");
     $check_user_is_verified = get_one("SELECT if(max(u.id) is null, 0, max(u.id) + 1) as `res` from tbl_user u where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0  limit 1");
+    $check_user_is_active = get_one("SELECT if(max(u.id) is null, 0, max(u.id) + 1) as `res` from tbl_user u where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0 and u.active_flag = 1  limit 1");
 
     if (empty($check_user_is_verified->res)) {
         $_SESSION['error'][$email] = '';
@@ -44,11 +45,14 @@ function login($data)
 
 
 
-    if (isset($user->verified) && !empty($user->verified)) {
+
+    if (isset($user->verified) && !empty($user->verified) && isset($user->active_flag) && !empty($user->active_flag)) {
         remove_error();
         // return print_r($user);
         $_SESSION['user'] = $user;
         return '<script>location.reload();</script>';
+    } elseif (empty($user->active_flag)) {
+        return message_error("Account Inactive Yet!");
     } else {
         return message_error("Account Not Yet Verfied!");
     }
@@ -176,7 +180,7 @@ function signup($data)
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="w-100" src="assets/landing/carousel-1.jpg" alt="Image">
+                        <img class="w-100" src="assets/landing/carousel-1.jpg" alt="Image" style="height: 1087px;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <h3 class="text-white text-capitalize m-0">Gym & Fitness Centerasdasdas</h3>
                             <h2 class="display-2 m-0 mt-2 mt-md-4 text-primary font-weight-bold text-capitalize">Strong Tower Gym</h2>

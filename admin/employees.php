@@ -39,6 +39,7 @@
                   <th>Full Name</th>
                   <th>Gender</th>
                   <th>Contact</th>
+                  <th>Active/Inactive</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -55,6 +56,7 @@
                     <td><?php echo ucwords($res['first_name'] . ' ' . $res['last_name']); ?></td>
                     <td><?php echo strtoupper($res['gender']); ?></td>
                     <td><?php echo $res['contact_no']; ?></td>
+                    <td><?php echo ($res['active_flag'] ? "Active" : "Inactive"); ?></td>
                     <?php if (in_array($_SESSION['user']->access_id, array(1, 2))) { ?>
                       <td>
                         <form method="post" onsubmit="return confirm('Are You Sure?');">

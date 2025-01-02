@@ -60,7 +60,7 @@
           move_uploaded_file($_FILES["image2"]["tmp_name"],   '../medical_certificate/' . $medical_certificate);
         }
 
-        query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `password` = '$new_password', `branch_id` = '$branch' where id = $id");
+        query("UPDATE tbl_user set `username` = '$username', `email` = '$email', `password` = '$new_password', `branch_id` = '$branch', `active_flag` = '$active_flag' where id = $id");
         query("UPDATE tbl_user_info set `first_name` = '$first_name', `middle_name` = '$middle_name', `last_name` = '$last_name', `gender_id` = '$gender', `contact_no` = '$contact', `picture`='$image_name', barangay = '$barangay', city = '$city','province'='$province' where id = $id");
         return message_success("Client Updated Successfully!", 'Successfull!');
       }
@@ -197,7 +197,13 @@
                             <input type="hidden" id="branch" name="branch" value="<?= $_SESSION['user']->branch_id ?>" disabled>
                           <?php } ?>
                         </div>
-
+                        <div class="form-group">
+                          <label for="">Status</label>
+                          <select id="active_flag" name="active_flag" style=";float:right" class="form-control <?= isset($_SESSION['error']['active_flag']) ? 'is-invalid' : '' ?>">
+                            <option value="1" <?= ($user->active_flag == 1) ? 'selected' : ''; ?>>Active</option>
+                            <option value="0" <?= ($user->active_flag == 0) ? 'selected' : ''; ?>>Inactive</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
 
