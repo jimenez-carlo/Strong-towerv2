@@ -154,7 +154,7 @@
                         </div>
                         <div class="form-group">
                           <label>*Email</label>
-                          <input type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : $user->email ?>">
+                          <input type="email" pattern="^[a-zA-Z0-9]+@gmail\.com$" class="form-control <?= isset($_SESSION['error']['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : $user->email ?>" required title="This field should be xxx@gmail.com">
                         </div>
                         <div class="form-group">
                           <label>*Username</label>

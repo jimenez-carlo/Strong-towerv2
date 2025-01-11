@@ -16,7 +16,7 @@ function escape_data($data = array())
 }
 function get_access($id)
 {
-  return get_one("select name from tbl_branch where id = " . $id)->name;
+  return get_one("select concat(a.name,' - ', c.name) as `name` from tbl_branch a inner join tbl_city c on c.id = a.city where a.id = " . $id)->name;
 }
 function get_list($sql)
 {

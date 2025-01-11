@@ -82,7 +82,7 @@
                           <input type="text" disabled class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Contact No" value="<?= isset($_POST['contact']) ? $_POST['contact'] : $walkin->contact_no ?>">
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <!-- <div class="col-md-4">
                         <div class="form-group">
                           <label for="">*Price</label>
 
@@ -93,13 +93,14 @@
                             <?php } ?>
                           </select>
                         </div>
-                      </div>
+                      </div> 
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">*Date</label>
                           <input type="date" disabled class="form-control <?= isset($_SESSION['error']['date']) ? 'is-invalid' : '' ?>" id="date" name="date" placeholder="Date" value="<?= isset($_POST['date']) ? $_POST['date'] : $walkin->date ?>">
                         </div>
                       </div>
+                      -->
 
                     </div>
                     <div class="row">
@@ -133,10 +134,10 @@
             </thead>
             <tbody>
               <?php $where = ($_SESSION['user']->access_id == 1) ? "" : " and  branch_id = " . $_SESSION['user']->branch_id  ?>
-              <?php foreach (get_list("select *, sum(price_raw) as price_raw from tbl_walkin where deleted_flag = 0 $where and first_name = '$walkin->first_name' and last_name = '$walkin->last_name'  order by created_date desc") as $res) { ?>
+              <?php foreach (get_list("select * from tbl_walkin where deleted_flag = 0 $where and first_name = '$walkin->first_name' and last_name = '$walkin->last_name'  order by created_date desc") as $res) { ?>
                 <tr>
-                  <!-- <td style="text-align: right;"><?php echo number_format($res['price'] ?? 0, 2); ?></td> -->
                   <td style="text-align: right;"><?php echo number_format($res['price_raw'] ?? 0, 2); ?></td>
+                  <!-- <td style="text-align: right;"><?php echo number_format($res['price_raw'] ?? 0, 2); ?></td> -->
                   <td><?php echo date_format(date_create($res['date']), "D, d M Y");   ?></td>
 
                 </tr>

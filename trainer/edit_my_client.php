@@ -156,7 +156,7 @@
                           <?php foreach (get_list("SELECT * from tbl_workout_plan where client_plan_id = $default->id") as $res) { ?>
                             <tr>
                               <td><select name="workout[]" class="form-control">
-                                  <?php foreach (get_list("select * from tbl_workout where deleted_flag = 0") as $subres) { ?>
+                                  <?php foreach (get_list("select w.*,concat(c.name, ' - ', w.name , ' - ', bp.name) as `name` from tbl_workout w inner join tbl_category c on c.id = w.category_id inner join tbl_body_part bp on bp.id = w.body_part_id where w.deleted_flag = 0") as $subres) { ?>
                                     <option value="<?= $subres['id']; ?>" <?php echo ($res['workout_id'] == $subres['id']) ? 'selected' : ''; ?>> <?= strtoupper($subres['name']); ?> </option>
                                   <?php } ?>
                                 </select> </td>

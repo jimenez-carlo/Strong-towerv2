@@ -33,7 +33,7 @@ function login($data)
         return message_error("Please Fill Blank Fields!");
     }
 
-    $user = get_one("SELECT b.name as `branch`,ui.*,u.* from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_branch b on b.id = u.branch_id left join refcitymun c on c.id = b.city where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0 and u.active_flag = 1 limit 1");
+    $user = get_one("SELECT b.name as `branch`,ui.*,u.*,aa.name as access from tbl_user u inner join tbl_user_info ui on ui.id = u.id inner join tbl_access aa on aa.id = u.access_id inner join tbl_branch b on b.id = u.branch_id left join refcitymun c on c.id = b.city where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0 and u.active_flag = 1 limit 1");
     $check_user_is_verified = get_one("SELECT if(max(u.id) is null, 0, max(u.id) + 1) as `res` from tbl_user u where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0  limit 1");
     $check_user_is_active = get_one("SELECT if(max(u.id) is null, 0, max(u.id) + 1) as `res` from tbl_user u where (u.email ='" . $email . "' or u.username ='" . $email . "') and u.`password`='" . $password . "' and u.deleted_flag = 0 and u.active_flag = 1  limit 1");
 
@@ -174,7 +174,7 @@ function signup($data)
                     <div class="carousel-item active">
                         <img class="w-100" src="assets/landing/backgroud.jpg" alt="Image" style="height:1087px;object-fit:cover">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <h3 class="text-white text-capitalize m-0">Gym & Fitness Centeasdasdr</h3>
+                            <h3 class="text-white text-capitalize m-0">Gym & Fitness Center</h3>
                             <h2 class="display-2 m-0 mt-2 mt-md-4 text-primary font-weight-bold text-capitalize">Strong Tower Gym</h2>
                             <a href="#" class="btn btn-lg btn-outline-light mt-3 mt-md-5 py-md-3 px-md-5" data-toggle="modal" data-target="#register_modal">Join Us Now</a>
                         </div>
@@ -182,7 +182,7 @@ function signup($data)
                     <div class="carousel-item">
                         <img class="w-100" src="assets/landing/carousel-1.jpg" alt="Image" style="height: 1087px;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <h3 class="text-white text-capitalize m-0">Gym & Fitness Centerasdasdas</h3>
+                            <h3 class="text-white text-capitalize m-0">Gym & Fitness Center</h3>
                             <h2 class="display-2 m-0 mt-2 mt-md-4 text-primary font-weight-bold text-capitalize">Strong Tower Gym</h2>
                             <a href="#" class="btn btn-lg btn-outline-light mt-3 mt-md-5 py-md-3 px-md-5" data-toggle="modal" data-target="#register_modal">Join Us Now</a>
                         </div>

@@ -140,7 +140,7 @@
                         </thead>
                         <tbody id="wrapper2">
 
-                          <?php foreach (get_list("SELECT w.*,wp.*,d.name as `day` from tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id inner join tbl_workout_day d on d.id = wp.day_id where wp.client_plan_id = $default->id") as $res) { ?>
+                          <?php foreach (get_list("SELECT w.*,wp.*,concat(c.name, ' - ', w.name , ' - ', bp.name) as `name`,d.name as `day` from tbl_workout_plan wp inner join tbl_workout w on w.id = wp.workout_id inner join tbl_workout_day d on d.id = wp.day_id  inner join tbl_category c on c.id = w.category_id inner join tbl_body_part bp on bp.id = w.body_part_id where wp.client_plan_id = $default->id") as $res) { ?>
                             <tr>
                               <td><?= strtoupper($res['name']) ?></td>
                               <td><?= $res['reps'] ?></td>

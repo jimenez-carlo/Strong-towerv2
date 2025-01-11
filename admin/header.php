@@ -101,7 +101,8 @@ function activate2($array)
             <!---style="height:50px;width:50px;border:2px solid #fff;" -->
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><br><?= ucfirst($_SESSION['user']->access)  ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id); ?></a>
+            <!-- <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><br><?= ucfirst($_SESSION['user']->access)  ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id); ?></a> -->
+            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><br><?= ucfirst($_SESSION['user']->access ?? 'Customer')  ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id ?? 0); ?></a>
           </div>
         </div>
 
@@ -222,10 +223,10 @@ function activate2($array)
                 <li class="nav-item"><a href="client_plans.php" class="nav-link <?= activate(array("client_plans", "create_client_plan", "edit_client_plan")) ?>"><i class="fa fa-clipboard nav-icon"></i>
                     <p>Client Plans</p>
                   </a></li>
-
+                <!-- 
                 <li class="nav-item"><a href="workouts.php" class="nav-link <?= activate(array("workouts", "create_workout", "edit_workout")) ?>" name="admin/workouts"><i class="fa fa-hand-rock nav-icon"></i>
                     <p>Workouts</p>
-                  </a></li>
+                  </a></li> -->
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle"></i>

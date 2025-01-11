@@ -79,7 +79,7 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="">*Contact No</label>
-                          <input type="text" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Contact No" value="<?= isset($_POST['contact']) ? $_POST['contact'] : '' ?>">
+                          <input type="number" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Contact No" value="<?= isset($_POST['contact']) ? $_POST['contact'] : '' ?>">
                         </div>
                       </div>
                       <div class="col-md-4">
