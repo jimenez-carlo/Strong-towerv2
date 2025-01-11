@@ -102,7 +102,8 @@ function activate2($array)
           </div>
           <div class="info">
             <!-- <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><br><?= ucfirst($_SESSION['user']->access)  ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id); ?></a> -->
-            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><br><?= ucfirst($_SESSION['user']->access ?? 'Customer')  ?><?= $_SESSION['user']->access_id == 1 ? '' : '<br> ' . get_access($_SESSION['user']->branch_id ?? 0); ?></a>
+            <a href="#" class="d-block"><?= ucfirst($_SESSION['user']->first_name) . ' ' . ucfirst($_SESSION['user']->last_name); ?><br><?= ucfirst($_SESSION['user']->access ?? 'Customer')  ?><?= $_SESSION['user']->access_id == 1 ? '' : (strlen(get_access($_SESSION['user']->branch_id ?? 0)) < 19 ? '<br>' . get_access($_SESSION['user']->branch_id ?? 0) . '' :
+                                                                                                                                                                                                  '<br><marquee> ' . get_access($_SESSION['user']->branch_id ?? 0) . '</marquee>'); ?></a>
           </div>
         </div>
 
