@@ -66,7 +66,7 @@
 
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label>*Address</label>
+                          <label>*Province</label>
                           <div style="display: flex;">
                             <select id="province" name="province" style="" class="form-control <?= isset($_SESSION['error']['province']) ? 'is-invalid' : '' ?>">
                               <?php foreach (get_list("select * from refprovince") as $res) { ?>
