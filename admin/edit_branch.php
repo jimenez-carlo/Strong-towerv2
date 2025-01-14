@@ -62,26 +62,50 @@
                       <label for="">*Branch Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Branch Name" value="<?= isset($_POST['name']) ? $_POST['name'] : $branch->name ?>">
                     </div>
-                    <div class="form-group">
-                      <label>*Address</label>
-                      <div style="display: flex;">
-                        <select id="province" name="province" style="width:50%" class="form-control <?= isset($_SESSION['error']['province']) ? 'is-invalid' : '' ?>">
-                          <?php foreach (get_list("select * from refprovince") as $res) { ?>
-                            <option value="<?= $res['id']; ?>" <?= $branch->province == $res['id'] ? 'selected' : '' ?>><?= $res['provDesc']; ?></option>
-                          <?php } ?>
-                        </select>
-                        <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
-                          <?php foreach (get_list("select * from tbl_city where province_id = '0128'") as $res) { ?>
-                            <option value="<?= $res['id']; ?>" <?= $branch->city == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
-                          <?php } ?>
-                        </select>
-                        <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
-                          <?php foreach (get_list("select * from tbl_barangay where city_id = " . $branch->city . "") as $res) { ?>
-                            <option value="<?= $res['id']; ?>" <?= $branch->barangay == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
-                          <?php } ?>
-                        </select>
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>*Address</label>
+                          <div style="display: flex;">
+                            <select id="province" name="province" style="" class="form-control <?= isset($_SESSION['error']['province']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from refprovince") as $res) { ?>
+                                <option value="<?= $res['id']; ?>" <?= $branch->province == $res['id'] ? 'selected' : '' ?>><?= $res['provDesc']; ?></option>
+                              <?php } ?>
+                            </select>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>*City</label>
+                          <div style="display: flex;">
+
+                            <select id="city" name="city" style="" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from tbl_city where province_id = '0128'") as $res) { ?>
+                                <option value="<?= $res['id']; ?>" <?= $branch->city == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
+                              <?php } ?>
+                            </select>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>*Barangay</label>
+                          <div style="display: flex;">
+
+                            <select id="barangay" name="barangay" style=";float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from tbl_barangay where city_id = " . $branch->city . "") as $res) { ?>
+                                <option value="<?= $res['id']; ?>" <?= $branch->barangay == $res['id'] ? 'selected' : '' ?>><?= $res['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
                       </div>
                     </div>
+
                     <div class="form-group">
                       <label for="">*Branch Contact</label>
                       <input type="number" class="form-control <?= isset($_SESSION['error']['contact']) ? 'is-invalid' : '' ?>" id="contact" name="contact" placeholder="Branch Contact" value="<?= isset($_POST['contact']) ? $_POST['contact'] : $branch->contact_no ?>">

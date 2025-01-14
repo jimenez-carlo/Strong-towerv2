@@ -60,24 +60,44 @@
                       <label for="">*Branch Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['branch']) ? 'is-invalid' : '' ?>" id="branch" name="branch" placeholder="Branch Name" value="<?= isset($_POST['branch']) ? $_POST['branch'] : '' ?>">
                     </div>
-                    <div class="form-group">
-                      <label>*Address</label>
-                      <div style="display: flex;">
-                        <select id="province" name="province" style="width:50%" class="form-control <?= isset($_SESSION['error']['province']) ? 'is-invalid' : '' ?>">
-                          <?php foreach (get_list("select * from refprovince") as $res) { ?>
-                            <option value="<?= $res['id']; ?>"><?= $res['provDesc']; ?></option>
-                          <?php } ?>
-                        </select>
-                        <select id="city" name="city" style="width:50%" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
-                          <?php foreach (get_list("select * from tbl_city where province_id = '0128'") as $res) { ?>
-                            <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
-                          <?php } ?>
-                        </select>
-                        <select id="barangay" name="barangay" style="width:50%;float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
-                          <?php foreach (get_list("select * from tbl_barangay where  city_id = 012801") as $res) { ?>
-                            <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
-                          <?php } ?>
-                        </select>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>*Province</label>
+                          <div style="display: flex;">
+                            <select id="province" name="province" style="" class="form-control <?= isset($_SESSION['error']['province']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from refprovince") as $res) { ?>
+                                <option value="<?= $res['id']; ?>"><?= $res['provDesc']; ?></option>
+                              <?php } ?>
+                            </select>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>*City</label>
+                          <div style="display: flex;">
+
+                            <select id="city" name="city" style="" class="form-control <?= isset($_SESSION['error']['city']) ? 'is-invalid' : '' ?>">
+                              <?php foreach (get_list("select * from tbl_city where province_id = '0128'") as $res) { ?>
+                                <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                              <?php } ?>
+                            </select>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>*Barangay</label>
+
+                          <select id="barangay" name="barangay" style=";float:right" class="form-control <?= isset($_SESSION['error']['barangay']) ? 'is-invalid' : '' ?>">
+                            <?php foreach (get_list("select * from tbl_barangay where  city_id = 012801") as $res) { ?>
+                              <option value="<?= $res['id']; ?>"><?= $res['name']; ?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group">

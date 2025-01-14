@@ -22,7 +22,7 @@
           return message_error("Please Fill Blank Fields!");
         }
         $branch_id = isset($branch) ? $branch : $_SESSION['user']->branch_id;
-        $check_category_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_category b where b.name ='$category' and id <> $id  and b.deleted_flag = 0 limit 1");
+        $check_category_name = get_one("SELECT if(max(b.id) is null, 0, max(b.id) + 1) as `res` from tbl_body_part b where b.name ='$category' and id <> $id  and b.deleted_flag = 0 limit 1");
 
         if (!empty($check_category_name->res)) {
           $_SESSION['error']['category'] = true;
@@ -30,17 +30,17 @@
         }
 
 
-        query("UPDATE tbl_category set `name` = '$category',`branch_id`= '$branch_id' where id = $id");
+        query("UPDATE tbl_body_part set `name` = '$category',`branch_id`= '$branch_id' where id = $id");
         return message_success("Category Updated Successfully!", 'Successfull!');
       }
       ?>
       <?php echo (isset($_POST['update'])) ? update(array_merge($_POST, $_FILES)) : '';  ?>
-      <?php $category = get_one("select * from tbl_category where id =" . $_GET['id']) ?>
+      <?php $category = get_one("select * from tbl_body_part where id =" . $_GET['id']) ?>
       <div class="container-fluid" id="content">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0"><i class="fa fa-edit"></i> Edit Category #<?= $category->id ?>
-              <a href="category.php" class="btn btn-dark" style="float:right">Back</a>
+            <h1 class="m-0"><i class="fa fa-edit"></i> Edit Body Part
+              <a href="body_part.php" class="btn btn-dark" style="float:right">Back</a>
             </h1>
           </div><!-- /.col -->
         </div>
@@ -71,7 +71,7 @@
                       </div>
                     <?php } ?>
                     <div class="form-group">
-                      <label for="">*Category Name</label>
+                      <label for="">*Body Part Name</label>
                       <input type="text" class="form-control <?= isset($_SESSION['error']['category']) ? 'is-invalid' : '' ?>" id="category" name="category" placeholder="Category Name" value="<?= isset($_POST['category']) ? $_POST['category'] : $category->name ?>">
                     </div>
 
